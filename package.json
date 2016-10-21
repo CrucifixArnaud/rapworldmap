@@ -17,7 +17,20 @@
   },
   "homepage": "https://gitlab.com/CrucifixArnaud/rapmap#README",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^2.0.0",
+    "ejs": "^2.5.2",
     "express": "^4.14.0",
-    "morgan": "^1.7.0"
+    "express-ejs-layouts": "^2.2.0",
+    "express-session": "^1.14.1",
+    "mongoose": "^4.6.4",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-remember-me-extended": "0.0.3",
+    "validate": "^3.0.1"
   }
 }

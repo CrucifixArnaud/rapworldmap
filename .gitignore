@@ -4,3 +4,6 @@
 
 # Node related file
 node_modules
+
+# Environement variable
+.env
