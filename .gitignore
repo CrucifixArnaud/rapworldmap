@@ -1,0 +1,6 @@
+# Sublime related file
+*.sublime-workspace
+*.sublime-project
+
+# Node related file
+node_modules
