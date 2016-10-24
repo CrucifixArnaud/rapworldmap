@@ -16,6 +16,7 @@ const express = require('express'),
   mongoose = require('mongoose'),
   morgan = require('morgan'),
   flash = require('connect-flash');
+  expressValidator = require('express-validator');
 
 // Define config variables/const
 const port = process.env.PORT || 8080;
@@ -35,6 +36,7 @@ app.use(cookieParser());
 // Use body parser to grab info from a form
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 
 // Passport specific
 app.use(session({

@@ -4,7 +4,8 @@
 //====== Define depencies ======
 const express = require ('express'),
   usersController = require('./modules/users/users.controller'),
-  userMiddlewares = require('./modules/users/user.middlewares');
+  userMiddlewares = require('./modules/users/user.middlewares'),
+  artistsController = require('./modules/artists/artists.controller');
 
 //====== Define routes ======
 module.exports = function(app, passport) {
@@ -31,4 +32,9 @@ module.exports = function(app, passport) {
   }));
   // Profile
   app.get('/profile', userMiddlewares.isLoggedIn, usersController.showProfile);
+
+  // Artists
+  app.get('/artists/create', artistsController.showCreate);
+  app.post('/artists/create', artistsController.processCreate);
+  app.get('/artists/:slug', artistsController.showSingle);
 };
