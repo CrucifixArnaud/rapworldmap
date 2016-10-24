@@ -4,7 +4,7 @@
 var LocalStrategy = require('passport-local').Strategy;
 
 //  up the user model
-var User = require('../models/user.model');
+var User = require('../modules/users/user.model');
 
 //====== Create the strategy ======
 var passportStrategy = (passport) => {

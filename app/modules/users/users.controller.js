@@ -2,7 +2,7 @@
 //==============================================
 
 //====== Define depencies ======
-const User = require('../models/user.model');
+const User = require('./user.model');
 const passport = require('passport');
 
 //====== Export method ======
