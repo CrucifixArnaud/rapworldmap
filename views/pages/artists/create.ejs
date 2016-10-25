@@ -14,22 +14,22 @@
 <form action="/artists/create" method="post">
     <div>
       <h3>About</h3>
-      <label>Name:</label>
-      <input type="text" name="name">
+      <label for="inputName">Name:</label>
+      <input id="inputName" type="text" name="name">
     </div>
     <div>
       <h3>Location</h3>
       <div>
-        <label>City:</label>
-        <input type="text" name="city">
+        <label for="inputCity">City:</label>
+        <input id="inputCity" type="text" name="city">
       </div>
       <div>
-        <label>Neighborhood Name:</label>
-        <input type="text" name="neighborhoodName">
+        <label for="inputNeighborhoodName">Neighborhood Name:</label>
+        <input id="inputNeighborhoodName" type="text" name="neighborhoodName">
       </div>
       <div>
-        <label>Coordinates:</label>
-        <input type="text" name="coordinates">
+        <label for="coordinates">Coordinates:</label>
+        <input id="coordinates" type="text" name="coordinates">
       </div>
     </div>
     <div>
@@ -43,40 +43,43 @@
     </div>
     <div>
       <h3>Images</h3>
-      <label>Thumbnail Url:</label>
-      <input type="text" name="thumbnailUrl">
+      <label for="thumbnailUrl">Thumbnail Url:</label>
+      <input id="thumbnailUrl" type="text" name="thumbnailUrl">
     </div>
     <div>
       <h3>Bio</h3>
       <div>
-        <label>Summary:</label>
-        <textarea name="summary">
+        <label for="inputSummary">Summary:</label>
+        <textarea id="inputSummary" name="summary">
         </textarea>
       </div>
       <div>
-        <label>Wikipedia Url:</label>
-        <input type="string" name="wikipediaUrl">
+        <label for="inputWikipediaUrl">Wikipedia Url:</label>
+        <input id="inputWikipediaUrl" type="string" name="wikipediaUrl">
       </div>
       <div>
-        <label>Birthdate:</label>
-        <input type="date" name="birthdate">
+        <label for="inputBirthDate">Birthdate:</label>
+        <input id="inputBirthDate" type="date" name="birthdate">
       </div>
       <div>
-        <label>Deathdate:</label>
-        <input type="date" name="deathdate">
+        <label for="inputDeathDate">Deathdate:</label>
+        <input id="inputDeathDate" type="date" name="deathdate">
       </div>
     </div>
     <div>
       <h3>Youtube</h3>
       <div>
-        <label>Page Url:</label>
-        <input type="string" name="youtugePageUrl">
+        <label for="inputYoutubePageUrl">Page Url:</label>
+        <input id="inputYoutubePageUrl" type="string" name="youtugePageUrl">
       </div>
       <div>
-        <label>Clip Example Url:</label>
-        <input type="string" name="clipExampleUrl">
+        <label for="inputClipExampleUrl">Clip Example Url:</label>
+        <input id="inputClipExampleUrl" type="string" name="clipExampleUrl">
       </div>
     </div>
 
     <button type="submit">Create</button>
 </form>
+
+
+<script type="text/javascript" src="/js/artistsCreate.js"></script>
