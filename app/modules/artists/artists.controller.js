@@ -72,6 +72,7 @@ function processCreate(req, res) {
 
   // if there are errors, redirect and save errors to flash
   const errors = req.validationErrors();
+
   if (errors) {
     req.flash('errors', errors.map(err => err.msg));
     return res.redirect('/artists/create');
@@ -102,8 +103,11 @@ function processCreate(req, res) {
   });
 
   artist.save((err) => {
-    if (err)
-      throw err;
+
+    if (err) {
+      req.flash('errors', err.message);
+      return res.redirect('/artists/create');
+    }
 
     // set a successful flash message
     req.flash('success', 'Successfuly created artist!');
