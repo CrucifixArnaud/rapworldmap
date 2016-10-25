@@ -11,8 +11,9 @@ const artistSchema = new Schema({
   name: String,
   slug: String,
   location: [{
+    city: String,
     coordinates: String,
-    name: String,
+    neighborhood: String,
     _id : false
   }],
   categories: Array,

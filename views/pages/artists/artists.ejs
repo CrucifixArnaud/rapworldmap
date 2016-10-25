@@ -1,0 +1,42 @@
+<h1>All Artists</h1>
+
+<% if (success.length > 0) { %>
+    <div class="success"><%= success %></div>
+<% } %>
+
+<a href="/artists/create">Create a new artist</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Categorie(s)</th>
+            <th>Creation Date</th>
+            <th>Published</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <% for (var artist of artists) { %>
+            <tr>
+                <td><%= artist.name %></td>
+                <td><%= artist.location.city %></td>
+                <td>
+                  <% for (categorie of artist.categories) { %>
+                    <span><%= categorie %></span>
+                  <% } %>
+                </td>
+                <td><%= moment(artist.createDate).format('DD/MM/YYYY HH:mm') %></td>
+                <td><%= artist.published %></td>
+                <td>
+                    <a href="/artists/<%= artist.slug %>/edit" class="btn">Edit</a>
+                    <a href="/artists/<%= artist.slug %>" class="btn">See artist</a>
+                    <a href="/artists/<%= artist.slug %>/delete" class="btn">Delete</a>
+                </td>
+            </tr>
+        <% } %>
+
+    </tbody>
+</table>

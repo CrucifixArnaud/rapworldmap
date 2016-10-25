@@ -37,4 +37,5 @@ module.exports = function(app, passport) {
   app.get('/artists/create', artistsController.showCreate);
   app.post('/artists/create', artistsController.processCreate);
   app.get('/artists/:slug', artistsController.showSingle);
+  app.get('/artists/', artistsController.showArtists);
 };

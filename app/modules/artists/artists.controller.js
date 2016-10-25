@@ -2,16 +2,53 @@
 //==============================================
 
 //====== Define depencies ======
-const Artist = require('./artist.model');
+const Artist = require('./artist.model'),
+  moment = require('moment');
 
 //====== Export method ======
 module.exports = {
+  showArtists: showArtists,
+  showSingle: showSingle,
   showCreate: showCreate,
-  processCreate: processCreate,
-  showSingle: showSingle
+  processCreate: processCreate
 };
 
 //====== Methods ======
+
+/**
+ * [showArtists Show a list of all artists]
+ */
+function showArtists (req, res) {
+  Artist.find({}, (err, artists) => {
+
+    if(err) {
+      res.status(404);
+      res.send('Artists not found!');
+    }
+
+    res.render('pages/artists/artists', {
+      artists: artists,
+      moment: moment,
+      success: req.flash('success')
+    });
+
+  });
+}
+
+/**
+ * [showSingle Show a single artist]
+ */
+function showSingle (req, res) {
+  // get a single artist
+  Artist.findOne({ slug: req.params.slug }, (err, artist) => {
+    if(err) {
+        res.status(404);
+        res.send(`Artist ${req.params.slug} cannot be found!`);
+    }
+
+    res.json(artist);
+  });
+}
 
 /**
  * [showCreate Show artist creation page]
@@ -28,7 +65,7 @@ function showCreate(req, res) {
 function processCreate(req, res) {
   // validate informations
   req.checkBody('name', 'Name is required.').notEmpty();
-  req.checkBody('neighborhoodName', 'Neighborhood Name is required').notEmpty();
+  req.checkBody('city', 'City name is required').notEmpty();
 
   // if there are errors, redirect and save errors to flash
   const errors = req.validationErrors();
@@ -41,8 +78,9 @@ function processCreate(req, res) {
   const artist = new Artist({
     name: req.body.name,
     location: [{
+      city: req.body.city,
       coordinates: req.body.coordinates,
-      name: req.body.neighborhoodName
+      neighborhood: req.body.neighborhoodName
     }],
     categories: req.body.categories,
     image: [{
@@ -68,21 +106,6 @@ function processCreate(req, res) {
     req.flash('success', 'Successfuly created artist!');
 
     // Redirect to the newly created artist
-    res.redirect(`/artists/${artist.slug}`);
-  });
-}
-
-/**
- * [showSingle Show a single artist]
- */
-function showSingle (req, res) {
-  // get a single artist
-  Artist.findOne({ slug: req.params.slug }, (err, artist) => {
-    if(err) {
-        res.status(404);
-        res.send(`Artist ${req.params.slug} cannot be found!`);
-    }
-
-    res.json(artist);
+    res.redirect(`/artists`);
   });
 }
