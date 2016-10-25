@@ -13,7 +13,8 @@ module.exports = {
   showCreate: showCreate,
   processCreate: processCreate,
   showEdit: showEdit,
-  processEdit: processEdit
+  processEdit: processEdit,
+  deleteArtist: deleteArtist
 };
 
 //====== Methods ======
@@ -184,5 +185,15 @@ function processEdit(req, res) {
     });
 
   });
+}
 
+/**
+ * [deleteArtist Delete an artist from the database]
+ */
+function deleteArtist(req, res) {
+  Artist.remove({ slug: req.params.slug }, (err) => {
+    console.log(res);
+    req.flash('success', `Artist ${req.params.slug} successfuly delete`);
+    res.redirect('/artists');
+  });
 }

@@ -40,4 +40,5 @@ module.exports = function(app, passport) {
   app.get('/artists/:slug', artistsController.showSingle);
   app.get('/artists/:slug/edit', artistsController.showEdit);
   app.post('/artists/:slug', artistsController.processEdit);
+  app.get('/artists/:slug/delete', artistsController.deleteArtist);
 };
