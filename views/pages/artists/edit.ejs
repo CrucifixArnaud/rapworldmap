@@ -1,0 +1,83 @@
+
+<h1>Edit <%= artist.name %></h1>
+
+<% if (errors.length > 0) { %>
+  <div class="errors">
+    <p>Something goes wrong: </p>
+    <% for (error of errors) { %>
+      <%= error %> <br>
+    <% } %>
+  </div>
+<% } %>
+
+<!-- ARTIST EDIT FORM -->
+<form action="/artists/<%= artist.slug %>" method="POST">
+
+  <div>
+    <h3>About</h3>
+    <label>Name:</label>
+    <input type="text" name="name" value="<%= artist.name %>">
+  </div>
+  <div>
+    <h3>Location</h3>
+    <div>
+      <label>City:</label>
+      <input type="text" name="city" value="<%= artist.location[0].city %>">
+    </div>
+    <div>
+      <label>Neighborhood Name:</label>
+      <input type="text" name="neighborhoodName" value="<%= artist.location[0].neighborhood %>">
+    </div>
+    <div>
+      <label>Coordinates:</label>
+      <input type="text" name="coordinates" value="<%= artist.location[0].coordinates %>">
+    </div>
+  </div>
+  <div>
+    <h3>Categories:</h3>
+    <label for="producer">Producer</label>
+    <input type="checkbox" id="producer" name="categories" value="producer" <%= underscore.indexOf(artist.categories, 'producer') !== -1 ? 'checked' : '' %>>
+    <label for="rapper">Rapper</label>
+    <input type="checkbox" id="rapper" name="categories" value="rapper" <%= underscore.indexOf(artist.categories, 'rapper') !== -1 ? 'checked' : '' %>>
+    <label for="singer">Singer</label>
+    <input type="checkbox" id="singer" name="categories" value="singer" <%= underscore.indexOf(artist.categories, 'singer') !== -1 ? 'checked' : '' %>>
+  </div>
+  <div>
+    <h3>Images</h3>
+    <label>Thumbnail Url:</label>
+    <input type="text" name="thumbnailUrl" value="<%= artist.image[0].thumbnailUrl %>">
+  </div>
+  <div>
+    <h3>Bio</h3>
+    <div>
+      <label>Summary:</label>
+      <textarea name="summary" rows="10" cols="50"><%= artist.bio[0].summary %></textarea>
+    </div>
+    <div>
+      <label>Wikipedia Url:</label>
+      <input type="string" name="wikipediaUrl" value="<%= artist.bio[0].wikipediaUrl %>">
+    </div>
+    <div>
+      <label>Birthdate:</label>
+      <input type="datetime" name="birthdate" value="<%= moment(artist.bio[0].birthdate).format('MM/DD/YYYY') %>">
+    </div>
+    <div>
+      <label>Deathdate:</label>
+      <input type="datetime" name="deathdate" value="<%= moment(artist.bio[0].deathdate).format('MM/DD/YYYY') %>">
+    </div>
+  </div>
+  <div>
+    <h3>Youtube</h3>
+    <div>
+      <label>Page Url:</label>
+      <input type="string" name="youtugePageUrl" value="<%= artist.youtube[0].pageUrl %>">
+    </div>
+    <div>
+      <label>Clip Example Url:</label>
+      <input type="string" name="clipExampleUrl" value="<%= artist.youtube[0].clipExampleUrl %>">
+    </div>
+  </div>
+
+  <button type="submit">Edit</button>
+
+</form>

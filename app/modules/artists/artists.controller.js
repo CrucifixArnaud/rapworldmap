@@ -3,14 +3,17 @@
 
 //====== Define depencies ======
 const Artist = require('./artist.model'),
-  moment = require('moment');
+  moment = require('moment'),
+  underscore= require('underscore');
 
 //====== Export method ======
 module.exports = {
   showArtists: showArtists,
   showSingle: showSingle,
   showCreate: showCreate,
-  processCreate: processCreate
+  processCreate: processCreate,
+  showEdit: showEdit,
+  processEdit: processEdit
 };
 
 //====== Methods ======
@@ -108,4 +111,74 @@ function processCreate(req, res) {
     // Redirect to the newly created artist
     res.redirect(`/artists`);
   });
+}
+
+/**
+ * [showEdit Show artist edit page]
+ */
+function showEdit(req, res) {
+  // Retrieve the artist to edit
+  Artist.findOne({ slug: req.params.slug }, (err, artist) => {
+
+    // Return 404 if artist cannot be found
+    if(!artist) {
+      res.status(404);
+      res.send(`Artist ${req.params.slug} cannot be found!`);
+    }
+
+    // Render the view
+    res.render('pages/artists/edit', {
+      artist: artist,
+      moment: moment,
+      underscore: underscore,
+      errors: req.flash('errors')
+    });
+  });
+}
+
+/**
+ * [processEdit Process artist edition]
+ */
+function processEdit(req, res) {
+  // validate informations
+  req.checkBody('name', 'Name is required.').notEmpty();
+  req.checkBody('city', 'City name is required').notEmpty();
+
+  // if there are errors, redirect to form and save errors to flash
+  const errors = req.validationErrors();
+  if (errors) {
+    req.flash('errors', errors.map(err => err.msg));
+    return res.redirect(`/artists/${req.params.slug}/edit`);
+  }
+
+  // Find current artist
+  Artist.findOne({ slug: req.params.slug }, (err, artist) => {
+
+    // updating the current artist
+    artist.name = req.body.name;
+    artist.location[0].city = req.body.city;
+    artist.location[0].coordinates = req.body.coordinates;
+    artist.location[0].neighborhood = req.body.neighborhoodName;
+    artist.categories = req.body.categories;
+    artist.image[0].thumbnailUrl = req.body.thumbnailUrl;
+    artist.bio[0].summary = req.body.summary;
+    artist.bio[0].wikipediaUrl = req.body.wikipediaUrl;
+    artist.bio[0].birthdate = req.body.birthdate;
+    artist.bio[0].deathdate = req.body.deathdate;
+    artist.youtube[0].pageUrl = req.body.youtugePageUrl;
+    artist.youtube[0].clipExampleUrl = req.body.clipExampleUrl;
+
+    artist.save( (err) => {
+      // If error stop and display it
+      if(err)
+        throw err;
+
+      // Set flash success
+      // Redirect to artists
+      req.flash('success', `Successfuly update ${artist.name}!`);
+      res.redirect('/artists');
+    });
+
+  });
+
 }

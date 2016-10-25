@@ -34,8 +34,10 @@ module.exports = function(app, passport) {
   app.get('/profile', userMiddlewares.isLoggedIn, usersController.showProfile);
 
   // Artists
+  app.get('/artists/', artistsController.showArtists);
   app.get('/artists/create', artistsController.showCreate);
   app.post('/artists/create', artistsController.processCreate);
   app.get('/artists/:slug', artistsController.showSingle);
-  app.get('/artists/', artistsController.showArtists);
+  app.get('/artists/:slug/edit', artistsController.showEdit);
+  app.post('/artists/:slug', artistsController.processEdit);
 };

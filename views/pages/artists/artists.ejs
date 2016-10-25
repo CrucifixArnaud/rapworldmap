@@ -28,7 +28,7 @@
                     <span><%= categorie %></span>
                   <% } %>
                 </td>
-                <td><%= moment(artist.createDate).format('DD/MM/YYYY HH:mm') %></td>
+                <td><%= moment(artist.createDate).format('MM/DD/YYYY HH:mm') %></td>
                 <td><%= artist.published %></td>
                 <td>
                     <a href="/artists/<%= artist.slug %>/edit" class="btn">Edit</a>
