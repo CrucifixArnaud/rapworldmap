@@ -59,11 +59,11 @@
     </div>
     <div>
       <label>Birthdate:</label>
-      <input type="datetime" name="birthdate" value="<%= moment(artist.bio[0].birthdate).format('MM/DD/YYYY') %>">
+      <input type="datetime" name="birthdate" value="<%= (artist.bio[0].birthdate !== null ? moment(artist.bio[0].birthdate).format('MM/DD/YYYY') : '') %>">
     </div>
     <div>
       <label>Deathdate:</label>
-      <input type="datetime" name="deathdate" value="<%= moment(artist.bio[0].deathdate).format('MM/DD/YYYY') %>">
+      <input type="datetime" name="deathdate" value="<%= (artist.bio[0].deathdate !== null ? moment(artist.bio[0].deathdate).format('MM/DD/YYYY') : '') %>">
     </div>
   </div>
   <div>

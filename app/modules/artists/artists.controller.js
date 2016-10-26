@@ -14,7 +14,8 @@ module.exports = {
   processCreate: processCreate,
   showEdit: showEdit,
   processEdit: processEdit,
-  deleteArtist: deleteArtist
+  deleteArtist: deleteArtist,
+  getArtistsGeojson: getArtistsGeojson
 };
 
 //====== Methods ======
@@ -195,5 +196,59 @@ function deleteArtist(req, res) {
     console.log(res);
     req.flash('success', `Artist ${req.params.slug} successfuly delete`);
     res.redirect('/artists');
+  });
+}
+
+/**
+ * [getArtistsGeojson Return a list of all rappers formated into geojson for mapbox]
+ */
+function getArtistsGeojson (req, res) {
+
+  Artist.find({
+    'location.coordinates': {
+      $ne: ''
+    }
+  }, (err, artists) => {
+
+    if(err) {
+      res.status(404);
+      res.send('Artists not found!');
+    }
+
+    var features = [];
+    for (var i = artists.length - 1; i >= 0; i--) {
+      var artist = artists[i];
+
+      features.push({
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": JSON.parse( '[' + artist.location[0].coordinates + ']' )
+        },
+        "properties": {
+            "name": artist.name,
+            "icon": {
+                "iconUrl": (artist.image[0].thumbnailUrl ? artist.image[0].thumbnailUrl : "/images/placeholder-artists.svg"),
+                "iconSize": [50, 50],
+                "iconAnchor": [25, 25],
+                "popupAnchor": [0, -25],
+                "className": "marker"
+            }
+        }
+      });
+    }
+
+    var geojson = {
+      "type": "FeatureCollection",
+      "crs": {
+        "type": "name",
+        "properties": {
+          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+      },
+      "features": features
+    };
+
+    res.status(200).json(geojson);
   });
 }

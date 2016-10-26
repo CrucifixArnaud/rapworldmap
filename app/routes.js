@@ -3,6 +3,7 @@
 
 //====== Define depencies ======
 const express = require ('express'),
+  atlasController = require('./modules/atlas/atlas.controller'),
   usersController = require('./modules/users/users.controller'),
   userMiddlewares = require('./modules/users/user.middlewares'),
   artistsController = require('./modules/artists/artists.controller');
@@ -10,6 +11,9 @@ const express = require ('express'),
 //====== Define routes ======
 module.exports = function(app, passport) {
   var router = express.Router();
+
+  // Atltas
+  app.get('/', atlasController.showAtlas);
 
   // users
   // app.get('/users', usersController.showUsers);
@@ -35,6 +39,7 @@ module.exports = function(app, passport) {
 
   // Artists
   app.get('/artists/', artistsController.showArtists);
+  app.get('/artists/geojson', artistsController.getArtistsGeojson);
   app.get('/artists/create', artistsController.showCreate);
   app.post('/artists/create', artistsController.processCreate);
   app.get('/artists/:slug', artistsController.showSingle);

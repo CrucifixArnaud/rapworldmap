@@ -2,10 +2,40 @@
 // ---------------------
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.mapbox {
+     position:absolute;
+     top:0;
+     bottom:0;
+     width:100%;
+}
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-size: cover;
+    outline: none;
+}
+
+.marker:hover,
+.marker:focus {
+    box-shadow: 0 0 0 2px #ff0066;
+}
+
+.leaflet-popup-content {
+    min-width: 320px;
+}
+
+.popup__picture .image {
+    display: block;
+    max-width: 100%;
 }
