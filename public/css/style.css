@@ -39,3 +39,24 @@ body {
     display: block;
     max-width: 100%;
 }
+
+/**
+ * Predictive box
+ */
+
+.field {
+  position: relative;
+}
+
+.predictive-box {
+  border: 1px solid #000;
+  position: absolute;
+  top: calc(100% + 10px);
+  width: 500px;
+  background: #fff;
+  min-height: 100px;
+}
+
+.predictive-box__item {
+  display: block;
+}

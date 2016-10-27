@@ -12,7 +12,7 @@
 
 <!-- ARTIST CREATION FORM -->
 <form action="/artists/create" method="post">
-    <div>
+    <div id="inputNameField" class="field">
       <h3>About</h3>
       <label for="inputName">Name:</label>
       <input id="inputName" type="text" name="name">
@@ -81,5 +81,10 @@
     <button type="submit">Create</button>
 </form>
 
+<!-- Handlebars template -->
+<script id="handlebarsPredictiveItemTemplate" type="text/x-handlebars-template">
+  <a href="" class="predictive-box__item">{{name}} / {{city}} / {{}}</a>
+</script>
 
+<script type="text/javascript" src="/js/vendor/handlebars.min-latest.js"></script>
 <script type="text/javascript" src="/js/artistsCreate.js"></script>
