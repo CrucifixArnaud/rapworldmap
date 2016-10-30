@@ -1,0 +1,75 @@
+/***********************\
+  > Mixins
+\***********************/
+
+/**
+ * [rem Return good rem value related to a given function, and add a fallback with pixel]
+ * @param  {string} $property [Any property accepting rem/px value]
+ * @param  {number} $values   [A number with the wanted final value in px]
+ */
+@mixin rem($property, $values) {
+  $px : (); /* 3 */
+  $rem: (); /* 3 */
+
+  @each $value in $values { /* 4 */
+
+    @if $value == 0 or $value == auto { /* 5 */
+      $px : append($px , $value);
+      $rem: append($rem, $value);
+    }
+
+    @else {
+      $unit: unit($value);    /* 6 */
+      $val: parseInt($value); /* 6 */
+
+      @if $unit == "px" {  /* 7 */
+        $px : append($px,  $value);
+        $rem: append($rem, ($val / 10 + rem));
+      }
+
+      @if $unit == "rem" { /* 7 */
+        $px : append($px,  ($val * 10 + px));
+        $rem: append($rem, $value);
+      }
+    }
+  }
+
+  @if $px == $rem {     /* 8 */
+    #{$property}: $px;  /* 9 */
+  } @else {
+    #{$property}: $px;  /* 9 */
+    #{$property}: $rem; /* 9 */
+  }
+}
+
+/**
+ * [Vertical Center]
+ * @param  {string} $position [Position type of the element] (default: relative)
+ */
+@mixin vertical-center($position:relative) {
+    position: $position;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/**
+ * [Horizontal Center]
+ * Horizontaly align item
+ * @param  {string} $position [Position type of the element] (default: relative)
+ */
+@mixin horizontal-center($position:relative) {
+    position: $position;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/**
+ * [Center Align]
+ * @param  {string} $position [Position type of the element] (default: relative)
+ */
+@mixin center-align($position:relative) {
+    position: $position;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

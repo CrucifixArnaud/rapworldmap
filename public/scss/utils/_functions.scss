@@ -1,0 +1,13 @@
+/***********************\
+  > Functions
+  Usefull functions use every where in the applications
+\***********************/
+
+/**
+ * [parseInt Return an integer from a value with a unit]
+ * @param  {number} $n [A number]
+ * @return {int}    [The related integer of the given ($n) number]
+ */
+@function parseInt($n) {
+  @return $n / ($n * 0 + 1);
+}
