@@ -1,5 +1,22 @@
 //====== Form ======
 
+// Input like text
+// ---------------------
+
+@mixin inputText () {
+  display: block;
+  box-shadow: 0;
+  border-color: 1px solid $grey-21;
+  border-radius: 0;
+  padding: 5px;
+  outline-color: #ff0066;
+}
+
+[type="text"],
+[type="mail"] {
+  @include inputText();
+}
+
 /**
  * Predictive box
  */

@@ -397,7 +397,8 @@ th {
 
 html,
 body {
-  font-family: serif; }
+  font-family: sans-serif;
+  color: #333; }
 
 /***********************
   > Layout.scss
@@ -405,6 +406,9 @@ body {
 \***********************/
 * {
   box-sizing: border-box; }
+
+body {
+  padding: 1em; }
 
 .mapbox {
   position: absolute;
@@ -430,6 +434,32 @@ body {
 .popup__picture .image {
   display: block;
   max-width: 100%; }
+
+[type="text"],
+[type="mail"] {
+  display: block;
+  box-shadow: 0;
+  border-color: 1px solid #333;
+  border-radius: 0;
+  padding: 5px;
+  outline-color: #ff0066; }
+
+/**
+ * Predictive box
+ */
+.field {
+  position: relative; }
+
+.predictive-box {
+  border: 1px solid #000;
+  position: absolute;
+  top: calc(100% + 10px);
+  width: 500px;
+  background: #fff;
+  min-height: 100px; }
+
+.predictive-box__item {
+  display: block; }
 
 
 /*# sourceMappingURL=app.css.map*/
