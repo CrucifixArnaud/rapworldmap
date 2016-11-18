@@ -9,6 +9,11 @@ module.exports = {
   plugins: {
     sass: {
       options: ['--style', 'compressed', '--no-cache']
+    },
+    postcss: {
+      processors: [
+        require('autoprefixer')(['last 4 versions'])
+      ]
     }
   }
 };
