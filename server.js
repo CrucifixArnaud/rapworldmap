@@ -23,6 +23,7 @@ const port = process.env.PORT || 8080;
 
 //====== App configuration ======
 // Connect the database
+// @TODO Verify that connection work before launch it to avoid app error on display.
 mongoose.connect(process.env.DB_URI);
 
 // Load passport configuration
