@@ -47,8 +47,8 @@ function showSingle (req, res) {
   // get a single artist
   Artist.findOne({ slug: req.params.slug }, (err, artist) => {
     if(err) {
-        res.status(404);
-        res.send(`Artist ${req.params.slug} cannot be found!`);
+      res.status(404);
+      res.send(`Artist ${req.params.slug} cannot be found!`);
     }
 
     res.json(artist);
@@ -120,7 +120,7 @@ function processCreate(req, res) {
     req.flash('success', 'Successfuly created artist!');
 
     // Redirect to the newly created artist
-    res.redirect(`/artists`);
+    res.redirect('/artists/create');
   });
 }
 
@@ -198,9 +198,12 @@ function processEdit(req, res) {
  */
 function deleteArtist(req, res) {
   Artist.remove({ slug: req.params.slug }, (err) => {
-    console.log(res);
-    req.flash('success', `Artist ${req.params.slug} successfuly delete`);
-    res.redirect('/artists');
+    if(err) {
+      console.log(err);
+    } else {
+      req.flash('success', `Artist ${req.params.slug} successfuly delete`);
+      res.redirect('/artists');
+    }
   });
 }
 
@@ -225,33 +228,33 @@ function getArtistsGeojson (req, res) {
       var artist = artists[i];
 
       features.push({
-        "type": "Feature",
-        "geometry": {
-            "type": "Point",
-            "coordinates": JSON.parse( '[' + artist.location[0].coordinates + ']' )
+        'type': 'Feature',
+        'geometry': {
+          'type': 'Point',
+          'coordinates': JSON.parse( '[' + artist.location[0].coordinates + ']' )
         },
-        "properties": {
-            "name": artist.name,
-            "icon": {
-                "iconUrl": (artist.image[0].thumbnailUrl ? artist.image[0].thumbnailUrl : "/images/placeholder-artists.svg"),
-                "iconSize": [50, 50],
-                "iconAnchor": [25, 25],
-                "popupAnchor": [0, -25],
-                "className": "marker"
-            }
+        'properties': {
+          'name': artist.name,
+          'icon': {
+            'iconUrl': (artist.image[0].thumbnailUrl ? artist.image[0].thumbnailUrl : '/images/placeholder-artists.svg'),
+            'iconSize': [50, 50],
+            'iconAnchor': [25, 25],
+            'popupAnchor': [0, -25],
+            'className': 'marker'
+          }
         }
       });
     }
 
     var geojson = {
-      "type": "FeatureCollection",
-      "crs": {
-        "type": "name",
-        "properties": {
-          "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+      'type': 'FeatureCollection',
+      'crs': {
+        'type': 'name',
+        'properties': {
+          'name': 'urn:ogc:def:crs:OGC:1.3:CRS84'
         }
       },
-      "features": features
+      'features': features
     };
 
     res.status(200).json(geojson);

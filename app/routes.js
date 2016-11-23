@@ -30,9 +30,9 @@ module.exports = function(app, passport) {
   // Login
   app.get('/login', usersController.showLogin);
   app.post('/login', passport.authenticate('local-login', {
-      successRedirect : '/profile',
-      failureRedirect : '/login',
-      failureFlash : true
+    successRedirect : '/profile',
+    failureRedirect : '/login',
+    failureFlash : true
   }));
   // Profile
   app.get('/profile', userMiddlewares.isLoggedIn, usersController.showProfile);
