@@ -83092,22 +83092,122 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ArtistsCreateForm = function (_React$Component) {
-  _inherits(ArtistsCreateForm, _React$Component);
+var InputCity = function (_React$Component) {
+  _inherits(InputCity, _React$Component);
+
+  function InputCity(props) {
+    _classCallCheck(this, InputCity);
+
+    // State
+    var _this = _possibleConstructorReturn(this, (InputCity.__proto__ || Object.getPrototypeOf(InputCity)).call(this, props));
+
+    _this.state = {
+      value: props.value
+    };
+
+    // Method
+    _this.handleChange = _this.handleChange.bind(_this);
+    return _this;
+  }
+
+  // Update state on props change
+
+
+  _createClass(InputCity, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.value !== this.state.value) {
+        this.setState({
+          value: nextProps.value
+        });
+      }
+    }
+
+    /**
+     * [handleChange Handle input change]
+     */
+
+  }, {
+    key: 'handleChange',
+    value: function handleChange(event) {
+      var that = this;
+
+      this.setState({
+        value: event.target.value
+      });
+
+      var name = event.target.value;
+      var nameLenght = name.length;
+
+      // Only call predictive search if user type 3 or more character
+      if (nameLenght >= 3) {
+
+        var url = 'http://musicbrainz.org/ws/2/artist?query="' + name + '"AND comment:rapper&fmt=json';
+
+        Request(url, function (error, response, body) {
+          if (!error && response.statusCode === 200) {
+
+            // Success
+            var res = JSON.parse(body);
+
+            var artists = [];
+
+            if (res.artists.length > 0) {
+              for (var i = res.artists.length - 1; i >= 0; i--) {
+
+                artists.push(res.artists[i]);
+
+                that.setState({
+                  artists: artists
+                });
+              }
+            }
+          } else {
+            // console.error(error);
+          }
+        });
+      }
+    }
+
+    /**
+     * [render InputName]
+     */
+
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'field' },
+        _react2.default.createElement(
+          'label',
+          { className: 'field__label', htmlFor: 'inputCity' },
+          'City:'
+        ),
+        _react2.default.createElement('input', { id: 'inputCity', type: 'text', name: 'city', value: this.state.value, onChange: this.handleChange })
+      );
+    }
+  }]);
+
+  return InputCity;
+}(_react2.default.Component);
+
+var ArtistsCreateForm = function (_React$Component2) {
+  _inherits(ArtistsCreateForm, _React$Component2);
 
   function ArtistsCreateForm() {
     _classCallCheck(this, ArtistsCreateForm);
 
-    var _this = _possibleConstructorReturn(this, (ArtistsCreateForm.__proto__ || Object.getPrototypeOf(ArtistsCreateForm)).call(this));
+    var _this2 = _possibleConstructorReturn(this, (ArtistsCreateForm.__proto__ || Object.getPrototypeOf(ArtistsCreateForm)).call(this));
 
-    _this.state = {
+    _this2.state = {
       currentArtist: {
         name: '',
         city: '',
         thumbnailUrl: ''
       }
     };
-    return _this;
+    return _this2;
   }
 
   _createClass(ArtistsCreateForm, [{
@@ -83116,6 +83216,8 @@ var ArtistsCreateForm = function (_React$Component) {
 
       var birthdate = artist['life-span']['begin'];
       var deathdate = artist['life-span']['ended'];
+
+      console.log("Update artists");
 
       this.setState({
         currentArtist: {
@@ -83145,16 +83247,7 @@ var ArtistsCreateForm = function (_React$Component) {
             { className: 'field-group__title' },
             'Location'
           ),
-          _react2.default.createElement(
-            'div',
-            { className: 'field' },
-            _react2.default.createElement(
-              'label',
-              { className: 'field__label', htmlFor: 'inputCity' },
-              'City:'
-            ),
-            _react2.default.createElement('input', { id: 'inputCity', type: 'text', name: 'city', value: this.state.currentArtist.city })
-          ),
+          _react2.default.createElement(InputCity, { value: this.state.currentArtist.city }),
           _react2.default.createElement(
             'div',
             { className: 'field' },
@@ -83373,6 +83466,9 @@ var Artist = function (_React$Component) {
     // handleClick Handle click event on artist
     value: function handleClick(event) {
       event.preventDefault();
+
+      console.log("Handle click");
+
       this.props.updateArtist(this.props.artist);
 
       this.props.resetArtists();
@@ -83390,7 +83486,7 @@ var Artist = function (_React$Component) {
         { className: 'predictive-box__item', key: this.props.step },
         _react2.default.createElement(
           'a',
-          { className: 'predictive-box__item__link', href: '#', onClick: function onClick(event) {
+          { className: 'predictive-box__item__link artist', href: '#', onClick: function onClick(event) {
               return _this2.handleClick(event);
             } },
           this.props.artist.name,

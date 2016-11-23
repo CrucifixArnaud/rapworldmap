@@ -2,6 +2,85 @@ import React from 'react';
 
 import InputName from './inputName';
 
+class InputCity extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // State
+    this.state = {
+      value: props.value
+    };
+
+    // Method
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+
+  // Update state on props change
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.state.value) {
+      this.setState({
+        value: nextProps.value
+      });
+    }
+  }
+
+  /**
+   * [handleChange Handle input change]
+   */
+  handleChange(event) {
+    const that = this;
+
+    this.setState({
+      value: event.target.value
+    });
+
+    const name = event.target.value;
+    const nameLenght = name.length;
+
+    // Only call predictive search if user type 3 or more character
+    if (nameLenght >= 3) {
+
+      var url = 'http://musicbrainz.org/ws/2/artist?query="' + name + '"AND comment:rapper&fmt=json';
+
+      Request(url, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+
+          // Success
+          const res = JSON.parse(body);
+
+          const artists = [];
+
+          if(res.artists.length > 0) {
+            for (let i = res.artists.length - 1; i >= 0; i--) {
+
+              artists.push(res.artists[i]);
+
+              that.setState({
+                artists: artists
+              });
+            }
+          }
+        } else {
+          // console.error(error);
+        }
+      });
+    }
+  }
+
+  /**
+   * [render InputName]
+   */
+  render() {
+    return(
+      <div className="field">
+        <label className="field__label" htmlFor="inputCity">City:</label>
+        <input id="inputCity" type="text" name="city" value={this.state.value} onChange={this.handleChange} />
+      </div>
+    );
+  }
+}
+
 export default class ArtistsCreateForm extends React.Component {
   constructor() {
     super();
@@ -18,6 +97,8 @@ export default class ArtistsCreateForm extends React.Component {
 
     const birthdate = artist['life-span']['begin'];
     const deathdate = artist['life-span']['ended'];
+
+    console.log("Update artists");
 
     this.setState({
       currentArtist: {
@@ -37,10 +118,7 @@ export default class ArtistsCreateForm extends React.Component {
         </div>
         <div className="field-group">
           <h3 className="field-group__title">Location</h3>
-          <div className="field">
-            <label className="field__label" htmlFor="inputCity">City:</label>
-            <input id="inputCity" type="text" name="city" value={this.state.currentArtist.city} />
-          </div>
+          <InputCity value={this.state.currentArtist.city} />
           <div className="field">
             <label className="field__label" htmlFor="inputNeighborhoodName">Neighborhood Name:</label>
             <input id="inputNeighborhoodName" type="text" name="neighborhoodName" />
