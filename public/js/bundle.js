@@ -83343,10 +83343,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _request = require('request');
 
 var _request2 = _interopRequireDefault(_request);
@@ -83493,7 +83489,7 @@ var InputName = function (_React$Component2) {
               }
             }
           } else {
-            console.error(error);
+            // console.error(error);
           }
         });
       }
@@ -83507,7 +83503,7 @@ var InputName = function (_React$Component2) {
     key: 'handleBlur',
     value: function handleBlur(event) {
       if (event.relatedTarget !== null) {
-        if (!event.relatedTarget.classList.contains("artist")) {
+        if (!event.relatedTarget.classList.contains('artist')) {
           this.resetArtists();
         }
       } else {
@@ -83531,7 +83527,7 @@ var InputName = function (_React$Component2) {
     value: function render() {
       var _this4 = this;
 
-      var inputName = null;
+      // let inputName = null;
 
       // Artists list
       var artists = this.state.artists.map(function (artist, step) {
@@ -83571,7 +83567,7 @@ var InputName = function (_React$Component2) {
 
 exports.default = InputName;
 
-},{"react":408,"react-dom":265,"request":409}],464:[function(require,module,exports){
+},{"react":408,"request":409}],464:[function(require,module,exports){
 'use strict';
 
 var _reactDom = require('react-dom');

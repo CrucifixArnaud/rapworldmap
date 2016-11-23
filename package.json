@@ -46,6 +46,8 @@
     "babel-preset-react": "^6.16.0",
     "babelify": "^7.3.0",
     "brunch": "^2.8.2",
+    "eslint": "^3.10.2",
+    "eslint-plugin-react": "^6.7.1",
     "postcss-brunch": "^2.0.5",
     "sass-brunch": "^2.6.3"
   }

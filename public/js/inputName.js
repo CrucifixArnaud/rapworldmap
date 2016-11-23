@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
 
 import Request from 'request';
 
@@ -20,7 +19,7 @@ class Artist extends React.Component {
     return (
       <li key={this.props.step}>
         <a className="artist" href="#" onClick={(event) => this.handleClick(event)}>
-        {this.props.artist.name} ({this.props.artist.disambiguation}) {(this.props.artist.area) ? <span className="city">({this.props.artist.area.name})</span> : ''}
+          {this.props.artist.name} ({this.props.artist.disambiguation}) {(this.props.artist.area) ? <span className="city">({this.props.artist.area.name})</span> : ''}
         </a>
       </li>
     );
@@ -37,7 +36,7 @@ export default class InputName extends React.Component {
     this.state = {
       artists: [],
       value: props.value
-    }
+    };
 
     // Method
     this.handleChange = this.handleChange.bind(this);
@@ -92,9 +91,9 @@ export default class InputName extends React.Component {
             }
           }
         } else {
-          console.error(error);
+          // console.error(error);
         }
-      })
+      });
     }
   }
 
@@ -103,7 +102,7 @@ export default class InputName extends React.Component {
    */
   handleBlur(event) {
     if(event.relatedTarget !== null) {
-      if(!event.relatedTarget.classList.contains("artist")) {
+      if(!event.relatedTarget.classList.contains('artist')) {
         this.resetArtists();
       }
     }else{
@@ -122,7 +121,7 @@ export default class InputName extends React.Component {
    */
   render() {
 
-    let inputName = null;
+    // let inputName = null;
 
     // Artists list
     const artists = this.state.artists.map((artist, step) => {
