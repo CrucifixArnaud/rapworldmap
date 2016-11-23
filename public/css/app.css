@@ -553,7 +553,7 @@ textarea {
 /* accessibility */
 .button {
   position: relative;
-  display: block;
+  display: inline-block;
   background: none;
   padding: 0 3rem;
   line-height: 4rem;
@@ -695,6 +695,44 @@ textarea {
     background: #18252d;
     color: #ffd700; }
 
+.table__row {
+  background: #16232a; }
+  .table__row:nth-child(odd) {
+    background: #121d23; }
+  .table__row:hover, .table__row:focus, .table__row:nth-child(odd):hover, .table__row:nth-child(odd):focus {
+    background: #20333e; }
+
+.table__cell {
+  padding: .5em 1em;
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 15px;
+  /* 9 */
+  font-size: 1.5rem;
+  /* 9 */ }
+
+.table__head__row {
+  background: #192831; }
+
+.table__head__cell {
+  padding: 1em;
+  text-align: left;
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 16px;
+  /* 9 */
+  font-size: 1.6rem;
+  /* 9 */
+  text-transform: uppercase; }
+
 .page-atlas {
   padding: 0; }
 
@@ -760,6 +798,9 @@ textarea {
 
 .form-create {
   max-width: 25%; }
+
+.table--artist {
+  margin-top: 1em; }
 
 
 /*# sourceMappingURL=app.css.map*/

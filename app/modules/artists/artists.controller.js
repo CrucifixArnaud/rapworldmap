@@ -26,17 +26,21 @@ module.exports = {
 function showArtists (req, res) {
   Artist.find({}, (err, artists) => {
 
+    const locals = {
+      artists: artists,
+      moment: moment,
+      success: req.flash('success'),
+      layout: 'admin',
+      title: 'All artists',
+      slug: 'page-admin'
+    };
+
     if(err) {
       res.status(404);
       res.send('Artists not found!');
     }
 
-    res.render('pages/artists/artists', {
-      artists: artists,
-      moment: moment,
-      success: req.flash('success')
-    });
-
+    res.render('pages/artists/artists', locals);
   });
 }
 

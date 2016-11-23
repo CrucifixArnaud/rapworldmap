@@ -1,42 +1,44 @@
-<h1>All Artists</h1>
+<div class="admin-content">
 
-<% if (success.length > 0) { %>
-    <div class="success"><%= success %></div>
-<% } %>
+  <% if (success.length > 0) { %>
+      <div class="success"><%= success %></div>
+  <% } %>
 
-<a href="/artists/create">Create a new artist</a>
+  <a class="button" href="/artists/create">Create a new artist</a>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>City</th>
-            <th>Categorie(s)</th>
-            <th>Creation Date</th>
-            <th>Published</th>
-        </tr>
-    </thead>
+  <table class="table table--artist">
+      <thead class="table__head">
+          <tr class="table__head__row">
+              <th class="table__head__cell">Name</th>
+              <th class="table__head__cell">City</th>
+              <th class="table__head__cell">Categorie(s)</th>
+              <th class="table__head__cell">Creation Date</th>
+              <th class="table__head__cell">Published</th>
+              <th></th>
+          </tr>
+      </thead>
 
-    <tbody>
+      <tbody class="table__body">
 
-        <% for (var artist of artists) { %>
-            <tr>
-                <td><%= artist.name %></td>
-                <td><%= artist.location.city %></td>
-                <td>
-                  <% for (categorie of artist.categories) { %>
-                    <span><%= categorie %></span>
-                  <% } %>
-                </td>
-                <td><%= moment(artist.createDate).format('MM/DD/YYYY HH:mm') %></td>
-                <td><%= artist.published %></td>
-                <td>
-                    <a href="/artists/<%= artist.slug %>/edit" class="btn">Edit</a>
-                    <a href="/artists/<%= artist.slug %>" class="btn">See artist</a>
-                    <a href="/artists/<%= artist.slug %>/delete" class="btn">Delete</a>
-                </td>
-            </tr>
-        <% } %>
+          <% for (var artist of artists) { %>
+              <tr class="table__row">
+                  <td class="table__cell"><%= artist.name %></td>
+                  <td class="table__cell"><%= artist.location.city %></td>
+                  <td class="table__cell">
+                    <% for (categorie of artist.categories) { %>
+                      <span><%= categorie %></span>
+                    <% } %>
+                  </td>
+                  <td class="table__cell"><%= moment(artist.createDate).format('MM/DD/YYYY HH:mm') %></td>
+                  <td class="table__cell"><%= artist.published %></td>
+                  <td class="table__cell">
+                      <a href="/artists/<%= artist.slug %>/edit" class="button">Edit</a>
+                      <a href="/artists/<%= artist.slug %>" class="button">See artist</a>
+                      <a href="/artists/<%= artist.slug %>/delete" class="button">Delete</a>
+                  </td>
+              </tr>
+          <% } %>
 
-    </tbody>
-</table>
+      </tbody>
+  </table>
+</div>

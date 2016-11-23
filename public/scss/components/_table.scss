@@ -1,0 +1,41 @@
+//====== Table ======
+
+.table {
+
+}
+
+// table row
+.table__row {
+  background: darken($blue-mirage, 3);
+
+  &:nth-child(odd) {
+    background: darken($blue-mirage, 5);
+  }
+
+  &:hover,
+  &:focus,
+  &:nth-child(odd):hover ,
+  &:nth-child(odd):focus {
+    background: lighten($blue-mirage, 3);
+  }
+}
+
+
+// table cell
+.table__cell {
+  padding: .5em 1em;
+  @include rem(font-size, 15px);
+}
+
+// Table head
+
+.table__head__row {
+  background: darken($blue-mirage, 1);
+}
+
+.table__head__cell {
+  padding: 1em;
+  text-align: left;
+  @include rem(font-size, 16px);
+  text-transform: uppercase;
+}
