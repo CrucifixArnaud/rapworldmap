@@ -83387,10 +83387,10 @@ var Artist = function (_React$Component) {
 
       return _react2.default.createElement(
         'li',
-        { key: this.props.step },
+        { className: 'predictive-box__item', key: this.props.step },
         _react2.default.createElement(
           'a',
-          { className: 'artist', href: '#', onClick: function onClick(event) {
+          { className: 'predictive-box__item__link', href: '#', onClick: function onClick(event) {
               return _this2.handleClick(event);
             } },
           this.props.artist.name,
@@ -83554,7 +83554,7 @@ var InputName = function (_React$Component2) {
           _react2.default.createElement('input', { ref: 'inputName', id: 'inputName', type: 'text', name: 'name', onChange: this.handleChange, onBlur: this.handleBlur, value: this.state.value }),
           _react2.default.createElement(
             'ul',
-            null,
+            { className: 'predictive-box' },
             artists
           )
         )

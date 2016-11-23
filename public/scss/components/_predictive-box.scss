@@ -1,0 +1,27 @@
+//====== Predictive box ======
+
+.predictive-box {
+  margin: 2px 0 0;
+  padding: 0;
+}
+
+.predictive-box__item {
+  list-style-type: none;
+}
+
+.predictive-box__item__link {
+  display: block;
+  width: 100%;
+  color: #fff;
+  padding: 1em;
+  background: darken($blue-mirage, 5);
+  text-decoration: none;
+  @include rem(font-size, 12px);
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: darken($blue-mirage, 2);
+    color: $color-primary;
+  }
+}

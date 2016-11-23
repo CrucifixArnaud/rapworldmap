@@ -667,6 +667,34 @@ textarea {
 .error p {
   margin: 0; }
 
+.predictive-box {
+  margin: 2px 0 0;
+  padding: 0; }
+
+.predictive-box__item {
+  list-style-type: none; }
+
+.predictive-box__item__link {
+  display: block;
+  width: 100%;
+  color: #fff;
+  padding: 1em;
+  background: #121d23;
+  text-decoration: none;
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 12px;
+  /* 9 */
+  font-size: 1.2rem;
+  /* 9 */ }
+  .predictive-box__item__link:hover, .predictive-box__item__link:focus, .predictive-box__item__link:active {
+    background: #18252d;
+    color: #ffd700; }
+
 .page-atlas {
   padding: 0; }
 

@@ -9,6 +9,9 @@ class Artist extends React.Component {
   // handleClick Handle click event on artist
   handleClick(event) {
     event.preventDefault();
+
+    console.log("Handle click");
+
     this.props.updateArtist(this.props.artist);
 
     this.props.resetArtists();
@@ -17,8 +20,8 @@ class Artist extends React.Component {
   // Render artist
   render() {
     return (
-      <li key={this.props.step}>
-        <a className="artist" href="#" onClick={(event) => this.handleClick(event)}>
+      <li className="predictive-box__item" key={this.props.step}>
+        <a className="predictive-box__item__link artist" href="#" onClick={(event) => this.handleClick(event)}>
           {this.props.artist.name} ({this.props.artist.disambiguation}) {(this.props.artist.area) ? <span className="city">({this.props.artist.area.name})</span> : ''}
         </a>
       </li>
@@ -58,7 +61,6 @@ export default class InputName extends React.Component {
    */
   handleChange(event) {
     const that = this;
-
 
     this.setState({
       value: event.target.value
@@ -137,7 +139,7 @@ export default class InputName extends React.Component {
         <div className="field">
           <label className="field__label" htmlFor="inputName">Name:</label>
           <input ref="inputName" id="inputName" type="text" name="name" onChange={this.handleChange} onBlur={this.handleBlur} value={this.state.value} />
-          <ul>{artists}</ul>
+          <ul className="predictive-box">{artists}</ul>
         </div>
       </div>
     );
