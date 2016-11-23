@@ -4,6 +4,7 @@
 @import 'vendors/normalize';
 
 // Utils
+@import 'utils/functions';
 @import 'utils/mixins';
 @import 'utils/variables';
 
@@ -20,3 +21,4 @@
 
 // Pages
 @import 'pages/atlas';
+@import 'pages/admin';

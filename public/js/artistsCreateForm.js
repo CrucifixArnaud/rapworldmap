@@ -31,75 +31,84 @@ export default class ArtistsCreateForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form action="/artists/create" method="post">
-          <div id="inputNameField" className="field">
-            <InputName value={this.state.currentArtist.name} updateArtist={this.updateArtist.bind(this)}/>
+      <form className="form-create" action="/artists/create" method="post">
+        <div className="field-group">
+          <InputName value={this.state.currentArtist.name} updateArtist={this.updateArtist.bind(this)}/>
+        </div>
+        <div className="field-group">
+          <h3 className="field-group__title">Location</h3>
+          <div className="field">
+            <label className="field__label" htmlFor="inputCity">City:</label>
+            <input id="inputCity" type="text" name="city" value={this.state.currentArtist.city} />
           </div>
-          <div>
-            <h3>Location</h3>
-            <div>
-              <label htmlFor="inputCity">City:</label>
-              <input id="inputCity" type="text" name="city" value={this.state.currentArtist.city} />
-            </div>
-            <div>
-              <label htmlFor="inputNeighborhoodName">Neighborhood Name:</label>
-              <input id="inputNeighborhoodName" type="text" name="neighborhoodName" />
-            </div>
-            <div>
-              <label htmlFor="coordinates">Coordinates:</label>
-              <input id="coordinates" type="text" name="coordinates" />
-            </div>
+          <div className="field">
+            <label className="field__label" htmlFor="inputNeighborhoodName">Neighborhood Name:</label>
+            <input id="inputNeighborhoodName" type="text" name="neighborhoodName" />
           </div>
-          <div>
-            <h3>Categories:</h3>
-            <label htmlFor="producer">Producer</label>
+          <div className="field">
+            <label className="field__label" htmlFor="coordinates">Coordinates:</label>
+            <input id="coordinates" type="text" name="coordinates" />
+          </div>
+        </div>
+        <div className="field-group">
+          <h3 className="field-group__title">Categories:</h3>
+          <div className="field--inline">
             <input type="checkbox" id="producer" name="categories" value="producer" />
-            <label htmlFor="rapper">Rapper</label>
-            <input type="checkbox" id="rapper" name="categories" value="rapper" />
-            <label htmlFor="singer">Singer</label>
-            <input type="checkbox" id="singer" name="categories" value="singer" />
+            <label className="field__label" htmlFor="producer">Producer</label>
           </div>
-          <div>
-            <h3>Images</h3>
-            <label htmlFor="thumbnailUrl">Thumbnail Url:</label>
+          <div className="field--inline">
+            <input type="checkbox" id="rapper" name="categories" value="rapper" />
+            <label className="field__label" htmlFor="rapper">Rapper</label>
+          </div>
+          <div className="field--inline">
+            <input type="checkbox" id="singer" name="categories" value="singer" />
+            <label className="field__label" htmlFor="singer">Singer</label>
+          </div>
+        </div>
+        <div className="field-group">
+          <h3 className="field-group__title">Images</h3>
+          <div className="field">
+            <label className="field__label" htmlFor="thumbnailUrl">Thumbnail Url:</label>
             <input id="thumbnailUrl" type="text" name="thumbnailUrl" value={this.state.currentArtist.thumbnailUrl}/>
           </div>
-          <div>
-            <h3>Bio</h3>
-            <div>
-              <label htmlFor="inputSummary">Summary:</label>
-              <textarea id="inputSummary" name="summary">
-              </textarea>
-            </div>
-            <div>
-              <label htmlFor="inputWikipediaUrl">Wikipedia Url:</label>
-              <input id="inputWikipediaUrl" type="string" name="wikipediaUrl" />
-            </div>
-            <div>
-              <label htmlFor="inputBirthDate">Birthdate:</label>
-              <input id="inputBirthDate" value={this.state.currentArtist.birthdate} type="date" name="birthdate" />
-            </div>
-            <div>
-              <label htmlFor="inputDeathDate">Deathdate:</label>
-              <input id="inputDeathDate" value={this.state.currentArtist.deathdate} type="date" name="deathdate" />
-            </div>
+        </div>
+        <div className="field-group">
+          <h3 className="field-group__title">Bio</h3>
+          <div className="field">
+            <label className="field__label" htmlFor="inputSummary">Summary:</label>
+            <textarea id="inputSummary" name="summary">
+            </textarea>
           </div>
-          <div>
-            <h3>Youtube</h3>
-            <div>
-              <label htmlFor="inputYoutubePageUrl">Page Url:</label>
-              <input id="inputYoutubePageUrl" type="string" name="youtugePageUrl" />
-            </div>
-            <div>
-              <label htmlFor="inputClipExampleUrl">Clip Example Url:</label>
-              <input id="inputClipExampleUrl" type="string" name="clipExampleUrl" />
-            </div>
+          <div className="field">
+            <label className="field__label" htmlFor="inputWikipediaUrl">Wikipedia Url:</label>
+            <input id="inputWikipediaUrl" type="text" name="wikipediaUrl" />
           </div>
-
-          <button type="submit">Create</button>
-        </form>
-      </div>
+          <div className="field--inline">
+            <label className="field__label" htmlFor="inputBirthDate">Birthdate:</label>
+            <input id="inputBirthDate" value={this.state.currentArtist.birthdate} type="date" name="birthdate" />
+          </div>
+          <div className="field--inline">
+            <label className="field__label" htmlFor="inputDeathDate">Deathdate:</label>
+            <input id="inputDeathDate" value={this.state.currentArtist.deathdate} type="date" name="deathdate" />
+          </div>
+        </div>
+        <div className="field-group">
+          <h3 className="field-group__title">Youtube</h3>
+          <div className="field--inline">
+            <label className="field__label" htmlFor="inputYoutubePageUrl">Page Url:</label>
+            <input id="inputYoutubePageUrl" type="text" name="youtugePageUrl" />
+          </div>
+          <div className="field--inline">
+            <label className="field__label" htmlFor="inputClipExampleUrl">Clip Example Url:</label>
+            <input id="inputClipExampleUrl" type="text" name="clipExampleUrl" />
+          </div>
+        </div>
+        <div className="field">
+          <button className="button" type="submit">
+            Add artist
+          </button>
+        </div>
+      </form>
     );
   }
 }

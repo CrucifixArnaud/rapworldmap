@@ -1,17 +1,22 @@
 
-<h1>Create an artists</h1>
 
-<% if (errors.length > 0) { %>
-  <div class="errors">
-    <p>Something goes wrong: </p>
-    <% for (error of errors) { %>
-        <%= error %> <br>
-    <% } %>
-  </div>
-<% } %>
+<div class="admin-content">
 
-<!-- ARTIST CREATION FORM -->
-<div id="app">
+  <% if (errors.length > 0) { %>
+    <div class="errors">
+      <p>Something goes wrong: </p>
+      <ul>
+        <% for (error of errors) { %>
+          <li class="error">
+            <p><%= error %> </p>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  <% } %>
 
+  <!-- ARTIST CREATION FORM -->
+  <div id="app">
 
-<script src="/js/bundle.js"></script>
+  <script src="/js/bundle.js"></script>
+</div>

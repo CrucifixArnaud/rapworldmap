@@ -59,9 +59,14 @@ function showSingle (req, res) {
  * [showCreate Show artist creation page]
  */
 function showCreate(req, res) {
-  res.render('pages/artists/create', {
-    errors: req.flash('errors')
-  });
+  const locals = {
+    errors: req.flash('errors'),
+    layout: 'admin',
+    title: 'Create a new artist',
+    slug: 'page-admin'
+  };
+
+  res.render('pages/artists/create', locals);
 }
 
 /**

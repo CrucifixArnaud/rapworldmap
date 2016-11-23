@@ -83130,179 +83130,195 @@ var ArtistsCreateForm = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        null,
+        'form',
+        { className: 'form-create', action: '/artists/create', method: 'post' },
         _react2.default.createElement(
-          'form',
-          { action: '/artists/create', method: 'post' },
+          'div',
+          { className: 'field-group' },
+          _react2.default.createElement(_inputName2.default, { value: this.state.currentArtist.name, updateArtist: this.updateArtist.bind(this) })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'field-group' },
           _react2.default.createElement(
-            'div',
-            { id: 'inputNameField', className: 'field' },
-            _react2.default.createElement(_inputName2.default, { value: this.state.currentArtist.name, updateArtist: this.updateArtist.bind(this) })
+            'h3',
+            { className: 'field-group__title' },
+            'Location'
           ),
           _react2.default.createElement(
             'div',
-            null,
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Location'
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'inputCity' },
-                'City:'
-              ),
-              _react2.default.createElement('input', { id: 'inputCity', type: 'text', name: 'city', value: this.state.currentArtist.city })
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'inputNeighborhoodName' },
-                'Neighborhood Name:'
-              ),
-              _react2.default.createElement('input', { id: 'inputNeighborhoodName', type: 'text', name: 'neighborhoodName' })
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'coordinates' },
-                'Coordinates:'
-              ),
-              _react2.default.createElement('input', { id: 'coordinates', type: 'text', name: 'coordinates' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Categories:'
-            ),
+            { className: 'field' },
             _react2.default.createElement(
               'label',
-              { htmlFor: 'producer' },
-              'Producer'
+              { className: 'field__label', htmlFor: 'inputCity' },
+              'City:'
             ),
+            _react2.default.createElement('input', { id: 'inputCity', type: 'text', name: 'city', value: this.state.currentArtist.city })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field' },
+            _react2.default.createElement(
+              'label',
+              { className: 'field__label', htmlFor: 'inputNeighborhoodName' },
+              'Neighborhood Name:'
+            ),
+            _react2.default.createElement('input', { id: 'inputNeighborhoodName', type: 'text', name: 'neighborhoodName' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field' },
+            _react2.default.createElement(
+              'label',
+              { className: 'field__label', htmlFor: 'coordinates' },
+              'Coordinates:'
+            ),
+            _react2.default.createElement('input', { id: 'coordinates', type: 'text', name: 'coordinates' })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'field-group' },
+          _react2.default.createElement(
+            'h3',
+            { className: 'field-group__title' },
+            'Categories:'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field--inline' },
             _react2.default.createElement('input', { type: 'checkbox', id: 'producer', name: 'categories', value: 'producer' }),
             _react2.default.createElement(
               'label',
-              { htmlFor: 'rapper' },
-              'Rapper'
-            ),
+              { className: 'field__label', htmlFor: 'producer' },
+              'Producer'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field--inline' },
             _react2.default.createElement('input', { type: 'checkbox', id: 'rapper', name: 'categories', value: 'rapper' }),
             _react2.default.createElement(
               'label',
-              { htmlFor: 'singer' },
-              'Singer'
-            ),
-            _react2.default.createElement('input', { type: 'checkbox', id: 'singer', name: 'categories', value: 'singer' })
+              { className: 'field__label', htmlFor: 'rapper' },
+              'Rapper'
+            )
           ),
           _react2.default.createElement(
             'div',
-            null,
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Images'
-            ),
+            { className: 'field--inline' },
+            _react2.default.createElement('input', { type: 'checkbox', id: 'singer', name: 'categories', value: 'singer' }),
             _react2.default.createElement(
               'label',
-              { htmlFor: 'thumbnailUrl' },
+              { className: 'field__label', htmlFor: 'singer' },
+              'Singer'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'field-group' },
+          _react2.default.createElement(
+            'h3',
+            { className: 'field-group__title' },
+            'Images'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field' },
+            _react2.default.createElement(
+              'label',
+              { className: 'field__label', htmlFor: 'thumbnailUrl' },
               'Thumbnail Url:'
             ),
             _react2.default.createElement('input', { id: 'thumbnailUrl', type: 'text', name: 'thumbnailUrl', value: this.state.currentArtist.thumbnailUrl })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'field-group' },
+          _react2.default.createElement(
+            'h3',
+            { className: 'field-group__title' },
+            'Bio'
           ),
           _react2.default.createElement(
             'div',
-            null,
+            { className: 'field' },
             _react2.default.createElement(
-              'h3',
-              null,
-              'Bio'
+              'label',
+              { className: 'field__label', htmlFor: 'inputSummary' },
+              'Summary:'
             ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'inputSummary' },
-                'Summary:'
-              ),
-              _react2.default.createElement('textarea', { id: 'inputSummary', name: 'summary' })
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'inputWikipediaUrl' },
-                'Wikipedia Url:'
-              ),
-              _react2.default.createElement('input', { id: 'inputWikipediaUrl', type: 'string', name: 'wikipediaUrl' })
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'inputBirthDate' },
-                'Birthdate:'
-              ),
-              _react2.default.createElement('input', { id: 'inputBirthDate', value: this.state.currentArtist.birthdate, type: 'date', name: 'birthdate' })
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'inputDeathDate' },
-                'Deathdate:'
-              ),
-              _react2.default.createElement('input', { id: 'inputDeathDate', value: this.state.currentArtist.deathdate, type: 'date', name: 'deathdate' })
-            )
+            _react2.default.createElement('textarea', { id: 'inputSummary', name: 'summary' })
           ),
           _react2.default.createElement(
             'div',
-            null,
+            { className: 'field' },
             _react2.default.createElement(
-              'h3',
-              null,
-              'Youtube'
+              'label',
+              { className: 'field__label', htmlFor: 'inputWikipediaUrl' },
+              'Wikipedia Url:'
             ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'inputYoutubePageUrl' },
-                'Page Url:'
-              ),
-              _react2.default.createElement('input', { id: 'inputYoutubePageUrl', type: 'string', name: 'youtugePageUrl' })
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'inputClipExampleUrl' },
-                'Clip Example Url:'
-              ),
-              _react2.default.createElement('input', { id: 'inputClipExampleUrl', type: 'string', name: 'clipExampleUrl' })
-            )
+            _react2.default.createElement('input', { id: 'inputWikipediaUrl', type: 'text', name: 'wikipediaUrl' })
           ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field--inline' },
+            _react2.default.createElement(
+              'label',
+              { className: 'field__label', htmlFor: 'inputBirthDate' },
+              'Birthdate:'
+            ),
+            _react2.default.createElement('input', { id: 'inputBirthDate', value: this.state.currentArtist.birthdate, type: 'date', name: 'birthdate' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field--inline' },
+            _react2.default.createElement(
+              'label',
+              { className: 'field__label', htmlFor: 'inputDeathDate' },
+              'Deathdate:'
+            ),
+            _react2.default.createElement('input', { id: 'inputDeathDate', value: this.state.currentArtist.deathdate, type: 'date', name: 'deathdate' })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'field-group' },
+          _react2.default.createElement(
+            'h3',
+            { className: 'field-group__title' },
+            'Youtube'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field--inline' },
+            _react2.default.createElement(
+              'label',
+              { className: 'field__label', htmlFor: 'inputYoutubePageUrl' },
+              'Page Url:'
+            ),
+            _react2.default.createElement('input', { id: 'inputYoutubePageUrl', type: 'text', name: 'youtugePageUrl' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field--inline' },
+            _react2.default.createElement(
+              'label',
+              { className: 'field__label', htmlFor: 'inputClipExampleUrl' },
+              'Clip Example Url:'
+            ),
+            _react2.default.createElement('input', { id: 'inputClipExampleUrl', type: 'text', name: 'clipExampleUrl' })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'field' },
           _react2.default.createElement(
             'button',
-            { type: 'submit' },
-            'Create'
+            { className: 'button', type: 'submit' },
+            'Add artist'
           )
         )
       );
@@ -83528,19 +83544,23 @@ var InputName = function (_React$Component2) {
         null,
         _react2.default.createElement(
           'h3',
-          null,
+          { className: 'field-group__title' },
           'About'
         ),
         _react2.default.createElement(
-          'label',
-          { htmlFor: 'inputName' },
-          'Name:'
-        ),
-        _react2.default.createElement('input', { ref: 'inputName', id: 'inputName', type: 'text', name: 'name', onChange: this.handleChange, onBlur: this.handleBlur, value: this.state.value }),
-        _react2.default.createElement(
-          'ul',
-          null,
-          artists
+          'div',
+          { className: 'field' },
+          _react2.default.createElement(
+            'label',
+            { className: 'field__label', htmlFor: 'inputName' },
+            'Name:'
+          ),
+          _react2.default.createElement('input', { ref: 'inputName', id: 'inputName', type: 'text', name: 'name', onChange: this.handleChange, onBlur: this.handleBlur, value: this.state.value }),
+          _react2.default.createElement(
+            'ul',
+            null,
+            artists
+          )
         )
       );
     }

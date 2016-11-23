@@ -1,0 +1,55 @@
+// Page Admin
+// ---------------------
+
+.page-admin {
+  background-color: darken($blue-mirage, 2);
+  color: #fff;
+}
+
+
+// admin-header
+// ---------------------
+.admin-header {
+  background-color: darken($blue-mirage, 2);
+  padding: 1em 4em;
+}
+
+.main-title,
+.page__title {
+  display: inline-block;
+}
+
+.main-title {
+  margin: 0;
+  @include rem(font-size, 24px);
+}
+
+.page__title {
+  @include rem(font-size, 18px);
+
+  &:before {
+    content: ' › ';
+    color: $color-primary;
+  }
+}
+
+// Admin Content
+.admin-content {
+  background-color: $blue-mirage;
+  margin-left: 4em;
+  margin-bottom: 4em;
+  padding: 2em;
+  max-width: calc(100% - 8em);
+}
+
+.admin-content__title {
+  margin: 0;
+  @include rem(font-size, 24px);
+}
+
+// Form Create
+// ---------------------
+
+.form-create {
+  max-width: 25%;
+}

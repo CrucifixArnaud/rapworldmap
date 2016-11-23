@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ==========================================================================
    Normalize.scss settings
    ========================================================================== */
@@ -368,6 +369,14 @@ td,
 th {
   padding: 0; }
 
+/***********************  > Functions
+  Usefull functions use every where in the applications
+\***********************/
+/**
+ * [parseInt Return an integer from a value with a unit]
+ * @param  {number} $n [A number]
+ * @return {int}    [The related integer of the given ($n) number]
+ */
 /***********************  > Mixins
 \***********************/
 /**
@@ -389,16 +398,28 @@ th {
  * @param  {string} $position [Position type of the element] (default: relative)
  */
 @font-face {
-  font-family: 'cac_champagneregular';
-  src: url("/fonts/cac_champagne-webfont.eot");
-  src: url("/fonts/cac_champagne-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/cac_champagne-webfont.woff") format("woff"), url("/fonts/cac_champagne-webfont.ttf") format("truetype"), url("/fonts/cac_champagne-webfont.svg#cac_champagneregular") format("svg");
+  font-family: 'liberation';
+  src: url("../fonts/LiberationSans/LiberationSans-Regular-webfont.eot");
+  src: url("../fonts/LiberationSans/LiberationSans-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/LiberationSans/LiberationSans-Regular-webfont.woff") format("woff"), url("../fonts/LiberationSans/LiberationSans-Regular-webfont.ttf") format("truetype"), url("../fonts/LiberationSans/LiberationSans-Regular-webfont.svg#liberation_sansregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
-html,
+html {
+  font-size: 62.5%; }
+
 body {
-  font-family: sans-serif;
-  color: #333; }
+  font-family: liberation, sans-serif;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400; }
 
 /***********************
   > Layout.scss
@@ -406,9 +427,6 @@ body {
 \***********************/
 * {
   box-sizing: border-box; }
-
-body {
-  padding: 1em; }
 
 .mapbox {
   position: absolute;
@@ -436,33 +454,284 @@ body {
   max-width: 100%; }
 
 [type="text"],
-[type="mail"] {
+[type="mail"],
+[type="date"],
+textarea {
   display: block;
-  box-shadow: 0;
-  border-color: 1px solid #333;
-  border-radius: 0;
   padding: 5px;
-  outline-color: #ff0066; }
+  box-shadow: 0;
+  border: 0;
+  border-radius: 0;
+  width: 100%;
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 14px;
+  /* 9 */
+  font-size: 1.4rem;
+  /* 9 */
+  background: #111a20; }
+  [type="text"]:focus,
+  [type="mail"]:focus,
+  [type="date"]:focus,
+  textarea:focus {
+    outline: none;
+    box-shadow: 0 2px 0 #ffd700; }
 
-/**
- * Predictive box
- */
-.field {
+textarea {
+  min-height: 250px; }
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  opacity: 0;
+  position: absolute; }
+
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  display: inline-block;
+  vertical-align: middle;
   position: relative; }
 
-.predictive-box {
-  border: 1px solid #000;
-  position: absolute;
-  top: calc(100% + 10px);
-  width: 500px;
-  background: #fff;
-  min-height: 100px; }
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  background: #111a20;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer; }
 
-.predictive-box__item {
-  display: block; }
+/* Fake Checked mark aspect */
+[type="checkbox"]:not(:checked) + label:hover:after,
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 6px;
+  left: 5px;
+  color: #ffd700;
+  transition: all .2s;
+  border-radius: 2px; }
+
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0); }
+
+/* Hover style */
+[type="checkbox"]:not(:checked) + label:hover:after,
+[type="checkbox"]:focus:not(:checked) + label:after {
+  opacity: 1;
+  transform: scale(1);
+  background: #2c4756; }
+
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+  background: #ffd700; }
+
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  background-color: #16232a; }
+
+[type="checkbox"]:disabled + label {
+  color: gray; }
+
+[type="checkbox"]:disabled + label,
+[type="checkbox"]:disabled + label:before {
+  cursor: not-allowed; }
+
+/* accessibility */
+.button {
+  position: relative;
+  display: block;
+  background: none;
+  padding: 0 3rem;
+  line-height: 4rem;
+  text-align: center;
+  border: 0;
+  text-decoration: none;
+  border-radius: 2px;
+  color: #1b2b34;
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 15px;
+  /* 9 */
+  font-size: 1.5rem;
+  /* 9 */
+  cursor: pointer;
+  transition: background-position 0.5s ease-in-out, background-color 0.2s ease-in-out;
+  background-color: #ffd700;
+  background-image: linear-gradient(to right, #ffd700, #ffeba8 100%);
+  background-size: 400% 400%; }
+  .button:after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: .5;
+    background: -250px center no-repeat;
+    border-radius: 4px;
+    background-clip: padding-box;
+    transition: all .5s ease-in-out;
+    background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0) 25%, #fff4c2 25%, #fff4c2 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 60%, #fff4c2 60%, #fff4c2 70%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0) 76%, #fff4c2 76%, #fff4c2 80%, rgba(255, 255, 255, 0) 80%); }
+  .button:hover, .button:focus {
+    outline: none;
+    background-position: 100% 50%;
+    transition: background-position 1s ease-in-out, background-color 0.2s ease-in-out;
+    background-color: #ffeba8; }
+    .button:hover:after, .button:focus:after {
+      background-position: 200px center; }
+  .button:active {
+    background-image: none;
+    background-color: #e5b823; }
+
+.field {
+  position: relative;
+  margin: 0 0 .5em; }
+
+.field__label {
+  display: block;
+  margin-bottom: .4em;
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 16px;
+  /* 9 */
+  font-size: 1.6rem;
+  /* 9 */ }
+
+.field--inline {
+  display: inline-block;
+  margin-right: 1em; }
+  .field--inline:last-child {
+    margin-right: 0; }
+
+.field-group {
+  margin: 1.5em 0;
+  padding-left: .5em; }
+  .field-group:first-of-type {
+    margin-top: 0; }
+  .field-group:last-of-type {
+    margin-bottom: 0; }
+
+.field-group__title {
+  margin: 0 0 0.5em -0.5em;
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 18px;
+  /* 9 */
+  font-size: 1.8rem;
+  /* 9 */
+  color: #ffd700; }
+
+.errors {
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 15px;
+  /* 9 */
+  font-size: 1.5rem;
+  /* 9 */
+  margin-bottom: 1em; }
+
+.error {
+  color: #e52323; }
+
+.error p {
+  margin: 0; }
 
 .page-atlas {
   padding: 0; }
+
+.page-admin {
+  background-color: #18252d;
+  color: #fff; }
+
+.admin-header {
+  background-color: #18252d;
+  padding: 1em 4em; }
+
+.main-title,
+.page__title {
+  display: inline-block; }
+
+.main-title {
+  margin: 0;
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 24px;
+  /* 9 */
+  font-size: 2.4rem;
+  /* 9 */ }
+
+.page__title {
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 18px;
+  /* 9 */
+  font-size: 1.8rem;
+  /* 9 */ }
+  .page__title:before {
+    content: ' › ';
+    color: #ffd700; }
+
+.admin-content {
+  background-color: #1b2b34;
+  margin-left: 4em;
+  margin-bottom: 4em;
+  padding: 2em;
+  max-width: calc(100% - 8em); }
+
+.admin-content__title {
+  margin: 0;
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 24px;
+  /* 9 */
+  font-size: 2.4rem;
+  /* 9 */ }
+
+.form-create {
+  max-width: 25%; }
 
 
 /*# sourceMappingURL=app.css.map*/

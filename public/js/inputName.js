@@ -134,10 +134,12 @@ export default class InputName extends React.Component {
     // Input
     return (
       <div>
-        <h3>About</h3>
-        <label htmlFor="inputName">Name:</label>
-        <input ref="inputName" id="inputName" type="text" name="name" onChange={this.handleChange} onBlur={this.handleBlur} value={this.state.value} />
-        <ul>{artists}</ul>
+        <h3 className="field-group__title">About</h3>
+        <div className="field">
+          <label className="field__label" htmlFor="inputName">Name:</label>
+          <input ref="inputName" id="inputName" type="text" name="name" onChange={this.handleChange} onBlur={this.handleBlur} value={this.state.value} />
+          <ul>{artists}</ul>
+        </div>
       </div>
     );
   }

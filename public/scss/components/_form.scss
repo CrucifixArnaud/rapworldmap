@@ -5,35 +5,245 @@
 
 @mixin inputText () {
   display: block;
-  box-shadow: 0;
-  border-color: 1px solid $grey-21;
-  border-radius: 0;
   padding: 5px;
-  outline-color: #ff0066;
+  box-shadow: 0;
+  border: 0;
+  border-radius: 0;
+  // min-width: 250px;
+  width: 100%;
+  @include rem(font-size, 14px);
+  // outline-color: $color-primary;
+  background: darken($blue-mirage, 6);
+
+  &:focus {
+    outline: none;
+    box-shadow:  0 2px 0 $color-primary;
+  }
 }
 
 [type="text"],
-[type="mail"] {
+[type="mail"],
+[type="date"],
+textarea {
   @include inputText();
 }
 
-/**
- * Predictive box
- */
+// textarea
+// ---------------------
 
-.field {
+textarea {
+  min-height: 250px;
+}
+
+
+// Checkbox
+// ---------------------
+
+// Hide default input
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  opacity: 0;
+  position: absolute;
+}
+
+// Label styles
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  display: inline-block;
+  vertical-align: middle;
   position: relative;
 }
 
-.predictive-box {
-  border: 1px solid #000;
-  position: absolute;
-  top: calc(100% + 10px);
-  width: 500px;
-  background: #fff;
-  min-height: 100px;
+// Fake checkbox Aspect
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  background: darken($blue-mirage, 6);
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
-.predictive-box__item {
+/* Fake Checked mark aspect */
+[type="checkbox"]:not(:checked) + label:hover:after,
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 6px;
+  left: 5px;
+  color: $color-primary;
+  transition: all .2s;
+  border-radius: 2px;
+}
+
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Hover style */
+[type="checkbox"]:not(:checked) + label:hover:after,
+[type="checkbox"]:focus:not(:checked) + label:after {
+  opacity: 1;
+  transform: scale(1);
+  background: lighten($blue-mirage, 10);
+}
+
+// Checked
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+  background: $color-primary;
+}
+
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  background-color: darken($blue-mirage, 3);
+}
+
+[type="checkbox"]:disabled + label {
+  color: darken(#fff, 50);
+}
+
+[type="checkbox"]:disabled + label,
+[type="checkbox"]:disabled + label:before {
+  cursor: not-allowed;
+}
+
+/* accessibility */
+// [type="checkbox"]:checked:focus + label:before,
+// [type="checkbox"]:not(:checked):focus + label:before {
+//   border: 1px dotted blue;
+// }
+
+
+// Button
+// ---------------------
+
+.button {
+  position: relative;
   display: block;
+  background: none;
+  padding: 0 3rem;
+  line-height: 4rem;
+  text-align: center;
+  border: 0;
+  text-decoration: none;
+  border-radius: 2px;
+  color: $blue-mirage;
+  @include rem(font-size, 15px);
+  cursor: pointer;
+  transition: background-position 0.5s ease-in-out, background-color 0.2s ease-in-out;
+
+  background-color: #ffd700;
+  background-image: linear-gradient(to right,#ffd700, #ffeba8 100%);
+  background-size: 400% 400%;
+
+  // Shiny effect
+  &:after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: .5;
+    background: -250px center no-repeat;
+    border-radius: 4px;
+    background-clip: padding-box;
+    transition: all .5s ease-in-out;
+    background-image: linear-gradient(-45deg,rgba(255,255,255,0) 25%,#fff4c2 25%,#fff4c2 50%,rgba(255,255,255,0) 50%, rgba(255,255,255,0) 60%, #fff4c2 60%, #fff4c2 70%, rgba(255,255,255,0) 70%, rgba(255,255,255,0) 76%, #fff4c2 76%, #fff4c2 80%, rgba(255,255,255,0) 80%);
+  }
+
+  // Hover, focus, active interactions
+  &:hover,
+  &:focus {
+    outline: none;
+    background-position: 100% 50%;
+    transition: background-position 1s ease-in-out, background-color 0.2s ease-in-out;
+    background-color: #ffeba8;
+
+    // Shiny effect on hover
+    &:after {
+      background-position: 200px center;
+    }
+  }
+
+  &:active {
+    background-image: none;
+    background-color: #e5b823;
+  }
+}
+
+// Field
+// ---------------------
+
+.field {
+  position: relative;
+  margin: 0 0 .5em;
+}
+
+.field__label {
+  display: block;
+  margin-bottom: .4em;
+  @include rem(font-size, 16px);
+}
+
+// field--inline
+
+.field--inline {
+  display: inline-block;
+  margin-right: 1em;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// Field group
+// ---------------------
+
+.field-group {
+  margin: 1.5em 0;
+  padding-left: .5em;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.field-group__title {
+  margin: 0 0 0.5em -0.5em;
+  @include rem(font-size, 18px);
+  color: $color-primary;
+}
+
+// Errors
+// ---------------------
+
+.errors {
+  @include rem(font-size, 15px);
+  margin-bottom: 1em;
+}
+
+.error {
+  color: $color-error;
+}
+
+.error p {
+  margin: 0;
 }

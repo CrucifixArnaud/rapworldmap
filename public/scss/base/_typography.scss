@@ -2,8 +2,22 @@
 // Define all typography global rules heres
 // ---------------------
 
-html,
+html {
+  font-size: 62.5%;
+}
+
 body {
-    font-family: $font-sans-serif;
-    color: $grey-21;
+  font-family: $font-sans-serif;
+  color: $grey-21;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
 }
