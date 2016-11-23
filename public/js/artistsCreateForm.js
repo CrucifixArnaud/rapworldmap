@@ -87,8 +87,7 @@ export default class ArtistsCreateForm extends React.Component {
     this.state = {
       currentArtist: {
         name: '',
-        city: '',
-        thumbnailUrl: ''
+        city: ''
       }
     }
   }
@@ -147,7 +146,7 @@ export default class ArtistsCreateForm extends React.Component {
           <h3 className="field-group__title">Images</h3>
           <div className="field">
             <label className="field__label" htmlFor="thumbnailUrl">Thumbnail Url:</label>
-            <input id="thumbnailUrl" type="text" name="thumbnailUrl" value={this.state.currentArtist.thumbnailUrl}/>
+            <input id="thumbnailUrl" type="text" name="thumbnailUrl" />
           </div>
         </div>
         <div className="field-group">

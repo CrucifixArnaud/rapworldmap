@@ -83203,8 +83203,7 @@ var ArtistsCreateForm = function (_React$Component2) {
     _this2.state = {
       currentArtist: {
         name: '',
-        city: '',
-        thumbnailUrl: ''
+        city: ''
       }
     };
     return _this2;
@@ -83324,7 +83323,7 @@ var ArtistsCreateForm = function (_React$Component2) {
               { className: 'field__label', htmlFor: 'thumbnailUrl' },
               'Thumbnail Url:'
             ),
-            _react2.default.createElement('input', { id: 'thumbnailUrl', type: 'text', name: 'thumbnailUrl', value: this.state.currentArtist.thumbnailUrl })
+            _react2.default.createElement('input', { id: 'thumbnailUrl', type: 'text', name: 'thumbnailUrl' })
           )
         ),
         _react2.default.createElement(
