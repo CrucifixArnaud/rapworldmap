@@ -24,6 +24,16 @@
   @include rem(font-size, 24px);
 }
 
+.main-title a {
+  color: #fff;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+}
+
 .page__title {
   @include rem(font-size, 18px);
 

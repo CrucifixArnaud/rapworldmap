@@ -566,12 +566,67 @@ a {
 .marker:focus {
   box-shadow: 0 0 0 2px #ff0066; }
 
-.leaflet-popup-content {
-  min-width: 320px; }
+.leaflet-container {
+  font-family: liberation, sans-serif; }
 
-.popup__picture .image {
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 2px;
+  background: #1b2b34; }
+
+.leaflet-popup-content {
+  min-width: 320px;
+  border: 0; }
+
+.leaflet-container a {
+  color: #ffd700; }
+  .leaflet-container a:hover, .leaflet-container a:focus, .leaflet-container a:active {
+    text-decoration: underline; }
+
+.leaflet-popup-tip {
+  border-top-color: #1b2b34; }
+
+.leaflet-container a:hover,
+.leaflet-container.dark a,
+.leaflet-popup-close-button {
+  color: #ffd700; }
+
+.leaflet-popup-close-button:hover {
+  background-color: #ffd700; }
+
+.popup {
+  color: #fff; }
+
+.popup .popup__title {
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 16px;
+  /* 9 */
+  font-size: 1.6rem;
+  /* 9 */ }
+
+.popup__thumbnail .image {
   display: block;
   max-width: 100%; }
+
+.popup__body {
+  margin-top: 1em; }
+
+.popup__body .popup__body__title {
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 16px;
+  /* 9 */
+  font-size: 1.6rem;
+  /* 9 */ }
 
 [type="text"],
 [type="mail"],
@@ -829,6 +884,11 @@ textarea {
   /* 9 */
   font-size: 2.4rem;
   /* 9 */ }
+
+.main-title a {
+  color: #fff; }
+  .main-title a:hover, .main-title a:focus, .main-title a:active {
+    text-decoration: none; }
 
 .page__title {
   /* 3 */

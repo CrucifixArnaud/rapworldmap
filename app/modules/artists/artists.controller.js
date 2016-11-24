@@ -250,6 +250,21 @@ function getArtistsGeojson (req, res) {
             'iconAnchor': [25, 25],
             'popupAnchor': [0, -25],
             'className': 'marker'
+          },
+          'location' : {
+            'city': artist.location[0].city,
+            'neighborhood': artist.location[0].neighborhood
+          },
+          categories: artist.categories,
+          bio: {
+            summary: artist.bio[0].summary,
+            wikipediaUrl: artist.bio[0].wikipediaUrl,
+            birthdate: artist.bio[0].birthdate,
+            deathdate: artist.bio[0].deathdate
+          },
+          youtube: {
+            pageUrl: artist.youtube[0].youtugePageUrl,
+            clipExampleUrl: artist.youtube[0].clipExampleUrl
           }
         }
       });
