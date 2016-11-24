@@ -1,10 +1,12 @@
 <div class="admin-content">
 
   <% if (success.length > 0) { %>
-      <div class="success"><%= success %></div>
+      <div class="success">
+        <p><%= success %></p>
+      </div>
   <% } %>
 
-  <a class="button" href="/artists/create">Create a new artist</a>
+  <a class="button--primary--md" href="/artists/create">Create a new artist</a>
 
   <table class="table table--artist">
       <thead class="table__head">
@@ -23,7 +25,7 @@
           <% for (var artist of artists) { %>
               <tr class="table__row">
                   <td class="table__cell"><%= artist.name %></td>
-                  <td class="table__cell"><%= artist.location.city %></td>
+                  <td class="table__cell"><%= artist.location[0].city %></td>
                   <td class="table__cell">
                     <% for (categorie of artist.categories) { %>
                       <span><%= categorie %></span>
@@ -32,9 +34,8 @@
                   <td class="table__cell"><%= moment(artist.createDate).format('MM/DD/YYYY HH:mm') %></td>
                   <td class="table__cell"><%= artist.published %></td>
                   <td class="table__cell">
-                      <a href="/artists/<%= artist.slug %>/edit" class="button">Edit</a>
-                      <a href="/artists/<%= artist.slug %>" class="button">See artist</a>
-                      <a href="/artists/<%= artist.slug %>/delete" class="button">Delete</a>
+                      <a href="/artists/<%= artist.slug %>/edit" class="button--primary">Edit</a>
+                      <a href="/artists/<%= artist.slug %>/delete" class="button--danger">Delete</a>
                   </td>
               </tr>
           <% } %>

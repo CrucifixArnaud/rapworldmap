@@ -1,0 +1,161 @@
+//====== Button ======
+
+.button,
+[class*="button--"] {
+  display: inline-block;
+  border-radius: 2px;
+  border: 0;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+// Disable state
+%button-disable,
+.button.disable,
+[class*="button--"].disable {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+// Button Default
+@mixin button-default($color) {
+  background-color: $color;
+  color: #fff;
+  transition: background-color 0.2s ease-in-out;
+
+  // Hover, focus, active interactions
+  &:hover:not(.disable),
+  &:focus:not(.disable) {
+    outline: none;
+    background-color: darken($color, 10);
+  }
+
+  &:active:not(.disable) {
+    background-image: none;
+    background-color: darken($color, 20);
+  }
+}
+
+// Button Shiny
+@mixin button-shiny($color) {
+  // Variables
+  // Hover color
+  $diff-hover: (
+    'adjust-hue': -4.38134deg,
+    'saturate': 0%,
+    'lighten': 32%
+  );
+  $color-hover: apply-color-diff($color, $diff-hover);
+  // Reflect color
+  $diff-reflect: (
+    'adjust-hue': -1.40791deg,
+    'saturate': 0%,
+    'lighten': 38%
+  );
+  $color-reflect: apply-color-diff($color, $diff-reflect);
+
+  // Styles
+  background-color: $color;
+  background-image: linear-gradient(to right, $color, $color-hover 100%);
+  background-size: 400% 400%;
+  color: $blue-mirage;
+  transition: background-position 0.5s ease-in-out, background-color 0.2s ease-in-out;
+
+  // Shiny effect
+  &:after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: .5;
+    background: -250px center no-repeat;
+    border-radius: 4px;
+    background-clip: padding-box;
+    transition: all .5s ease-in-out;
+    background-image: linear-gradient(-45deg,rgba(255,255,255,0) 25%,$color-reflect 25%,$color-reflect 50%,rgba(255,255,255,0) 50%, rgba(255,255,255,0) 60%, $color-reflect 60%, $color-reflect 70%, rgba(255,255,255,0) 70%, rgba(255,255,255,0) 76%, $color-reflect 76%, $color-reflect 80%, rgba(255,255,255,0) 80%);
+  }
+
+  // Hover, focus, active interactions
+  &:hover:not(.disable),
+  &:focus:not(.disable) {
+    outline: none;
+    background-position: 98% 50%;
+    transition: background-position 1s ease-in-out, background-color 0.2s ease-in-out, color .2s ease-in-out;
+    background-color: $color-hover;
+    color: #000;
+
+
+    // Shiny effect on hover
+    &:after {
+      background-position: 200px center;
+    }
+  }
+
+  &:active:not(.disable) {
+    background-image: none;
+    background-color: darken($color, 1);
+    //#e5b823
+  }
+
+  // &.disable {
+  //     @extend %button--primary-disabled;
+  // }
+}
+
+// Size Variation
+
+%button-size-default {
+  @include rem(font-size, 15px);
+  padding: 0 1.5rem;
+  line-height: 1.8;
+}
+
+%button-size-medium {
+  @include rem(font-size, 15px);
+  padding: 0 3rem;
+  line-height: 2.8;
+}
+
+//====== Button Definition ======
+
+// Button
+.button {
+    @extend %button-size-default;
+}
+
+// Button Primary
+%button--primary,
+[class*='button--primary'] {
+  position: relative;
+  @include button-shiny($yellow-gold);
+}
+
+.button--primary {
+  @extend %button-size-default;
+}
+
+.button--primary--md {
+  @extend %button-size-medium;
+}
+
+// Button Danger
+%button--danger,
+[class*='button--danger'] {
+  position: relative;
+  @include button-default($red-punch);
+}
+
+.button--danger {
+  @extend %button-size-default;
+}
+

@@ -182,7 +182,7 @@ export default class ArtistsForm extends React.Component {
           </div>
         </div>
         <div className="field">
-          <button className="button" type="submit">
+          <button className="button--primary--md" type="submit">
             Add artist
           </button>
         </div>

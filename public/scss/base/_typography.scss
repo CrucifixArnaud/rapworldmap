@@ -21,3 +21,15 @@ h5,
 h6 {
   font-weight: 400;
 }
+
+// Link
+a {
+  color: $yellow-gold;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: underline;
+  }
+}

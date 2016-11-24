@@ -87758,7 +87758,7 @@ var ArtistsForm = function (_React$Component2) {
           { className: 'field' },
           _react2.default.createElement(
             'button',
-            { className: 'button', type: 'submit' },
+            { className: 'button--primary--md', type: 'submit' },
             'Add artist'
           )
         )
