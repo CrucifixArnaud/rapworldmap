@@ -141,13 +141,18 @@ function showEdit(req, res) {
       res.send(`Artist ${req.params.slug} cannot be found!`);
     }
 
-    // Render the view
-    res.render('pages/artists/edit', {
+    const locals = {
       artist: artist,
       moment: moment,
       underscore: underscore,
-      errors: req.flash('errors')
-    });
+      errors: req.flash('errors'),
+      layout: 'admin',
+      title: 'Edit artist - <span class="artist-name">' + artist.name + '</span>',
+      slug: 'page-admin'
+    };
+
+    // Render the view
+    res.render('pages/artists/edit', locals);
   });
 }
 

@@ -776,6 +776,9 @@ textarea {
     content: ' › ';
     color: #ffd700; }
 
+.page__title .artist-name {
+  color: #ffd700; }
+
 .admin-content {
   background-color: #1b2b34;
   margin-left: 4em;
