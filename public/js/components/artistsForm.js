@@ -81,14 +81,15 @@ class InputCity extends React.Component {
   }
 }
 
-export default class ArtistsCreateForm extends React.Component {
-  constructor() {
-    super();
+export default class ArtistsForm extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
       currentArtist: {
         name: '',
         city: ''
-      }
+      },
+      action: props.action
     }
   }
 
@@ -111,7 +112,7 @@ export default class ArtistsCreateForm extends React.Component {
 
   render() {
     return (
-      <form className="form-create" action="/artists/create" method="post">
+      <form className="form-create" action={this.state.action} method="post">
         <div className="field-group">
           <InputName value={this.state.currentArtist.name} updateArtist={this.updateArtist.bind(this)}/>
         </div>

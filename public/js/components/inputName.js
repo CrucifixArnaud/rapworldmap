@@ -10,8 +10,6 @@ class Artist extends React.Component {
   handleClick(event) {
     event.preventDefault();
 
-    console.log("Handle click");
-
     this.props.updateArtist(this.props.artist);
 
     this.props.resetArtists();

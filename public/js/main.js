@@ -1,11 +1,8 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-// const ArtistsCreateForm = require('./artistsCreateForm');
+import Router from './router';
 
-import ArtistsCreateForm from './artistsCreateForm';
-
-ReactDOM.render(
-  <ArtistsCreateForm />,
+ReactDOM.render(Router,
   document.getElementById('app')
 );
