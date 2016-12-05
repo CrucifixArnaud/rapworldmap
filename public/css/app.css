@@ -864,6 +864,23 @@ textarea {
   background-color: #18252d;
   color: #fff; }
 
+.link--back-to {
+  /* 3 */
+  /* 3 */
+  /* 4 */
+  /* 6 */
+  /* 6 */
+  /* 7 */
+  font-size: 16px;
+  /* 9 */
+  font-size: 1.6rem;
+  /* 9 */
+  display: inline-block;
+  margin-bottom: 1em; }
+  .link--back-to:hover, .link--back-to:focus, .link--back-to:active {
+    text-decoration: none;
+    color: #ffeaa3; }
+
 .admin-header {
   background-color: #18252d;
   padding: 1em 4em; }

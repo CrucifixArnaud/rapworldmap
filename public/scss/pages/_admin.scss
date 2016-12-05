@@ -6,6 +6,19 @@
   color: #fff;
 }
 
+.link--back-to {
+  @include rem(font-size, 16px);
+  display: inline-block;
+  margin-bottom: 1em;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+    color: $yellow-vis-vis;
+  }
+}
+
 
 // admin-header
 // ---------------------
@@ -74,3 +87,4 @@
 .table--artist {
   margin-top: 1em;
 }
+
