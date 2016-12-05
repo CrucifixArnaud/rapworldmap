@@ -55,6 +55,10 @@
         <input type="checkbox" id="singer" name="categories" value="singer" <%= underscore.indexOf(artist.categories, 'singer') !== -1 ? 'checked' : '' %>>
         <label class="field__label" for="singer">Singer</label>
       </div>
+      <div class="field--inline">
+        <input type="checkbox" id="group" name="categories" value="group" <%= underscore.indexOf(artist.categories, 'group') !== -1 ? 'checked' : '' %>>
+        <label class="field__label" for="group">Group</label>
+      </div>
     </div>
 
     <div class="field-group">

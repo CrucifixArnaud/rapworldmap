@@ -6,7 +6,6 @@ import MainLayout from './layouts/main-layout';
 
 // Pages
 import ArtistsCreate from './pages/artistsCreate';
-import ArtistEdit from './pages/artistEdit';
 
 export default (
   <Router history={browserHistory}>

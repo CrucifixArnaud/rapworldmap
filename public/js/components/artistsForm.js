@@ -142,6 +142,10 @@ export default class ArtistsForm extends React.Component {
             <input type="checkbox" id="singer" name="categories" value="singer" />
             <label className="field__label" htmlFor="singer">Singer</label>
           </div>
+          <div className="field--inline">
+            <input type="checkbox" id="group" name="categories" value="group" />
+            <label className="field__label" htmlFor="group">Group</label>
+          </div>
         </div>
         <div className="field-group">
           <h3 className="field-group__title">Images</h3>

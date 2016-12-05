@@ -87654,6 +87654,16 @@ var ArtistsForm = function (_React$Component2) {
               { className: 'field__label', htmlFor: 'singer' },
               'Singer'
             )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field--inline' },
+            _react2.default.createElement('input', { type: 'checkbox', id: 'group', name: 'categories', value: 'group' }),
+            _react2.default.createElement(
+              'label',
+              { className: 'field__label', htmlFor: 'group' },
+              'Group'
+            )
           )
         ),
         _react2.default.createElement(
@@ -88057,10 +88067,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _reactDom2.default.render(_router2.default, document.getElementById('app'));
 
-},{"./router":530,"react":466,"react-dom":282}],528:[function(require,module,exports){
-"use strict";
-
-},{}],529:[function(require,module,exports){
+},{"./router":529,"react":466,"react-dom":282}],528:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -88106,7 +88113,7 @@ var ArtistsCreate = function (_React$Component) {
 
 exports.default = ArtistsCreate;
 
-},{"../components/artistsForm":524,"react":466}],530:[function(require,module,exports){
+},{"../components/artistsForm":524,"react":466}],529:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -88127,13 +88134,9 @@ var _artistsCreate = require('./pages/artistsCreate');
 
 var _artistsCreate2 = _interopRequireDefault(_artistsCreate);
 
-var _artistEdit = require('./pages/artistEdit');
-
-var _artistEdit2 = _interopRequireDefault(_artistEdit);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Pages
+// Layouts
 exports.default = _react2.default.createElement(
   _reactRouter.Router,
   { history: _reactRouter.browserHistory },
@@ -88144,6 +88147,6 @@ exports.default = _react2.default.createElement(
   )
 );
 
-// Layouts
+// Pages
 
-},{"./layouts/main-layout":526,"./pages/artistEdit":528,"./pages/artistsCreate":529,"react":466,"react-router":435}]},{},[527]);
+},{"./layouts/main-layout":526,"./pages/artistsCreate":528,"react":466,"react-router":435}]},{},[527]);
