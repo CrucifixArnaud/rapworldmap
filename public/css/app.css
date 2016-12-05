@@ -628,6 +628,10 @@ a {
   font-size: 1.6rem;
   /* 9 */ }
 
+.artist__location__city,
+.artist__location__neighborhood {
+  display: inline-block; }
+
 [type="text"],
 [type="mail"],
 [type="date"],

@@ -1,6 +1,7 @@
 <!-- MapBox -->
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+<script src='/js/vendor/moment.js'></script>
 
 <div id='map' class='mapbox'></div>
 
@@ -27,22 +28,24 @@ L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function(e) {
       '<div>' +
       '<div class="popup__body">' +
         '<div class="artist__location">' +
-          '<h2 class="popup__body__title">Location:</h2>' +
           '<p class="artist__location__city">' + feature.properties.location.city +'</p>' +
-          '<p class="artist__location__neighborhood">' + feature.properties.location.neighborhood +'</p>' +
+          (feature.properties.location.neighborhood !== null ? '<p class="artist__location__neighborhood">, ' + feature.properties.location.neighborhood +'</p>' : '') +
         '</div>' +
+        (feature.properties.bio.wikipediaUrl !== '' || feature.properties.bio.birthdate !== null || feature.properties.bio.deathdate !== null ?
         '<div class="artist__bio">' +
-          '<h2 class="popup__body__title">Bio:</h2>' +
-          '<p class="artist__bio__summary">' + feature.properties.bio.summary +'</p>' +
-          '<a class="artist__bio__wikipedia href="' + feature.properties.bio.wikipediaUrl +'" title="Open the youtube page of ' + feature.properties.name + '">Wikipedia Page</a>' +
-          '<p class="artist__bio__birthdate">Borndate: ' + feature.properties.bio.birthdate +'</p>' +
-          '<p class="artist__bio__deathdate">Deathdate:' + feature.properties.bio.deathdate +'</p>' +
-        '</div>' +
+          '<h2 class="popup__body__title">Bio: </h2>' +
+          (feature.properties.bio.wikipediaUrl !== '' ?
+          '<a class="artist__bio__wikipedia" href="' + feature.properties.bio.wikipediaUrl +'" title="Open the youtube page of ' + feature.properties.name + '">Wikipedia Page</a>' : '') +
+          (feature.properties.bio.birthdate !== null ? '<p class="artist__bio__birthdate">Birthdate: ' + moment(feature.properties.bio.birthdate).format("MM/DD/YYYY") +'</p>' : '') +
+          (feature.properties.bio.deathdate !== null ? '<p class="artist__bio__deathdate">Deathdate: ' + moment(feature.properties.bio.deathdate).format("MM/DD/YYYY") +'</p>' : '') +
+        '</div>' : '') +
+        (feature.properties.youtube.clipExampleUrl !== '' || feature.properties.youtube.pageUrl !== undefined ?
         '<div class="artist__youtube">' +
-          '<h2 class="popup__body__title">Youtube:</h2>' +
-          '<iframe width="300" height="169" src="' + feature.properties.youtube.clipExampleUrl + '" frameborder="0" allowfullscreen></iframe>' +
-          '<a class="artist__youtube__page-url" href="' + feature.properties.youtube.pageUrl +'" title="Open the youtube page of ' + feature.properties.name + '">Youtube Page</a>' +
-        '</div>' +
+          (feature.properties.youtube.clipExampleUrl !== '' ?
+          '<iframe width="300" height="169" src="' + feature.properties.youtube.clipExampleUrl + '" frameborder="0" allowfullscreen></iframe>' : '') +
+          (feature.properties.youtube.pageUrl !== '' ?
+          '<a class="artist__youtube__page-url" href="' + feature.properties.youtube.pageUrl +'" title="Open the youtube page of ' + feature.properties.name + '">Youtube Page</a>' : '') +
+        '</div>' : '' ) +
       '</div>' +
     '</div>';
 
