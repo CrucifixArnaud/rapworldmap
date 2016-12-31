@@ -19,7 +19,7 @@ const express = require('express'),
   expressValidator = require('express-validator');
 
 // Define config variables/const
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3666;
 
 //====== App configuration ======
 // Connect the database
