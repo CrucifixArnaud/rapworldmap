@@ -4,3 +4,24 @@
 .page-atlas {
   padding: 0;
 }
+
+// Marker Cluster
+// ---------------------
+
+// Small
+.marker-cluster-small {
+  background-color: rgba(255, 0, 102, .2);
+}
+
+.marker-cluster-small div {
+  background-color: rgba(255, 0, 102, .8);
+}
+
+// Medium
+.marker-cluster-medium {
+  background-color: rgba(143, 57, 154, .2);
+}
+
+.marker-cluster-medium div {
+  background-color: rgba(143, 57, 154, .8);
+}
