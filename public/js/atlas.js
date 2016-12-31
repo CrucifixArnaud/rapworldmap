@@ -2,7 +2,7 @@ import Request from 'request';
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiY3J1Y2lmaXhhcm5hdWQiLCJhIjoiY2lxejJocHB6MDA1dWkybWc1MnhyMWRoOCJ9.BcDRx2fZ0sl3q5ofSTbZ_g';
 
-const artistsGeojsonUrl = 'http://localhost:8080/artists/geojson';
+const artistsGeojsonUrl = 'http://localhost:3666/artists/geojson';
 
 var artistsPromise = new Promise(function(resolve, reject) {
   // setTimeout(() => resolve(4), 2000);
@@ -22,9 +22,27 @@ artistsPromise.then((res) => {
 
 function createAtlas(geojson) {
 
-  var map = L.mapbox.map('map')
-    .setView([36.3843749, -98.7628543], 5)
-    .addLayer(L.mapbox.tileLayer('mapbox.dark'));
+  // Construct a bounding box for this map that the user cannot
+  // move out of
+  // var southWest = L.latLng(-45.929886, -179.908432),
+  //     northEast = L.latLng(71.810957, -167.955307),
+  //     bounds = L.latLngBounds(southWest, northEast);
+
+  // var map = L.mapbox.map('map', 'mapbox.dark', {
+  //     // set that bounding box as maxBounds to restrict moving the map
+  //     // see full maxBounds documentation:
+  //     // http://leafletjs.com/reference.html#map-maxbounds
+  //     maxBounds: bounds,
+  //     maxZoom: 19,
+  //     minZoom: 10
+  // });
+
+  // // zoom the map to that bounding box
+  // map.fitBounds(bounds);
+
+  var map = L.mapbox.map('map', 'mapbox.dark', {
+    minZoom: 3.5
+  }).setView([36.3843749, -98.7628543], 3);
 
   L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function(e) {
     // The clusterGroup gets each marker in the group added to it
