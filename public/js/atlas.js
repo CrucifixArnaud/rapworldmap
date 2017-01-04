@@ -1,100 +1,72 @@
+import ReactDOM from 'react-dom';
+import React from 'react';
 import Request from 'request';
+import L from 'mapbox.js';
+import LeafletMarkercluster from 'leaflet.markercluster';
 
-L.mapbox.accessToken = 'pk.eyJ1IjoiY3J1Y2lmaXhhcm5hdWQiLCJhIjoiY2lxejJocHB6MDA1dWkybWc1MnhyMWRoOCJ9.BcDRx2fZ0sl3q5ofSTbZ_g';
+export default class Atlas extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-const artistsGeojsonUrl = 'http://localhost:3666/artists/geojson';
+  createAtlas(geojson) {
 
-var artistsPromise = new Promise(function(resolve, reject) {
-  // setTimeout(() => resolve(4), 2000);
-  Request(artistsGeojsonUrl, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      // Success
-      resolve(JSON.parse(body));
-    } else {
-      console.error(error);
-    }
-  });
-});
+    var map = L.mapbox.map('map', 'mapbox.dark', {
+      minZoom: 3.5
+    }).setView([36.3843749, -98.7628543], 3);
 
-artistsPromise.then((res) => {
-  createAtlas(res);
-});
+    L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function(e) {
+      // The clusterGroup gets each marker in the group added to it
+      // once loaded, and then is added to the map
+      var clusterGroup = new L.MarkerClusterGroup();
+      e.target.eachLayer(function(layer) {
 
-function createAtlas(geojson) {
+        var marker = layer,
+          feature = marker.feature;
 
-  // Construct a bounding box for this map that the user cannot
-  // move out of
-  // var southWest = L.latLng(-45.929886, -179.908432),
-  //     northEast = L.latLng(71.810957, -167.955307),
-  //     bounds = L.latLngBounds(southWest, northEast);
+        marker.addEventListener('click', function() {
+          // console.log(marker.feature);
+          var panel = document.getElementById("panel");
+          panel.classList.add('open');
+        });
 
-  // var map = L.mapbox.map('map', 'mapbox.dark', {
-  //     // set that bounding box as maxBounds to restrict moving the map
-  //     // see full maxBounds documentation:
-  //     // http://leafletjs.com/reference.html#map-maxbounds
-  //     maxBounds: bounds,
-  //     maxZoom: 19,
-  //     minZoom: 10
-  // });
+        marker.setIcon(L.icon(feature.properties.icon));
 
-  // // zoom the map to that bounding box
-  // map.fitBounds(bounds);
+        var content = '<h2>'+ feature.properties.name+'<\/h2>' + '<img src="'+feature.properties.icon.iconUrl+'" alt="">';
 
-  var map = L.mapbox.map('map', 'mapbox.dark', {
-    minZoom: 3.5
-  }).setView([36.3843749, -98.7628543], 3);
-
-  L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function(e) {
-    // The clusterGroup gets each marker in the group added to it
-    // once loaded, and then is added to the map
-    var clusterGroup = new L.MarkerClusterGroup();
-    e.target.eachLayer(function(layer) {
-
-      var marker = layer,
-        feature = marker.feature;
-
-      var popupContent =  '<div id="' + feature.properties.id + '" class="popup">' +
-        '<h2 class="popup__title artist__name">' + feature.properties.name + '</h2>' +
-        '<div class="popup__thumbnail">' +
-          '<img src="' + feature.properties.icon.iconUrl + '" class="image" alt="">' +
-        '<div>' +
-        '<div class="popup__body">' +
-          '<div class="artist__location">' +
-            '<p class="artist__location__city">' + feature.properties.location.city +'</p>' +
-            (feature.properties.location.neighborhood !== null ? '<p class="artist__location__neighborhood">, ' + feature.properties.location.neighborhood +'</p>' : '') +
-          '</div>' +
-          (feature.properties.bio.wikipediaUrl !== '' || feature.properties.bio.birthdate !== null || feature.properties.bio.deathdate !== null ?
-          '<div class="artist__bio">' +
-            '<h2 class="popup__body__title">Bio: </h2>' +
-            (feature.properties.bio.wikipediaUrl !== '' ?
-            '<a class="artist__bio__wikipedia" href="' + feature.properties.bio.wikipediaUrl +'" title="Open the youtube page of ' + feature.properties.name + '">Wikipedia Page</a>' : '') +
-            (feature.properties.bio.birthdate !== null ? '<p class="artist__bio__birthdate">Birthdate: ' + moment(feature.properties.bio.birthdate).format("MM/DD/YYYY") +'</p>' : '') +
-            (feature.properties.bio.deathdate !== null ? '<p class="artist__bio__deathdate">Deathdate: ' + moment(feature.properties.bio.deathdate).format("MM/DD/YYYY") +'</p>' : '') +
-          '</div>' : '') +
-          (feature.properties.youtube.clipExampleUrl !== '' || feature.properties.youtube.pageUrl !== undefined ?
-          '<div class="artist__youtube">' +
-            (feature.properties.youtube.clipExampleUrl !== '' ?
-            '<iframe width="300" height="169" src="' + feature.properties.youtube.clipExampleUrl + '" frameborder="0" allowfullscreen></iframe>' : '') +
-            (feature.properties.youtube.pageUrl !== '' ?
-            '<a class="artist__youtube__page-url" href="' + feature.properties.youtube.pageUrl +'" title="Open the youtube page of ' + feature.properties.name + '">Youtube Page</a>' : '') +
-          '</div>' : '' ) +
-        '</div>' +
-      '</div>';
-
-      // marker.bindPopup(popupContent);
-
-      marker.addEventListener('click', function() {
-        // console.log(marker.feature);
-        var panel = document.getElementById("panel");
-        panel.classList.add('open');
+        clusterGroup.addLayer(layer);
       });
-
-      marker.setIcon(L.icon(feature.properties.icon));
-
-      var content = '<h2>'+ feature.properties.name+'<\/h2>' + '<img src="'+feature.properties.icon.iconUrl+'" alt="">';
-
-      clusterGroup.addLayer(layer);
+      map.addLayer(clusterGroup);
     });
-    map.addLayer(clusterGroup);
-  });
+  }
+
+  render() {
+    L.mapbox.accessToken = 'pk.eyJ1IjoiY3J1Y2lmaXhhcm5hdWQiLCJhIjoiY2lxejJocHB6MDA1dWkybWc1MnhyMWRoOCJ9.BcDRx2fZ0sl3q5ofSTbZ_g';
+
+    const artistsGeojsonUrl = 'http://localhost:3666/artists/geojson';
+
+    var artistsPromise = new Promise(function(resolve, reject) {
+      // setTimeout(() => resolve(4), 2000);
+      Request(artistsGeojsonUrl, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+          // Success
+          resolve(JSON.parse(body));
+        } else {
+          console.error(error);
+        }
+      });
+    });
+
+    artistsPromise.then((res) => {
+      this.createAtlas(res);
+    });
+
+    return (
+      <div id='map' className='mapbox'></div>
+    );
+  }
 }
+
+ReactDOM.render(<Atlas />,
+  document.getElementById('app')
+);
