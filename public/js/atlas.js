@@ -81,7 +81,13 @@ function createAtlas(geojson) {
         '</div>' +
       '</div>';
 
-      marker.bindPopup(popupContent);
+      // marker.bindPopup(popupContent);
+
+      marker.addEventListener('click', function() {
+        // console.log(marker.feature);
+        var panel = document.getElementById("panel");
+        panel.classList.add('open');
+      });
 
       marker.setIcon(L.icon(feature.properties.icon));
 

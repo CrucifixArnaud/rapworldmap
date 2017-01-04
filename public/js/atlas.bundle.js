@@ -62504,7 +62504,13 @@ function createAtlas(geojson) {
 
       var popupContent = '<div id="' + feature.properties.id + '" class="popup">' + '<h2 class="popup__title artist__name">' + feature.properties.name + '</h2>' + '<div class="popup__thumbnail">' + '<img src="' + feature.properties.icon.iconUrl + '" class="image" alt="">' + '<div>' + '<div class="popup__body">' + '<div class="artist__location">' + '<p class="artist__location__city">' + feature.properties.location.city + '</p>' + (feature.properties.location.neighborhood !== null ? '<p class="artist__location__neighborhood">, ' + feature.properties.location.neighborhood + '</p>' : '') + '</div>' + (feature.properties.bio.wikipediaUrl !== '' || feature.properties.bio.birthdate !== null || feature.properties.bio.deathdate !== null ? '<div class="artist__bio">' + '<h2 class="popup__body__title">Bio: </h2>' + (feature.properties.bio.wikipediaUrl !== '' ? '<a class="artist__bio__wikipedia" href="' + feature.properties.bio.wikipediaUrl + '" title="Open the youtube page of ' + feature.properties.name + '">Wikipedia Page</a>' : '') + (feature.properties.bio.birthdate !== null ? '<p class="artist__bio__birthdate">Birthdate: ' + moment(feature.properties.bio.birthdate).format("MM/DD/YYYY") + '</p>' : '') + (feature.properties.bio.deathdate !== null ? '<p class="artist__bio__deathdate">Deathdate: ' + moment(feature.properties.bio.deathdate).format("MM/DD/YYYY") + '</p>' : '') + '</div>' : '') + (feature.properties.youtube.clipExampleUrl !== '' || feature.properties.youtube.pageUrl !== undefined ? '<div class="artist__youtube">' + (feature.properties.youtube.clipExampleUrl !== '' ? '<iframe width="300" height="169" src="' + feature.properties.youtube.clipExampleUrl + '" frameborder="0" allowfullscreen></iframe>' : '') + (feature.properties.youtube.pageUrl !== '' ? '<a class="artist__youtube__page-url" href="' + feature.properties.youtube.pageUrl + '" title="Open the youtube page of ' + feature.properties.name + '">Youtube Page</a>' : '') + '</div>' : '') + '</div>' + '</div>';
 
-      marker.bindPopup(popupContent);
+      // marker.bindPopup(popupContent);
+
+      marker.addEventListener('click', function () {
+        // console.log(marker.feature);
+        var panel = document.getElementById("panel");
+        panel.classList.add('open');
+      });
 
       marker.setIcon(L.icon(feature.properties.icon));
 
