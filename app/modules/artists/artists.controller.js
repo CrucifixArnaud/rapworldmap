@@ -98,9 +98,9 @@ function processCreate(req, res) {
       neighborhood: req.body.neighborhoodName
     }],
     categories: req.body.categories,
-    image: [{
+    image: {
       thumbnailUrl: req.body.thumbnailUrl
-    }],
+    },
     bio: [{
       summary: req.body.summary,
       wikipediaUrl: req.body.wikipediaUrl,
@@ -108,7 +108,7 @@ function processCreate(req, res) {
       deathdate: req.body.deathdate
     }],
     youtube: [{
-      pageUrl: req.body.youtugePageUrl,
+      pageUrl: req.body.pageUrl,
       clipExampleUrl: req.body.clipExampleUrl
     }]
   });
@@ -255,6 +255,9 @@ function getArtistsGeojson (req, res) {
             'city': artist.location[0].city,
             'neighborhood': artist.location[0].neighborhood
           },
+          image: {
+            thumbnailUrl: artist.image[0].thumbnailUrl,
+          },
           categories: artist.categories,
           bio: {
             summary: artist.bio[0].summary,
@@ -263,7 +266,7 @@ function getArtistsGeojson (req, res) {
             deathdate: artist.bio[0].deathdate
           },
           youtube: {
-            pageUrl: artist.youtube[0].youtugePageUrl,
+            pageUrl: artist.youtube[0].pageUrl,
             clipExampleUrl: artist.youtube[0].clipExampleUrl
           }
         }

@@ -101292,6 +101292,7 @@ arguments[4][167][0].apply(exports,arguments)
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Panel = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -101323,51 +101324,124 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Atlas = function (_React$Component) {
-  _inherits(Atlas, _React$Component);
+/**
+ * Panel
+ */
+var Panel = exports.Panel = function (_React$Component) {
+  _inherits(Panel, _React$Component);
 
-  function Atlas(props) {
-    _classCallCheck(this, Atlas);
+  function Panel(props) {
+    _classCallCheck(this, Panel);
 
-    return _possibleConstructorReturn(this, (Atlas.__proto__ || Object.getPrototypeOf(Atlas)).call(this, props));
+    // State
+    var _this = _possibleConstructorReturn(this, (Panel.__proto__ || Object.getPrototypeOf(Panel)).call(this, props));
+
+    _this.state = {
+      open: false
+    };
+    return _this;
   }
 
-  _createClass(Atlas, [{
-    key: 'createAtlas',
-    value: function createAtlas(geojson) {
-
-      var map = _mapbox2.default.mapbox.map('map', 'mapbox.dark', {
-        minZoom: 3.5
-      }).setView([36.3843749, -98.7628543], 3);
-
-      _mapbox2.default.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function (e) {
-        // The clusterGroup gets each marker in the group added to it
-        // once loaded, and then is added to the map
-        var clusterGroup = new _mapbox2.default.MarkerClusterGroup();
-        e.target.eachLayer(function (layer) {
-
-          var marker = layer,
-              feature = marker.feature;
-
-          marker.addEventListener('click', function () {
-            // console.log(marker.feature);
-            var panel = document.getElementById("panel");
-            panel.classList.add('open');
-          });
-
-          marker.setIcon(_mapbox2.default.icon(feature.properties.icon));
-
-          var content = '<h2>' + feature.properties.name + '<\/h2>' + '<img src="' + feature.properties.icon.iconUrl + '" alt="">';
-
-          clusterGroup.addLayer(layer);
-        });
-        map.addLayer(clusterGroup);
+  _createClass(Panel, [{
+    key: 'open',
+    value: function open() {
+      this.setState({
+        open: true
+      });
+    }
+  }, {
+    key: 'close',
+    value: function close() {
+      this.setState({
+        open: false
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+
+      if (this.props.artist) {
+
+        var tagsList = this.props.artist.categories.map(function (category, key) {
+          return _react2.default.createElement(
+            'li',
+            { key: key, className: 'panel-artist__categories__item' },
+            category
+          );
+        });
+
+        return _react2.default.createElement(
+          'div',
+          { id: 'panel', className: 'panel ' + (this.state.open ? 'open' : '') },
+          _react2.default.createElement(
+            'ul',
+            { className: 'panel-artist__categories' },
+            tagsList
+          ),
+          _react2.default.createElement(
+            'h2',
+            { className: 'panel-artist__name' },
+            this.props.artist.name
+          ),
+          _react2.default.createElement('img', { className: 'panel-artist__thumbnail', src: this.props.artist.image.thumbnailUrl }),
+          _react2.default.createElement(
+            'div',
+            { className: 'panel-artist__bio' },
+            _react2.default.createElement(
+              'p',
+              null,
+              this.props.artist.bio.summary
+            ),
+            _react2.default.createElement(
+              'a',
+              { href: this.props.artist.bio.wikipediaUrl },
+              'Wikipedia Page'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'panel-artist__youtube' },
+            _react2.default.createElement('iframe', { className: 'panel-artist__youtube__embed', src: this.props.artist.youtube.clipExampleUrl, frameBorder: '0' }),
+            _react2.default.createElement(
+              'a',
+              { href: this.props.artist.youtube.pageUrl },
+              'Youtube Channel'
+            )
+          )
+        );
+      } else {
+        return null;
+      }
+    }
+  }]);
+
+  return Panel;
+}(_react2.default.Component);
+
+/**
+ * Atlas
+ */
+
+
+var Atlas = function (_React$Component2) {
+  _inherits(Atlas, _React$Component2);
+
+  function Atlas(props) {
+    _classCallCheck(this, Atlas);
+
+    // State
+    var _this2 = _possibleConstructorReturn(this, (Atlas.__proto__ || Object.getPrototypeOf(Atlas)).call(this, props));
+
+    _this2.state = {
+      artist: ''
+    };
+    return _this2;
+  }
+
+  _createClass(Atlas, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this3 = this;
 
       _mapbox2.default.mapbox.accessToken = 'pk.eyJ1IjoiY3J1Y2lmaXhhcm5hdWQiLCJhIjoiY2lxejJocHB6MDA1dWkybWc1MnhyMWRoOCJ9.BcDRx2fZ0sl3q5ofSTbZ_g';
 
@@ -101386,10 +101460,53 @@ var Atlas = function (_React$Component) {
       });
 
       artistsPromise.then(function (res) {
-        _this2.createAtlas(res);
+        _this3.createAtlas(res);
       });
+    }
+  }, {
+    key: 'createAtlas',
+    value: function createAtlas() {
+      var self = this;
 
-      return _react2.default.createElement('div', { id: 'map', className: 'mapbox' });
+      var map = _mapbox2.default.mapbox.map('map', 'mapbox.dark', {
+        minZoom: 3.5
+      }).setView([36.3843749, -98.7628543], 3);
+
+      _mapbox2.default.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function (e) {
+        // The clusterGroup gets each marker in the group added to it
+        // once loaded, and then is added to the map
+        var clusterGroup = new _mapbox2.default.MarkerClusterGroup();
+        e.target.eachLayer(function (layer) {
+
+          var marker = layer,
+              feature = marker.feature,
+              artist = feature.properties;
+
+          marker.addEventListener('click', function () {
+            // var panel = document.getElementById('panel');
+            // panel.classList.add('open');
+
+            self.setState({
+              artist: artist
+            });
+            self.refs.panel.open();
+          });
+
+          marker.setIcon(_mapbox2.default.icon(feature.properties.icon));
+          clusterGroup.addLayer(layer);
+        });
+        map.addLayer(clusterGroup);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('div', { id: 'map', className: 'mapbox' }),
+        _react2.default.createElement(Panel, { ref: 'panel', artist: this.state.artist })
+      );
     }
   }]);
 
