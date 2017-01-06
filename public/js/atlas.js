@@ -15,6 +15,9 @@ export class Panel extends React.Component {
     this.state = {
       open: false
     };
+
+    this.open = this.open.bind(this);
+    this.close = this.close.bind(this);
   }
 
   open() {
@@ -39,10 +42,12 @@ export class Panel extends React.Component {
 
       return (
         <div id="panel" className={'panel ' + ((this.state.open) ? 'open' : '')}>
+          <a onClick={() => this.close()} className="panel-button--close" title="Close panel">&#10799;</a>
+          <h2 className="panel-artist__name">{this.props.artist.name}</h2>
           <ul className="panel-artist__categories">
             {tagsList}
           </ul>
-          <h2 className="panel-artist__name">{this.props.artist.name}</h2>
+
           <img className="panel-artist__thumbnail" src={this.props.artist.image.thumbnailUrl} />
           <div className="panel-artist__bio">
             <p>{this.props.artist.bio.summary}</p>

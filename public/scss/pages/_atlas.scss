@@ -46,6 +46,11 @@
   transform: translateX(0);
 }
 
+.panel-button--close {
+  float: right;
+  @include rem(font-size, 30px);
+}
+
 // Panel-artist
 // ---------------------
 
@@ -53,10 +58,11 @@
   margin-top: 0;
   color: $yellow-gold;
   @include rem(font-size, 24px);
+  display: inline-block;
 }
 
 .panel-artist__thumbnail {
-  clear: both;
+  display: block;
   max-width: 100%;
   max-height: 300px;
 }
@@ -67,9 +73,9 @@
 }
 
 .panel-artist__categories {
-  float: right;
   list-style-type: none;
   margin: 0;
+  display: inline-block;
 }
 
 .panel-artist__categories__item {

@@ -101339,6 +101339,9 @@ var Panel = exports.Panel = function (_React$Component) {
     _this.state = {
       open: false
     };
+
+    _this.open = _this.open.bind(_this);
+    _this.close = _this.close.bind(_this);
     return _this;
   }
 
@@ -101359,6 +101362,7 @@ var Panel = exports.Panel = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
 
       if (this.props.artist) {
 
@@ -101374,14 +101378,21 @@ var Panel = exports.Panel = function (_React$Component) {
           'div',
           { id: 'panel', className: 'panel ' + (this.state.open ? 'open' : '') },
           _react2.default.createElement(
-            'ul',
-            { className: 'panel-artist__categories' },
-            tagsList
+            'a',
+            { onClick: function onClick() {
+                return _this2.close();
+              }, className: 'panel-button--close', title: 'Close panel' },
+            '\u2A2F'
           ),
           _react2.default.createElement(
             'h2',
             { className: 'panel-artist__name' },
             this.props.artist.name
+          ),
+          _react2.default.createElement(
+            'ul',
+            { className: 'panel-artist__categories' },
+            tagsList
           ),
           _react2.default.createElement('img', { className: 'panel-artist__thumbnail', src: this.props.artist.image.thumbnailUrl }),
           _react2.default.createElement(
@@ -101430,18 +101441,18 @@ var Atlas = function (_React$Component2) {
     _classCallCheck(this, Atlas);
 
     // State
-    var _this2 = _possibleConstructorReturn(this, (Atlas.__proto__ || Object.getPrototypeOf(Atlas)).call(this, props));
+    var _this3 = _possibleConstructorReturn(this, (Atlas.__proto__ || Object.getPrototypeOf(Atlas)).call(this, props));
 
-    _this2.state = {
+    _this3.state = {
       artist: ''
     };
-    return _this2;
+    return _this3;
   }
 
   _createClass(Atlas, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var _this3 = this;
+      var _this4 = this;
 
       _mapbox2.default.mapbox.accessToken = 'pk.eyJ1IjoiY3J1Y2lmaXhhcm5hdWQiLCJhIjoiY2lxejJocHB6MDA1dWkybWc1MnhyMWRoOCJ9.BcDRx2fZ0sl3q5ofSTbZ_g';
 
@@ -101460,7 +101471,7 @@ var Atlas = function (_React$Component2) {
       });
 
       artistsPromise.then(function (res) {
-        _this3.createAtlas(res);
+        _this4.createAtlas(res);
       });
     }
   }, {
