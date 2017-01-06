@@ -811,9 +811,13 @@ textarea {
   transform: translateX(0); }
 
 .panel-button--close {
+  line-height: 1;
   float: right;
+  transition: color .2s ease;
   font-size: 30px;
   font-size: 3rem; }
+  .panel-button--close:hover, .panel-button--close:focus, .panel-button--close:active {
+    color: #b39700; }
 
 .panel-artist__name {
   margin-top: 0;
@@ -826,6 +830,9 @@ textarea {
   display: block;
   max-width: 100%;
   max-height: 300px; }
+
+.panel-artist__bio {
+  margin-top: 1em; }
 
 .panel-artist__bio,
 .panel-artist__youtube {

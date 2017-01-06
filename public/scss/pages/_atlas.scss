@@ -47,8 +47,16 @@
 }
 
 .panel-button--close {
+  line-height: 1;
   float: right;
+  transition: color .2s ease;
   @include rem(font-size, 30px);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: darken($yellow-gold, 15);
+  }
 }
 
 // Panel-artist
@@ -65,6 +73,10 @@
   display: block;
   max-width: 100%;
   max-height: 300px;
+}
+
+.panel-artist__bio {
+  margin-top: 1em;
 }
 
 .panel-artist__bio,
