@@ -63,16 +63,25 @@
 // ---------------------
 
 .panel-artist__name {
-  margin-top: 0;
+  margin: 0 0 .2em;
   color: $yellow-gold;
   @include rem(font-size, 24px);
-  display: inline-block;
 }
 
 .panel-artist__thumbnail {
   display: block;
-  max-width: 100%;
-  max-height: 300px;
+  height: 250px;
+  width: 250px;
+  overflow: hidden;
+  border-radius: 125px;
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.panel-artist__thumbnail__picture {
+  display: block;
+  width: 100%;
 }
 
 .panel-artist__bio {
@@ -87,15 +96,14 @@
 .panel-artist__categories {
   list-style-type: none;
   margin: 0;
-  display: inline-block;
 }
 
 .panel-artist__categories__item {
-  @include rem(font-size, 12px);
+  @include rem(font-size, 11px);
   background: $blue-mirage;
   display: inline-block;
   padding: 4px 10px 2px;
-  margin: 0 .5em;
+  margin: 0 .5em 0 0;
   text-transform: uppercase;
   color: $blue-mirage;
   background: $yellow-gold;

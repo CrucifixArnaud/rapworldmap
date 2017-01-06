@@ -820,16 +820,24 @@ textarea {
     color: #b39700; }
 
 .panel-artist__name {
-  margin-top: 0;
+  margin: 0 0 .2em;
   color: #ffd700;
   font-size: 24px;
-  font-size: 2.4rem;
-  display: inline-block; }
+  font-size: 2.4rem; }
 
 .panel-artist__thumbnail {
   display: block;
-  max-width: 100%;
-  max-height: 300px; }
+  height: 250px;
+  width: 250px;
+  overflow: hidden;
+  border-radius: 125px;
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em; }
+
+.panel-artist__thumbnail__picture {
+  display: block;
+  width: 100%; }
 
 .panel-artist__bio {
   margin-top: 1em; }
@@ -841,16 +849,15 @@ textarea {
 
 .panel-artist__categories {
   list-style-type: none;
-  margin: 0;
-  display: inline-block; }
+  margin: 0; }
 
 .panel-artist__categories__item {
-  font-size: 12px;
-  font-size: 1.2rem;
+  font-size: 11px;
+  font-size: 1.1rem;
   background: #1b2b34;
   display: inline-block;
   padding: 4px 10px 2px;
-  margin: 0 .5em;
+  margin: 0 .5em 0 0;
   text-transform: uppercase;
   color: #1b2b34;
   background: #ffd700;

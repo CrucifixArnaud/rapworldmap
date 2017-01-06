@@ -101417,6 +101417,11 @@ var Panel = exports.Panel = function (_React$Component) {
             '\u2A2F'
           ),
           _react2.default.createElement(
+            'div',
+            { className: 'panel-artist__thumbnail' },
+            _react2.default.createElement('img', { className: 'panel-artist__thumbnail__picture', src: this.props.artist.image.thumbnailUrl })
+          ),
+          _react2.default.createElement(
             'h2',
             { className: 'panel-artist__name' },
             this.props.artist.name
@@ -101426,18 +101431,29 @@ var Panel = exports.Panel = function (_React$Component) {
             { className: 'panel-artist__categories' },
             tagsList
           ),
-          _react2.default.createElement('img', { className: 'panel-artist__thumbnail', src: this.props.artist.image.thumbnailUrl }),
           _react2.default.createElement(
             'div',
             { className: 'panel-artist__bio' },
-            artistBio,
-            artistWikipediaUrl
+            _react2.default.createElement(
+              'div',
+              null,
+              artistBio
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              artistWikipediaUrl
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              artistYoutubePage
+            )
           ),
           _react2.default.createElement(
             'div',
             { className: 'panel-artist__youtube' },
-            artistClipExample,
-            artistYoutubePage
+            artistClipExample
           )
         );
       } else {

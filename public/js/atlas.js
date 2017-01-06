@@ -71,18 +71,26 @@ export class Panel extends React.Component {
       return (
         <div id="panel" className={'panel ' + ((this.state.open) ? 'open' : '')}>
           <a onClick={() => this.close()} className="panel-button--close" title="Close panel">&#10799;</a>
+          <div className="panel-artist__thumbnail">
+            <img className="panel-artist__thumbnail__picture" src={this.props.artist.image.thumbnailUrl} />
+          </div>
           <h2 className="panel-artist__name">{this.props.artist.name}</h2>
           <ul className="panel-artist__categories">
             {tagsList}
           </ul>
-          <img className="panel-artist__thumbnail" src={this.props.artist.image.thumbnailUrl} />
           <div className="panel-artist__bio">
-            { artistBio }
-            { artistWikipediaUrl }
+            <div>
+              { artistBio }
+            </div>
+            <div>
+              { artistWikipediaUrl }
+            </div>
+            <div>
+              { artistYoutubePage }
+            </div>
           </div>
           <div className="panel-artist__youtube">
             { artistClipExample }
-            { artistYoutubePage }
           </div>
         </div>
       );
