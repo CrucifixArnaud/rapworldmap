@@ -804,7 +804,8 @@ textarea {
   right: 0;
   transform: translateX(100%);
   transition: transform .2s ease;
-  padding: 2em; }
+  padding: 2em;
+  overflow-y: auto; }
 
 .panel.open {
   transform: translateX(0); }
