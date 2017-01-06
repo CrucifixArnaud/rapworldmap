@@ -101506,7 +101506,15 @@ var Atlas = function (_React$Component2) {
       _mapbox2.default.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function (e) {
         // The clusterGroup gets each marker in the group added to it
         // once loaded, and then is added to the map
-        var clusterGroup = new _mapbox2.default.MarkerClusterGroup();
+        var clusterGroup = new _mapbox2.default.MarkerClusterGroup({
+          polygonOptions: {
+            fillColor: '#ff00666',
+            color: '#ff0066',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.5
+          }
+        });
         e.target.eachLayer(function (layer) {
 
           var marker = layer,
