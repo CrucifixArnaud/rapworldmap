@@ -101374,6 +101374,38 @@ var Panel = exports.Panel = function (_React$Component) {
           );
         });
 
+        var artistBio = void 0;
+        if (this.props.artist.bio.summary) {
+          artistBio = _react2.default.createElement(
+            'p',
+            null,
+            this.props.artist.bio.summary
+          );
+        }
+
+        var artistWikipediaUrl = void 0;
+        if (this.props.artist.bio.wikipediaUrl) {
+          artistWikipediaUrl = _react2.default.createElement(
+            'a',
+            { href: this.props.artist.bio.wikipediaUrl },
+            'Wikipedia Page'
+          );
+        }
+
+        var artistClipExample = void 0;
+        if (this.props.artist.youtube.clipExampleUrl) {
+          artistClipExample = _react2.default.createElement('iframe', { className: 'panel-artist__youtube__embed', src: this.props.artist.youtube.clipExampleUrl, frameBorder: '0' });
+        }
+
+        var artistYoutubePage = void 0;
+        if (this.props.artist.youtube.pageUrl) {
+          artistYoutubePage = _react2.default.createElement(
+            'a',
+            { href: this.props.artist.youtube.pageUrl },
+            'Youtube Channel'
+          );
+        }
+
         return _react2.default.createElement(
           'div',
           { id: 'panel', className: 'panel ' + (this.state.open ? 'open' : '') },
@@ -101398,26 +101430,14 @@ var Panel = exports.Panel = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'panel-artist__bio' },
-            _react2.default.createElement(
-              'p',
-              null,
-              this.props.artist.bio.summary
-            ),
-            _react2.default.createElement(
-              'a',
-              { href: this.props.artist.bio.wikipediaUrl },
-              'Wikipedia Page'
-            )
+            artistBio,
+            artistWikipediaUrl
           ),
           _react2.default.createElement(
             'div',
             { className: 'panel-artist__youtube' },
-            _react2.default.createElement('iframe', { className: 'panel-artist__youtube__embed', src: this.props.artist.youtube.clipExampleUrl, frameBorder: '0' }),
-            _react2.default.createElement(
-              'a',
-              { href: this.props.artist.youtube.pageUrl },
-              'Youtube Channel'
-            )
+            artistClipExample,
+            artistYoutubePage
           )
         );
       } else {

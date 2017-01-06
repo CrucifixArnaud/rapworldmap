@@ -40,6 +40,34 @@ export class Panel extends React.Component {
         return <li key={key} className='panel-artist__categories__item'>{category}</li>;
       });
 
+      let artistBio;
+      if (this.props.artist.bio.summary) {
+        artistBio = (
+          <p>{this.props.artist.bio.summary}</p>
+        );
+      }
+
+      let artistWikipediaUrl;
+      if (this.props.artist.bio.wikipediaUrl) {
+        artistWikipediaUrl = (
+          <a href={this.props.artist.bio.wikipediaUrl}>Wikipedia Page</a>
+        );
+      }
+
+      let artistClipExample;
+      if (this.props.artist.youtube.clipExampleUrl) {
+        artistClipExample = (
+          <iframe className="panel-artist__youtube__embed" src={this.props.artist.youtube.clipExampleUrl} frameBorder="0"></iframe>
+        );
+      }
+
+      let artistYoutubePage;
+      if (this.props.artist.youtube.pageUrl) {
+        artistYoutubePage = (
+          <a href={this.props.artist.youtube.pageUrl}>Youtube Channel</a>
+        );
+      }
+
       return (
         <div id="panel" className={'panel ' + ((this.state.open) ? 'open' : '')}>
           <a onClick={() => this.close()} className="panel-button--close" title="Close panel">&#10799;</a>
@@ -47,15 +75,14 @@ export class Panel extends React.Component {
           <ul className="panel-artist__categories">
             {tagsList}
           </ul>
-
           <img className="panel-artist__thumbnail" src={this.props.artist.image.thumbnailUrl} />
           <div className="panel-artist__bio">
-            <p>{this.props.artist.bio.summary}</p>
-            <a href={this.props.artist.bio.wikipediaUrl}>Wikipedia Page</a>
+            { artistBio }
+            { artistWikipediaUrl }
           </div>
           <div className="panel-artist__youtube">
-            <iframe className="panel-artist__youtube__embed" src={this.props.artist.youtube.clipExampleUrl} frameBorder="0"></iframe>
-            <a href={this.props.artist.youtube.pageUrl}>Youtube Channel</a>
+            { artistClipExample }
+            { artistYoutubePage }
           </div>
         </div>
       );
