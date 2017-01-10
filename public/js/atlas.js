@@ -4,103 +4,7 @@ import Request from 'request';
 import L from 'mapbox.js';
 import LeafletMarkercluster from 'leaflet.markercluster';
 
-/**
- * Panel
- */
-export class Panel extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // State
-    this.state = {
-      open: false
-    };
-
-    this.open = this.open.bind(this);
-    this.close = this.close.bind(this);
-  }
-
-  open() {
-    this.setState({
-      open: true
-    });
-  }
-
-  close() {
-    this.setState({
-      open: false
-    });
-  }
-
-  render() {
-
-    if(this.props.artist) {
-
-      var tagsList = this.props.artist.categories.map(function(category, key){
-        return <li key={key} className='panel-artist__categories__item'>{category}</li>;
-      });
-
-      let artistBio;
-      if (this.props.artist.bio.summary) {
-        artistBio = (
-          <p>{this.props.artist.bio.summary}</p>
-        );
-      }
-
-      let artistWikipediaUrl;
-      if (this.props.artist.bio.wikipediaUrl) {
-        artistWikipediaUrl = (
-          <a href={this.props.artist.bio.wikipediaUrl}>Wikipedia Page</a>
-        );
-      }
-
-      let artistClipExample;
-      if (this.props.artist.youtube.clipExampleUrl) {
-        artistClipExample = (
-          <iframe className="panel-artist__youtube__embed" src={this.props.artist.youtube.clipExampleUrl} frameBorder="0"></iframe>
-        );
-      }
-
-      let artistYoutubePage;
-      if (this.props.artist.youtube.pageUrl) {
-        artistYoutubePage = (
-          <a href={this.props.artist.youtube.pageUrl}>Youtube Channel</a>
-        );
-      }
-
-      return (
-        <div id="panel" className={'panel ' + ((this.state.open) ? 'open' : '')}>
-          <a onClick={() => this.close()} className="panel-button--close" title="Close panel">&#10799;</a>
-          <div className="panel-artist__thumbnail">
-            <img className="panel-artist__thumbnail__picture" src={this.props.artist.image.thumbnailUrl} />
-          </div>
-          <h2 className="panel-artist__name">{this.props.artist.name}</h2>
-          <ul className="panel-artist__categories">
-            {tagsList}
-          </ul>
-          <div className="panel-artist__bio">
-            <div>
-              { artistBio }
-            </div>
-            <div>
-              { artistWikipediaUrl }
-            </div>
-            <div>
-              { artistYoutubePage }
-            </div>
-          </div>
-          <div className="panel-artist__youtube">
-            { artistClipExample }
-          </div>
-        </div>
-      );
-
-    } else {
-      return null;
-    }
-  }
-
-}
+import ArtistPanel from './components/artistPanel';
 
 /**
  * Atlas
@@ -183,7 +87,7 @@ export default class Atlas extends React.Component {
     return (
       <div>
         <div id='map' className='mapbox'></div>
-        <Panel ref='panel' artist={this.state.artist} />
+        <ArtistPanel ref='panel' artist={this.state.artist} />
       </div>
     );
   }

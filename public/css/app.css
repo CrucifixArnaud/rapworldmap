@@ -383,6 +383,11 @@ th {
  * @param  {color} $color-b [Any valid css color]
  * @return {map}          [A map of the diff hue, saturation, ligthness between the two color]
  */
+/**
+ * [z Look for the given argument in a layers map to see if it is mapped to a z-index value]
+ * @param  {string} $layer [Layer to search for]
+ * @return {int} [Z-index value]
+ */
 /***********************  > Mixins
 \***********************/
 /**
@@ -782,7 +787,8 @@ textarea {
 
 .page-atlas {
   padding: 0;
-  color: #fff; }
+  color: #fff;
+  overflow: hidden; }
 
 .marker-cluster-small {
   background-color: rgba(255, 0, 102, 0.2); }
@@ -796,9 +802,101 @@ textarea {
 .marker-cluster-medium div {
   background-color: rgba(143, 57, 154, 0.8); }
 
+.artist-panel {
+  position: absolute;
+  bottom: 15vh;
+  right: 0;
+  width: 620px;
+  min-height: 320px;
+  padding: 1em;
+  z-index: 1000;
+  right: 0;
+  transform: translateX(120%);
+  transition: transform .2s ease; }
+
+.artist-panel.open {
+  transform: translateX(0); }
+
+.artist-panel__thumbnail {
+  position: absolute;
+  top: -70px;
+  left: -70px;
+  display: block;
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+  border-radius: 100px;
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  border: 4px solid #ffd700; }
+
+.artist-panel__thumbnail__picture {
+  display: block;
+  width: 100%; }
+
+.artist-panel__body {
+  max-width: 575px; }
+
+.artist-panel__name {
+  margin: 20px 0 .2em 140px;
+  color: #ffd700;
+  font-size: 24px;
+  font-size: 2.4rem; }
+
+.artist-panel__categories {
+  margin: 0 0 .2em 140px;
+  padding: 0; }
+
+.artist-panel__bio {
+  font-size: 16px;
+  font-size: 1.6rem;
+  margin: 30px 0 0 20px; }
+
+.artist-panel__bio p {
+  margin-bottom: .5em; }
+
+.artist-panel__readmore {
+  font-size: 12px;
+  font-size: 1.2rem; }
+
+.artist-panel__background {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -1; }
+
+.artist-panel__button--close {
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 35px;
+  transition: color .2s ease;
+  font-size: 30px;
+  font-size: 3rem; }
+  .artist-panel__button--close:hover, .artist-panel__button--close:focus, .artist-panel__button--close:active {
+    color: #b39700; }
+
+.artist-panel__youtube {
+  position: relative; }
+
+.artist-panel__youtube__embed {
+  position: absolute;
+  right: 15px;
+  z-index: 1000; }
+
+.artist-panel__youtube__background {
+  position: absolute;
+  right: -5px;
+  top: -15px; }
+
+.artist-panel__location {
+  margin: 0 0 10px 140px;
+  font-size: 14px;
+  font-size: 1.4rem; }
+
 .panel {
   position: fixed;
-  background-color: #18252d;
   height: 100%;
   width: 33vw;
   right: 0;

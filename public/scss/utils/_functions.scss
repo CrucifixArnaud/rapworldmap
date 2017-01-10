@@ -40,3 +40,16 @@
   }
   @return $color;
 }
+
+/**
+ * [z Look for the given argument in a layers map to see if it is mapped to a z-index value]
+ * @param  {string} $layer [Layer to search for]
+ * @return {int} [Z-index value]
+ */
+@function z($layer) {
+  @if not map-has-key($z-layers, $layer) {
+    @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
+  }
+
+  @return map-get($z-layers, $layer);
+}

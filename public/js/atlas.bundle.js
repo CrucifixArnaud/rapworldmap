@@ -101292,7 +101292,6 @@ arguments[4][167][0].apply(exports,arguments)
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Panel = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -101316,6 +101315,10 @@ var _leaflet = require('leaflet.markercluster');
 
 var _leaflet2 = _interopRequireDefault(_leaflet);
 
+var _artistPanel = require('./components/artistPanel');
+
+var _artistPanel2 = _interopRequireDefault(_artistPanel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -101325,170 +101328,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
- * Panel
- */
-var Panel = exports.Panel = function (_React$Component) {
-  _inherits(Panel, _React$Component);
-
-  function Panel(props) {
-    _classCallCheck(this, Panel);
-
-    // State
-    var _this = _possibleConstructorReturn(this, (Panel.__proto__ || Object.getPrototypeOf(Panel)).call(this, props));
-
-    _this.state = {
-      open: false
-    };
-
-    _this.open = _this.open.bind(_this);
-    _this.close = _this.close.bind(_this);
-    return _this;
-  }
-
-  _createClass(Panel, [{
-    key: 'open',
-    value: function open() {
-      this.setState({
-        open: true
-      });
-    }
-  }, {
-    key: 'close',
-    value: function close() {
-      this.setState({
-        open: false
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      if (this.props.artist) {
-
-        var tagsList = this.props.artist.categories.map(function (category, key) {
-          return _react2.default.createElement(
-            'li',
-            { key: key, className: 'panel-artist__categories__item' },
-            category
-          );
-        });
-
-        var artistBio = void 0;
-        if (this.props.artist.bio.summary) {
-          artistBio = _react2.default.createElement(
-            'p',
-            null,
-            this.props.artist.bio.summary
-          );
-        }
-
-        var artistWikipediaUrl = void 0;
-        if (this.props.artist.bio.wikipediaUrl) {
-          artistWikipediaUrl = _react2.default.createElement(
-            'a',
-            { href: this.props.artist.bio.wikipediaUrl },
-            'Wikipedia Page'
-          );
-        }
-
-        var artistClipExample = void 0;
-        if (this.props.artist.youtube.clipExampleUrl) {
-          artistClipExample = _react2.default.createElement('iframe', { className: 'panel-artist__youtube__embed', src: this.props.artist.youtube.clipExampleUrl, frameBorder: '0' });
-        }
-
-        var artistYoutubePage = void 0;
-        if (this.props.artist.youtube.pageUrl) {
-          artistYoutubePage = _react2.default.createElement(
-            'a',
-            { href: this.props.artist.youtube.pageUrl },
-            'Youtube Channel'
-          );
-        }
-
-        return _react2.default.createElement(
-          'div',
-          { id: 'panel', className: 'panel ' + (this.state.open ? 'open' : '') },
-          _react2.default.createElement(
-            'a',
-            { onClick: function onClick() {
-                return _this2.close();
-              }, className: 'panel-button--close', title: 'Close panel' },
-            '\u2A2F'
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'panel-artist__thumbnail' },
-            _react2.default.createElement('img', { className: 'panel-artist__thumbnail__picture', src: this.props.artist.image.thumbnailUrl })
-          ),
-          _react2.default.createElement(
-            'h2',
-            { className: 'panel-artist__name' },
-            this.props.artist.name
-          ),
-          _react2.default.createElement(
-            'ul',
-            { className: 'panel-artist__categories' },
-            tagsList
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'panel-artist__bio' },
-            _react2.default.createElement(
-              'div',
-              null,
-              artistBio
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              artistWikipediaUrl
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              artistYoutubePage
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'panel-artist__youtube' },
-            artistClipExample
-          )
-        );
-      } else {
-        return null;
-      }
-    }
-  }]);
-
-  return Panel;
-}(_react2.default.Component);
-
-/**
  * Atlas
  */
-
-
-var Atlas = function (_React$Component2) {
-  _inherits(Atlas, _React$Component2);
+var Atlas = function (_React$Component) {
+  _inherits(Atlas, _React$Component);
 
   function Atlas(props) {
     _classCallCheck(this, Atlas);
 
     // State
-    var _this3 = _possibleConstructorReturn(this, (Atlas.__proto__ || Object.getPrototypeOf(Atlas)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Atlas.__proto__ || Object.getPrototypeOf(Atlas)).call(this, props));
 
-    _this3.state = {
+    _this.state = {
       artist: ''
     };
-    return _this3;
+    return _this;
   }
 
   _createClass(Atlas, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var _this4 = this;
+      var _this2 = this;
 
       _mapbox2.default.mapbox.accessToken = 'pk.eyJ1IjoiY3J1Y2lmaXhhcm5hdWQiLCJhIjoiY2lxejJocHB6MDA1dWkybWc1MnhyMWRoOCJ9.BcDRx2fZ0sl3q5ofSTbZ_g';
 
@@ -101507,7 +101367,7 @@ var Atlas = function (_React$Component2) {
       });
 
       artistsPromise.then(function (res) {
-        _this4.createAtlas(res);
+        _this2.createAtlas(res);
       });
     }
   }, {
@@ -101560,7 +101420,7 @@ var Atlas = function (_React$Component2) {
         'div',
         null,
         _react2.default.createElement('div', { id: 'map', className: 'mapbox' }),
-        _react2.default.createElement(Panel, { ref: 'panel', artist: this.state.artist })
+        _react2.default.createElement(_artistPanel2.default, { ref: 'panel', artist: this.state.artist })
       );
     }
   }]);
@@ -101573,4 +101433,194 @@ exports.default = Atlas;
 
 _reactDom2.default.render(_react2.default.createElement(Atlas, null), document.getElementById('app'));
 
-},{"leaflet.markercluster":256,"mapbox.js":269,"react":442,"react-dom":291,"request":443}]},{},[500]);
+},{"./components/artistPanel":501,"leaflet.markercluster":256,"mapbox.js":269,"react":442,"react-dom":291,"request":443}],501:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ArtistPanel = function (_React$Component) {
+  _inherits(ArtistPanel, _React$Component);
+
+  function ArtistPanel(props) {
+    _classCallCheck(this, ArtistPanel);
+
+    // State
+    var _this = _possibleConstructorReturn(this, (ArtistPanel.__proto__ || Object.getPrototypeOf(ArtistPanel)).call(this, props));
+
+    _this.state = {
+      open: false
+    };
+
+    _this.open = _this.open.bind(_this);
+    _this.close = _this.close.bind(_this);
+    return _this;
+  }
+
+  _createClass(ArtistPanel, [{
+    key: 'open',
+    value: function open() {
+      this.setState({
+        open: true
+      });
+    }
+  }, {
+    key: 'close',
+    value: function close() {
+      this.setState({
+        open: false
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      if (this.props.artist) {
+
+        var tagsList = this.props.artist.categories.map(function (category, key) {
+          return _react2.default.createElement(
+            'li',
+            { key: key, className: 'panel-artist__categories__item' },
+            category
+          );
+        });
+
+        var artistBio = void 0;
+        if (this.props.artist.bio.summary) {
+          artistBio = _react2.default.createElement(
+            'p',
+            null,
+            this.props.artist.bio.summary
+          );
+        }
+
+        var artistWikipediaUrl = void 0;
+        if (this.props.artist.bio.wikipediaUrl) {
+          artistWikipediaUrl = _react2.default.createElement(
+            'a',
+            { className: 'artist-panel__readmore', href: this.props.artist.bio.wikipediaUrl },
+            'Read more on Wikipedia'
+          );
+        }
+
+        var artistClipExample = void 0;
+        if (this.props.artist.youtube.clipExampleUrl) {
+          artistClipExample = _react2.default.createElement(
+            'div',
+            { className: 'artist-panel__youtube' },
+            _react2.default.createElement('iframe', { className: 'artist-panel__youtube__embed', src: this.props.artist.youtube.clipExampleUrl, frameBorder: '0', allowFullScreen: 'allowfullscreen' }),
+            _react2.default.createElement(
+              'svg',
+              { className: 'artist-panel__youtube__background', height: '182px', width: '340px' },
+              _react2.default.createElement('path', { d: 'M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z', style: { fill: '#ffd700' } })
+            )
+          );
+        }
+
+        var artistLocationNeighborhood = void 0;
+        if (this.props.artist.location.neighborhood) {
+          artistLocationNeighborhood = _react2.default.createElement(
+            'span',
+            { className: 'artist-panel__location__neighborhood' },
+            this.props.artist.location.neighborhood,
+            ' - '
+          );
+        }
+
+        var artistLocationCountry = void 0;
+        if (this.props.artist.location.country) {
+          artistLocationCountry = _react2.default.createElement(
+            'span',
+            { className: 'artist-panel__location__country' },
+            '(',
+            this.props.artist.location.country,
+            ')'
+          );
+        }
+
+        return _react2.default.createElement(
+          'div',
+          { id: 'panel', className: 'artist-panel ' + (this.state.open ? 'open' : '') },
+          _react2.default.createElement(
+            'a',
+            { onClick: function onClick() {
+                return _this2.close();
+              }, className: 'artist-panel__button--close', title: 'Close panel' },
+            '\u2A2F'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'artist-panel__thumbnail' },
+            _react2.default.createElement('img', { className: 'artist-panel__thumbnail__picture', src: this.props.artist.image.thumbnailUrl })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'artist-panel__body' },
+            _react2.default.createElement(
+              'h2',
+              { className: 'artist-panel__name' },
+              this.props.artist.name
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'artist-panel__location' },
+              artistLocationNeighborhood,
+              _react2.default.createElement(
+                'span',
+                { className: 'artist-panel__location__city' },
+                this.props.artist.location.city,
+                ' '
+              ),
+              artistLocationCountry
+            ),
+            _react2.default.createElement(
+              'ul',
+              { className: 'artist-panel__categories' },
+              tagsList
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'artist-panel__bio' },
+              _react2.default.createElement(
+                'div',
+                null,
+                artistBio,
+                artistWikipediaUrl
+              )
+            ),
+            artistClipExample
+          ),
+          _react2.default.createElement(
+            'svg',
+            { className: 'artist-panel__background', height: '100%', width: '100%' },
+            _react2.default.createElement('path', { d: 'M16.000,14.000 L0.000,300.000 L603.000,295.000 L596.000,-0.000 L16.000,14.000 Z', style: { fill: '#1b2b34' } })
+          )
+        );
+      } else {
+        return _react2.default.createElement('div', { id: 'panel', className: 'artist-panel' });
+      }
+    }
+  }]);
+
+  return ArtistPanel;
+}(_react2.default.Component);
+
+exports.default = ArtistPanel;
+
+},{"react":442}]},{},[500]);

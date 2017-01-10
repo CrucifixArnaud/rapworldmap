@@ -27,3 +27,8 @@ $color-primary: $yellow-gold;
 $base-font-size: 16px;
 
 $font-sans-serif: liberation, sans-serif;
+
+// Z-layer
+$z-layers: (
+  "panelArtist": 1000
+);
