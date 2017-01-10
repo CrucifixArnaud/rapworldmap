@@ -101478,6 +101478,12 @@ var ArtistPanel = function (_React$Component) {
       this.setState({
         open: true
       });
+
+      // setTimeout(function(arg1) {
+      //   this.setState({
+      //     thumbnail: true
+      //   });
+      // }, .1000);
     }
   }, {
     key: 'close',
@@ -101613,7 +101619,84 @@ var ArtistPanel = function (_React$Component) {
           )
         );
       } else {
-        return _react2.default.createElement('div', { id: 'panel', className: 'artist-panel' });
+        return _react2.default.createElement(
+          'div',
+          { id: 'panel', className: 'artist-panel' },
+          _react2.default.createElement(
+            'a',
+            { className: 'artist-panel__button--close', title: 'Close panel' },
+            '\u2A2F'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'artist-panel__thumbnail' },
+            _react2.default.createElement('img', { className: 'artist-panel__thumbnail__picture', src: 'http://img2-ak.lst.fm/i/u/770x0/cfa2c7713c7345d698969a2ddad92067.jpg' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'artist-panel__body' },
+            _react2.default.createElement(
+              'h2',
+              { className: 'artist-panel__name' },
+              'Chief Keef'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'artist-panel__location' },
+              _react2.default.createElement(
+                'span',
+                { className: 'artist-panel__location__city' },
+                'Chicago'
+              )
+            ),
+            _react2.default.createElement(
+              'ul',
+              { className: 'artist-panel__categories' },
+              _react2.default.createElement(
+                'li',
+                { className: 'panel-artist__categories__item' },
+                'producer'
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'panel-artist__categories__item' },
+                'rapper'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'artist-panel__bio' },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'Keith Cozart, better known by his stage name Chief Keef, is an American rapper and record producer from Chicago, Illinois.'
+                ),
+                _react2.default.createElement(
+                  'a',
+                  { className: 'artist-panel__readmore', href: 'https://en.wikipedia.org/wiki/Chief_Keef' },
+                  'Read more on Wikipedia'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'artist-panel__youtube' },
+              _react2.default.createElement(
+                'svg',
+                { className: 'artist-panel__youtube__background', height: '182px', width: '340px' },
+                _react2.default.createElement('path', { d: 'M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z', style: { fill: '#ffd700' } })
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'svg',
+            { className: 'artist-panel__background', height: '100%', width: '100%' },
+            _react2.default.createElement('path', { d: 'M16.000,14.000 L0.000,300.000 L603.000,295.000 L596.000,-0.000 L16.000,14.000 Z', style: { fill: '#1b2b34' } })
+          )
+        );
       }
     }
   }]);

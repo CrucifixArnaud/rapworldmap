@@ -6,7 +6,7 @@ export default class ArtistPanel extends React.Component {
 
     // State
     this.state = {
-      open: false
+      open: false,
     };
 
     this.open = this.open.bind(this);
@@ -17,6 +17,12 @@ export default class ArtistPanel extends React.Component {
     this.setState({
       open: true
     });
+
+    // setTimeout(function(arg1) {
+    //   this.setState({
+    //     thumbnail: true
+    //   });
+    // }, .1000);
   }
 
   close() {
@@ -105,8 +111,36 @@ export default class ArtistPanel extends React.Component {
 
     } else {
       return (
-        <div id="panel" className={'artist-panel'}>
-        </div>
+        <div id="panel" className="artist-panel">
+          <a className="artist-panel__button--close" title="Close panel">&#10799;</a>
+          <div className="artist-panel__thumbnail">
+            <img className="artist-panel__thumbnail__picture" src="http://img2-ak.lst.fm/i/u/770x0/cfa2c7713c7345d698969a2ddad92067.jpg" />
+          </div>
+          <div className="artist-panel__body">
+            <h2 className="artist-panel__name">Chief Keef</h2>
+            <div className="artist-panel__location">
+              <span className="artist-panel__location__city">Chicago</span>
+            </div>
+            <ul className="artist-panel__categories">
+              <li className="panel-artist__categories__item">producer</li>
+              <li className="panel-artist__categories__item">rapper</li>
+            </ul>
+            <div className="artist-panel__bio">
+              <div>
+                <p>Keith Cozart, better known by his stage name Chief Keef, is an American rapper and record producer from Chicago, Illinois.</p>
+                  <a className="artist-panel__readmore" href="https://en.wikipedia.org/wiki/Chief_Keef">Read more on Wikipedia</a>
+                </div>
+              </div>
+            <div className="artist-panel__youtube">
+              <svg className="artist-panel__youtube__background" height="182px" width="340px">
+              <path d="M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z" style={{fill:'#ffd700'}} />
+              </svg>
+            </div>
+            </div>
+            <svg className="artist-panel__background" height="100%" width="100%">
+              <path d="M16.000,14.000 L0.000,300.000 L603.000,295.000 L596.000,-0.000 L16.000,14.000 Z" style={{fill:'#1b2b34'}} />
+            </svg>
+          </div>
       );
     }
   }
