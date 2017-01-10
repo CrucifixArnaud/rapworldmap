@@ -7,6 +7,28 @@
   overflow: hidden;
 }
 
+// Atlas-header
+// ---------------------
+.atlas-header {
+  width: 100%;
+  height: 60px;
+  background: $blue-mirage;
+  padding: 2em;
+}
+
+.atlas-header__title {
+  margin: 0;
+  // line-height: 60px;
+}
+
+.atlas-header__title a {
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+}
+
 // Marker Cluster
 // ---------------------
 
