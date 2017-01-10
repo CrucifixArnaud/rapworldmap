@@ -46,7 +46,7 @@ export default class Atlas extends React.Component {
 
     var map = L.mapbox.map('map', 'mapbox.dark', {
       minZoom: 3.5
-    }).setView([36.3843749, -98.7628543], 3);
+    }).setView([40, -45], 3);
 
     L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function(e) {
       // The clusterGroup gets each marker in the group added to it
@@ -67,9 +67,6 @@ export default class Atlas extends React.Component {
           artist = feature.properties;
 
         marker.addEventListener('click', function() {
-          // var panel = document.getElementById('panel');
-          // panel.classList.add('open');
-
           self.setState({
             artist: artist
           });

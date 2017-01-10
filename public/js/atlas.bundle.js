@@ -101377,7 +101377,7 @@ var Atlas = function (_React$Component) {
 
       var map = _mapbox2.default.mapbox.map('map', 'mapbox.dark', {
         minZoom: 3.5
-      }).setView([36.3843749, -98.7628543], 3);
+      }).setView([40, -45], 3);
 
       _mapbox2.default.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function (e) {
         // The clusterGroup gets each marker in the group added to it
@@ -101398,9 +101398,6 @@ var Atlas = function (_React$Component) {
               artist = feature.properties;
 
           marker.addEventListener('click', function () {
-            // var panel = document.getElementById('panel');
-            // panel.classList.add('open');
-
             self.setState({
               artist: artist
             });
