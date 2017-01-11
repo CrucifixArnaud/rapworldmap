@@ -105,7 +105,6 @@
 .artist-panel__thumbnail__picture {
   display: block;
   width: 100%;
-  @include vertical-center(absolute);
 }
 
 .artist-panel.open .artist-panel__thumbnail {

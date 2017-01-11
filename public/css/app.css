@@ -858,10 +858,7 @@ textarea {
 
 .artist-panel__thumbnail__picture {
   display: block;
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%); }
+  width: 100%; }
 
 .artist-panel.open .artist-panel__thumbnail {
   animation-name: display-circle; }
