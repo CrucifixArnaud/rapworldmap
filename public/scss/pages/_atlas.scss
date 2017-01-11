@@ -92,6 +92,7 @@
   animation-delay: .2s;
   animation-fill-mode: forwards;
   will-change: transform,opacity;
+  background: $blue-mirage;
 }
 
 @keyframes display-circle {
@@ -104,6 +105,7 @@
 .artist-panel__thumbnail__picture {
   display: block;
   width: 100%;
+  @include vertical-center(absolute);
 }
 
 .artist-panel.open .artist-panel__thumbnail {

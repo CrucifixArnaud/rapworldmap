@@ -848,7 +848,8 @@ textarea {
   animation-timing-function: cubic-bezier(0.05, 1.1, 0.98, 1);
   animation-delay: .2s;
   animation-fill-mode: forwards;
-  will-change: transform,opacity; }
+  will-change: transform,opacity;
+  background: #1b2b34; }
 
 @keyframes display-circle {
   to {
@@ -857,7 +858,10 @@ textarea {
 
 .artist-panel__thumbnail__picture {
   display: block;
-  width: 100%; }
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); }
 
 .artist-panel.open .artist-panel__thumbnail {
   animation-name: display-circle; }
