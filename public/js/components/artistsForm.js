@@ -80,7 +80,7 @@ export default class ArtistsForm extends React.Component {
 
   render() {
     return (
-      <form className="form-create" action={this.state.action} method="post">
+      <form id="uploadForm" className="form-create" action={this.state.action} encType="multipart/form-data" method="post">
         <div className="field-group">
           <InputName value={this.state.currentArtist.name} updateArtist={this.updateArtist.bind(this)}/>
         </div>
@@ -118,8 +118,8 @@ export default class ArtistsForm extends React.Component {
         <div className="field-group">
           <h3 className="field-group__title">Images</h3>
           <div className="field">
-            <label className="field__label" htmlFor="thumbnailUrl">Thumbnail Url:</label>
-            <input id="thumbnailUrl" type="text" name="thumbnailUrl" />
+            <label className="field__label" htmlFor="thumbnail">Thumbnail:</label>
+            <input id="thumbnail" type="file" name="thumbnail" />
           </div>
         </div>
         <div className="field-group">

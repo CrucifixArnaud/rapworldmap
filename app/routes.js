@@ -12,7 +12,7 @@ const express = require ('express'),
 module.exports = function(app, passport) {
   var router = express.Router();
 
-  // Atltas
+  // Atlas
   app.get('/', atlasController.showAtlas);
 
   // users
@@ -41,9 +41,9 @@ module.exports = function(app, passport) {
   app.get('/artists/', artistsController.showArtists);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
   app.get('/artists/create', artistsController.showCreate);
-  app.post('/artists/create', artistsController.processCreate);
+  app.post('/artists/create', artistsController.uploadThumbnail, artistsController.processCreate);
   app.get('/artists/:slug', artistsController.showSingle);
   app.get('/artists/:slug/edit', artistsController.showEdit);
-  app.post('/artists/:slug', artistsController.processEdit);
+  app.post('/artists/:slug', artistsController.uploadThumbnail, artistsController.processEdit);
   app.get('/artists/:slug/delete', artistsController.deleteArtist);
 };

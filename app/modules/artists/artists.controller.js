@@ -4,7 +4,8 @@
 //====== Define depencies ======
 const Artist = require('./artist.model'),
   moment = require('moment'),
-  underscore= require('underscore');
+  underscore = require('underscore'),
+  multer = require('multer');
 
 //====== Export method ======
 module.exports = {
@@ -15,7 +16,8 @@ module.exports = {
   showEdit: showEdit,
   processEdit: processEdit,
   deleteArtist: deleteArtist,
-  getArtistsGeojson: getArtistsGeojson
+  getArtistsGeojson: getArtistsGeojson,
+  uploadThumbnail: uploadThumbnail
 };
 
 //====== Methods ======
@@ -99,7 +101,7 @@ function processCreate(req, res) {
     }],
     categories: req.body.categories,
     image: {
-      thumbnailUrl: req.body.thumbnailUrl
+      thumbnailUrl: req.file.filename
     },
     bio: [{
       summary: req.body.summary,
@@ -128,6 +130,27 @@ function processCreate(req, res) {
   });
 }
 
+/**
+ * [uploadThumbnail Upload thumbnail (using multer)]
+ */
+function uploadThumbnail(req, res, next) {
+  var storage =   multer.diskStorage({
+    destination: function (req, file, callback) {
+      callback(null, './public/uploads');
+    },
+    filename: function (req, file, callback) {
+      callback(null, Date.now() + '-' + file.originalname);
+    }
+  });
+  var upload = multer({ storage : storage}).single('thumbnail');
+
+  upload(req,res,function(err) {
+    if(err) {
+      return res.end('Error uploading file: ' + req.file);
+    }
+    next();
+  });
+}
 /**
  * [showEdit Show artist edit page]
  */
@@ -180,7 +203,7 @@ function processEdit(req, res) {
     artist.location[0].coordinates = req.body.coordinates;
     artist.location[0].neighborhood = req.body.neighborhoodName;
     artist.categories = req.body.categories;
-    artist.image[0].thumbnailUrl = req.body.thumbnailUrl;
+    artist.image[0].thumbnailUrl = req.file.filename;
     artist.bio[0].summary = req.body.summary;
     artist.bio[0].wikipediaUrl = req.body.wikipediaUrl;
     artist.bio[0].birthdate = req.body.birthdate;
@@ -245,7 +268,7 @@ function getArtistsGeojson (req, res) {
         'properties': {
           'name': artist.name,
           'icon': {
-            'iconUrl': (artist.image[0].thumbnailUrl ? artist.image[0].thumbnailUrl : '/images/placeholder-artists.svg'),
+            'iconUrl': (artist.image[0].thumbnailUrl ? '/uploads/' + artist.image[0].thumbnailUrl : '/images/placeholder-artists.svg'),
             'iconSize': [50, 50],
             'iconAnchor': [25, 25],
             'popupAnchor': [0, -25],

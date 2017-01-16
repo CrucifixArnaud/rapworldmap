@@ -101570,7 +101570,7 @@ var ArtistPanel = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'artist-panel__thumbnail' },
-            _react2.default.createElement('img', { className: 'artist-panel__thumbnail__picture', src: this.props.artist.image.thumbnailUrl })
+            _react2.default.createElement('img', { className: 'artist-panel__thumbnail__picture', src: '/uploads/' + this.props.artist.image.thumbnailUrl })
           ),
           _react2.default.createElement(
             'div',

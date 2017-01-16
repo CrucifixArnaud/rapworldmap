@@ -15,7 +15,7 @@ const express = require('express'),
   passport = require('passport'),
   mongoose = require('mongoose'),
   morgan = require('morgan'),
-  flash = require('connect-flash');
+  flash = require('connect-flash'),
   expressValidator = require('express-validator');
 
 // Define config variables/const
@@ -59,7 +59,6 @@ app.use(express.static(__dirname + '/public'));
 // Set ejs as our templating engine
 app.set('view engine', 'ejs');
 app.use(expressLayout);
-
 
 //====== Configure the routes ======
 // app.use(require('./app/routes'));

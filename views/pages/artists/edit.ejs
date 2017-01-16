@@ -17,7 +17,7 @@
 
   <a href="/artists" class="link--back-to">&larr; Back to artist list</a>
 
-  <form class="form-create" action="/artists/<%= artist.slug %>" method="POST">
+  <form class="form-create" action="/artists/<%= artist.slug %>" enctype="multipart/form-data" method="POST">
 
     <div class="field-group">
       <h3 class="field-group__title">About</h3>
@@ -66,8 +66,8 @@
     <div class="field-group">
       <h3 class="field-group__title">Images</h3>
       <div class="field">
-        <label for="thumbnailUrl" class="field__label">Thumbnail Url:</label>
-        <input id="thumbnailUrl" type="text" name="thumbnailUrl" value="<%= artist.image[0].thumbnailUrl %>" />
+        <label class="field__label" for="thumbnail">Thumbnail:</label>
+        <input id="thumbnail" type="file" name="thumbnail" value="<%= artist.image[0].thumbnail %>" />
       </div>
     </div>
 

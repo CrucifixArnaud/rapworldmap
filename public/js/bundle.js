@@ -87549,7 +87549,7 @@ var ArtistsForm = function (_React$Component2) {
     value: function render() {
       return _react2.default.createElement(
         'form',
-        { className: 'form-create', action: this.state.action, method: 'post' },
+        { id: 'uploadForm', className: 'form-create', action: this.state.action, encType: 'multipart/form-data', method: 'post' },
         _react2.default.createElement(
           'div',
           { className: 'field-group' },
@@ -87647,10 +87647,10 @@ var ArtistsForm = function (_React$Component2) {
             { className: 'field' },
             _react2.default.createElement(
               'label',
-              { className: 'field__label', htmlFor: 'thumbnailUrl' },
-              'Thumbnail Url:'
+              { className: 'field__label', htmlFor: 'thumbnail' },
+              'Thumbnail:'
             ),
-            _react2.default.createElement('input', { id: 'thumbnailUrl', type: 'text', name: 'thumbnailUrl' })
+            _react2.default.createElement('input', { id: 'thumbnail', type: 'file', name: 'thumbnail' })
           )
         ),
         _react2.default.createElement(
