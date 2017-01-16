@@ -87483,38 +87483,6 @@ var InputCity = function (_React$Component) {
       this.setState({
         value: event.target.value
       });
-
-      var name = event.target.value;
-      var nameLenght = name.length;
-
-      // Only call predictive search if user type 3 or more character
-      if (nameLenght >= 3) {
-
-        var url = 'http://musicbrainz.org/ws/2/artist?query="' + name + '"AND comment:rapper&fmt=json';
-
-        Request(url, function (error, response, body) {
-          if (!error && response.statusCode === 200) {
-
-            // Success
-            var res = JSON.parse(body);
-
-            var artists = [];
-
-            if (res.artists.length > 0) {
-              for (var i = res.artists.length - 1; i >= 0; i--) {
-
-                artists.push(res.artists[i]);
-
-                that.setState({
-                  artists: artists
-                });
-              }
-            }
-          } else {
-            // console.error(error);
-          }
-        });
-      }
     }
 
     /**

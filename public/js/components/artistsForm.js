@@ -34,38 +34,6 @@ class InputCity extends React.Component {
     this.setState({
       value: event.target.value
     });
-
-    const name = event.target.value;
-    const nameLenght = name.length;
-
-    // Only call predictive search if user type 3 or more character
-    if (nameLenght >= 3) {
-
-      var url = 'http://musicbrainz.org/ws/2/artist?query="' + name + '"AND comment:rapper&fmt=json';
-
-      Request(url, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
-
-          // Success
-          const res = JSON.parse(body);
-
-          const artists = [];
-
-          if(res.artists.length > 0) {
-            for (let i = res.artists.length - 1; i >= 0; i--) {
-
-              artists.push(res.artists[i]);
-
-              that.setState({
-                artists: artists
-              });
-            }
-          }
-        } else {
-          // console.error(error);
-        }
-      });
-    }
   }
 
   /**
