@@ -5,7 +5,8 @@
 const Artist = require('./artist.model'),
   moment = require('moment'),
   underscore = require('underscore'),
-  multer = require('multer');
+  multer = require('multer'),
+  sharp = require('sharp');
 
 //====== Export method ======
 module.exports = {
@@ -148,7 +149,15 @@ function uploadThumbnail(req, res, next) {
     if(err) {
       return res.end('Error uploading file: ' + req.file);
     }
-    next();
+
+    sharp(req.file.path).resize(300, 300).crop(sharp.strategy.attention).toFile('public/uploads/medium-' + req.file.filename, function (err, info) {
+      if (err) {
+        return next(err);
+      }
+
+      next();
+    });
+
   });
 }
 /**
