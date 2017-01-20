@@ -11,9 +11,9 @@
 // ---------------------
 .atlas-header {
   width: 100%;
-  height: 60px;
-  background: $blue-mirage;
-  padding: 2em;
+  min-height: 66px;
+  position: relative;
+  z-index: z('header');
 }
 
 .atlas-header__title {
@@ -27,6 +27,35 @@
   &:active {
     text-decoration: none;
   }
+}
+
+// Mapbox
+// ---------------------
+
+.mapbox {
+     position:absolute;
+     top: 0;
+     bottom: 0;
+     width: 100%;
+     right: 0;
+}
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-size: cover;
+    outline: none;
+}
+
+.marker:hover,
+.marker:focus {
+    box-shadow: 0 0 0 2px #ff0066;
+}
+
+.leaflet-container {
+  font-family: $font-sans-serif;
 }
 
 // Marker Cluster

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="350px" height="66px" viewBox="0 0 350 66" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>rapworldmap</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="350 2.75 0 0 0 66 325 59"></polygon>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="350" height="66" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <use id="Path-3" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+        <g id="Logo" transform="translate(11.000000, 18.000000)" font-size="32" font-family="Grotesk" fill="#18252D" font-weight="400">
+            <text id="RAP-WORLD-MAP">
+                <tspan x="0" y="24">RAP WORLD MAP</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

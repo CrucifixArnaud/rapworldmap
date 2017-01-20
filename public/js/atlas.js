@@ -45,7 +45,8 @@ export default class Atlas extends React.Component {
     var self = this;
 
     var map = L.mapbox.map('map', 'mapbox.dark', {
-      minZoom: 3.5
+      minZoom: 3.5,
+      zoomControl: false
     }).setView([40, -45], 3);
 
     L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function(e) {

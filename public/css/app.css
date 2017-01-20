@@ -544,74 +544,6 @@ a {
     background-image: none;
     background-color: #921a1a; }
 
-.mapbox {
-  position: absolute;
-  top: 60px;
-  bottom: 0;
-  width: 100%; }
-
-.marker {
-  display: block;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  background-size: cover;
-  outline: none; }
-
-.marker:hover,
-.marker:focus {
-  box-shadow: 0 0 0 2px #ff0066; }
-
-.leaflet-container {
-  font-family: liberation, sans-serif; }
-
-.leaflet-popup-content-wrapper {
-  padding: 0;
-  border-radius: 2px;
-  background: #1b2b34; }
-
-.leaflet-popup-content {
-  min-width: 320px;
-  border: 0; }
-
-.leaflet-container a {
-  color: #ffd700; }
-  .leaflet-container a:hover, .leaflet-container a:focus, .leaflet-container a:active {
-    text-decoration: underline; }
-
-.leaflet-popup-tip {
-  border-top-color: #1b2b34; }
-
-.leaflet-container a:hover,
-.leaflet-container.dark a,
-.leaflet-popup-close-button {
-  color: #ffd700; }
-
-.leaflet-popup-close-button:hover {
-  background-color: #ffd700; }
-
-.popup {
-  color: #fff; }
-
-.popup .popup__title {
-  font-size: 16px;
-  font-size: 1.6rem; }
-
-.popup__thumbnail .image {
-  display: block;
-  max-width: 100%; }
-
-.popup__body {
-  margin-top: 1em; }
-
-.popup__body .popup__body__title {
-  font-size: 16px;
-  font-size: 1.6rem; }
-
-.artist__location__city,
-.artist__location__neighborhood {
-  display: inline-block; }
-
 [type="text"],
 [type="mail"],
 [type="date"],
@@ -796,15 +728,37 @@ textarea {
 
 .atlas-header {
   width: 100%;
-  height: 60px;
-  background: #1b2b34;
-  padding: 2em; }
+  min-height: 66px;
+  position: relative;
+  z-index: 1500; }
 
 .atlas-header__title {
   margin: 0; }
 
 .atlas-header__title a:hover, .atlas-header__title a:focus, .atlas-header__title a:active {
   text-decoration: none; }
+
+.mapbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  right: 0; }
+
+.marker {
+  display: block;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background-size: cover;
+  outline: none; }
+
+.marker:hover,
+.marker:focus {
+  box-shadow: 0 0 0 2px #ff0066; }
+
+.leaflet-container {
+  font-family: liberation, sans-serif; }
 
 .marker-cluster-small {
   background-color: rgba(255, 0, 102, 0.2); }
@@ -1021,29 +975,39 @@ textarea {
     color: #ffeaa3; }
 
 .admin-header {
-  background-color: #18252d;
-  padding: 1em 4em; }
+  background-color: #18252d; }
 
 .main-title,
-.page__title {
-  display: inline-block; }
+.page__title,
+.admin__title {
+  display: inline-block;
+  vertical-align: middle; }
 
 .main-title {
   margin: 0;
   font-size: 24px;
   font-size: 2.4rem; }
 
+.main-logo {
+  display: block; }
+
 .main-title a {
   color: #fff; }
   .main-title a:hover, .main-title a:focus, .main-title a:active {
     text-decoration: none; }
 
-.page__title {
+.page__title,
+.admin__title {
   font-size: 18px;
   font-size: 1.8rem; }
-  .page__title:before {
-    content: ' › ';
-    color: #ffd700; }
+
+.page__title:before {
+  content: ' › ';
+  color: #ffd700; }
+
+.admin__title {
+  color: #fff;
+  margin-right: .2em; }
 
 .page__title .artist-name {
   color: #ffd700; }

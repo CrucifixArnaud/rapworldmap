@@ -24,17 +24,23 @@
 // ---------------------
 .admin-header {
   background-color: darken($blue-mirage, 2);
-  padding: 1em 4em;
+  // padding: 1em 4em;
 }
 
 .main-title,
-.page__title {
+.page__title,
+.admin__title {
   display: inline-block;
+  vertical-align: middle;
 }
 
 .main-title {
   margin: 0;
   @include rem(font-size, 24px);
+}
+
+.main-logo {
+  display: block;
 }
 
 .main-title a {
@@ -47,13 +53,21 @@
   }
 }
 
-.page__title {
+.page__title,
+.admin__title {
   @include rem(font-size, 18px);
+}
 
+.page__title {
   &:before {
     content: ' › ';
     color: $color-primary;
   }
+}
+
+.admin__title {
+  color: #fff;
+  margin-right: .2em;
 }
 
 .page__title .artist-name {

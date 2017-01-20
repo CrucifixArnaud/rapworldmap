@@ -101376,7 +101376,8 @@ var Atlas = function (_React$Component) {
       var self = this;
 
       var map = _mapbox2.default.mapbox.map('map', 'mapbox.dark', {
-        minZoom: 3.5
+        minZoom: 3.5,
+        zoomControl: false
       }).setView([40, -45], 3);
 
       _mapbox2.default.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function (e) {
