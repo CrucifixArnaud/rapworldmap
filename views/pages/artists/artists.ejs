@@ -24,7 +24,7 @@
 
           <% for (var artist of artists) { %>
               <tr class="table__row">
-                  <td class="table__cell"><%= artist.name %></td>
+              <td class="table__cell"><a href="/artists/<%= artist.slug %>" title="View details (json)"><%= artist.name %></a></td>
                   <td class="table__cell"><%= artist.location[0].city %></td>
                   <td class="table__cell">
                     <% for (categorie of artist.categories) { %>
