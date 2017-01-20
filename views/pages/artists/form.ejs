@@ -12,15 +12,15 @@
     <h3 class="field-group__title">Location</h3>
     <div class="field">
       <label for="city" class="field__label">City:</label>
-      <input id="city" type="text" name="city" value="<%= typeof artist.location != 'undefined'  ? artist.location[0].city : '' %>" />
+      <input id="city" type="text" name="city" value="<%= typeof artist.location !== 'undefined'  ? artist.location[0].city : '' %>" />
     </div>
     <div class="field">
       <label for="neighborhoodName" class="field__label">Neighborhood Name:</label>
-      <input id="neighborhoodName" type="text" name="neighborhoodName" value="<%= typeof artist.location != 'undefined' ? artist.location[0].neighborhood : '' %>" />
+      <input id="neighborhoodName" type="text" name="neighborhoodName" value="<%= typeof artist.location !== 'undefined' ? artist.location[0].neighborhood : '' %>" />
     </div>
     <div class="field">
       <label for="coordinates" class="field__label">Coordinates:</label>
-      <input id="coordinates" type="text" name="coordinates" value="<%= typeof artist.location != 'undefined' ? artist.location[0].coordinates : '' %>" />
+      <input id="coordinates" type="text" name="coordinates" value="<%= typeof artist.location !== 'undefined' ? artist.location[0].coordinates : '' %>" />
     </div>
   </div>
 
@@ -48,8 +48,13 @@
     <h3 class="field-group__title">Images</h3>
     <div class="field">
       <label class="field__label" for="thumbnail">Thumbnail:</label>
-      <input type="hidden" name="originalThumbnail" value="<%= typeof artist.image != 'undefined' ? artist.image[0].thumbnailUrl : '' %>" />
-      <input id="thumbnail" type="file" name="thumbnail" />
+      <%if (typeof artist.image !== 'undefined') { %>
+        <div class="artist-panel__thumbnail--preview">
+          <img class="artist-panel__thumbnail__picture" src="/uploads/medium-<%= artist.image[0].thumbnailUrl %>" alt="" />
+        </div>
+      <% } %>
+      <input type="hidden" name="originalThumbnail" value="<%= typeof artist.image !== 'undefined' ? artist.image[0].thumbnailUrl : '' %>" />
+      <input id="thumbnail" class="input--file" type="file" name="thumbnail" />
     </div>
   </div>
 
@@ -57,19 +62,19 @@
     <h3 class="field-group__title">Bio</h3>
     <div class="field">
       <label for="summary" class="field__label">Summary:</label>
-      <textarea name="summary" rows="10" cols="50"><%= typeof artist.bio != 'undefined' ? artist.bio[0].summary : '' %></textarea>
+      <textarea name="summary" rows="10" cols="50"><%= typeof artist.bio !== 'undefined' ? artist.bio[0].summary : '' %></textarea>
     </div>
     <div class="field">
       <label for="wikipediaUrl" class="field__label">Wikipedia Url:</label>
-      <input id="wikipediaUrl" type="text" name="wikipediaUrl" value="<%= typeof artist.bio != 'undefined' ?  artist.bio[0].wikipediaUrl : '' %>">
+      <input id="wikipediaUrl" type="text" name="wikipediaUrl" value="<%= typeof artist.bio !== 'undefined' ?  artist.bio[0].wikipediaUrl : '' %>">
     </div>
     <div class="field field--inline">
       <label for="birthdate" class="field__label">Birthdate:</label>
-      <input id="birthdate" type="date" name="birthdate" value="<%= typeof artist.bio != 'undefined' ? (artist.bio[0].birthdate !== null ? moment(artist.bio[0].birthdate).format('YYYY-MM-DD') : '') : ''%>">
+      <input id="birthdate" type="date" name="birthdate" value="<%= typeof artist.bio !== 'undefined' ? (artist.bio[0].birthdate !== null ? moment(artist.bio[0].birthdate).format('YYYY-MM-DD') : '') : ''%>">
     </div>
     <div class="field field--inline">
       <label for="deathdate" class="field__label">Deathdate:</label>
-      <input id="deathdate" type="date" name="deathdate" value="<%= typeof artist.bio != 'undefined' ? (artist.bio[0].deathdate !== null ? moment(artist.bio[0].deathdate).format('YYYY-MM-DD') : '') : '' %>">
+      <input id="deathdate" type="date" name="deathdate" value="<%= typeof artist.bio !== 'undefined' ? (artist.bio[0].deathdate !== null ? moment(artist.bio[0].deathdate).format('YYYY-MM-DD') : '') : '' %>">
     </div>
   </div>
 
@@ -77,7 +82,7 @@
     <h3 class="field-group__title">Youtube</h3>
     <div class="field--inline">
       <label for="clipExampleUrl" class="field__label">Clip Example Url:</label>
-      <input id="clipExampleUrl" type="text" name="clipExampleUrl" value="<%= typeof artist.youtube != 'undefined' ? artist.youtube[0].clipExampleUrl : '' %>">
+      <input id="clipExampleUrl" type="text" name="clipExampleUrl" value="<%= typeof artist.youtube !== 'undefined' ? artist.youtube[0].clipExampleUrl : '' %>">
     </div>
   </div>
 
