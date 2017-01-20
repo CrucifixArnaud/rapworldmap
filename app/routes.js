@@ -38,12 +38,12 @@ module.exports = function(app, passport) {
   app.get('/profile', userMiddlewares.isLoggedIn, usersController.showProfile);
 
   // Artists
-  app.get('/artists/', artistsController.showArtists);
+  app.get('/artists/', userMiddlewares.isLoggedIn, artistsController.showArtists);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
-  app.get('/artists/create', artistsController.showCreate);
-  app.post('/artists/create', artistsController.uploadThumbnail, artistsController.processCreate);
+  app.get('/artists/create', userMiddlewares.isLoggedIn, artistsController.showCreate);
+  app.post('/artists/create', userMiddlewares.isLoggedIn, artistsController.uploadThumbnail, artistsController.processCreate);
   app.get('/artists/:slug', artistsController.showSingle);
-  app.get('/artists/:slug/edit', artistsController.showEdit);
-  app.post('/artists/:slug', artistsController.uploadThumbnail, artistsController.processEdit);
-  app.get('/artists/:slug/delete', artistsController.deleteArtist);
+  app.get('/artists/:slug/edit', userMiddlewares.isLoggedIn, artistsController.showEdit);
+  app.post('/artists/:slug', userMiddlewares.isLoggedIn, artistsController.uploadThumbnail, artistsController.processEdit);
+  app.get('/artists/:slug/delete', userMiddlewares.isLoggedIn, artistsController.deleteArtist);
 };
