@@ -68,6 +68,7 @@ function showSingle (req, res) {
 function showCreate(req, res) {
   const locals = {
     errors: req.flash('errors'),
+    underscore: underscore,
     layout: 'admin',
     title: 'Create a new artist',
     slug: 'page-admin'

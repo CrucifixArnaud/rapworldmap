@@ -18,7 +18,8 @@
   <a href="/artists" class="link--back-to">&larr; Back to artist list</a>
 
   <!-- ARTIST CREATION FORM -->
-  <div id="app"></div>
-
-  <script src="/js/bundle.js"></script>
+  <% var action='/artists/create'; %>
+  <% var artist='{}'; %>
+  <% var submitLabel='Create'; %>
+  <% include form.ejs %>
 </div>
