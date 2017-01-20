@@ -101352,7 +101352,7 @@ var Atlas = function (_React$Component) {
 
       _mapbox2.default.mapbox.accessToken = 'pk.eyJ1IjoiY3J1Y2lmaXhhcm5hdWQiLCJhIjoiY2lxejJocHB6MDA1dWkybWc1MnhyMWRoOCJ9.BcDRx2fZ0sl3q5ofSTbZ_g';
 
-      var artistsGeojsonUrl = 'http://localhost:3666/artists/geojson';
+      var artistsGeojsonUrl = window.location.href + 'artists/geojson';
 
       var artistsPromise = new Promise(function (resolve, reject) {
         // setTimeout(() => resolve(4), 2000);
