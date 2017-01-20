@@ -83,7 +83,7 @@ export default class ArtistPanel extends React.Component {
         <div id="panel" className={'artist-panel ' + ((this.state.open) ? 'open' : '')}>
           <a onClick={() => this.close()} className="artist-panel__button--close" title="Close panel">&#10799;</a>
           <div className="artist-panel__thumbnail">
-            <img className="artist-panel__thumbnail__picture" src={'/uploads/' + this.props.artist.image.thumbnailUrl} />
+            <img className="artist-panel__thumbnail__picture" src={'/uploads/medium-' + this.props.artist.image.thumbnailUrl} />
           </div>
           <div className="artist-panel__body">
             <h2 className="artist-panel__name">{this.props.artist.name}</h2>

@@ -92,6 +92,8 @@ function processCreate(req, res) {
     return res.redirect('/artists/create');
   }
 
+  var thumbnail = req.file ? req.file.filename : req.body.thumbnailUrl;
+
   // create a new artist
   const artist = new Artist({
     name: req.body.name,
@@ -102,7 +104,7 @@ function processCreate(req, res) {
     }],
     categories: req.body.categories,
     image: {
-      thumbnailUrl: req.file.filename
+      thumbnailUrl: thumbnail
     },
     bio: [{
       summary: req.body.summary,
@@ -150,13 +152,16 @@ function uploadThumbnail(req, res, next) {
       return res.end('Error uploading file: ' + req.file);
     }
 
-    sharp(req.file.path).resize(300, 300).crop(sharp.strategy.attention).toFile('public/uploads/medium-' + req.file.filename, function (err, info) {
-      if (err) {
-        return next(err);
-      }
+    if(req.file) {
+      sharp(req.file.path).resize(300, 300).crop(sharp.strategy.attention).toFile('public/uploads/medium-' + req.file.filename, function (err, info) {
+        if (err) {
+          return next(err);
+        }
 
-      next();
-    });
+      });
+    }
+
+    next();
 
   });
 }
@@ -192,6 +197,9 @@ function showEdit(req, res) {
  * [processEdit Process artist edition]
  */
 function processEdit(req, res) {
+
+  console.log(req.body);
+
   // validate informations
   req.checkBody('name', 'Name is required.').notEmpty();
   req.checkBody('city', 'City name is required').notEmpty();
@@ -206,13 +214,15 @@ function processEdit(req, res) {
   // Find current artist
   Artist.findOne({ slug: req.params.slug }, (err, artist) => {
 
+    var tumbnail = req.file ? req.file.filename : req.body.originalThumbnail;
+
     // updating the current artist
     artist.name = req.body.name;
     artist.location[0].city = req.body.city;
     artist.location[0].coordinates = req.body.coordinates;
     artist.location[0].neighborhood = req.body.neighborhoodName;
     artist.categories = req.body.categories;
-    artist.image[0].thumbnailUrl = req.file.filename;
+    artist.image[0].thumbnailUrl = tumbnail;
     artist.bio[0].summary = req.body.summary;
     artist.bio[0].wikipediaUrl = req.body.wikipediaUrl;
     artist.bio[0].birthdate = req.body.birthdate;
@@ -277,7 +287,7 @@ function getArtistsGeojson (req, res) {
         'properties': {
           'name': artist.name,
           'icon': {
-            'iconUrl': (artist.image[0].thumbnailUrl ? '/uploads/' + artist.image[0].thumbnailUrl : '/images/placeholder-artists.svg'),
+            'iconUrl': (artist.image[0].thumbnailUrl ? '/uploads/medium-' + artist.image[0].thumbnailUrl : '/images/placeholder-artists.svg'),
             'iconSize': [50, 50],
             'iconAnchor': [25, 25],
             'popupAnchor': [0, -25],
