@@ -83,6 +83,9 @@
 
 // Artists List
 // ---------------------
+.artist-total {
+  @include rem(font-size, 16px);
+}
 
 .table--artist {
   margin-top: 1em;
