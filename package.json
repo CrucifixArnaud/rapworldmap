@@ -39,6 +39,7 @@
     "passport-remember-me-extended": "0.0.3",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-onclickout": "^2.0.5",
     "sharp": "^0.17.1",
     "underscore": "^1.8.3",
     "validate": "^3.0.1"
