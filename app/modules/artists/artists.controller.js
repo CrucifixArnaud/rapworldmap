@@ -34,7 +34,7 @@ function showArtists (req, res) {
       moment: moment,
       success: req.flash('success'),
       layout: 'admin',
-      title: 'All artists',
+      title: 'All artists (' + artists.length + ')',
       slug: 'page-admin'
     };
 
