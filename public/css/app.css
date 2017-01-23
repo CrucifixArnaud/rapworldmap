@@ -545,7 +545,8 @@ a {
     background-color: #921a1a; }
 
 [type="text"],
-[type="mail"],
+[type="email"],
+[type="password"],
 [type="date"],
 textarea {
   display: block;
@@ -558,7 +559,8 @@ textarea {
   font-size: 1.4rem;
   background: #111a20; }
   [type="text"]:focus,
-  [type="mail"]:focus,
+  [type="email"]:focus,
+  [type="password"]:focus,
   [type="date"]:focus,
   textarea:focus {
     outline: none;

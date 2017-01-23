@@ -27,10 +27,11 @@ module.exports = function(app, passport) {
   //     failureRedirect : '/signup',
   //     failureFlash : true
   // }));
+
   // Login
   app.get('/login', usersController.showLogin);
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/profile',
+    successRedirect : '/artists/',
     failureRedirect : '/login',
     failureFlash : true
   }));
@@ -41,7 +42,7 @@ module.exports = function(app, passport) {
   app.get('/artists/', userMiddlewares.isLoggedIn, artistsController.showArtists);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
   app.get('/artists/create', userMiddlewares.isLoggedIn, artistsController.showCreate);
-  app.post('/artists/create', userMiddlewares.isLoggedIn, artistsController.uploadThumbnail, artistsController.processCreate);
+  app.post('/artists/create', artistsController.uploadThumbnail, artistsController.processCreate);
   app.get('/artists/:slug', artistsController.showSingle);
   app.get('/artists/:slug/edit', userMiddlewares.isLoggedIn, artistsController.showEdit);
   app.post('/artists/:slug', userMiddlewares.isLoggedIn, artistsController.uploadThumbnail, artistsController.processEdit);

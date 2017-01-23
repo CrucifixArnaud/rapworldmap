@@ -56,8 +56,6 @@ function showSignup (req, res) {
  * [processSignup Process the signup form]
  */
 function processSignup (req, res) {
-  console.log('processSignup');
-
   passport.authenticate('local-signup', {
     successRedirect : '/profile', // redirect to the secure profile section
     failureRedirect : '/signup', // redirect back to the signup page if there is an error
@@ -69,9 +67,14 @@ function processSignup (req, res) {
  * [showLogin Display login form]
  */
 function showLogin (req, res) {
-  res.render('pages/users/login', {
+  const locals = {
+    layout: 'admin',
+    title: 'Login',
+    slug: 'page-admin',
     errors: req.flash('loginMessage')
-  });
+  };
+
+  res.render('pages/users/login', locals);
 }
 
 /**

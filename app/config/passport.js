@@ -19,16 +19,16 @@ var passportStrategy = (passport) => {
   // Deserialize user
   passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
-        done(err, user);
+      done(err, user);
     });
   });
 
   //====== Local signup ======
   passport.use('local-signup', new LocalStrategy({
       // by default, local strategy uses username and password, we will override with email
-      usernameField : 'email',
-      passwordField : 'password',
-      passReqToCallback : true // allows us to pass back the entire request to the callback
+    usernameField : 'email',
+    passwordField : 'password',
+    passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, email, password, done) {
 
@@ -59,9 +59,9 @@ var passportStrategy = (passport) => {
 
           // save the user
           newUser.save(function(err) {
-              if (err)
-                  throw err;
-              return done(null, newUser);
+            if (err)
+              throw err;
+            return done(null, newUser);
           });
         }
       });
@@ -70,10 +70,10 @@ var passportStrategy = (passport) => {
 
   //====== Local login ======
   passport.use('local-login', new LocalStrategy({
-      // by default, local strategy uses username and password, we will override with email
-      usernameField : 'email',
-      passwordField : 'password',
-      passReqToCallback : true // allows us to pass back the entire request to the callback
+    // by default, local strategy uses username and password, we will override with email
+    usernameField : 'email',
+    passwordField : 'password',
+    passReqToCallback : true // allows us to pass back the entire request to the callback
   },
   function(req, email, password, done) {
 
@@ -87,11 +87,11 @@ var passportStrategy = (passport) => {
 
       // if no user is found, return the message
       if (!user)
-        return done(null, false, req.flash('loginMessage', 'No user found'));
+        return done(null, false, req.flash('loginMessage', 'Invalid email or password.'));
 
       // if the user is found but password invalid
       if (!user.validPassword(password))
-        return done(null, false, req.flash('loginMessage', 'Login/Password dont match'));
+        return done(null, false, req.flash('loginMessage', 'Invalid email or password.'));
 
       return done(null, user);
     });

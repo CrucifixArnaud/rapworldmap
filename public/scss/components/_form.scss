@@ -22,7 +22,8 @@
 }
 
 [type="text"],
-[type="mail"],
+[type="email"],
+[type="password"],
 [type="date"],
 textarea {
   @include inputText();

@@ -9,7 +9,8 @@ require('dotenv').config();
 const express = require('express'),
   app = express(),
   expressLayout = require('express-ejs-layouts'),
-  session = require('express-session'),
+  // session = require('express-session'),
+  session = require('client-sessions'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   passport = require('passport'),
@@ -40,12 +41,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 
 // Passport specific
+// app.use(session({
+//     secret: process.env.SECRET,
+//     cookie: { maxAge: 60000 },
+//     resave: false, // forces the session to be saved back to the store
+//     saveUninitialized: false // dont save unmodified
+// }));
+
 app.use(session({
-    secret: process.env.SECRET,
-    cookie: { maxAge: 60000 },
-    resave: false, // forces the session to be saved back to the store
-    saveUninitialized: false // dont save unmodified
+  cookieName: 'session',
+  secret: process.env.SECRET,
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
 }));
+
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
