@@ -111,7 +111,9 @@ function processCreate(req, res) {
       summary: req.body.summary,
       wikipediaUrl: req.body.wikipediaUrl,
       birthdate: req.body.birthdate,
-      deathdate: req.body.deathdate
+      deathdate: req.body.deathdate,
+      yearsActiveStart: req.body.yearsActiveStart,
+      yearsActiveEnd: req.body.yearsActiveEnd
     }],
     youtube: [{
       pageUrl: req.body.pageUrl,
@@ -228,6 +230,8 @@ function processEdit(req, res) {
     artist.bio[0].wikipediaUrl = req.body.wikipediaUrl;
     artist.bio[0].birthdate = req.body.birthdate;
     artist.bio[0].deathdate = req.body.deathdate;
+    artist.bio[0].yearsActiveStart = req.body.yearsActiveStart;
+    artist.bio[0].yearsActiveEnd = req.body.yearsActiveEnd;
     artist.youtube[0].pageUrl = req.body.youtugePageUrl;
     artist.youtube[0].clipExampleUrl = req.body.clipExampleUrl;
 
@@ -306,7 +310,9 @@ function getArtistsGeojson (req, res) {
             summary: artist.bio[0].summary,
             wikipediaUrl: artist.bio[0].wikipediaUrl,
             birthdate: artist.bio[0].birthdate,
-            deathdate: artist.bio[0].deathdate
+            deathdate: artist.bio[0].deathdate,
+            yearsActiveStart: artist.bio[0].yearsActiveStart,
+            yearsActiveEnd: artist.bio[0].yearsActiveEnd
           },
           youtube: {
             pageUrl: artist.youtube[0].pageUrl,

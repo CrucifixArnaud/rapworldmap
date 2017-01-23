@@ -548,6 +548,7 @@ a {
 [type="email"],
 [type="password"],
 [type="date"],
+[type="number"],
 textarea {
   display: block;
   padding: 5px;
@@ -562,6 +563,7 @@ textarea {
   [type="email"]:focus,
   [type="password"]:focus,
   [type="date"]:focus,
+  [type="number"]:focus,
   textarea:focus {
     outline: none;
     box-shadow: 0 2px 0 #ffd700; }
@@ -884,10 +886,17 @@ textarea {
   right: -5px;
   top: -15px; }
 
-.artist-panel__location {
-  margin: 0 0 10px 140px;
+.artist-panel__location,
+.artist-panel__yearsactive {
+  display: inline-block;
   font-size: 14px;
   font-size: 1.4rem; }
+
+.artist-panel__location {
+  margin: 0 0 10px 140px; }
+
+.artist-panel__yearsactive {
+  margin: 0 0 10px 20px; }
 
 .panel {
   position: fixed;

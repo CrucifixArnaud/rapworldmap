@@ -29,6 +29,8 @@ const artistSchema = new Schema({
     wikipediaUrl: String,
     birthdate: Date,
     deathdate: Date,
+    yearsActiveStart: Number,
+    yearsActiveEnd: Number,
     _id : false
   }],
   youtube: [{

@@ -212,9 +212,18 @@
   top: -15px;
 }
 
-.artist-panel__location {
-  margin: 0 0 10px 140px;
+.artist-panel__location,
+.artist-panel__yearsactive {
+  display: inline-block;
   @include rem(font-size, 14px);
+}
+
+.artist-panel__location{
+  margin: 0 0 10px 140px;
+}
+
+.artist-panel__yearsactive {
+  margin: 0 0 10px 20px;
 }
 
 // Panel

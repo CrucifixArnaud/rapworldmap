@@ -43,7 +43,7 @@ export default class ArtistPanel extends React.Component {
 
     if(this.props.artist) {
 
-      var tagsList = this.props.artist.categories.map(function(category, key){
+      var tagsList = this.props.artist.categories.map(function(category, key) {
         return <li key={key} className='panel-artist__categories__item'>{category}</li>;
       });
 
@@ -87,6 +87,13 @@ export default class ArtistPanel extends React.Component {
         );
       }
 
+      let artistYearsActive;
+      if (this.props.artist.bio.yearsActiveStart) {
+        artistYearsActive = (
+          <span className="artist-panel__yearsactive">(Years active: {this.props.artist.bio.yearsActiveStart} {(this.props.artist.bio.yearsActiveEnd) ? ' - ' + this.props.artist.bio.yearsActiveEnd : '- present'})</span>
+        );
+      }
+
       return (
         <ClickOutHandler ref="panelHandler" onClickOut={this.clickOutside}>
           <div id="panel" className={'artist-panel ' + ((this.state.open) ? 'open' : '')}>
@@ -101,6 +108,7 @@ export default class ArtistPanel extends React.Component {
                 <span className="artist-panel__location__city">{this.props.artist.location.city} </span>
                 { artistLocationCountry }
               </div>
+              { artistYearsActive }
               <ul className="artist-panel__categories">
                 {tagsList}
               </ul>

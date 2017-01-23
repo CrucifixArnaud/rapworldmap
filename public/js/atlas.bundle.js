@@ -101643,6 +101643,19 @@ var ArtistPanel = function (_React$Component) {
           );
         }
 
+        var artistYearsActive = void 0;
+        if (this.props.artist.bio.yearsActiveStart) {
+          artistYearsActive = _react2.default.createElement(
+            'span',
+            { className: 'artist-panel__yearsactive' },
+            '(Years active: ',
+            this.props.artist.bio.yearsActiveStart,
+            ' ',
+            this.props.artist.bio.yearsActiveEnd ? ' - ' + this.props.artist.bio.yearsActiveEnd : '- present',
+            ')'
+          );
+        }
+
         return _react2.default.createElement(
           _reactOnclickout2.default,
           { ref: 'panelHandler', onClickOut: this.clickOutside },
@@ -101681,6 +101694,7 @@ var ArtistPanel = function (_React$Component) {
                 ),
                 artistLocationCountry
               ),
+              artistYearsActive,
               _react2.default.createElement(
                 'ul',
                 { className: 'artist-panel__categories' },
