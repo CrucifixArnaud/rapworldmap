@@ -53,6 +53,8 @@ export default class Atlas extends React.Component {
       // The clusterGroup gets each marker in the group added to it
       // once loaded, and then is added to the map
       var clusterGroup = new L.MarkerClusterGroup({
+        removeOutsideVisibleBounds: true,
+        maxClusterRadius: 40,
         polygonOptions: {
           fillColor: '#ff00666',
           color: '#ff0066',

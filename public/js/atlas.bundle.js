@@ -101457,6 +101457,8 @@ var Atlas = function (_React$Component) {
         // The clusterGroup gets each marker in the group added to it
         // once loaded, and then is added to the map
         var clusterGroup = new _mapbox2.default.MarkerClusterGroup({
+          removeOutsideVisibleBounds: true,
+          maxClusterRadius: 40,
           polygonOptions: {
             fillColor: '#ff00666',
             color: '#ff0066',
