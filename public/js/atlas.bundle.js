@@ -101415,6 +101415,8 @@ var Atlas = function (_React$Component) {
     _this.state = {
       artist: ''
     };
+
+    _this.map = '';
     return _this;
   }
 
@@ -101448,7 +101450,7 @@ var Atlas = function (_React$Component) {
     value: function createAtlas() {
       var self = this;
 
-      var map = _mapbox2.default.mapbox.map('map', 'mapbox.dark', {
+      this.map = _mapbox2.default.mapbox.map('map', 'mapbox.dark', {
         minZoom: 3.5,
         zoomControl: false
       }).setView([40, -45], 3);
@@ -101483,17 +101485,29 @@ var Atlas = function (_React$Component) {
           marker.setIcon(_mapbox2.default.icon(feature.properties.icon));
           clusterGroup.addLayer(layer);
         });
-        map.addLayer(clusterGroup);
+        self.map.addLayer(clusterGroup);
       });
+    }
+  }, {
+    key: 'centerArtist',
+    value: function centerArtist(coordinates, e) {
+      var coordinates = JSON.parse('[' + coordinates + ']');
+      var lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
+      var lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
+      this.map.flyTo([lat, lng], 10);
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement('div', { id: 'map', className: 'mapbox' }),
-        _react2.default.createElement(_artistPanel2.default, { ref: 'panel', artist: this.state.artist })
+        _react2.default.createElement(_artistPanel2.default, { ref: 'panel', centerArtist: function centerArtist(e) {
+            return _this3.centerArtist(e);
+          }, artist: this.state.artist })
       );
     }
   }]);
@@ -101547,6 +101561,7 @@ var ArtistPanel = function (_React$Component) {
     _this.open = _this.open.bind(_this);
     _this.close = _this.close.bind(_this);
     _this.clickOutside = _this.clickOutside.bind(_this);
+    _this.handleClickOnCity = _this.handleClickOnCity.bind(_this);
     return _this;
   }
 
@@ -101576,6 +101591,11 @@ var ArtistPanel = function (_React$Component) {
       if (this.state.open && !hasClass(target, 'marker')) {
         this.close();
       }
+    }
+  }, {
+    key: 'handleClickOnCity',
+    value: function handleClickOnCity() {
+      this.props.centerArtist(this.props.artist.location.coordinates);
     }
   }, {
     key: 'render',
@@ -101689,8 +101709,10 @@ var ArtistPanel = function (_React$Component) {
                 { className: 'artist-panel__location' },
                 artistLocationNeighborhood,
                 _react2.default.createElement(
-                  'span',
-                  { className: 'artist-panel__location__city' },
+                  'a',
+                  { onClick: function onClick() {
+                      return _this2.handleClickOnCity();
+                    }, className: 'artist-panel__location__city' },
                   this.props.artist.location.city,
                   ' '
                 ),

@@ -300,7 +300,8 @@ function getArtistsGeojson (req, res) {
           },
           'location' : {
             'city': artist.location[0].city,
-            'neighborhood': artist.location[0].neighborhood
+            'neighborhood': artist.location[0].neighborhood,
+            'coordinates': artist.location[0].coordinates
           },
           image: {
             thumbnailUrl: artist.image[0].thumbnailUrl,

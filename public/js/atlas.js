@@ -17,6 +17,8 @@ export default class Atlas extends React.Component {
     this.state = {
       artist: ''
     };
+
+    this.map = '';
   }
 
   componentWillMount() {
@@ -44,7 +46,7 @@ export default class Atlas extends React.Component {
   createAtlas() {
     var self = this;
 
-    var map = L.mapbox.map('map', 'mapbox.dark', {
+    this.map = L.mapbox.map('map', 'mapbox.dark', {
       minZoom: 3.5,
       zoomControl: false
     }).setView([40, -45], 3);
@@ -79,15 +81,23 @@ export default class Atlas extends React.Component {
         marker.setIcon(L.icon(feature.properties.icon));
         clusterGroup.addLayer(layer);
       });
-      map.addLayer(clusterGroup);
+      self.map.addLayer(clusterGroup);
     });
+
+  }
+
+  centerArtist(coordinates, e) {
+    var coordinates = JSON.parse( '[' + coordinates + ']');
+    var lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
+    var lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
+    this.map.flyTo([lat, lng], 10);
   }
 
   render() {
     return (
       <div>
         <div id='map' className='mapbox'></div>
-        <ArtistPanel ref='panel' artist={this.state.artist} />
+        <ArtistPanel ref='panel' centerArtist={e => this.centerArtist(e)} artist={this.state.artist} />
       </div>
     );
   }

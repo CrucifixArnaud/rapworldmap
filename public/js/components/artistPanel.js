@@ -13,6 +13,7 @@ export default class ArtistPanel extends React.Component {
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
     this.clickOutside = this.clickOutside.bind(this);
+    this.handleClickOnCity = this.handleClickOnCity.bind(this);
   }
 
   open() {
@@ -37,6 +38,10 @@ export default class ArtistPanel extends React.Component {
     if(this.state.open && !hasClass(target, 'marker')) {
       this.close();
     }
+  }
+
+  handleClickOnCity() {
+    this.props.centerArtist(this.props.artist.location.coordinates);
   }
 
   render() {
@@ -105,7 +110,7 @@ export default class ArtistPanel extends React.Component {
               <h2 className="artist-panel__name">{this.props.artist.name}</h2>
               <div className="artist-panel__location">
                 { artistLocationNeighborhood }
-                <span className="artist-panel__location__city">{this.props.artist.location.city} </span>
+                <a onClick={() => this.handleClickOnCity()} className="artist-panel__location__city">{this.props.artist.location.city} </a>
                 { artistLocationCountry }
               </div>
               { artistYearsActive }
