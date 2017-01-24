@@ -15,7 +15,8 @@ module.exports = {
  */
 function showAtlas (req, res) {
   const locals = {
-    slug: 'page-atlas'
+    slug: 'page-atlas',
+    title: 'Atlas'
   };
   res.render('pages/atlas/atlas', locals);
 }
