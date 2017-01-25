@@ -456,6 +456,11 @@ a {
 * {
   box-sizing: border-box; }
 
+body {
+  background: #000;
+  height: 100vh;
+  width: 100vw; }
+
 .button,
 [class*="button--"] {
   display: inline-block;
@@ -739,7 +744,12 @@ textarea {
   color: #fff;
   overflow: hidden; }
 
+.page-atlas .app-container {
+  width: 100vw;
+  height: 100vh; }
+
 .atlas-header {
+  display: block;
   width: 100%;
   min-height: 66px;
   position: relative;
@@ -750,6 +760,10 @@ textarea {
 
 .atlas-header__title a:hover, .atlas-header__title a:focus, .atlas-header__title a:active {
   text-decoration: none; }
+
+@media screen and (max-width: 767px) {
+  .atlas-header .main-logo {
+    width: 50%; } }
 
 .mapbox {
   position: absolute;
@@ -786,44 +800,67 @@ textarea {
   background-color: rgba(143, 57, 154, 0.8); }
 
 .artist-panel {
+  visibility: hidden;
   position: absolute;
+  transition: visibility 0s, transform .2s ease;
   bottom: 15vh;
-  right: 0;
-  width: 620px;
-  min-height: 320px;
-  padding: 1em;
-  z-index: 1000;
-  right: 0;
-  transform: translateX(120%);
-  transition: transform .2s ease; }
+  right: 0; }
+  @media screen and (max-width: 767px) {
+    .artist-panel {
+      background: #1b2b34;
+      min-width: 360px; } }
+  @media screen and (min-width: 768px) {
+    .artist-panel {
+      width: 620px;
+      min-height: 320px;
+      padding: 1em;
+      z-index: 1000;
+      right: 0;
+      transform: translateX(120%); } }
 
 .artist-panel.open {
+  visibility: visible;
   transform: translateX(0); }
 
 .artist-panel__thumbnail,
 .artist-panel__thumbnail--preview {
   display: block;
-  height: 200px;
-  width: 200px;
   overflow: hidden;
-  border-radius: 100px;
   margin-right: 1em;
   margin-bottom: 1em;
   border: 4px solid #ffd700;
   background: #1b2b34; }
+  @media screen and (max-width: 767px) {
+    .artist-panel__thumbnail,
+    .artist-panel__thumbnail--preview {
+      height: 100px;
+      width: 100px;
+      border-radius: 50px; } }
+  @media screen and (min-width: 768px) {
+    .artist-panel__thumbnail,
+    .artist-panel__thumbnail--preview {
+      height: 200px;
+      width: 200px;
+      border-radius: 100px; } }
 
 .artist-panel__thumbnail {
   position: absolute;
-  top: -70px;
-  left: -70px;
-  float: left;
-  opacity: 0;
-  transform: rotate(1turn) translateX(100%);
-  animation-duration: .5s;
-  animation-timing-function: cubic-bezier(0.05, 1.1, 0.98, 1);
-  animation-delay: .2s;
-  animation-fill-mode: forwards;
-  will-change: transform,opacity; }
+  float: left; }
+  @media screen and (max-width: 767px) {
+    .artist-panel__thumbnail {
+      top: 20px;
+      left: 20px; } }
+  @media screen and (min-width: 768px) {
+    .artist-panel__thumbnail {
+      top: -70px;
+      left: -70px;
+      opacity: 0;
+      transform: rotate(1turn) translateX(100%);
+      animation-duration: .5s;
+      animation-timing-function: cubic-bezier(0.05, 1.1, 0.98, 1);
+      animation-delay: .2s;
+      animation-fill-mode: forwards;
+      will-change: transform,opacity; } }
 
 .artist-panel__thumbnail--preview {
   margin-bottom: 1em; }
@@ -840,8 +877,13 @@ textarea {
 .artist-panel.open .artist-panel__thumbnail {
   animation-name: display-circle; }
 
-.artist-panel__body {
-  max-width: 575px; }
+@media screen and (max-width: 767px) {
+  .artist-panel__body {
+    max-width: 75vw; } }
+
+@media screen and (min-width: 768px) {
+  .artist-panel__body {
+    max-width: 575px; } }
 
 .artist-panel__name {
   margin: 20px 0 .2em 140px;
@@ -866,34 +908,62 @@ textarea {
   font-size: 1.2rem; }
 
 .artist-panel__background {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: -1; }
+  display: block;
+  background: #1b2b34;
+  padding: .5em; }
+  @media screen and (min-width: 768px) {
+    .artist-panel__background {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: -1; } }
 
 .artist-panel__button--close {
   line-height: 1;
   position: absolute;
   top: 0;
-  right: 35px;
   transition: color .2s ease;
   font-size: 30px;
   font-size: 3rem; }
+  @media screen and (max-width: 767px) {
+    .artist-panel__button--close {
+      right: 15px; } }
+  @media screen and (min-width: 768px) {
+    .artist-panel__button--close {
+      right: 35px; } }
   .artist-panel__button--close:hover, .artist-panel__button--close:focus, .artist-panel__button--close:active {
     color: #b39700; }
 
 .artist-panel__youtube {
   position: relative; }
+  @media screen and (max-width: 767px) {
+    .artist-panel__youtube {
+      margin: 1em 0;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%); } }
 
-.artist-panel__youtube__embed {
-  position: absolute;
-  right: 15px;
-  z-index: 1000; }
+@media screen and (max-width: 767px) {
+  .artist-panel__youtube__embed {
+    background: #ffd700;
+    padding: 1em; } }
 
-.artist-panel__youtube__background {
-  position: absolute;
-  right: -5px;
-  top: -15px; }
+@media screen and (min-width: 768px) {
+  .artist-panel__youtube__embed {
+    position: absolute;
+    right: 15px;
+    z-index: 1000; } }
+
+@media screen and (max-width: 767px) {
+  .artist-panel__youtube__background {
+    display: none; } }
+
+@media screen and (min-width: 768px) {
+  .artist-panel__youtube__background {
+    position: absolute;
+    right: -5px;
+    top: -15px; } }
 
 .artist-panel__location,
 .artist-panel__yearsactive {
@@ -909,6 +979,10 @@ textarea {
 
 .artist-panel__yearsactive {
   margin: 0 0 10px 20px; }
+  @media screen and (max-width: 767px) {
+    .artist-panel__yearsactive {
+      display: block;
+      margin-left: 140px; } }
 
 .panel {
   position: fixed;
@@ -1056,6 +1130,7 @@ textarea {
 
 .table--artist {
   margin-top: 1em; }
+
 
 
 /*# sourceMappingURL=app.css.map*/

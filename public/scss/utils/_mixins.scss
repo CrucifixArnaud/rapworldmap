@@ -2,6 +2,42 @@
   > Mixins
 \***********************/
 
+//====== Breakpoints mixin ======
+// https://gist.github.com/timknight/b8adb5df5600c37fd567#file-breakpoint-v2-scss
+// Article: https://medium.com/developing-with-sass/refactoring-my-simple-sass-breakpoint-mixin-71205dd6badd
+// Use ex: @include breakpoint($md);
+
+$sm: (min: $screen-sm-min);
+$md: (min: $screen-md-min);
+
+$xs-only: (max:  $screen-xs-max);
+$sm-only: (min: map-get($sm, min), max: map-get($md, min) - 1);
+
+$below-sm: (max:  $screen-sm-min - 1);
+$below-md: (max:  $screen-md-min - 1);
+$below-lg: (max:  $screen-lg-min - 1);
+
+@mixin breakpoint($map) {
+  $query: '';
+  @if map-has-key($map, min) {
+      $query: append($query, '(min-width: #{map-get($map, min)})');
+  }
+  @if map-has-key($map, min) and map-has-key($map, max) {
+      $query: append($query, 'and');
+  }
+  @if map-has-key($map, min) and map-has-key($map, orientation){
+      $query: append($query, 'and');
+      $query: append($query, '(orientation: #{map-get($map, orientation)})');
+  }
+  @if map-has-key($map, max) {
+      $query: append($query, '(max-width: #{map-get($map, max)})');
+  }
+
+  @media screen and #{$query} {
+      @content;
+  }
+}
+
 /**
  * [rem Return good rem value related to a given function, and add a fallback with pixel]
  * @param  {string} $property [Any property accepting rem/px value]

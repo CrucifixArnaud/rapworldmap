@@ -30,6 +30,26 @@ $base-font-size: 16px;
 
 $font-sans-serif: liberation, sans-serif;
 
+//============ LAYOUT ============
+$site-container-width-md:     1140px;
+
+//============ BREAKPOINT ============
+// Extra small screen high / high resolution phone
+$screen-xsh-min:            480px;
+// Small screen / tablet
+$screen-sm-min:             480px;
+// Medium screen / desktop
+$screen-md-min:             768px;
+// Large screen / wide desktop
+$screen-lg-min:             1160px;
+// Extra large screen / very wide desktop
+$screen-xl-min:             1600px;
+// So media queries don't overlap when required, provide a maximum
+$screen-sm-max:             ($screen-md-min - 1) !default;
+// XS-max using SM-max value as we don't use SM breakpoint
+$screen-xs-max:             $screen-sm-max !default;
+$screen-md-max:             ($screen-lg-min - 1) !default;
+
 // Z-layer
 $z-layers: (
   "header": 1500,
