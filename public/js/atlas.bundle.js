@@ -101555,11 +101555,13 @@ var ArtistPanel = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ArtistPanel.__proto__ || Object.getPrototypeOf(ArtistPanel)).call(this, props));
 
     _this.state = {
-      open: false
+      open: false,
+      reduce: false
     };
 
     _this.open = _this.open.bind(_this);
     _this.close = _this.close.bind(_this);
+    _this.reduce = _this.reduce.bind(_this);
     _this.clickOutside = _this.clickOutside.bind(_this);
     _this.handleClickOnCity = _this.handleClickOnCity.bind(_this);
     return _this;
@@ -101580,6 +101582,13 @@ var ArtistPanel = function (_React$Component) {
       });
     }
   }, {
+    key: 'reduce',
+    value: function reduce() {
+      this.setState({
+        reduce: true
+      });
+    }
+  }, {
     key: 'clickOutside',
     value: function clickOutside(e) {
       function hasClass(elem, className) {
@@ -101589,7 +101598,7 @@ var ArtistPanel = function (_React$Component) {
       var target = e.target;
 
       if (this.state.open && !hasClass(target, 'marker')) {
-        this.close();
+        this.reduce();
       }
     }
   }, {
@@ -101683,7 +101692,7 @@ var ArtistPanel = function (_React$Component) {
           { ref: 'panelHandler', onClickOut: this.clickOutside },
           _react2.default.createElement(
             'div',
-            { id: 'panel', className: 'artist-panel ' + (this.state.open ? 'open' : '') },
+            { id: 'panel', className: 'artist-panel ' + (this.state.open ? 'open' : '') + ' ' + (this.state.reduce ? 'reduce' : '') },
             _react2.default.createElement(
               'a',
               { onClick: function onClick() {

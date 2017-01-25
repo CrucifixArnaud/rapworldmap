@@ -8,10 +8,12 @@ export default class ArtistPanel extends React.Component {
     // State
     this.state = {
       open: false,
+      reduce: false
     };
 
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
+    this.reduce = this.reduce.bind(this);
     this.clickOutside = this.clickOutside.bind(this);
     this.handleClickOnCity = this.handleClickOnCity.bind(this);
   }
@@ -28,6 +30,12 @@ export default class ArtistPanel extends React.Component {
     });
   }
 
+  reduce() {
+    this.setState({
+      reduce: true
+    });
+  }
+
   clickOutside(e) {
     function hasClass(elem, className) {
       return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
@@ -36,7 +44,7 @@ export default class ArtistPanel extends React.Component {
     let target = e.target;
 
     if(this.state.open && !hasClass(target, 'marker')) {
-      this.close();
+      this.reduce();
     }
   }
 
@@ -101,7 +109,7 @@ export default class ArtistPanel extends React.Component {
 
       return (
         <ClickOutHandler ref="panelHandler" onClickOut={this.clickOutside}>
-          <div id="panel" className={'artist-panel ' + ((this.state.open) ? 'open' : '')}>
+          <div id="panel" className={'artist-panel ' + ((this.state.open) ? 'open' : '') + ' ' + ((this.state.reduce) ? 'reduce' : '')}>
             <a onClick={() => this.close()} className="artist-panel__button--close" title="Close panel">&#10799;</a>
             <div className="artist-panel__thumbnail">
               <img className="artist-panel__thumbnail__picture" src={'/uploads/medium-' + this.props.artist.image.thumbnailUrl} />
