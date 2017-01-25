@@ -683,6 +683,15 @@ textarea {
 .error p {
   margin: 0; }
 
+.success {
+  background: #3eb36f;
+  padding: .5em 1em;
+  margin-bottom: 2em;
+  font-size: 14px;
+  font-size: 1.4rem;
+  line-height: 0;
+  border-radius: 2px; }
+
 .predictive-box {
   margin: 2px 0 0;
   padding: 0; }
