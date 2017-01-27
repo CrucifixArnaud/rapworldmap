@@ -1,5 +1,5 @@
 {
-  "name": "rapmap",
+  "name": "rapworldmap",
   "version": "1.0.0",
   "description": "Display a map of Rapper based on their childhood neighborhood",
   "main": "server.js",
