@@ -209,8 +209,8 @@
 }
 
 .artist-panel__bio {
+  margin: 30px 0 1em 20px;
   @include rem(font-size, 16px);
-  margin: 30px 0 0 20px;
 }
 
 .artist-panel__bio p {

@@ -896,9 +896,9 @@ textarea {
   padding: 0; }
 
 .artist-panel__bio {
+  margin: 30px 0 1em 20px;
   font-size: 16px;
-  font-size: 1.6rem;
-  margin: 30px 0 0 20px; }
+  font-size: 1.6rem; }
 
 .artist-panel__bio p {
   margin-bottom: .5em; }
