@@ -909,7 +909,6 @@ textarea {
 
 .artist-panel__background {
   display: block;
-  background: #1b2b34;
   padding: .5em; }
   @media screen and (min-width: 768px) {
     .artist-panel__background {
