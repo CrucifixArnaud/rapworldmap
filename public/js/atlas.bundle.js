@@ -101708,7 +101708,27 @@ var Atlas = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Atlas.__proto__ || Object.getPrototypeOf(Atlas)).call(this, props));
 
     _this.state = {
-      artist: ''
+      artist: {
+        'name': 'Gucci Mane',
+        'youtube': [{
+          'clipExampleUrl': 'https://www.youtube.com/embed/r4n8s6PVzl8'
+        }],
+        'bio': [{
+          'summary': 'Radric Delantic Davis (born February 12, 1980),[1][2] known professionally as Gucci Mane, is an American rapper from Atlanta, Georgia.',
+          'wikipediaUrl': 'https://en.wikipedia.org/wiki/Gucci_Mane',
+          'birthdate': null,
+          'deathdate': null
+        }],
+        'image': [{
+          'thumbnailUrl': '1484925966101-guccimane.jpg'
+        }],
+        'categories': ['rapper'],
+        'location': [{
+          'city': 'Atlanta',
+          'coordinates': '-84.34546, 33.74001',
+          'neighborhood': ''
+        }]
+      }
     };
 
     _this.map = '';
@@ -101744,6 +101764,7 @@ var Atlas = function (_React$Component) {
     key: 'createAtlas',
     value: function createAtlas() {
       var self = this;
+
       this.map = _mapbox2.default.mapbox.map('map', 'mapbox.dark', {
         minZoom: 3.5,
         zoomControl: false
