@@ -934,6 +934,13 @@ textarea {
   .artist-panel__button--close:hover, .artist-panel__button--close:focus, .artist-panel__button--close:active {
     color: #b39700; }
 
+.artist-panel__thumbnail--preview {
+  margin-bottom: 1em; }
+
+@keyframes display-youtubeClip {
+  to {
+    opacity: 1; } }
+
 .artist-panel__youtube {
   position: relative; }
   @media screen and (max-width: 767px) {
@@ -942,6 +949,15 @@ textarea {
       position: absolute;
       left: 50%;
       transform: translateX(-50%); } }
+  @media screen and (min-width: 768px) {
+    .artist-panel__youtube {
+      opacity: 0;
+      animation-name: display-youtubeClip;
+      animation-duration: .5s;
+      animation-timing-function: cubic-bezier(0.05, 1.1, 0.98, 1);
+      animation-delay: .2s;
+      animation-fill-mode: forwards;
+      will-change: transform,opacity; } }
 
 @media screen and (max-width: 767px) {
   .artist-panel__youtube__embed {

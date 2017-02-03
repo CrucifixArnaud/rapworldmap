@@ -101871,7 +101871,8 @@ var ArtistPanel = function (_React$Component) {
 
     _this.state = {
       open: false,
-      reduce: false
+      reduce: false,
+      youtubeClip: false
     };
 
     _this.open = _this.open.bind(_this);
@@ -101885,9 +101886,19 @@ var ArtistPanel = function (_React$Component) {
   _createClass(ArtistPanel, [{
     key: 'open',
     value: function open() {
-      this.setState({
+      var self = this;
+
+      self.setState({
         open: true
       });
+
+      if (this.props.artist.youtube.clipExampleUrl) {
+        setTimeout(function () {
+          self.setState({
+            youtubeClip: true
+          });
+        }, 750);
+      }
     }
   }, {
     key: 'close',
@@ -101895,6 +101906,14 @@ var ArtistPanel = function (_React$Component) {
       this.setState({
         open: false
       });
+
+      if (this.props.artist.youtube.clipExampleUrl) {
+        this.setState({
+          youtubeClip: false
+        });
+        // setTimeout(function() {
+        // }, 2000);
+      }
     }
   }, {
     key: 'reduce',
@@ -101955,18 +101974,7 @@ var ArtistPanel = function (_React$Component) {
         }
 
         var artistClipExample = void 0;
-        if (this.props.artist.youtube.clipExampleUrl) {
-          artistClipExample = _react2.default.createElement(
-            'div',
-            { className: 'artist-panel__youtube' },
-            _react2.default.createElement('iframe', { className: 'artist-panel__youtube__embed', src: this.props.artist.youtube.clipExampleUrl, frameBorder: '0', allowFullScreen: 'allowfullscreen' }),
-            _react2.default.createElement(
-              'svg',
-              { className: 'artist-panel__youtube__background', height: '182px', width: '340px' },
-              _react2.default.createElement('path', { d: 'M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z', style: { fill: '#ffd700' } })
-            )
-          );
-        }
+        if (this.props.artist.youtube.clipExampleUrl) {}
 
         var artistLocationNeighborhood = void 0;
         if (this.props.artist.location.neighborhood) {
@@ -102058,7 +102066,16 @@ var ArtistPanel = function (_React$Component) {
                   artistWikipediaUrl
                 )
               ),
-              artistClipExample
+              this.state.youtubeClip && _react2.default.createElement(
+                'div',
+                { className: 'artist-panel__youtube' + (this.state.youtubeClip ? ' open' : '') },
+                _react2.default.createElement('iframe', { className: 'artist-panel__youtube__embed', src: this.props.artist.youtube.clipExampleUrl, frameBorder: '0', allowFullScreen: 'allowfullscreen' }),
+                _react2.default.createElement(
+                  'svg',
+                  { className: 'artist-panel__youtube__background', height: '182px', width: '340px' },
+                  _react2.default.createElement('path', { d: 'M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z', style: { fill: '#ffd700' } })
+                )
+              )
             ),
             _react2.default.createElement(
               'svg',

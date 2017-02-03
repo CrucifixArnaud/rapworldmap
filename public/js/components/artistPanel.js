@@ -8,7 +8,8 @@ export default class ArtistPanel extends React.Component {
     // State
     this.state = {
       open: false,
-      reduce: false
+      reduce: false,
+      youtubeClip: false
     };
 
     this.open = this.open.bind(this);
@@ -19,15 +20,33 @@ export default class ArtistPanel extends React.Component {
   }
 
   open() {
-    this.setState({
+    var self = this;
+
+    self.setState({
       open: true
     });
+
+    if (this.props.artist.youtube.clipExampleUrl) {
+      setTimeout(function() {
+        self.setState({
+          youtubeClip: true
+        });
+      }, 750);
+    }
   }
 
   close() {
     this.setState({
       open: false
     });
+
+    if (this.props.artist.youtube.clipExampleUrl) {
+      this.setState({
+        youtubeClip: false
+      });
+      // setTimeout(function() {
+      // }, 2000);
+    }
   }
 
   reduce() {
@@ -76,14 +95,6 @@ export default class ArtistPanel extends React.Component {
 
       let artistClipExample;
       if (this.props.artist.youtube.clipExampleUrl) {
-        artistClipExample = (
-          <div className="artist-panel__youtube">
-            <iframe className="artist-panel__youtube__embed" src={this.props.artist.youtube.clipExampleUrl} frameBorder="0" allowFullScreen="allowfullscreen"></iframe>
-            <svg className="artist-panel__youtube__background" height="182px" width="340px">
-              <path d="M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z" style={{fill:'#ffd700'}} />
-            </svg>
-          </div>
-        );
       }
 
       let artistLocationNeighborhood;
@@ -131,7 +142,14 @@ export default class ArtistPanel extends React.Component {
                   { artistWikipediaUrl }
                 </div>
               </div>
-              { artistClipExample }
+                {this.state.youtubeClip &&
+                  <div className={'artist-panel__youtube' + ((this.state.youtubeClip) ? ' open' : '')}>
+                    <iframe className="artist-panel__youtube__embed" src={this.props.artist.youtube.clipExampleUrl} frameBorder="0" allowFullScreen="allowfullscreen"></iframe>
+                    <svg className="artist-panel__youtube__background" height="182px" width="340px">
+                      <path d="M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z" style={{fill:'#ffd700'}} />
+                    </svg>
+                  </div>
+                }
             </div>
             <svg className="artist-panel__background" height="100%" width="100%">
               <path d="M16.000,14.000 L0.000,300.000 L603.000,295.000 L596.000,-0.000 L16.000,14.000 Z" style={{fill:'#1b2b34'}} />

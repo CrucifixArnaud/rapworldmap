@@ -257,12 +257,32 @@
   }
 }
 
+.artist-panel__thumbnail--preview {
+  margin-bottom: 1em;
+}
+
+@keyframes display-youtubeClip {
+  to {
+    opacity: 1;
+  }
+}
+
 .artist-panel__youtube {
   position: relative;
 
   @include breakpoint($below-md) {
     margin: 1em 0;
     @include horizontal-center(absolute);
+  }
+
+  @include breakpoint($md) {
+    opacity: 0;
+    animation-name: display-youtubeClip;
+    animation-duration: .5s;
+    animation-timing-function: cubic-bezier(0.05, 1.10, 0.98, 1);
+    animation-delay: .2s;
+    animation-fill-mode: forwards;
+    will-change: transform,opacity;
   }
 }
 
