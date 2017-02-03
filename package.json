@@ -4,7 +4,7 @@
   "description": "Display a map of Rapper based on their childhood neighborhood",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify public/js/atlas.js -o public/js/atlas.bundle.js -t [ babelify --presets [ es2015 react ] ]"
   },
