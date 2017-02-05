@@ -501,7 +501,7 @@ body {
   background-size: 400% 400%;
   color: #1b2b34;
   transition: background-position 0.5s ease-in-out, background-color 0.2s ease-in-out; }
-  
+
   [class*='button--primary']:after {
     display: block;
     content: "";
@@ -516,7 +516,7 @@ body {
     background-clip: padding-box;
     transition: all .5s ease-in-out;
     background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0) 25%, #fff4c2 25%, #fff4c2 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 60%, #fff4c2 60%, #fff4c2 70%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0) 76%, #fff4c2 76%, #fff4c2 80%, rgba(255, 255, 255, 0) 80%); }
-  
+
   [class*='button--primary']:hover:not(.disable),
   [class*='button--primary']:focus:not(.disable) {
     outline: none;
@@ -524,11 +524,11 @@ body {
     transition: background-position 1s ease-in-out, background-color 0.2s ease-in-out, color .2s ease-in-out;
     background-color: #ffeaa3;
     color: #000; }
-    
+
     [class*='button--primary']:hover:not(.disable):after,
     [class*='button--primary']:focus:not(.disable):after {
       background-position: 200px center; }
-  
+
   [class*='button--primary']:active:not(.disable) {
     background-image: none;
     background-color: #fad300; }
@@ -539,12 +539,12 @@ body {
   background-color: #db3737;
   color: #fff;
   transition: background-color 0.2s ease-in-out; }
-  
+
   [class*='button--danger']:hover:not(.disable),
   [class*='button--danger']:focus:not(.disable) {
     outline: none;
     background-color: #bd2222; }
-  
+
   [class*='button--danger']:active:not(.disable) {
     background-image: none;
     background-color: #921a1a; }
@@ -557,7 +557,7 @@ body {
 textarea {
   display: block;
   padding: 5px;
-  box-shadow: 0;
+  box-shadow: none;
   border: 0;
   border-radius: 0;
   width: 100%;
@@ -1137,7 +1137,8 @@ textarea {
   font-size: 2.4rem; }
 
 .form-create {
-  max-width: 25%; }
+  max-width: 500px;
+}
 
 .artist-total {
   font-size: 16px;
