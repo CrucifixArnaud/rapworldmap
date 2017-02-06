@@ -101719,9 +101719,9 @@ var Atlas = function (_React$Component) {
           'birthdate': null,
           'deathdate': null
         }],
-        'image': [{
+        'image': {
           'thumbnailUrl': '1484925966101-guccimane.jpg'
-        }],
+        },
         'categories': ['rapper'],
         'location': [{
           'city': 'Atlanta',
@@ -101972,9 +101972,6 @@ var ArtistPanel = function (_React$Component) {
             'Read more on Wikipedia'
           );
         }
-
-        var artistClipExample = void 0;
-        if (this.props.artist.youtube.clipExampleUrl) {}
 
         var artistLocationNeighborhood = void 0;
         if (this.props.artist.location.neighborhood) {

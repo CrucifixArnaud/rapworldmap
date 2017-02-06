@@ -20,6 +20,7 @@
   min-height: 66px;
   position: relative;
   z-index: z('header');
+  pointer-events: none;
 }
 
 .atlas-header__title {

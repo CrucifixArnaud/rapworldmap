@@ -30,11 +30,9 @@ export default class Atlas extends React.Component {
             'deathdate': null
           }
         ],
-        'image': [
-          {
-            'thumbnailUrl': '1484925966101-guccimane.jpg'
-          }
-        ],
+        'image': {
+          'thumbnailUrl': '1484925966101-guccimane.jpg'
+        },
         'categories': [
           'rapper'
         ],

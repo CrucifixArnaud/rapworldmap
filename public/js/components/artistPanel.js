@@ -93,10 +93,6 @@ export default class ArtistPanel extends React.Component {
         );
       }
 
-      let artistClipExample;
-      if (this.props.artist.youtube.clipExampleUrl) {
-      }
-
       let artistLocationNeighborhood;
       if (this.props.artist.location.neighborhood) {
         artistLocationNeighborhood = (
