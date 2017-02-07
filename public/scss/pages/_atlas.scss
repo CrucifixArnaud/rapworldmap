@@ -41,6 +41,78 @@
   }
 }
 
+//  Atlas-menu
+// ---------------------
+
+.atlas-menu {
+  position: relative;
+  z-index: z(header);;
+  pointer-events: none;
+}
+
+.atlas-menu .menu {
+  margin-left: 1em;
+}
+
+.atlas-menu .menu,
+.atlas-menu .submenu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.atlas-menu .menu__item__button,
+.atlas-menu .submenu__item__button {
+  pointer-events: auto;
+
+  @include rem(font-size, 14px);
+  @include button-transparent(#fff);
+}
+
+.atlas-menu .menu__item__button {
+  &:hover .button__label,
+  &:focus .button__label,
+  &:active .button__label {
+    text-decoration: underline;
+  }
+}
+
+.atlas-menu .submenu__item__button {
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: underline;
+  }
+}
+
+.submenu {
+  visibility: hidden;
+
+  &.open {
+    visibility: visible;
+  }
+}
+
+.atlas-menu .button__icon {
+  display: block;
+  margin: 0 auto;
+}
+
+.atlas-menu .button__label {
+  display: inline-block;
+  margin-top: .5em;
+}
+
+.atlas-menu .submenu,
+.atlas-menu .submenu__item,
+.menu__item__button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.atlas-menu .submenu__item {
+
+}
+
 // Mapbox
 // ---------------------
 

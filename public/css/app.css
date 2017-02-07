@@ -766,6 +766,64 @@ textarea {
   .atlas-header .main-logo {
     width: 50%; } }
 
+.atlas-menu {
+  position: relative;
+  z-index: 1500;
+  pointer-events: none; }
+
+.atlas-menu .menu {
+  margin-left: 1em; }
+
+.atlas-menu .menu,
+.atlas-menu .submenu {
+  list-style-type: none;
+  padding: 0; }
+
+.atlas-menu .menu__item__button,
+.atlas-menu .submenu__item__button {
+  pointer-events: auto;
+  font-size: 14px;
+  font-size: 1.4rem;
+  border: 0;
+  background-color: transparent;
+  color: #fff;
+  transition: color 0.2s ease-in-out; }
+  .atlas-menu .menu__item__button:hover:not(.disable), .atlas-menu .menu__item__button:focus:not(.disable),
+  .atlas-menu .submenu__item__button:hover:not(.disable),
+  .atlas-menu .submenu__item__button:focus:not(.disable) {
+    outline: none;
+    color: #e6e6e6; }
+  .atlas-menu .menu__item__button:active:not(.disable),
+  .atlas-menu .submenu__item__button:active:not(.disable) {
+    color: #cccccc; }
+
+.atlas-menu .menu__item__button:hover .button__label,
+.atlas-menu .menu__item__button:focus .button__label,
+.atlas-menu .menu__item__button:active .button__label {
+  text-decoration: underline; }
+
+.atlas-menu .submenu__item__button:hover, .atlas-menu .submenu__item__button:focus, .atlas-menu .submenu__item__button:active {
+  text-decoration: underline; }
+
+.submenu {
+  visibility: hidden; }
+  .submenu.open {
+    visibility: visible; }
+
+.atlas-menu .button__icon {
+  display: block;
+  margin: 0 auto; }
+
+.atlas-menu .button__label {
+  display: inline-block;
+  margin-top: .5em; }
+
+.atlas-menu .submenu,
+.atlas-menu .submenu__item,
+.menu__item__button {
+  display: inline-block;
+  vertical-align: middle; }
+
 .mapbox {
   position: absolute;
   top: 0;

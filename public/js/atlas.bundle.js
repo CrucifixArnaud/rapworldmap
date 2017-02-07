@@ -101687,6 +101687,10 @@ var _artistPanel = require('./components/artistPanel');
 
 var _artistPanel2 = _interopRequireDefault(_artistPanel);
 
+var _atlasMenu = require('./components/atlasMenu');
+
+var _atlasMenu2 = _interopRequireDefault(_atlasMenu);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -101785,7 +101789,6 @@ var Atlas = function (_React$Component) {
           }
         });
         e.target.eachLayer(function (layer) {
-
           var marker = layer,
               feature = marker.feature,
               artist = feature.properties;
@@ -101804,25 +101807,21 @@ var Atlas = function (_React$Component) {
       });
     }
   }, {
-    key: 'centerArtist',
-    value: function centerArtist(coordinates, e) {
-      var coordinates = JSON.parse('[' + coordinates + ']');
-      var lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
-      var lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
-      this.map.flyTo([lat, lng], 10);
+    key: 'centerView',
+    value: function centerView(lat, lng) {
+      var zoom = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+
+      this.map.setView([lat, lng], zoom);
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(_atlasMenu2.default, { centerView: this.centerView.bind(this) }),
         _react2.default.createElement('div', { id: 'map', className: 'mapbox' }),
-        _react2.default.createElement(_artistPanel2.default, { ref: 'panel', centerArtist: function centerArtist(e) {
-            return _this3.centerArtist(e);
-          }, artist: this.state.artist })
+        _react2.default.createElement(_artistPanel2.default, { ref: 'panel', centerView: this.centerView.bind(this), artist: this.state.artist })
       );
     }
   }]);
@@ -101835,7 +101834,7 @@ exports.default = Atlas;
 
 _reactDom2.default.render(_react2.default.createElement(Atlas, null), document.getElementById('app'));
 
-},{"./components/artistPanel":506,"leaflet.markercluster":257,"mapbox.js":269,"react":444,"react-dom":290,"request":445}],506:[function(require,module,exports){
+},{"./components/artistPanel":506,"./components/atlasMenu":507,"leaflet.markercluster":257,"mapbox.js":269,"react":444,"react-dom":290,"request":445}],506:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -101938,7 +101937,10 @@ var ArtistPanel = function (_React$Component) {
   }, {
     key: 'handleClickOnCity',
     value: function handleClickOnCity() {
-      this.props.centerArtist(this.props.artist.location.coordinates);
+      var coordinates = JSON.parse('[' + this.props.artist.location.coordinates + ']');
+      var lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
+      var lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
+      this.props.centerView(lat, lng, 13);
     }
   }, {
     key: 'render',
@@ -102169,4 +102171,223 @@ var ArtistPanel = function (_React$Component) {
 
 exports.default = ArtistPanel;
 
-},{"react":444,"react-onclickout":418}]},{},[505]);
+},{"react":444,"react-onclickout":418}],507:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AtlasMenu = function (_React$Component) {
+  _inherits(AtlasMenu, _React$Component);
+
+  function AtlasMenu(props) {
+    _classCallCheck(this, AtlasMenu);
+
+    var _this = _possibleConstructorReturn(this, (AtlasMenu.__proto__ || Object.getPrototypeOf(AtlasMenu)).call(this, props));
+
+    _this.handleAreaClick = _this.handleAreaClick.bind(_this);
+    _this.toggleSubmenu = _this.toggleSubmenu.bind(_this);
+    return _this;
+  }
+
+  _createClass(AtlasMenu, [{
+    key: 'handleAreaClick',
+    value: function handleAreaClick(lat, lng, zoom) {
+      this.props.centerView(lat, lng, zoom);
+    }
+  }, {
+    key: 'toggleSubmenu',
+    value: function toggleSubmenu(e) {
+      var submenu = e.target.parentNode.nextSibling;
+
+      submenu.classList.toggle('open');
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'nav',
+        { className: 'atlas-menu' },
+        _react2.default.createElement(
+          'ul',
+          { className: 'menu' },
+          _react2.default.createElement(
+            'li',
+            { className: 'menu__item' },
+            _react2.default.createElement(
+              'button',
+              { className: 'menu__item__button', onClick: function onClick(e) {
+                  return _this2.toggleSubmenu(e);
+                } },
+              _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests.svg', width: '50px', height: '40px', alt: '' }),
+              _react2.default.createElement(
+                'span',
+                { className: 'button__label' },
+                'Areas'
+              )
+            ),
+            _react2.default.createElement(
+              'ul',
+              { className: 'submenu' },
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(33.7161623, -84.3522846, 11);
+                    } },
+                  'Atlanta'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(37.938365, -122.344812, 11);
+                    } },
+                  'Bay Area'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(41.817786, -87.658691, 11);
+                    } },
+                  'Chicago'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(29.937851, -94.743895, 10);
+                    } },
+                  'Houston / Port Arthur'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(51.4945828, -0.1475805, 11);
+                    } },
+                  'London'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(33.950426, -118.259620, 11);
+                    } },
+                  'Los Angeles'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(43.320071, 5.374707, 13);
+                    } },
+                  'Marseille'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(35.115065, -89.976974, 13);
+                    } },
+                  'Memphis'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(25.809509, -80.193240, 12);
+                    } },
+                  'Miami'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(29.984120, -90.065548, 13);
+                    } },
+                  'New Orleans'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(40.758206, -73.887433, 11);
+                    } },
+                  'New York'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'submenu__item' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'submenu__item__button', onClick: function onClick() {
+                      return _this2.handleAreaClick(48.8589507, 2.2775175, 11);
+                    } },
+                  'Paris'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return AtlasMenu;
+}(_react2.default.Component);
+
+exports.default = AtlasMenu;
+
+},{"react":444}]},{},[505]);

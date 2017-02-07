@@ -106,10 +106,25 @@
     background-color: darken($color, 1);
     //#e5b823
   }
+}
 
-  // &.disable {
-  //     @extend %button--primary-disabled;
-  // }
+// Button Transparent
+@mixin button-transparent($color) {
+  border: 0;
+  background-color: transparent;
+  color: $color;
+  transition: color 0.2s ease-in-out;
+
+  // Hover, focus, active interactions
+  &:hover:not(.disable),
+  &:focus:not(.disable) {
+    outline: none;
+    color: darken($color, 10);
+  }
+
+  &:active:not(.disable) {
+    color: darken($color, 20);
+  }
 }
 
 // Size Variation

@@ -5,6 +5,7 @@ import L from 'mapbox.js';
 import LeafletMarkercluster from 'leaflet.markercluster';
 
 import ArtistPanel from './components/artistPanel';
+import AtlasMenu from './components/atlasMenu';
 
 /**
  * Atlas
@@ -94,7 +95,6 @@ export default class Atlas extends React.Component {
         }
       });
       e.target.eachLayer(function(layer) {
-
         var marker = layer,
           feature = marker.feature,
           artist = feature.properties;
@@ -114,18 +114,16 @@ export default class Atlas extends React.Component {
 
   }
 
-  centerArtist(coordinates, e) {
-    var coordinates = JSON.parse( '[' + coordinates + ']');
-    var lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
-    var lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
-    this.map.flyTo([lat, lng], 10);
+  centerView(lat, lng, zoom = 10) {
+    this.map.setView([lat, lng], zoom);
   }
 
   render() {
     return (
       <div>
+        <AtlasMenu centerView={this.centerView.bind(this)} />
         <div id='map' className='mapbox'></div>
-        <ArtistPanel ref='panel' centerArtist={e => this.centerArtist(e)} artist={this.state.artist} />
+        <ArtistPanel ref='panel' centerView={this.centerView.bind(this)} artist={this.state.artist} />
       </div>
     );
   }

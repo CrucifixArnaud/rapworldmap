@@ -68,7 +68,10 @@ export default class ArtistPanel extends React.Component {
   }
 
   handleClickOnCity() {
-    this.props.centerArtist(this.props.artist.location.coordinates);
+    var coordinates = JSON.parse( '[' + this.props.artist.location.coordinates + ']');
+    var lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
+    var lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
+    this.props.centerView(lat, lng, 13);
   }
 
   render() {
