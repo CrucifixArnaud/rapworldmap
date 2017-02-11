@@ -102184,6 +102184,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactOnclickout = require('react-onclickout');
+
+var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
+
+var _utils = require('../utils/utils');
+
+var _utils2 = _interopRequireDefault(_utils);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102198,10 +102206,17 @@ var AtlasMenu = function (_React$Component) {
   function AtlasMenu(props) {
     _classCallCheck(this, AtlasMenu);
 
+    // State
     var _this = _possibleConstructorReturn(this, (AtlasMenu.__proto__ || Object.getPrototypeOf(AtlasMenu)).call(this, props));
+
+    _this.state = {
+      areaOpen: false
+    };
 
     _this.handleAreaClick = _this.handleAreaClick.bind(_this);
     _this.toggleSubmenu = _this.toggleSubmenu.bind(_this);
+    _this.clickOutsideArea = _this.clickOutsideArea.bind(_this);
+    _this.closeAllSubmenu = _this.closeAllSubmenu.bind(_this);
     return _this;
   }
 
@@ -102218,13 +102233,27 @@ var AtlasMenu = function (_React$Component) {
       submenu.classList.toggle('open');
     }
   }, {
+    key: 'closeAllSubmenu',
+    value: function closeAllSubmenu() {
+      var submenus = document.getElementById('atlasMenu').getElementsByClassName('submenu open');
+
+      Object.keys(submenus).forEach(function (key) {
+        submenus[key].classList.remove('open');
+      });
+    }
+  }, {
+    key: 'clickOutsideArea',
+    value: function clickOutsideArea() {
+      this.closeAllSubmenu();
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
         'nav',
-        { className: 'atlas-menu' },
+        { id: 'atlasMenu', className: 'atlas-menu' },
         _react2.default.createElement(
           'ul',
           { className: 'menu' },
@@ -102232,150 +102261,154 @@ var AtlasMenu = function (_React$Component) {
             'li',
             { className: 'menu__item' },
             _react2.default.createElement(
-              'button',
-              { className: 'menu__item__button', onClick: function onClick(e) {
-                  return _this2.toggleSubmenu(e);
-                } },
-              _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests.svg', width: '50px', height: '40px', alt: '' }),
+              _reactOnclickout2.default,
+              { ref: 'areaHandler', onClickOut: this.clickOutsideArea },
               _react2.default.createElement(
-                'span',
-                { className: 'button__label' },
-                'Areas'
-              )
-            ),
-            _react2.default.createElement(
-              'ul',
-              { className: 'submenu' },
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                'button',
+                { className: 'menu__item__button', onClick: function onClick(e) {
+                    return _this2.toggleSubmenu(e);
+                  } },
+                _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests.svg', width: '50px', height: '40px', alt: '' }),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(33.7161623, -84.3522846, 11);
-                    } },
-                  'Atlanta'
+                  'span',
+                  { className: 'button__label' },
+                  'Areas'
                 )
               ),
               _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                'ul',
+                { className: 'submenu' },
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(37.938365, -122.344812, 11);
-                    } },
-                  'Bay Area'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(33.7161623, -84.3522846, 11);
+                      } },
+                    'Atlanta'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(41.817786, -87.658691, 11);
-                    } },
-                  'Chicago'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(37.938365, -122.344812, 11);
+                      } },
+                    'Bay Area'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(29.937851, -94.743895, 10);
-                    } },
-                  'Houston / Port Arthur'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(41.817786, -87.658691, 11);
+                      } },
+                    'Chicago'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(51.4945828, -0.1475805, 11);
-                    } },
-                  'London'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(29.937851, -94.743895, 10);
+                      } },
+                    'Houston / Port Arthur'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(33.950426, -118.259620, 11);
-                    } },
-                  'Los Angeles'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(51.4945828, -0.1475805, 11);
+                      } },
+                    'London'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(43.320071, 5.374707, 13);
-                    } },
-                  'Marseille'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(33.950426, -118.259620, 11);
+                      } },
+                    'Los Angeles'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(35.115065, -89.976974, 13);
-                    } },
-                  'Memphis'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(43.320071, 5.374707, 13);
+                      } },
+                    'Marseille'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(25.809509, -80.193240, 12);
-                    } },
-                  'Miami'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(35.115065, -89.976974, 13);
+                      } },
+                    'Memphis'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(29.984120, -90.065548, 13);
-                    } },
-                  'New Orleans'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(25.809509, -80.193240, 12);
+                      } },
+                    'Miami'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(40.758206, -73.887433, 11);
-                    } },
-                  'New York'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'submenu__item' },
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(29.984120, -90.065548, 13);
+                      } },
+                    'New Orleans'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  { className: 'submenu__item__button', onClick: function onClick() {
-                      return _this2.handleAreaClick(48.8589507, 2.2775175, 11);
-                    } },
-                  'Paris'
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(40.758206, -73.887433, 11);
+                      } },
+                    'New York'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  { className: 'submenu__item' },
+                  _react2.default.createElement(
+                    'button',
+                    { className: 'submenu__item__button', onClick: function onClick() {
+                        return _this2.handleAreaClick(48.8589507, 2.2775175, 11);
+                      } },
+                    'Paris'
+                  )
                 )
               )
             )
@@ -102390,4 +102423,15 @@ var AtlasMenu = function (_React$Component) {
 
 exports.default = AtlasMenu;
 
-},{"react":444}]},{},[505]);
+},{"../utils/utils":508,"react":444,"react-onclickout":418}],508:[function(require,module,exports){
+'use strict';
+
+// Utils.js
+// Contain various function reusable everywhere in the project
+//==============================================
+
+function hasClass(elem, className) {
+  return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+}
+
+},{}]},{},[505]);
