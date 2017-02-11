@@ -837,23 +837,32 @@ textarea {
   border-radius: 50%;
   cursor: pointer;
   background-size: cover;
-  outline: none; }
+  outline: none;
+  transition: box-shadow 0.3s cubic-bezier(0.39, 0.575, 0.565, 1); }
 
 .marker:hover,
 .marker:focus {
-  box-shadow: 0 0 0 2px #ff0066; }
+  box-shadow: 0 0 0 2px #ffd700; }
 
 .leaflet-container {
   font-family: liberation, sans-serif; }
 
+.marker-cluster-small,
+.marker-cluster-medium {
+  transition: background-color 0.3s cubic-bezier(0.39, 0.575, 0.565, 1); }
+
 .marker-cluster-small {
   background-color: rgba(255, 0, 102, 0.2); }
+  .marker-cluster-small:hover, .marker-cluster-small:focus, .marker-cluster-small:active {
+    background-color: rgba(255, 0, 102, 0.5); }
 
 .marker-cluster-small div {
   background-color: rgba(255, 0, 102, 0.8); }
 
 .marker-cluster-medium {
   background-color: rgba(143, 57, 154, 0.2); }
+  .marker-cluster-medium:hover, .marker-cluster-medium:focus, .marker-cluster-medium:active {
+    background-color: rgba(143, 57, 154, 0.6); }
 
 .marker-cluster-medium div {
   background-color: rgba(143, 57, 154, 0.8); }

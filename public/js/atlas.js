@@ -87,8 +87,8 @@ export default class Atlas extends React.Component {
         removeOutsideVisibleBounds: true,
         maxClusterRadius: 45,
         polygonOptions: {
-          fillColor: '#ff00666',
-          color: '#ff0066',
+          fillColor: 'transparent',
+          color: '#8f399a',
           weight: 1,
           opacity: 1,
           fillOpacity: 0.5

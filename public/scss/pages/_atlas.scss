@@ -131,11 +131,12 @@
     cursor: pointer;
     background-size: cover;
     outline: none;
+    transition: box-shadow .3s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .marker:hover,
 .marker:focus {
-    box-shadow: 0 0 0 2px #ff0066;
+    box-shadow: 0 0 0 2px $yellow-gold;
 }
 
 .leaflet-container {
@@ -145,9 +146,20 @@
 // Marker Cluster
 // ---------------------
 
+.marker-cluster-small,
+.marker-cluster-medium {
+  transition: background-color .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
 // Small
 .marker-cluster-small {
   background-color: rgba(255, 0, 102, .2);
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: rgba(255, 0, 102, .5);
+  }
 }
 
 .marker-cluster-small div {
@@ -157,6 +169,12 @@
 // Medium
 .marker-cluster-medium {
   background-color: rgba(143, 57, 154, .2);
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: rgba(143, 57, 154, .6);
+  }
 }
 
 .marker-cluster-medium div {
