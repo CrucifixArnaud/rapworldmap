@@ -40,14 +40,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 
-// Passport specific
-// app.use(session({
-//     secret: process.env.SECRET,
-//     cookie: { maxAge: 60000 },
-//     resave: false, // forces the session to be saved back to the store
-//     saveUninitialized: false // dont save unmodified
-// }));
-
 app.use(session({
   cookieName: 'session',
   secret: process.env.SECRET,
@@ -70,11 +62,9 @@ app.set('view engine', 'ejs');
 app.use(expressLayout);
 
 //====== Configure the routes ======
-// app.use(require('./app/routes'));
-// app.use(require('./app/routes'));
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 //====== Start server ======
 app.listen(port, () => {
-    console.log(`App listening on http://localhost:${port}`);
+  console.log(`App listening on http://localhost:${port}`);
 });
