@@ -1,6 +1,5 @@
 import React from 'react';
 import ClickOutHandler from 'react-onclickout';
-import Utils from '../utils/utils';
 
 export default class AtlasMenu extends React.Component {
   constructor(props) {

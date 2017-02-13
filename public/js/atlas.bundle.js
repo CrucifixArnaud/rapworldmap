@@ -102188,10 +102188,6 @@ var _reactOnclickout = require('react-onclickout');
 
 var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
 
-var _utils = require('../utils/utils');
-
-var _utils2 = _interopRequireDefault(_utils);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102423,15 +102419,4 @@ var AtlasMenu = function (_React$Component) {
 
 exports.default = AtlasMenu;
 
-},{"../utils/utils":508,"react":444,"react-onclickout":418}],508:[function(require,module,exports){
-'use strict';
-
-// Utils.js
-// Contain various function reusable everywhere in the project
-//==============================================
-
-function hasClass(elem, className) {
-  return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
-}
-
-},{}]},{},[505]);
+},{"react":444,"react-onclickout":418}]},{},[505]);
