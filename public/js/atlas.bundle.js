@@ -102196,6 +102196,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// import SubmitArtist from './submitArtist.js';
+
 var AtlasMenu = function (_React$Component) {
   _inherits(AtlasMenu, _React$Component);
 
@@ -102206,12 +102208,16 @@ var AtlasMenu = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (AtlasMenu.__proto__ || Object.getPrototypeOf(AtlasMenu)).call(this, props));
 
     _this.state = {
-      areaOpen: false
+      areaOpen: false,
+      submitArtistOpen: false
     };
 
     _this.handleAreaClick = _this.handleAreaClick.bind(_this);
+    _this.handleSubmitArtistClick = _this.handleSubmitArtistClick.bind(_this);
     _this.toggleSubmenu = _this.toggleSubmenu.bind(_this);
+    // this.toggleSubmitArtist = this.toggleSubmitArtist.bind(this);
     _this.clickOutsideArea = _this.clickOutsideArea.bind(_this);
+    _this.clickOutsideSubmit = _this.clickOutsideSubmit.bind(_this);
     _this.closeAllSubmenu = _this.closeAllSubmenu.bind(_this);
     return _this;
   }
@@ -102222,11 +102228,29 @@ var AtlasMenu = function (_React$Component) {
       this.props.centerView(lat, lng, zoom);
     }
   }, {
+    key: 'handleSubmitArtistClick',
+    value: function handleSubmitArtistClick() {
+      this.toggleSubmitArtist();
+    }
+  }, {
     key: 'toggleSubmenu',
     value: function toggleSubmenu(e) {
       var submenu = e.target.parentNode.nextSibling;
 
       submenu.classList.toggle('open');
+    }
+  }, {
+    key: 'toggleSubmitArtist',
+    value: function toggleSubmitArtist() {
+      if (this.state.submitArtistOpen === false) {
+        this.setState({
+          submitArtistOpen: true
+        });
+      } else {
+        this.setState({
+          submitArtistOpen: false
+        });
+      }
     }
   }, {
     key: 'closeAllSubmenu',
@@ -102241,6 +102265,13 @@ var AtlasMenu = function (_React$Component) {
     key: 'clickOutsideArea',
     value: function clickOutsideArea() {
       this.closeAllSubmenu();
+    }
+  }, {
+    key: 'clickOutsideSubmit',
+    value: function clickOutsideSubmit() {
+      if (this.state.submitArtistOpen === true) {
+        this.toggleSubmitArtist();
+      }
     }
   }, {
     key: 'render',
@@ -102264,7 +102295,7 @@ var AtlasMenu = function (_React$Component) {
                 { className: 'menu__item__button', onClick: function onClick(e) {
                     return _this2.toggleSubmenu(e);
                   } },
-                _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests.svg', width: '50px', height: '40px', alt: '' }),
+                _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/placeofinterrests.svg', width: '63px', height: '49px', alt: '' }),
                 _react2.default.createElement(
                   'span',
                   { className: 'button__label' },
@@ -102273,7 +102304,7 @@ var AtlasMenu = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'ul',
-                { className: 'submenu' },
+                { className: 'submenu submenu--placeofinterests' },
                 _react2.default.createElement(
                   'li',
                   { className: 'submenu__item' },
@@ -102282,7 +102313,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(33.7161623, -84.3522846, 11);
                       } },
-                    'Atlanta'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/atlanta.svg', width: '65px', height: '56px', alt: 'Atlanta', title: 'Atlanta' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102293,7 +102324,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(37.938365, -122.344812, 11);
                       } },
-                    'Bay Area'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/bay-a.svg', width: '104px', height: '52px', alt: 'Bay Area', title: 'Bay Area' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102304,7 +102335,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(41.817786, -87.658691, 11);
                       } },
-                    'Chicago'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/chiraq.svg', width: '116px', height: '56px', alt: 'Chicago', title: 'Chicago' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102315,7 +102346,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(29.937851, -94.743895, 10);
                       } },
-                    'Houston / Port Arthur'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/h-town.svg', width: '140px', height: '56px', alt: 'Houston', title: 'Houston' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102326,7 +102357,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(51.4945828, -0.1475805, 11);
                       } },
-                    'London'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/london.svg', width: '131px', height: '51px', alt: 'London', title: 'London' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102337,7 +102368,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(33.950426, -118.259620, 11);
                       } },
-                    'Los Angeles'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/la.svg', width: '48px', height: '49px', alt: 'Los Angeles', title: 'Los Angeles' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102348,7 +102379,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(43.320071, 5.374707, 13);
                       } },
-                    'Marseille'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/marseille.svg', width: '42px', height: '48px', alt: 'Marseille', title: 'Marseille' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102359,7 +102390,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(35.115065, -89.976974, 13);
                       } },
-                    'Memphis'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/memphis.svg', width: '92px', height: '47px', alt: 'Memphis', title: 'Memphis' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102370,7 +102401,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(25.809509, -80.193240, 12);
                       } },
-                    'Miami'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/magic-city.svg', width: '134px', height: '48px', alt: 'Miami', title: 'Miami' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102381,7 +102412,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(29.984120, -90.065548, 13);
                       } },
-                    'New Orleans'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/nola.svg', width: '95px', height: '50px', alt: 'New Orleans', title: 'New Orleans' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102392,7 +102423,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(40.758206, -73.887433, 11);
                       } },
-                    'New York'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/nyc.svg', width: '72px', height: '45px', alt: 'New York City', title: 'New York City' })
                   )
                 ),
                 _react2.default.createElement(
@@ -102403,7 +102434,7 @@ var AtlasMenu = function (_React$Component) {
                     { className: 'submenu__item__button', onClick: function onClick() {
                         return _this2.handleAreaClick(48.8589507, 2.2775175, 11);
                       } },
-                    'Paris'
+                    _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/paname.svg', width: '127px', height: '46px', alt: 'Paris', title: 'Paris' })
                   )
                 )
               )

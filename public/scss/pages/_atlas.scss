@@ -109,8 +109,14 @@
   vertical-align: middle;
 }
 
-.atlas-menu .submenu__item {
+// submenu--placeofinterests
 
+.submenu--placeofinterests {
+  margin-top: -1em;
+}
+
+.submenu--placeofinterests .submenu__item {
+  margin-right: -0.5em;
 }
 
 // Mapbox

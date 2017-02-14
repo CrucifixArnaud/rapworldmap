@@ -824,6 +824,12 @@ textarea {
   display: inline-block;
   vertical-align: middle; }
 
+.submenu--placeofinterests {
+  margin-top: -1em; }
+
+.submenu--placeofinterests .submenu__item {
+  margin-right: -0.5em; }
+
 .mapbox {
   position: absolute;
   top: 0;
