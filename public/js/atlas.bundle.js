@@ -102237,7 +102237,26 @@ var AtlasMenu = function (_React$Component) {
     value: function toggleSubmenu(e) {
       var submenu = e.target.parentNode.nextSibling;
 
-      submenu.classList.toggle('open');
+      var children = Array.from(submenu.childNodes);
+
+      if (this.state.areaOpen === false) {
+        this.setState({
+          areaOpen: true
+        });
+      } else {
+
+        children = children.reverse();
+
+        this.setState({
+          areaOpen: false
+        });
+      }
+
+      children.forEach(function (item, index) {
+        setTimeout(function () {
+          item.classList.toggle('open');
+        }, 50 * index);
+      });
     }
   }, {
     key: 'toggleSubmitArtist',

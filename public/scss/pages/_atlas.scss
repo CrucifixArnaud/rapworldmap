@@ -84,13 +84,13 @@
   }
 }
 
-.submenu {
-  visibility: hidden;
+// .submenu {
+  // visibility: hidden;
 
-  &.open {
-    visibility: visible;
-  }
-}
+  // &.open {
+  //   visibility: visible;
+  // }
+// }
 
 .atlas-menu .button__icon {
   display: block;
@@ -117,6 +117,20 @@
 
 .submenu--placeofinterests .submenu__item {
   margin-right: -0.5em;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .2s ease, transform .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.submenu--placeofinterests .submenu__item.open {
+  opacity: 1;
+  transform: scale(1);
+
+  &:hover,
+  &:focus,
+  &:active {
+    transform: scale(1.1);
+  }
 }
 
 // Mapbox

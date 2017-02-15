@@ -805,11 +805,6 @@ textarea {
 .atlas-menu .submenu__item__button:hover, .atlas-menu .submenu__item__button:focus, .atlas-menu .submenu__item__button:active {
   text-decoration: underline; }
 
-.submenu {
-  visibility: hidden; }
-  .submenu.open {
-    visibility: visible; }
-
 .atlas-menu .button__icon {
   display: block;
   margin: 0 auto; }
@@ -828,7 +823,16 @@ textarea {
   margin-top: -1em; }
 
 .submenu--placeofinterests .submenu__item {
-  margin-right: -0.5em; }
+  margin-right: -0.5em;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.2s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+.submenu--placeofinterests .submenu__item.open {
+  opacity: 1;
+  transform: scale(1); }
+  .submenu--placeofinterests .submenu__item.open:hover, .submenu--placeofinterests .submenu__item.open:focus, .submenu--placeofinterests .submenu__item.open:active {
+    transform: scale(1.1); }
 
 .mapbox {
   position: absolute;

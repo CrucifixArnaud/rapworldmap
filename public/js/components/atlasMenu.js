@@ -33,7 +33,26 @@ export default class AtlasMenu extends React.Component {
   toggleSubmenu(e) {
     var submenu = e.target.parentNode.nextSibling;
 
-    submenu.classList.toggle('open');
+    var children = Array.from(submenu.childNodes);
+
+    if(this.state.areaOpen === false) {
+      this.setState({
+        areaOpen: true
+      });
+    } else {
+
+      children = children.reverse();
+
+      this.setState({
+        areaOpen: false
+      });
+    }
+
+    children.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.toggle('open');
+      }, 50 * index);
+    });
   }
 
   toggleSubmitArtist() {
