@@ -102148,7 +102148,7 @@ var ArtistPanel = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              { className: 'artist-panel__youtube' },
+              { className: 'artist-panel__youtube', height: '182px', width: '340px' },
               _react2.default.createElement(
                 'svg',
                 { className: 'artist-panel__youtube__background', height: '182px', width: '340px' },

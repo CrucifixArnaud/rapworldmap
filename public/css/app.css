@@ -881,7 +881,7 @@ textarea {
   visibility: hidden;
   position: absolute;
   transition: visibility 0s, transform .2s ease;
-  bottom: 15vh;
+  bottom: 0;
   right: 0; }
   @media screen and (max-width: 767px) {
     .artist-panel {
@@ -890,7 +890,7 @@ textarea {
   @media screen and (min-width: 768px) {
     .artist-panel {
       width: 620px;
-      min-height: 320px;
+      min-height: 450px;
       padding: 1em;
       z-index: 1000;
       right: 0;
@@ -1029,6 +1029,9 @@ textarea {
       transform: translateX(-50%); } }
   @media screen and (min-width: 768px) {
     .artist-panel__youtube {
+      position: relative;
+      min-height: 182px;
+      min-width: 340px;
       opacity: 0;
       animation-name: display-youtubeClip;
       animation-duration: .5s;

@@ -179,7 +179,7 @@ export default class ArtistPanel extends React.Component {
                   <a className="artist-panel__readmore" href="https://en.wikipedia.org/wiki/Chief_Keef">Read more on Wikipedia</a>
                 </div>
               </div>
-            <div className="artist-panel__youtube">
+            <div className="artist-panel__youtube" height="182px" width="340px">
               <svg className="artist-panel__youtube__background" height="182px" width="340px">
               <path d="M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z" style={{fill:'#ffd700'}} />
               </svg>
