@@ -63,7 +63,6 @@
 .atlas-menu .menu__item__button,
 .atlas-menu .submenu__item__button {
   pointer-events: auto;
-
   @include rem(font-size, 14px);
   @include button-transparent(#fff);
 }
@@ -83,14 +82,6 @@
     text-decoration: underline;
   }
 }
-
-// .submenu {
-  // visibility: hidden;
-
-  // &.open {
-  //   visibility: visible;
-  // }
-// }
 
 .atlas-menu .button__icon {
   display: block;

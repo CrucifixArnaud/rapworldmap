@@ -774,10 +774,16 @@ textarea {
   text-transform: uppercase; }
 
 .submit-artist-panel {
+  visibility: hidden;
   position: absolute;
-  transition: transform .2s ease;
+  transition: visibility 0s, transform .2s ease;
   bottom: 0;
   right: 0; }
+  @media screen and (max-width: 767px) {
+    .submit-artist-panel {
+      background: #1b2b34;
+      min-width: 100%;
+      padding: 1em; } }
   @media screen and (min-width: 768px) {
     .submit-artist-panel {
       max-width: 600px;
@@ -800,6 +806,9 @@ textarea {
 .submit-artist-panel__background {
   display: block;
   padding: .5em; }
+  @media screen and (max-width: 767px) {
+    .submit-artist-panel__background {
+      display: none; } }
   @media screen and (min-width: 768px) {
     .submit-artist-panel__background {
       display: block;
