@@ -102188,6 +102188,10 @@ var _reactOnclickout = require('react-onclickout');
 
 var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
 
+var _submitArtist = require('./submitArtist.js');
+
+var _submitArtist2 = _interopRequireDefault(_submitArtist);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102195,8 +102199,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import SubmitArtist from './submitArtist.js';
 
 var AtlasMenu = function (_React$Component) {
   _inherits(AtlasMenu, _React$Component);
@@ -102208,8 +102210,7 @@ var AtlasMenu = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (AtlasMenu.__proto__ || Object.getPrototypeOf(AtlasMenu)).call(this, props));
 
     _this.state = {
-      areaOpen: false,
-      submitArtistOpen: false
+      areaOpen: false
     };
 
     _this.handleAreaClick = _this.handleAreaClick.bind(_this);
@@ -102261,14 +102262,10 @@ var AtlasMenu = function (_React$Component) {
   }, {
     key: 'toggleSubmitArtist',
     value: function toggleSubmitArtist() {
-      if (this.state.submitArtistOpen === false) {
-        this.setState({
-          submitArtistOpen: true
-        });
+      if (this.refs.submitArtist.state.open === false) {
+        this.refs.submitArtist.open();
       } else {
-        this.setState({
-          submitArtistOpen: false
-        });
+        this.refs.submitArtist.close();
       }
     }
   }, {
@@ -102458,6 +102455,27 @@ var AtlasMenu = function (_React$Component) {
                 )
               )
             )
+          ),
+          _react2.default.createElement(
+            'li',
+            { className: 'menu__item' },
+            _react2.default.createElement(
+              _reactOnclickout2.default,
+              { ref: 'areaHandler', onClickOut: this.clickOutsideSubmit },
+              _react2.default.createElement(
+                'button',
+                { className: 'menu__item__button', onClick: function onClick(e) {
+                    return _this2.handleSubmitArtistClick(e);
+                  } },
+                _react2.default.createElement('img', { className: 'button__icon', src: '/images/submit-artist.svg', width: '58px', height: '45px', alt: '' }),
+                _react2.default.createElement(
+                  'span',
+                  { className: 'button__label' },
+                  'Submit an entry'
+                )
+              ),
+              _react2.default.createElement(_submitArtist2.default, { ref: 'submitArtist' })
+            )
           )
         )
       );
@@ -102469,4 +102487,186 @@ var AtlasMenu = function (_React$Component) {
 
 exports.default = AtlasMenu;
 
-},{"react":444,"react-onclickout":418}]},{},[505]);
+},{"./submitArtist.js":508,"react":444,"react-onclickout":418}],508:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _request = require('request');
+
+var _request2 = _interopRequireDefault(_request);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SubmitArtist = function (_React$Component) {
+  _inherits(SubmitArtist, _React$Component);
+
+  function SubmitArtist(props) {
+    _classCallCheck(this, SubmitArtist);
+
+    var _this = _possibleConstructorReturn(this, (SubmitArtist.__proto__ || Object.getPrototypeOf(SubmitArtist)).call(this, props));
+
+    _this.state = {
+      open: false
+    };
+
+    _this.send = _this.send.bind(_this);
+    _this.handleNameChange = _this.handleNameChange.bind(_this);
+    _this.handleCityChange = _this.handleCityChange.bind(_this);
+    _this.handleClipChange = _this.handleClipChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(SubmitArtist, [{
+    key: 'open',
+    value: function open() {
+      this.setState({
+        open: true
+      });
+    }
+  }, {
+    key: 'close',
+    value: function close() {
+      this.setState({
+        open: false
+      });
+    }
+  }, {
+    key: 'handleNameChange',
+    value: function handleNameChange(e) {
+      this.setState({ name: e.target.value });
+    }
+  }, {
+    key: 'handleCityChange',
+    value: function handleCityChange(e) {
+      this.setState({ city: e.target.value });
+    }
+  }, {
+    key: 'handleClipChange',
+    value: function handleClipChange(e) {
+      this.setState({ clipExampleUrl: e.target.value });
+    }
+  }, {
+    key: 'send',
+    value: function send() {
+      var self = this;
+
+      var artist = {
+        'name': this.state.name,
+        'city': this.state.city,
+        'clipExampleUrl': this.state.clipExampleUrl
+      };
+
+      var artistsCreateUrl = window.location.href + 'artists/create';
+
+      _request2.default.post({ url: artistsCreateUrl, form: artist }, function (error, response) {
+        if (!error && response.statusCode === 200) {
+          // Success
+          console.log(artist.name + ' has been submited. Thank you!');
+          // Close submit panel
+          self.close();
+
+          // Empty Fields
+          self.refs.name.value = '';
+          self.refs.city.value = '';
+          self.refs.clipExampleUrl.value = '';
+        } else {
+          console.error(error);
+        }
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'form',
+        { className: 'submit-artist-panel ' + (this.state.open ? 'open' : ''), action: '', encType: 'multipart/form-data', method: 'POST' },
+        _react2.default.createElement(
+          'div',
+          { className: 'submit-artist-panel__content' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Submit an artists'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field-group' },
+            _react2.default.createElement(
+              'div',
+              { className: 'field' },
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'name', className: 'field__label' },
+                'Name:'
+              ),
+              _react2.default.createElement('input', { ref: 'name', id: 'name', type: 'text', name: 'name', onChange: this.handleNameChange })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'field' },
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'city', className: 'field__label' },
+                'City:'
+              ),
+              _react2.default.createElement('input', { ref: 'city', id: 'city', type: 'text', name: 'city', onChange: this.handleCityChange })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'field' },
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'clipExampleUrl', className: 'field__label' },
+                'Clip Example Url:'
+              ),
+              _react2.default.createElement('input', { ref: 'clipExampleUrl', id: 'clipExampleUrl', type: 'text', name: 'clipExampleUrl', onChange: this.handleClipChange })
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'field-group' },
+            _react2.default.createElement(
+              'div',
+              { className: 'field' },
+              _react2.default.createElement(
+                'button',
+                { onClick: function onClick() {
+                    return _this2.send();
+                  }, className: 'button--primary--md', type: 'button' },
+                'Submit'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'svg',
+          { className: 'submit-artist-panel__background', height: '100%', width: '100%' },
+          _react2.default.createElement('path', { d: 'M 15 0 14 17.3 0 295 560 310 573 9z', style: { fill: '#1b2b34' } })
+        )
+      );
+    }
+  }]);
+
+  return SubmitArtist;
+}(_react2.default.Component);
+
+exports.default = SubmitArtist;
+
+},{"react":444,"request":445}]},{},[505]);

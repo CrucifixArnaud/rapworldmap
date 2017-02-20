@@ -41,7 +41,7 @@ module.exports = function(app, passport) {
   // Artists
   app.get('/artists/', userMiddlewares.isLoggedIn, artistsController.showArtists);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
-  app.get('/artists/create', userMiddlewares.isLoggedIn, artistsController.showCreate);
+  app.get('/artists/create', artistsController.showCreate);
   app.post('/artists/create', artistsController.uploadThumbnail, artistsController.processCreate);
   app.get('/artists/:slug', artistsController.showSingle);
   app.get('/artists/:slug/edit', userMiddlewares.isLoggedIn, artistsController.showEdit);

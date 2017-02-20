@@ -1,6 +1,6 @@
 import React from 'react';
 import ClickOutHandler from 'react-onclickout';
-// import SubmitArtist from './submitArtist.js';
+import SubmitArtist from './submitArtist.js';
 
 export default class AtlasMenu extends React.Component {
   constructor(props) {
@@ -8,8 +8,7 @@ export default class AtlasMenu extends React.Component {
 
     // State
     this.state = {
-      areaOpen: false,
-      submitArtistOpen: false
+      areaOpen: false
     };
 
     this.handleAreaClick = this.handleAreaClick.bind(this);
@@ -56,14 +55,10 @@ export default class AtlasMenu extends React.Component {
   }
 
   toggleSubmitArtist() {
-    if(this.state.submitArtistOpen === false) {
-      this.setState({
-        submitArtistOpen: true
-      });
+    if(this.refs.submitArtist.state.open === false) {
+      this.refs.submitArtist.open();
     }else{
-      this.setState({
-        submitArtistOpen: false
-      });
+      this.refs.submitArtist.close();
     }
   }
 
@@ -171,18 +166,15 @@ export default class AtlasMenu extends React.Component {
               </ul>
             </ClickOutHandler>
           </li>
-          {/*
           <li className="menu__item">
             <ClickOutHandler ref="areaHandler" onClickOut={this.clickOutsideSubmit}>
               <button className="menu__item__button" onClick={(e) => this.handleSubmitArtistClick(e)}>
+                <img className="button__icon" src="/images/submit-artist.svg" width="58px" height="45px" alt="" />
                 <span className="button__label">Submit an entry</span>
               </button>
-              {this.state.submitArtistOpen &&
-                <SubmitArtist />
-              }
+              <SubmitArtist ref="submitArtist" />
             </ClickOutHandler>
           </li>
-          */}
         </ul>
       </nav>
     );

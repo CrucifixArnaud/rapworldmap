@@ -6,7 +6,8 @@ const Artist = require('./artist.model'),
   moment = require('moment'),
   underscore = require('underscore'),
   multer = require('multer'),
-  sharp = require('sharp');
+  sharp = require('sharp'),
+  userMiddlewares = require('../users/user.middlewares');
 
 //====== Export method ======
 module.exports = {
@@ -81,6 +82,7 @@ function showCreate(req, res) {
  * [processCreate Process artist creation]
  */
 function processCreate(req, res) {
+
   // validate informations
   req.checkBody('name', 'Name is required.').notEmpty();
   req.checkBody('city', 'City name is required').notEmpty();
@@ -89,11 +91,14 @@ function processCreate(req, res) {
   const errors = req.validationErrors();
 
   if (errors) {
+    console.log(errors.map(err => err.msg));
     req.flash('errors', errors.map(err => err.msg));
     return res.redirect('/artists/create');
   }
 
   var thumbnail = req.file ? req.file.filename : req.body.thumbnailUrl;
+
+  var published = (userMiddlewares.isLoggedIn ? req.body.published : false);
 
   // create a new artist
   const artist = new Artist({
@@ -118,17 +123,20 @@ function processCreate(req, res) {
     youtube: [{
       pageUrl: req.body.pageUrl,
       clipExampleUrl: req.body.clipExampleUrl
-    }]
+    }],
+    published: published
   });
 
   artist.save((err) => {
 
     if (err) {
+      console.log(err.message);
       req.flash('errors', err.message);
       return res.redirect('/artists/create');
     }
 
     // set a successful flash message
+    console.log('Successfuly created ' + req.body.name);
     req.flash('success', 'Successfuly created artist!');
 
     // Redirect to the newly created artist
@@ -201,8 +209,6 @@ function showEdit(req, res) {
  */
 function processEdit(req, res) {
 
-  console.log(req.body);
-
   // validate informations
   req.checkBody('name', 'Name is required.').notEmpty();
   req.checkBody('city', 'City name is required').notEmpty();
@@ -219,6 +225,8 @@ function processEdit(req, res) {
 
     var tumbnail = req.file ? req.file.filename : req.body.originalThumbnail;
 
+    var published = (userMiddlewares.isLoggedIn ? req.body.published : false);
+
     // updating the current artist
     artist.name = req.body.name;
     artist.location[0].city = req.body.city;
@@ -234,6 +242,7 @@ function processEdit(req, res) {
     artist.bio[0].yearsActiveEnd = req.body.yearsActiveEnd;
     artist.youtube[0].pageUrl = req.body.youtugePageUrl;
     artist.youtube[0].clipExampleUrl = req.body.clipExampleUrl;
+    artist.published = published;
 
     artist.save( (err) => {
       // If error stop and display it
@@ -270,8 +279,9 @@ function getArtistsGeojson (req, res) {
 
   Artist.find({
     'location.coordinates': {
-      $ne: ''
-    }
+      $gt: []
+    },
+    'published': true
   }, (err, artists) => {
 
     if(err) {

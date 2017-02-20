@@ -38,19 +38,23 @@ textarea {
 }
 
 
-// Checkbox
+// Checkbox & Radio
 // ---------------------
 
 // Hide default input
 [type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
+[type="checkbox"]:checked,
+[type="radio"]:not(:checked),
+[type="radio"]:checked {
   opacity: 0;
   position: absolute;
 }
 
 // Label styles
 [type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + label {
+[type="checkbox"]:checked + label,
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
   display: inline-block;
   vertical-align: middle;
   position: relative;
@@ -58,12 +62,13 @@ textarea {
 
 // Fake checkbox Aspect
 [type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before {
+[type="checkbox"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before,
+[type="radio"]:checked + label:before {
   content: "";
   display: inline-block;
   vertical-align: middle;
   background: darken($blue-mirage, 6);
-  border-radius: 3px;
   width: 20px;
   height: 20px;
   margin-right: 10px;
@@ -73,7 +78,10 @@ textarea {
 /* Fake Checked mark aspect */
 [type="checkbox"]:not(:checked) + label:hover:after,
 [type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after {
+[type="checkbox"]:checked + label:after,
+[type="radio"]:not(:checked) + label:hover:after,
+[type="radio"]:not(:checked) + label:after,
+[type="radio"]:checked + label:after {
   content: '';
   display: inline-block;
   position: absolute;
@@ -83,24 +91,27 @@ textarea {
   left: 5px;
   color: $color-primary;
   transition: all .2s;
-  border-radius: 2px;
 }
 
-[type="checkbox"]:not(:checked) + label:after {
+[type="checkbox"]:not(:checked) + label:after,
+[type="radio"]:not(:checked) + label:after {
   opacity: 0;
   transform: scale(0);
 }
 
 /* Hover style */
 [type="checkbox"]:not(:checked) + label:hover:after,
-[type="checkbox"]:focus:not(:checked) + label:after {
+[type="checkbox"]:focus:not(:checked) + label:after,
+[type="radio"]:not(:checked) + label:hover:after,
+[type="radio"]:focus:not(:checked) + label:after {
   opacity: 1;
   transform: scale(1);
   background: lighten($blue-mirage, 10);
 }
 
 // Checked
-[type="checkbox"]:checked + label:after {
+[type="checkbox"]:checked + label:after,
+[type="radio"]:checked + label:after {
   opacity: 1;
   transform: scale(1);
   background: $color-primary;
@@ -108,16 +119,21 @@ textarea {
 
 /* disabled checkbox */
 [type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before {
+[type="checkbox"]:disabled:checked + label:before,
+[type="radio"]:disabled:not(:checked) + label:before,
+[type="radio"]:disabled:checked + label:before {
   background-color: darken($blue-mirage, 3);
 }
 
-[type="checkbox"]:disabled + label {
+[type="checkbox"]:disabled + label,
+[type="radio"]:disabled + label {
   color: darken(#fff, 50);
 }
 
 [type="checkbox"]:disabled + label,
-[type="checkbox"]:disabled + label:before {
+[type="checkbox"]:disabled + label:before,
+[type="radio"]:disabled + label,
+[type="radio"]:disabled + label:before {
   cursor: not-allowed;
 }
 
@@ -126,6 +142,35 @@ textarea {
 // [type="checkbox"]:not(:checked):focus + label:before {
 //   border: 1px dotted blue;
 // }
+
+// Checkbox specific
+// Fake checkbox Aspect
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  border-radius: 3px;
+}
+
+// Fake Checked mark aspect
+[type="checkbox"]:not(:checked) + label:hover:after,
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  border-radius: 2px;
+}
+
+// Radio Specific
+
+// Fake radio Aspect
+[type="radio"]:not(:checked) + label:before,
+[type="radio"]:checked + label:before {
+  border-radius: 10px;
+}
+
+// Fake Checked mark aspect
+[type="radio"]:not(:checked) + label:hover:after,
+[type="radio"]:not(:checked) + label:after,
+[type="radio"]:checked + label:after {
+  border-radius: 5px;
+}
 
 // Input File
 // ---------------------
