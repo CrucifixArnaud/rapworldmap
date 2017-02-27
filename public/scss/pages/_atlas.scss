@@ -68,6 +68,8 @@
 }
 
 .atlas-menu .menu__item__button {
+  width: 130px;
+
   &:hover .button__label,
   &:focus .button__label,
   &:active .button__label {
@@ -103,25 +105,43 @@
 // submenu--placeofinterests
 
 .submenu--placeofinterests {
-  margin-top: -1em;
+  position: absolute;
+}
+
+.submenu--placeofinterests .submenu__item .button__icon,
+.submenu--placeofinterests .submenu__item {
+  transition: opacity .2s ease, transform .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .submenu--placeofinterests .submenu__item {
   margin-right: -0.5em;
   opacity: 0;
   transform: scale(0);
-  transition: opacity .2s ease, transform .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .submenu--placeofinterests .submenu__item.open {
   opacity: 1;
   transform: scale(1);
 
-  &:hover,
-  &:focus,
-  &:active {
+  &:hover .button__icon,
+  &:focus .button__icon,
+  &:active .button__icon {
     transform: scale(1.1);
   }
+}
+
+.submenu--placeofinterests .button__label {
+  @include horizontal-center(absolute);
+  opacity: 0;
+  margin: .5em 0 0;
+  width: 200%;
+  transition: opacity .2s ease;
+}
+
+.submenu--placeofinterests .submenu__item.open:hover .button__label,
+.submenu--placeofinterests .submenu__item.open:focus .button__label,
+.submenu--placeofinterests .submenu__item.open:active .button__label {
+  opacity: 1;
 }
 
 // Mapbox
