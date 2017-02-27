@@ -7,6 +7,7 @@ const Artist = require('./artist.model'),
   underscore = require('underscore'),
   multer = require('multer'),
   sharp = require('sharp'),
+  nodemailer = require('nodemailer'),
   userMiddlewares = require('../users/user.middlewares');
 
 //====== Export method ======
@@ -98,7 +99,7 @@ function processCreate(req, res) {
 
   var thumbnail = req.file ? req.file.filename : req.body.thumbnailUrl;
 
-  var published = (userMiddlewares.isLoggedIn ? req.body.published : false);
+  var published = (req.isAuthenticated() ? req.body.published : false);
 
   // create a new artist
   const artist = new Artist({
@@ -135,12 +136,54 @@ function processCreate(req, res) {
       return res.redirect('/artists/create');
     }
 
-    // set a successful flash message
-    console.log('Successfuly created ' + req.body.name);
-    req.flash('success', 'Successfuly created artist!');
+    if (req.isAuthenticated() === true) {
+      // User is logged (creation from admin)
 
-    // Redirect to the newly created artist
-    res.redirect('/artists/create');
+      // set a successful flash message
+      console.log('Successfuly created ' + req.body.name);
+      req.flash('success', 'Successfuly created artist!');
+
+      // Redirect to the newly created artist
+      res.redirect('/artists/create');
+    } else {
+
+      var smtpConfig = {
+        host: process.env.SMTP_HOST,
+        service: process.env.SMTP_SERVICE,
+        port: process.env.SMTP_PORT,
+        secure: false,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS
+        },
+        tls: {
+          rejectUnauthorized:false
+        }
+      };
+
+      var transporter = nodemailer.createTransport(smtpConfig);
+
+      var mailOptions = {
+        from: process.env.MAIL_FROM,
+        to: process.env.MAIL_TO,
+        subject: 'Rap World Map - New entry submited: ' + req.body.name,
+        html: '<p>A new entry was submited.</p> <ul><li>Name: ' + req.body.name + '</li> <li>City: ' + req.body.city + '</li></ul> <a href="http://rapworldmap.com/login">Edit the entry on rapworldmap.com</a>'
+      };
+
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          console.log(error);
+          res.json({
+            yo: 'error'
+          });
+        } else {
+          console.log('Message sent: ' + info.response);
+          res.json({
+            yo: info.response
+          });
+        }
+      });
+    }
   });
 }
 

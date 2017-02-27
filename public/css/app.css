@@ -1228,6 +1228,10 @@ textarea {
   .panel-button--close:hover, .panel-button--close:focus, .panel-button--close:active {
     color: #b39700; }
 
+.panel__title {
+  font-size: 18px;
+  font-size: 1.8rem; }
+
 .panel-artist__name {
   margin: 0 0 .2em;
   color: #ffd700;

@@ -494,6 +494,10 @@
   }
 }
 
+.panel__title {
+  @include rem(font-size, 18px);
+}
+
 // Panel-artist
 // ---------------------
 

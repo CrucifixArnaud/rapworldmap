@@ -53,7 +53,6 @@ app.use(passport.session()); // persistent login sessions
 // Flash message
 app.use(flash());
 
-
 // Define statics assets path
 app.use(express.static(__dirname + '/public'));
 
