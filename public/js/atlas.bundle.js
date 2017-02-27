@@ -102019,7 +102019,7 @@ var ArtistPanel = function (_React$Component) {
               'a',
               { onClick: function onClick() {
                   return _this2.close();
-                }, className: 'artist-panel__button--close', title: 'Close panel' },
+                }, className: 'artist-panel__button--close button--close', title: 'Close panel' },
               '\u2A2F'
             ),
             _react2.default.createElement(
@@ -102285,8 +102285,8 @@ var AtlasMenu = function (_React$Component) {
   }, {
     key: 'clickOutsideSubmit',
     value: function clickOutsideSubmit() {
-      if (this.state.submitArtistOpen === true) {
-        this.toggleSubmitArtist();
+      if (this.refs.submitArtist.state.open === true) {
+        this.refs.submitArtist.close();
       }
     }
   }, {
@@ -102461,7 +102461,7 @@ var AtlasMenu = function (_React$Component) {
             { className: 'menu__item' },
             _react2.default.createElement(
               _reactOnclickout2.default,
-              { ref: 'areaHandler', onClickOut: this.clickOutsideSubmit },
+              { ref: 'submitHandler', onClickOut: this.clickOutsideSubmit },
               _react2.default.createElement(
                 'button',
                 { className: 'menu__item__button', onClick: function onClick(e) {
@@ -102597,6 +102597,13 @@ var SubmitArtist = function (_React$Component) {
       return _react2.default.createElement(
         'form',
         { className: 'submit-artist-panel ' + (this.state.open ? 'open' : ''), action: '', encType: 'multipart/form-data', method: 'POST' },
+        _react2.default.createElement(
+          'a',
+          { onClick: function onClick() {
+              return _this2.close();
+            }, className: 'submit-artist-panel__button--close button--close', title: 'Close panel' },
+          '\u2A2F'
+        ),
         _react2.default.createElement(
           'div',
           { className: 'submit-artist-panel__content' },

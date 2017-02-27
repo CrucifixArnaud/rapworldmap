@@ -833,6 +833,15 @@ textarea {
       min-height: 450px;
       padding: 1em; } }
 
+.submit-artist-panel__button--close {
+  top: 15px; }
+  @media screen and (max-width: 767px) {
+    .submit-artist-panel__button--close {
+      right: 15px; } }
+  @media screen and (min-width: 768px) {
+    .submit-artist-panel__button--close {
+      right: 35px; } }
+
 .page-atlas {
   padding: 0;
   color: #fff;
@@ -1090,21 +1099,23 @@ textarea {
       right: 0;
       z-index: -1; } }
 
-.artist-panel__button--close {
+.button--close {
   line-height: 1;
   position: absolute;
-  top: 0;
   transition: color .2s ease;
   font-size: 30px;
   font-size: 3rem; }
+  .button--close:hover, .button--close:focus, .button--close:active {
+    color: #b39700; }
+
+.artist-panel__button--close {
+  top: 0; }
   @media screen and (max-width: 767px) {
     .artist-panel__button--close {
       right: 15px; } }
   @media screen and (min-width: 768px) {
     .artist-panel__button--close {
       right: 35px; } }
-  .artist-panel__button--close:hover, .artist-panel__button--close:focus, .artist-panel__button--close:active {
-    color: #b39700; }
 
 .artist-panel__thumbnail--preview {
   margin-bottom: 1em; }

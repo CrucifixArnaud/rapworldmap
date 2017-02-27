@@ -70,6 +70,7 @@ export default class SubmitArtist extends React.Component {
   render() {
     return (
       <form className={'submit-artist-panel ' + ((this.state.open) ? 'open' : '')} action="" encType="multipart/form-data" method="POST">
+        <a onClick={() => this.close()} className="submit-artist-panel__button--close button--close" title="Close panel">&#10799;</a>
         <div className="submit-artist-panel__content">
           <h2>Submit an artists</h2>
           <div className="field-group">

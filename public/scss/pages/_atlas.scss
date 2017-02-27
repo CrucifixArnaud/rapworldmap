@@ -336,12 +336,21 @@
   }
 }
 
-.artist-panel__button--close {
+.button--close {
   line-height: 1;
   position: absolute;
-  top: 0;
   transition: color .2s ease;
   @include rem(font-size, 30px);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: darken($yellow-gold, 15);
+  }
+}
+
+.artist-panel__button--close {
+  top: 0;
 
   @include breakpoint($below-md) {
     right: 15px;
@@ -349,12 +358,6 @@
 
   @include breakpoint($md) {
     right: 35px;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    color: darken($yellow-gold, 15);
   }
 }
 

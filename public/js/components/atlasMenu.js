@@ -75,8 +75,8 @@ export default class AtlasMenu extends React.Component {
   }
 
   clickOutsideSubmit() {
-    if(this.state.submitArtistOpen === true) {
-      this.toggleSubmitArtist();
+    if(this.refs.submitArtist.state.open === true) {
+      this.refs.submitArtist.close();
     }
   }
 
@@ -167,7 +167,7 @@ export default class AtlasMenu extends React.Component {
             </ClickOutHandler>
           </li>
           <li className="menu__item">
-            <ClickOutHandler ref="areaHandler" onClickOut={this.clickOutsideSubmit}>
+            <ClickOutHandler ref="submitHandler" onClickOut={this.clickOutsideSubmit}>
               <button className="menu__item__button" onClick={(e) => this.handleSubmitArtistClick(e)}>
                 <img className="button__icon" src="/images/submit-artist.svg" width="58px" height="45px" alt="" />
                 <span className="button__label">Submit an entry</span>

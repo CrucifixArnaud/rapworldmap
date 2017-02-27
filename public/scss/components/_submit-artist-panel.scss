@@ -73,3 +73,15 @@
 
   }
 }
+
+.submit-artist-panel__button--close {
+  top: 15px;
+
+  @include breakpoint($below-md) {
+    right: 15px;
+  }
+
+  @include breakpoint($md) {
+    right: 35px;
+  }
+}

@@ -120,7 +120,7 @@ export default class ArtistPanel extends React.Component {
       return (
         <ClickOutHandler ref="panelHandler" onClickOut={this.clickOutside}>
           <div id="panel" className={'artist-panel ' + ((this.state.open) ? 'open' : '') + ' ' + ((this.state.reduce) ? 'reduce' : '')}>
-            <a onClick={() => this.close()} className="artist-panel__button--close" title="Close panel">&#10799;</a>
+            <a onClick={() => this.close()} className="artist-panel__button--close button--close" title="Close panel">&#10799;</a>
             <div className="artist-panel__thumbnail">
               <img className="artist-panel__thumbnail__picture" src={'/uploads/medium-' + this.props.artist.image.thumbnailUrl} />
             </div>
