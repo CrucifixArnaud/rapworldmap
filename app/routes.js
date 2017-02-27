@@ -35,9 +35,10 @@ module.exports = function(app, passport) {
     failureRedirect : '/login',
     failureFlash : true
   }));
+  // Logout
+  app.get('/logout', usersController.processLogout);
   // Profile
   app.get('/profile', userMiddlewares.isLoggedIn, usersController.showProfile);
-
   // Artists
   app.get('/artists/', userMiddlewares.isLoggedIn, artistsController.showArtists);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);

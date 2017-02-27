@@ -13,6 +13,7 @@ module.exports = {
   showSignup: showSignup,
   // processSignup: processSignup,
   showLogin: showLogin,
+  processLogout: processLogout,
   showCreate: showCreate,
   processCreate: processCreate
 };
@@ -75,6 +76,14 @@ function showLogin (req, res) {
   };
 
   res.render('pages/users/login', locals);
+}
+
+/**
+ * [processLogout Logout user]
+ */
+function processLogout (req, res) {
+  req.logout();
+  res.redirect('/');
 }
 
 /**
