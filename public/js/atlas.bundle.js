@@ -102344,7 +102344,7 @@ var AtlasMenu = function (_React$Component) {
                   _react2.default.createElement(
                     'button',
                     { className: 'submenu__item__button', onClick: function onClick() {
-                        return _this2.handleAreaClick(37.938365, -122.344812, 11);
+                        return _this2.handleAreaClick(37.938365, -122.344812, 10);
                       } },
                     _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/bay-a.svg', width: '104px', height: '52px', alt: 'Bay Area', title: 'Bay Area' }),
                     _react2.default.createElement(
@@ -102360,7 +102360,7 @@ var AtlasMenu = function (_React$Component) {
                   _react2.default.createElement(
                     'button',
                     { className: 'submenu__item__button', onClick: function onClick() {
-                        return _this2.handleAreaClick(41.817786, -87.658691, 11);
+                        return _this2.handleAreaClick(41.817786, -87.658691, 10);
                       } },
                     _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/chiraq.svg', width: '116px', height: '56px', alt: 'Chicago', title: 'Chicago' }),
                     _react2.default.createElement(
@@ -102408,7 +102408,7 @@ var AtlasMenu = function (_React$Component) {
                   _react2.default.createElement(
                     'button',
                     { className: 'submenu__item__button', onClick: function onClick() {
-                        return _this2.handleAreaClick(33.950426, -118.259620, 11);
+                        return _this2.handleAreaClick(33.950426, -118.259620, 10);
                       } },
                     _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/la.svg', width: '48px', height: '49px', alt: 'Los Angeles', title: 'Los Angeles' }),
                     _react2.default.createElement(
@@ -102424,7 +102424,7 @@ var AtlasMenu = function (_React$Component) {
                   _react2.default.createElement(
                     'button',
                     { className: 'submenu__item__button', onClick: function onClick() {
-                        return _this2.handleAreaClick(43.320071, 5.374707, 13);
+                        return _this2.handleAreaClick(43.320071, 5.374707, 12);
                       } },
                     _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/marseille.svg', width: '42px', height: '48px', alt: 'Marseille', title: 'Marseille' }),
                     _react2.default.createElement(
@@ -102440,7 +102440,7 @@ var AtlasMenu = function (_React$Component) {
                   _react2.default.createElement(
                     'button',
                     { className: 'submenu__item__button', onClick: function onClick() {
-                        return _this2.handleAreaClick(35.115065, -89.976974, 13);
+                        return _this2.handleAreaClick(35.115065, -89.976974, 11);
                       } },
                     _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/memphis.svg', width: '92px', height: '47px', alt: 'Memphis', title: 'Memphis' }),
                     _react2.default.createElement(
@@ -102456,7 +102456,7 @@ var AtlasMenu = function (_React$Component) {
                   _react2.default.createElement(
                     'button',
                     { className: 'submenu__item__button', onClick: function onClick() {
-                        return _this2.handleAreaClick(25.809509, -80.193240, 12);
+                        return _this2.handleAreaClick(25.809509, -80.193240, 11);
                       } },
                     _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/magic-city.svg', width: '134px', height: '48px', alt: 'Miami', title: 'Miami' }),
                     _react2.default.createElement(
@@ -102472,7 +102472,7 @@ var AtlasMenu = function (_React$Component) {
                   _react2.default.createElement(
                     'button',
                     { className: 'submenu__item__button', onClick: function onClick() {
-                        return _this2.handleAreaClick(29.984120, -90.065548, 13);
+                        return _this2.handleAreaClick(29.984120, -90.065548, 11);
                       } },
                     _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/nola.svg', width: '95px', height: '50px', alt: 'New Orleans', title: 'New Orleans' }),
                     _react2.default.createElement(
@@ -102488,7 +102488,7 @@ var AtlasMenu = function (_React$Component) {
                   _react2.default.createElement(
                     'button',
                     { className: 'submenu__item__button', onClick: function onClick() {
-                        return _this2.handleAreaClick(40.758206, -73.887433, 11);
+                        return _this2.handleAreaClick(40.758206, -73.887433, 10);
                       } },
                     _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/nyc.svg', width: '72px', height: '45px', alt: 'New York City', title: 'New York City' }),
                     _react2.default.createElement(
@@ -102504,7 +102504,7 @@ var AtlasMenu = function (_React$Component) {
                   _react2.default.createElement(
                     'button',
                     { className: 'submenu__item__button', onClick: function onClick() {
-                        return _this2.handleAreaClick(48.8589507, 2.2775175, 11);
+                        return _this2.handleAreaClick(48.8589507, 2.2775175, 10);
                       } },
                     _react2.default.createElement('img', { className: 'button__icon', src: '/images/placeofinterrests/paname.svg', width: '138px', height: '48px', alt: 'Paris', title: 'Paris' }),
                     _react2.default.createElement(
