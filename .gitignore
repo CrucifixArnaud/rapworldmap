@@ -7,3 +7,6 @@ node_modules
 
 # Environement variable
 .env
+
+# Doc
+doc/about-prod.md
