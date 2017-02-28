@@ -801,7 +801,9 @@ textarea {
   transform: translateX(0); }
 
 .submit-artist-panel__content {
-  max-width: 500px; }
+  max-width: 500px;
+  background: #1b2b34;
+  padding: 0 1em; }
 
 .submit-artist-panel__background {
   display: block;
