@@ -2,12 +2,11 @@
 
 http://rapworldmap.com
 
-Display an atlas of Rapper artists based on their "neighborhood".
+Display an atlas of rap artists based on their "neighborhood".
 
 ## About
 
 Project create by Arnaud Crucifix (http://crucifixarnaud.com).
-
 
 ### Aim of the project
 
@@ -33,5 +32,5 @@ If you concider I have made a major mistake about an artist, don't hesitate to c
 
 ## Licence
 
-This project is registered under "Do What the Fuck You Want to Public License" (http://www.wtfpl.net)
+This project is licensed under the terms of the MIT license. (https://opensource.org/licenses/MIT)
 
