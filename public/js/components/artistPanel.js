@@ -141,15 +141,15 @@ export default class ArtistPanel extends React.Component {
                   { artistWikipediaUrl }
                 </div>
               </div>
-                {this.state.youtubeClip &&
-                  <div className={'artist-panel__youtube' + ((this.state.youtubeClip) ? ' open' : '')}>
-                    <iframe className="artist-panel__youtube__embed" src={this.props.artist.youtube.clipExampleUrl} frameBorder="0" allowFullScreen="allowfullscreen"></iframe>
-                    <svg className="artist-panel__youtube__background" height="182px" width="340px">
-                      <path d="M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z" style={{fill:'#ffd700'}} />
-                    </svg>
-                  </div>
-                }
             </div>
+            {this.state.youtubeClip &&
+              <div className={'artist-panel__youtube' + ((this.state.youtubeClip) ? ' open' : '')}>
+                <iframe className="artist-panel__youtube__embed" src={this.props.artist.youtube.clipExampleUrl} frameBorder="0" allowFullScreen="allowfullscreen"></iframe>
+                <svg className="artist-panel__youtube__background" height="182px" width="340px">
+                  <path d="M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z" style={{fill:'#ffd700'}} />
+                </svg>
+              </div>
+            }
             <svg className="artist-panel__background" height="100%" width="100%">
               <path d="M16.000,14.000 L0.000,300.000 L603.000,295.000 L596.000,-0.000 L16.000,14.000 Z" style={{fill:'#1b2b34'}} />
             </svg>

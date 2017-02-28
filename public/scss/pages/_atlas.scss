@@ -315,6 +315,7 @@
 
   @include breakpoint($md) {
     max-width: 575px;
+    background: $blue-mirage;
   }
 }
 
@@ -410,6 +411,7 @@
     animation-delay: .2s;
     animation-fill-mode: forwards;
     will-change: transform,opacity;
+    margin-right: 2em;
   }
 }
 

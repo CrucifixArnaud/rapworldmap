@@ -102078,16 +102078,16 @@ var ArtistPanel = function (_React$Component) {
                   artistBio,
                   artistWikipediaUrl
                 )
-              ),
-              this.state.youtubeClip && _react2.default.createElement(
-                'div',
-                { className: 'artist-panel__youtube' + (this.state.youtubeClip ? ' open' : '') },
-                _react2.default.createElement('iframe', { className: 'artist-panel__youtube__embed', src: this.props.artist.youtube.clipExampleUrl, frameBorder: '0', allowFullScreen: 'allowfullscreen' }),
-                _react2.default.createElement(
-                  'svg',
-                  { className: 'artist-panel__youtube__background', height: '182px', width: '340px' },
-                  _react2.default.createElement('path', { d: 'M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z', style: { fill: '#ffd700' } })
-                )
+              )
+            ),
+            this.state.youtubeClip && _react2.default.createElement(
+              'div',
+              { className: 'artist-panel__youtube' + (this.state.youtubeClip ? ' open' : '') },
+              _react2.default.createElement('iframe', { className: 'artist-panel__youtube__embed', src: this.props.artist.youtube.clipExampleUrl, frameBorder: '0', allowFullScreen: 'allowfullscreen' }),
+              _react2.default.createElement(
+                'svg',
+                { className: 'artist-panel__youtube__background', height: '182px', width: '340px' },
+                _react2.default.createElement('path', { d: 'M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z', style: { fill: '#ffd700' } })
               )
             ),
             _react2.default.createElement(

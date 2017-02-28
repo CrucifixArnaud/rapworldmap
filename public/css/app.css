@@ -1085,7 +1085,8 @@ textarea {
 
 @media screen and (min-width: 768px) {
   .artist-panel__body {
-    max-width: 575px; } }
+    max-width: 575px;
+    background: #1b2b34; } }
 
 .artist-panel__name {
   margin: 20px 0 .2em 140px;
@@ -1164,7 +1165,8 @@ textarea {
       animation-timing-function: cubic-bezier(0.05, 1.1, 0.98, 1);
       animation-delay: .2s;
       animation-fill-mode: forwards;
-      will-change: transform,opacity; } }
+      will-change: transform,opacity;
+      margin-right: 2em; } }
 
 @media screen and (max-width: 767px) {
   .artist-panel__youtube__embed {
