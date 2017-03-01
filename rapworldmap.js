@@ -55,6 +55,8 @@ app.use(flash());
 
 // Define statics assets path
 app.use(express.static(__dirname + '/public'));
+// Define upload folder path
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // Set ejs as our templating engine
 app.set('view engine', 'ejs');
