@@ -30,7 +30,6 @@ export default class AtlasMenu extends React.Component {
     this.toggleSubmitArtist();
   }
 
-
   toggleAreaMenu() {
     var submenu = this.refs.areaSubmenu;
     var children = Array.from(submenu.childNodes);

@@ -4,7 +4,7 @@ module.exports = {
     watched: ['public/scss']
   },
   files: {
-    stylesheets: {joinTo: 'public/css/app.css'}
+    stylesheets: {joinTo: 'public/css/main.css'}
   },
   plugins: {
     sass: {
