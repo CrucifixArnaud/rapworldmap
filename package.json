@@ -5,12 +5,17 @@
   "main": "rapworldmap.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:css": "brunch watch",
-    "dev:js": "watchify -t [ babelify ] public/js/atlas.js -o public/js/atlas.bundle.js",
-    "build:css": "node-sass --include-path scss public/scss/main.scss public/css/main.css | postcss -u autoprefixer -r public/css/main.css | postcss -u cssnano -r public/css/main.css",
-    "build:js": "browserify public/js/atlas.js -t [ babelify --presets [ es2015 react ] ] | uglifyjs -mc -o public/js/atlas.bundle.js",
+    "dev:css": "nodemon -e app/assets/scss/main.scss -x \"npm run compile:css && npm run autoprefixer\"",
+    "dev:js": "watchify -t [ babelify ] app/assets/js/atlas.js -o public/js/atlas.bundle.js",
+    "compile:css": "node-sass --include-path scss app/assets/scss/main.scss public/css/main.css",
+    "autoprefixer": "postcss -um autoprefixer -r public/css/main.css",
+    "minify:css": "postcss -u cssnano -r public/css/main.css",
+    "browserify": "NODE_ENV=production browserify app/assets/js/atlas.js -t [ babelify --presets [ es2015 react ] ] -o public/js/atlas.bundle.js",
+    "uglify:js": "NODE_ENV=production uglifyjs public/js/atlas.bundle.js -mc -o public/js/atlas.bundle.js",
+    "build:css": "npm run compile:css && npm run autoprefixer && npm run minify:css",
+    "build:js": "npm run browserify && npm run uglify:js",
     "build": "NODE_ENV=production npm run build:js && npm run build:css",
-    "start:dev": "nodemon rapworldmap.js",
+    "dev": "nodemon rapworldmap.js",
     "start": "NODE_ENV=production node rapworldmap.js"
   },
   "repository": {
@@ -56,16 +61,13 @@
     "babel-preset-react": "^6.23.0",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
-    "brunch": "^2.10.3",
     "cssnano": "^3.10.0",
     "eslint": "^3.10.2",
     "eslint-plugin-react": "^6.7.1",
     "node-sass": "^4.5.0",
     "nodemon": "^1.11.0",
-    "postcss-brunch": "^2.0.5",
     "postcss-cli": "^3.0.0-beta",
     "react-router": "^3.0.0",
-    "sass-brunch": "^2.9.0",
     "uglify-js": "^2.8.3"
   }
 }
