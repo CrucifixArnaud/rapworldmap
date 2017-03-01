@@ -60,6 +60,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 
 // Set ejs as our templating engine
 app.set('view engine', 'ejs');
+app.set('views', 'app/views');
 app.use(expressLayout);
 
 //====== Configure the routes ======
