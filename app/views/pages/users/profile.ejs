@@ -1,25 +1,36 @@
-<h1>Welcome <%= user.email %></h1>
+<div class="admin-content">
 
+  <h1>User: <%= user.email %></h1>
 
-<% if (errors.length > 0) { %>
-  <div class="errors">
-    <p>Something goes wrong: </p>
-    <% for (error of errors) { %>
-        <%= error %> <br>
-    <% } %>
-  </div>
-<% } %>
-
-<!-- Signup form -->
-<form action="/users/<%= user.id %>" method="post">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" name="email" value="<%= user.email %>">
+  <% if (success.length > 0) { %>
+    <div class="success">
+      <p><%= success %></p>
     </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" name="password">
-    </div>
+  <% } %>
 
-    <button type="submit">Update profile</button>
-</form>
+  <% if (errors.length > 0) { %>
+    <div class="errors">
+      <p>Something goes wrong: </p>
+      <% for (error of errors) { %>
+          <%= error %> <br>
+      <% } %>
+    </div>
+  <% } %>
+
+  <!-- Profile form -->
+  <form class="form" action="/users/<%= user.id %>" method="post">
+    <div class="field-group">
+      <div class="field">
+        <label for="email" class="field__label">Email:</label>
+        <input id="email" type="email" name="email" value="<%= user.email %>" />
+      </div>
+      <div class="field">
+        <label for="password" class="field__label">Password:</label>
+        <input id="password" type="password" name="password" />
+      </div>
+    </div>
+    <div class="field">
+      <button class="button--primary--md" type="submit">Update profile</button>
+    </div>
+  </form>
+</div>

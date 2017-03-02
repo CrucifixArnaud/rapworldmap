@@ -1,15 +1,14 @@
 <div class="admin-content">
   <% if (errors.length > 0) { %>
     <div class="errors">
-      <p>Something goes wrong: </p>
       <% for (error of errors) { %>
-          <%= error %> <br>
+        <p class="error"><%= error %></p>
       <% } %>
     </div>
   <% } %>
 
-  <!-- Signup form -->
-  <form class="form-create" action="/login" method="POST">
+  <!-- Login form -->
+  <form class="form" action="/login" method="POST">
     <div class="field-group">
       <div class="field">
         <label for="email" class="field__label">Email:</label>

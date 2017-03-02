@@ -7,25 +7,15 @@ const passport = require('passport');
 
 //====== Export method ======
 module.exports = {
-  showUsers: showUsers,
   showSingle: showSingle,
   showProfile: showProfile,
   showSignup: showSignup,
-  // processSignup: processSignup,
   showLogin: showLogin,
   processLogout: processLogout,
-  showCreate: showCreate,
-  processCreate: processCreate
+  processEdit: processEdit,
 };
 
 //====== Methods ======
-
-/**
- * [showUsers Display list of users]
- */
-function showUsers (req, res) {
-
-}
 
 /**
  * [showSingle Display single user]
@@ -38,10 +28,16 @@ function showSingle (req, res) {
  * [showProfile Display profile]
  */
 function showProfile (req, res) {
-  res.render('pages/users/profile', {
+  const locals = {
+    layout: 'admin',
+    title: 'Profile (' + req.user.email + ')',
+    slug: 'page-admin',
     user : req.user,
+    success: req.flash('success'),
     errors: req.flash('errors')
-  });
+  };
+
+  res.render('pages/users/profile', locals);
 }
 
 /**
@@ -50,17 +46,6 @@ function showProfile (req, res) {
 function showSignup (req, res) {
   res.render('pages/users/signup', {
     errors: req.flash('signupMessage')
-  });
-}
-
-/**
- * [processSignup Process the signup form]
- */
-function processSignup (req, res) {
-  passport.authenticate('local-signup', {
-    successRedirect : '/profile', // redirect to the secure profile section
-    failureRedirect : '/signup', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
   });
 }
 
@@ -79,25 +64,27 @@ function showLogin (req, res) {
 }
 
 /**
+ * [processEdit Process the edit profile form]
+ */
+function processEdit (req, res) {
+  User.findOne({ id: req.params.id }, (err, user) => {
+    user.email = req.body.email;
+    user.password = user.generateHash(req.body.password);
+
+    user.save ( (err) => {
+      if(err)
+        throw err;
+
+      req.flash('success', `Successfuly update ${user.email}`);
+      res.redirect('/profile');
+    });
+  });
+}
+
+/**
  * [processLogout Logout user]
  */
 function processLogout (req, res) {
   req.logout();
   res.redirect('/');
-}
-
-/**
- * [showCreate Display create user form]
- */
-function showCreate (req, res) {
-  res.render('pages/users/create', {
-      errors: req.flash('errors')
-    });
-}
-
-/**
- * [processCreate Process the creation form]
- */
-function processCreate (req, res) {
-
 }

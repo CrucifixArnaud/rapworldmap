@@ -16,9 +16,7 @@ module.exports = function(app, passport) {
   app.get('/', atlasController.showAtlas);
 
   // users
-  // app.get('/users', usersController.showUsers);
-  // app.get('/users/create', usersController.showCreate);
-  // app.post('/users/create', usersController.processCreate);
+  app.post('/users/:slug', userMiddlewares.isLoggedIn, usersController.processEdit);
 
   // Signup
   // app.get('/signup', usersController.showSignup);
@@ -27,7 +25,6 @@ module.exports = function(app, passport) {
   //     failureRedirect : '/signup',
   //     failureFlash : true
   // }));
-
   // Login
   app.get('/login', usersController.showLogin);
   app.post('/login', passport.authenticate('local-login', {
