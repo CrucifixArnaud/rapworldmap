@@ -1,7 +1,12 @@
 import React from 'react';
 import Request from 'request';
+import {EventEmitter} from 'events';
 
 export default class SubmitArtist extends React.Component {
+  static propTypes = {
+    bus: React.PropTypes.instanceOf(EventEmitter)
+  }
+
   constructor(props) {
     super(props);
 
@@ -50,17 +55,23 @@ export default class SubmitArtist extends React.Component {
 
     const artistsCreateUrl = window.location.href + 'artists/create';
 
-    Request.post({url:artistsCreateUrl, form: artist}, function(error, response) {
+    Request.post({url:artistsCreateUrl, form: artist}, (error, response) => {
       if (!error && response.statusCode === 200) {
         // Success
-        console.log(artist.name + ' has been submited. Thank you!');
+        if (typeof this.props.bus !== 'undefined') {
+          this.props.bus.emit('add', {
+            type: 'success',
+            message: `${artist.name} has been successfully submited`
+          });
+        }
+
         // Close submit panel
-        self.close();
+        this.close();
 
         // Empty Fields
-        self.refs.name.value = '';
-        self.refs.city.value = '';
-        self.refs.clipExampleUrl.value = '';
+        this.refs.name.value = '';
+        this.refs.city.value = '';
+        this.refs.clipExampleUrl.value = '';
       } else {
         console.error(error);
       }

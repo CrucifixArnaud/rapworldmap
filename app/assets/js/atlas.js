@@ -3,14 +3,22 @@ import React from 'react';
 import Request from 'request';
 import L from 'mapbox.js';
 import LeafletMarkercluster from 'leaflet.markercluster';
+import {EventEmitter} from "events";
 
 import ArtistPanel from './components/artistPanel';
 import AtlasMenu from './components/atlasMenu';
+import AtlasNotifications from './components/atlasNotifications';
+
+var bus = new EventEmitter();
 
 /**
  * Atlas
  */
 export default class Atlas extends React.Component {
+  static propTypes = {
+    bus: React.PropTypes.instanceOf(EventEmitter)
+  }
+
   constructor(props) {
     super(props);
 
@@ -72,6 +80,12 @@ export default class Atlas extends React.Component {
     });
   }
 
+  // componentDidMount() {
+  //   if (typeof bus !== "undefined") {
+  //     bus.emit("results", true)
+  //   }
+  // }
+
   createAtlas() {
     var self = this;
 
@@ -121,7 +135,8 @@ export default class Atlas extends React.Component {
   render() {
     return (
       <div>
-        <AtlasMenu centerView={this.centerView.bind(this)} />
+        <AtlasNotifications bus={bus} />
+        <AtlasMenu centerView={this.centerView.bind(this)} bus={bus} />
         <div id='map' className='mapbox'></div>
         <ArtistPanel ref='panel' centerView={this.centerView.bind(this)} artist={this.state.artist} />
       </div>

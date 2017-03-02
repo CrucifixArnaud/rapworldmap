@@ -1,0 +1,28 @@
+// Atlas Notifications
+// ---------------------
+
+.notifications {
+  z-index: 5000;
+  top: 0;
+
+  @include horizontal-center(absolute);
+}
+
+.notifications__list{
+  list-style-type: none;
+  margin: 0;
+}
+
+.notification {
+  padding: 1em;
+  margin-bottom: .5em;
+  @include rem(font-size, 14px);
+}
+
+.notification.open {
+  opacity: 1;
+}
+
+.notification--success {
+  background: $color-success;
+}

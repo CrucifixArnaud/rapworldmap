@@ -14,7 +14,8 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "babel-plugin-transform-class-properties"
     ],
     "rules": {
         "indent": [

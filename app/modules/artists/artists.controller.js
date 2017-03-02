@@ -145,7 +145,7 @@ function processCreate(req, res) {
 
       // Redirect to the newly created artist
       res.redirect('/artists/create');
-    } else {
+    } else if(process.env.DEBUG !== true) {
 
       var smtpConfig = {
         host: process.env.SMTP_HOST,
@@ -182,6 +182,10 @@ function processCreate(req, res) {
             yo: info.response
           });
         }
+      });
+    }else{
+      res.json({
+        yo: 'success'
       });
     }
   });

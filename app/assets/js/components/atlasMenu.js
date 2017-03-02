@@ -1,8 +1,13 @@
 import React from 'react';
 import ClickOutHandler from 'react-onclickout';
 import SubmitArtist from './submitArtist.js';
+import {EventEmitter} from 'events';
 
 export default class AtlasMenu extends React.Component {
+  static propTypes = {
+    bus: React.PropTypes.instanceOf(EventEmitter)
+  }
+
   constructor(props) {
     super(props);
 
@@ -172,7 +177,7 @@ export default class AtlasMenu extends React.Component {
                 <img className="button__icon" src="/images/submit-artist.svg" width="58px" height="45px" alt="" />
                 <span className="button__label">Submit an entry</span>
               </button>
-              <SubmitArtist ref="submitArtist" />
+              <SubmitArtist bus={this.props.bus} ref="submitArtist" addNotification={this.props.addNotification} />
             </ClickOutHandler>
           </li>
         </ul>
