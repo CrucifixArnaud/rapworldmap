@@ -14,15 +14,26 @@
 }
 
 .notification {
-  padding: 1em;
-  margin-bottom: .5em;
+  position: relative;
+  overflow: hidden;
   @include rem(font-size, 14px);
 }
 
-.notification.open {
-  opacity: 1;
+.notification__content {
+  white-space: pre;
+  word-break: break-word;
+  padding: 1em 1em;
+  display: block;
+  line-height: 1.2;
 }
 
 .notification--success {
   background: $color-success;
+}
+
+.buttonAdd {
+  position: absolute;
+  top: 500px;
+  left: 50%;
+  @include rem(font-size, 50px);
 }

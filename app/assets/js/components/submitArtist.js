@@ -61,7 +61,7 @@ export default class SubmitArtist extends React.Component {
         if (typeof this.props.bus !== 'undefined') {
           this.props.bus.emit('add', {
             type: 'success',
-            message: `${artist.name} has been successfully submited`
+            text: `${artist.name} has been successfully submited`
           });
         }
 
