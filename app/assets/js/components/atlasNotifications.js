@@ -56,7 +56,10 @@ export default class AtlasNotifications extends React.Component {
       return {
         ...notification,
         style: {
-          height: spring(44, presets.gentle),
+          height: spring(44, {
+            stiffness: 400,
+            damping: 20
+          }),
           opacity: spring(1, presets.gentle)
         }
       };
@@ -72,7 +75,10 @@ export default class AtlasNotifications extends React.Component {
 
   willLeave() {
     return {
-      height: spring(0),
+      height: spring(0, {
+        stiffness: 400,
+        damping: 20
+      }),
       opacity: spring(0),
     };
   }
@@ -100,6 +106,7 @@ export default class AtlasNotifications extends React.Component {
             </ul>
           }
         </TransitionMotion>
+        {/*<button className="buttonAdd" onClick={() => this.handleAdd({text:'blzbkjdsnjkdfhsjkdsfhkj', type:'success'})}>Click boum</button>*/}
       </div>
     );
   }
