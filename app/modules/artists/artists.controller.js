@@ -92,9 +92,15 @@ function processCreate(req, res) {
   const errors = req.validationErrors();
 
   if (errors) {
-    console.log(errors.map(err => err.msg));
-    req.flash('errors', errors.map(err => err.msg));
-    return res.redirect('/artists/create');
+    if(req.body.type !== undefined && req.body.type === 'submission') {
+
+      return res.status(400).json(errors);
+
+    } else {
+      console.log(errors.map(err => err.msg));
+      req.flash('errors', errors.map(err => err.msg));
+      return res.redirect('/artists/create');
+    }
   }
 
   var thumbnail = req.file ? req.file.filename : req.body.thumbnailUrl;

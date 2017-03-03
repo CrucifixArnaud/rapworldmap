@@ -253,3 +253,13 @@ textarea {
   line-height: 0;
   border-radius: 2px;
 }
+
+// field-errors
+// ---------------------
+
+.field-error {
+  display: block;
+  margin-top: .5em;
+  color: $color-error;
+  @include rem(font-size, 12px);
+}

@@ -11,7 +11,8 @@ export default class SubmitArtist extends React.Component {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      errors: []
     };
 
     this.send = this.send.bind(this);
@@ -50,7 +51,8 @@ export default class SubmitArtist extends React.Component {
     var artist = {
       'name': this.state.name,
       'city': this.state.city,
-      'clipExampleUrl': this.state.clipExampleUrl
+      'clipExampleUrl': this.state.clipExampleUrl,
+      'type': 'submission'
     };
 
     const artistsCreateUrl = window.location.href + 'artists/create';
@@ -72,13 +74,33 @@ export default class SubmitArtist extends React.Component {
         this.refs.name.value = '';
         this.refs.city.value = '';
         this.refs.clipExampleUrl.value = '';
+
+        this.setState({
+          name: '',
+          city: '',
+          clipExampleUrl: ''
+        });
+
       } else {
-        console.error(error);
+        let errors = JSON.parse(response.body);
+        let newErrors = [];
+
+        errors.map((error) => {
+          newErrors.push(error);
+        });
+
+        this.setState({
+          errors: newErrors
+        });
       }
     });
   }
 
   render() {
+
+    const errorName = this.state.errors.find(x => x.param === 'name');
+    const errorCity = this.state.errors.find(x => x.param === 'city');
+
     return (
       <form className={'submit-artist-panel ' + ((this.state.open) ? 'open' : '')} action="" encType="multipart/form-data" method="POST">
         <a onClick={() => this.close()} className="submit-artist-panel__button--close button--close" title="Close panel">&#10799;</a>
@@ -88,10 +110,16 @@ export default class SubmitArtist extends React.Component {
             <div className="field">
               <label htmlFor="name" className="field__label">Name:</label>
               <input ref="name" id="name" type="text" name="name" onChange={this.handleNameChange} />
+              {errorName &&
+                <label htmlFor="name" className="field-error">{errorName.msg}</label>
+              }
             </div>
             <div className="field">
               <label htmlFor="city" className="field__label">City:</label>
               <input ref="city" id="city" type="text" name="city" onChange={this.handleCityChange} />
+              {errorCity &&
+                <label htmlFor="name" className="field-error">{errorCity.msg}</label>
+              }
             </div>
             <div className="field">
               <label htmlFor="clipExampleUrl" className="field__label">Clip Example Url:</label>
