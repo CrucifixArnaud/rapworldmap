@@ -79,7 +79,7 @@ export default class ArtistPanel extends React.Component {
     if(this.props.artist) {
 
       var tagsList = this.props.artist.categories.map(function(category, key) {
-        return <li key={key} className='panel-artist__categories__item'>{category}</li>;
+        return <li key={key} className='artist-panel__categories__item'>{category}</li>;
       });
 
       let artistBio;
@@ -150,9 +150,6 @@ export default class ArtistPanel extends React.Component {
                 </svg>
               </div>
             }
-            <svg className="artist-panel__background" height="100%" width="100%">
-              <path d="M16.000,14.000 L0.000,300.000 L603.000,295.000 L596.000,-0.000 L16.000,14.000 Z" style={{fill:'#1b2b34'}} />
-            </svg>
           </div>
         </ClickOutHandler>
       );
@@ -170,8 +167,8 @@ export default class ArtistPanel extends React.Component {
               <span className="artist-panel__location__city">Chicago</span>
             </div>
             <ul className="artist-panel__categories">
-              <li className="panel-artist__categories__item">producer</li>
-              <li className="panel-artist__categories__item">rapper</li>
+              <li className="artist-panel__categories__item">producer</li>
+              <li className="artist-panel__categories__item">rapper</li>
             </ul>
             <div className="artist-panel__bio">
               <div>
@@ -185,9 +182,6 @@ export default class ArtistPanel extends React.Component {
               </svg>
             </div>
           </div>
-          <svg className="artist-panel__background" height="100%" width="100%">
-            <path d="M16.000,14.000 L0.000,300.000 L603.000,295.000 L596.000,-0.000 L16.000,14.000 Z" style={{fill:'#1b2b34'}} />
-          </svg>
         </div>
       );
     }

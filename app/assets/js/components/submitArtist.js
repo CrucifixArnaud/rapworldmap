@@ -132,7 +132,6 @@ export default class SubmitArtist extends React.Component {
             </div>
           </div>
         </div>
-        <svg className="submit-artist-panel__background" height="100%" width="100%"><path d="M 15 0 14 17.3 0 295 560 310 573 9z" style={{fill:'#1b2b34'}} /></svg>
       </form>
     );
   }
