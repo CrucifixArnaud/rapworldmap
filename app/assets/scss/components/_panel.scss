@@ -290,9 +290,15 @@
 // Submit Artist Panel
 // ---------------------
 
+.menu__item--submit-artist {
+  position: relative;
+  margin-bottom: .5em;
+}
+
 .submit-artist-panel {
   visibility: hidden;
   position: absolute;
+  z-index: -1;
   transition: visibility .2s, transform .2s ease;
   bottom: 0;
   right: 0;
@@ -307,7 +313,8 @@
     max-width: 600px;
     min-height: 325px;
     pointer-events: auto;
-    position: relative;
+    left: 0;
+    top: 0;
     padding: 1em 4em;
     z-index: z("panelArtist");
     right: 0;
@@ -320,25 +327,12 @@
 
 .submit-artist-panel.open {
   visibility: visible;
-  transform: translateX(0);
+  transform: translateX(125px);
 }
 
 .submit-artist-panel__content {
   max-width: 500px;
   padding: 0 1em;
-}
-
-.artist-panel {
-  visibility: hidden;
-  position: absolute;
-  transition: visibility 0s, transform .2s ease;
-  bottom: 0;
-  right: 0;
-
-  @include breakpoint($below-md) {
-    background: $blue-mirage;
-    min-width: 360px;
-  }
 }
 
 .submit-artist-panel__button--close {
@@ -351,4 +345,68 @@
   @include breakpoint($md) {
     right: 35px;
   }
+}
+
+// About Panel
+// ---------------------
+.menu__item--about-panel {
+  // position: relative;
+}
+
+.about-panel {
+  visibility: hidden;
+  position: absolute;
+  z-index: -1;
+  transition: visibility .2s, transform .2s ease;
+  right: 0;
+  background: $blue-mirage;
+
+  @include breakpoint($below-md) {
+    min-width: 100%;
+    padding: 1em;
+  }
+
+  @include breakpoint($md) {
+    overflow: hidden;
+    max-width: 600px;
+    min-height: 325px;
+    max-height: 85vh;
+    pointer-events: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    padding: 1em 0 3em 4em;
+    z-index: z("panelArtist");
+    transform: translateX(-120%);
+    will-change: transform,opacity;
+    background: url('../images/submit-artist-panel-background.svg') no-repeat;
+    background-size: cover;
+  }
+}
+
+.about-panel.open {
+  visibility: visible;
+  transform: translateX(125px);
+}
+
+.about-panel__button--close {
+  top: 15px;
+
+  @include breakpoint($below-md) {
+    right: 15px;
+  }
+
+  @include breakpoint($md) {
+    right: 35px;
+  }
+}
+
+.about-panel__body {
+  @include rem(font-size, 16px);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 1em 50px 1em 0;
+  padding-right: 50px;
+  margin-right: -20px;
+  margin-bottom: 1em;
 }

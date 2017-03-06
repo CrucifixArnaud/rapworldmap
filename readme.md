@@ -12,17 +12,17 @@ Project create by Arnaud Crucifix (http://crucifixarnaud.com).
 
 Maybe more than any other genre of music, Rap and Hiphop is deeply anchor to the place where the artists procuded it. Since rappers start to describe their everyday life condition, they describe their vision of their neighborhood. A lot of french rapper are famous for shouting their area code in their song, representing their neighborhood, using their song as a lever to reclaim a bit of pride around area generaly considered poor and abandoned by the state.
 
-Even if the democratisation of the internet access reduce concept of the border in music, originaly it exists various "subgenre" of rap based on their regions, because of similarity in the theme, type of sounds or flow, or simply accent of the artist. From the oldschool New York boombap to the californian GFunk, passing by the horrific Memphis sound or the original Atlanta trap. Representing major artists in their region can help visualised these "natural subdivision".
+Even if the democratisation of the internet access reduce concept of the border in music, originaly it exists various "subgenre" of rap based on their regions, because of similarity in the theme, type of sounds or flow, or simply accent of the artist. From the oldschool New York boombap to the californian GFunk, passing by the devilish Memphis sound or the original Atlanta trap. Representing major artists in their region can help visualised these "natural subdivision".
 
 Map can tell story. Looking at the map of Paris rap, it's easy to noticed that the vast majority of artists come from the outskirt of the city, put in parralele with the history of Paris and you can deduce a lot about history of imigrations & urbanisation of the city.
 
 ### Data Presented
 
-This atlas don't aim to be exaustif. The panel of artists represented in it, reflect only my knowledge of the Rap/Hiphop world. There are artists that I have listen at a moment of my life, or who I considered important for the history of this culture. There is a incredible amount of rappers, each day new one appear and release mixtapes and projects on internet, it's impossible to give a complete panel of what exists. In concequence I'have probably missed a lot of artists, don't hesitate to suggest a new adition.
+This atlas don't aim to be exaustif. There is a incredible amount of rap artists, each day new one appears and releases new songs, mixtapes and projects. It's impossible to give a complete panel of what exists. In concequence we have probably missed a lot of artists, don't hesitate to suggest a new adition.
 
 ### Localisation precision
 
-I have decide to locate each artist where they grow up or where they spent a signifiant part of their life that influence their musique instead of their born place (wich could be sometime irrelevant). It could occured in some strong opinionated decision. For example:
+We have decide to locate each artist where they grow up or where they spent a signifiant part of their life that influence their musique instead of their born place (wich could be sometime irrelevant). It could occured in some strong opinionated decision. For example:
 
 2 Pac have grow up en attempt school in Harlem until is 18 years old. Even if he only start producing song and album after is move to California, and that he is a major representante of the westcoast school. I considred that the vast majority of is education, and what could possibly influence him as a human being, occured in Harlem (New York). In concequence 2 Pac is represented in Harlem instead of California.
 
