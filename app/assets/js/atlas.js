@@ -33,7 +33,7 @@ export default class Atlas extends React.Component {
         ],
         'bio': [
           {
-            'summary': 'Radric Delantic Davis (born February 12, 1980),[1][2] known professionally as Gucci Mane, is an American rapper from Atlanta, Georgia.',
+            'summary': 'Radric Delantic Davis (born February 12, 1980), known professionally as Gucci Mane, is an American rapper from Atlanta, Georgia.',
             'wikipediaUrl': 'https://en.wikipedia.org/wiki/Gucci_Mane',
             'birthdate': null,
             'deathdate': null
@@ -52,7 +52,8 @@ export default class Atlas extends React.Component {
             'neighborhood': ''
           }
         ]
-      }
+      },
+      artistsTotal: 0
     };
 
     this.map = '';
@@ -64,7 +65,6 @@ export default class Atlas extends React.Component {
     const artistsGeojsonUrl = window.location.href + 'artists/geojson';
 
     var artistsPromise = new Promise(function(resolve, reject) {
-      // setTimeout(() => resolve(4), 2000);
       Request(artistsGeojsonUrl, (error, response, body) => {
         if (!error && response.statusCode === 200) {
           // Success
@@ -76,6 +76,9 @@ export default class Atlas extends React.Component {
     });
 
     artistsPromise.then((res) => {
+      this.setState({
+        artistsTotal: res.features.length
+      })
       this.createAtlas(res);
     });
   }
@@ -136,7 +139,7 @@ export default class Atlas extends React.Component {
     return (
       <div>
         <AtlasNotifications bus={bus} />
-        <AtlasMenu centerView={this.centerView.bind(this)} bus={bus} />
+        <AtlasMenu artistsTotal={this.state.artistsTotal} centerView={this.centerView.bind(this)} bus={bus} />
         <div id='map' className='mapbox'></div>
         <ArtistPanel ref='panel' centerView={this.centerView.bind(this)} artist={this.state.artist} />
       </div>
