@@ -1,10 +1,8 @@
-//====== Table ======
+/*------------------------------------*\
+  > Table
+\*------------------------------------*/
 
-.table {
-
-}
-
-// table row
+// Table row
 .table__row {
   background: darken($blue-mirage, 3);
 
@@ -21,14 +19,13 @@
 }
 
 
-// table cell
+// Table cell
 .table__cell {
   padding: .5em 1em;
   @include rem(font-size, 15px);
 }
 
 // Table head
-
 .table__head__row {
   background: darken($blue-mirage, 1);
 }

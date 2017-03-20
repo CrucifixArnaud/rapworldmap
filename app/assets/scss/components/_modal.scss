@@ -1,6 +1,9 @@
-// Modal
-// ---------------------
+/*------------------------------------*\
+  > Modal
+\*------------------------------------*/
 
+// Modal mixin
+// ---------------------
 @mixin modal() {
   visibility: hidden;
   position: fixed;
@@ -31,6 +34,8 @@
   }
 }
 
+// Modal definition
+// ---------------------
 .modal {
   @include modal();
 }

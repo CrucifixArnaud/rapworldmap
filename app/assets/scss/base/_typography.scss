@@ -1,7 +1,8 @@
-// > Typography
-// Define all typography global rules heres
-// ---------------------
-
+/*------------------------------------*\
+  > Typograpphy
+  Define all typography global rules heres
+  (fontface are handle in fonts.scss file)
+\*------------------------------------*/
 html {
   font-size: 62.5%;
 }
@@ -35,7 +36,6 @@ a {
 }
 
 // Abbr
-
 abbr[title] {
   border-bottom: 0;
 }

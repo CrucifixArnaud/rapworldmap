@@ -1,8 +1,10 @@
-/***********************\
+/*------------------------------------*\
   > Mixins
-\***********************/
+  Generic and common mixins
+\*------------------------------------*/
 
-//====== Breakpoints mixin ======
+// Breakpoints mixin
+// ---------------------
 // https://gist.github.com/timknight/b8adb5df5600c37fd567#file-breakpoint-v2-scss
 // Article: https://medium.com/developing-with-sass/refactoring-my-simple-sass-breakpoint-mixin-71205dd6badd
 // Use ex: @include breakpoint($md);

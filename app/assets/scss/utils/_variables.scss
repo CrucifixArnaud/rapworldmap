@@ -1,9 +1,10 @@
-// > Variables
-// ---------------------
+/*------------------------------------*\
+  > Variables
+\*------------------------------------*/
 
 // Colors
+// ---------------------
 // Named used (http://name-of-color.com/)
-
 $brown-pearl-bush: #e0d7c9;
 
 $blue-mirage: #1b2b34;
@@ -27,14 +28,17 @@ $color-success: $green-ocean;
 $color-primary: $yellow-gold;
 
 // Typography
+// ---------------------
 $base-font-size: 16px;
 
 $font-sans-serif: liberation, sans-serif;
 
-//============ LAYOUT ============
+// Layout
+// ---------------------
 $site-container-width-md:     1140px;
 
-//============ BREAKPOINT ============
+// Breakpoint
+// ---------------------
 // Extra small screen high / high resolution phone
 $screen-xsh-min:            480px;
 // Small screen / tablet
@@ -51,7 +55,8 @@ $screen-sm-max:             ($screen-md-min - 1) !default;
 $screen-xs-max:             $screen-sm-max !default;
 $screen-md-max:             ($screen-lg-min - 1) !default;
 
-// Z-layer
+// Z Layer
+// ---------------------
 $z-layers: (
   "header": 2000,
   "footer": 1500,

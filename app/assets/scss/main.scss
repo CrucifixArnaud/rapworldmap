@@ -1,4 +1,7 @@
-// Main SCSS File
+/*------------------------------------*\
+  rapworldmap.com - main.css
+  @author Crucifix Arnaud (hello@crucifixarnaud.com)
+\*------------------------------------*/
 
 // Vendors
 @import 'vendors/normalize';
@@ -21,7 +24,6 @@
 @import 'components/navigation';
 @import 'components/mapbox';
 @import 'components/form';
-@import 'components/predictive-box';
 @import 'components/table';
 @import 'components/atlas-notifications';
 @import 'components/panel';
