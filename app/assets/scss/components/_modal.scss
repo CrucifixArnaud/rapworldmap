@@ -1,0 +1,32 @@
+// Modal
+// ---------------------
+
+.modal {
+  visibility: hidden;
+  position: fixed;
+  transition: visibility .2s, opacity .2s ease, transform .2s ease;
+  opacity: 0;
+  right: 0;
+  background:  fade-out($blue-mirage, .1);
+
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding: 1em 0 3em 4em;
+  z-index: z("panelArtist");
+  will-change: transform, opacity;
+
+  @include breakpoint($below-md) {
+    min-width: 100%;
+    padding: 1em;
+  }
+}
+
+.modal.open {
+  visibility: visible;
+  opacity: 1;
+}

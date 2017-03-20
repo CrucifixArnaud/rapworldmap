@@ -210,36 +210,27 @@
 }
 
 .about-panel {
-  visibility: hidden;
-  position: fixed;
-  transition: visibility .2s, opacity .2s ease, transform .2s ease;
-  opacity: 0;
-  right: 0;
-  background:  fade-out($blue-mirage, .1);
 
-  @include breakpoint($below-md) {
-    min-width: 100%;
-    padding: 1em;
-  }
+  // @include breakpoint($below-md) {
+  //   min-width: 100%;
+  //   padding: 1em;
+  // }
 
-  @include breakpoint($md) {
-    overflow: auto;
-    width: 100%;
-    height: 100%;
-    pointer-events: auto;
-    left: 0;
-    top: 0;
-    right: 0;
-    padding: 1em 0 3em 4em;
-    z-index: z("panelArtist");
-    will-change: transform, opacity;
-  }
+  // @include breakpoint($md) {
+  //   overflow: auto;
+  //   width: 100%;
+  //   height: 100%;
+  //   pointer-events: auto;
+  //   left: 0;
+  //   top: 0;
+  //   right: 0;
+  //   padding: 1em 0 3em 4em;
+  //   z-index: z("panelArtist");
+  //   will-change: transform, opacity;
+  // }
 }
 
-.about-panel.open {
-  visibility: visible;
-  opacity: 1;
-}
+
 
 .about-panel__button--close {
   top: 15px;
@@ -256,6 +247,10 @@
 .about-panel__body {
   @include rem(font-size, 16px);
   max-width: 800px;
+
+  @include breakpoint($below-sm) {
+    margin-top: 4em;
+  }
 }
 
 .about-panel__body p {

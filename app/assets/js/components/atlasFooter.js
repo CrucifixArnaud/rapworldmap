@@ -43,7 +43,7 @@ export default class AtlasFooter extends React.Component {
               <button className="menu__item__button" onClick={(e) => this.handleAboutClick(e)}>
                 <span className="button__label">About Rap World Map ?</span>
               </button>
-              <div className={'about-panel ' + ((this.state.aboutOpen) ? 'open' : '')}>
+              <div className={'about-panel modal ' + ((this.state.aboutOpen) ? 'open' : '')}>
                 <a onClick={() => this.handleAboutClick()} className="button--close about-panel__button--close" title="Close panel">&#10799;</a>
                 <div className="about-panel__body">
                   <h2 className="panel__title">About Rap World Map</h2>
