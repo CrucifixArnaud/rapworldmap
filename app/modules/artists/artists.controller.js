@@ -73,7 +73,8 @@ function showCreate(req, res) {
     underscore: underscore,
     layout: 'admin',
     title: 'Create a new artist',
-    slug: 'page-admin'
+    slug: 'page-admin',
+    form: req.flash('body')
   };
 
   res.render('pages/artists/create', locals);
@@ -82,11 +83,15 @@ function showCreate(req, res) {
 /**
  * [processCreate Process artist creation]
  */
-function processCreate(req, res) {
+function processCreate(req, res, next) {
 
   // validate informations
   req.checkBody('name', 'Name is required.').notEmpty();
   req.checkBody('city', 'City name is required').notEmpty();
+
+  if(req.body.coordinates) {
+    req.checkBody('coordinates', 'Coordinate must be formated <lng, lat>').matches(/(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)\w+/);
+  }
 
   // if there are errors, redirect and save errors to flash
   const errors = req.validationErrors();
@@ -99,7 +104,7 @@ function processCreate(req, res) {
     } else {
       console.log(errors.map(err => err.msg));
       req.flash('errors', errors.map(err => err.msg));
-      return res.redirect('/artists/create');
+      return res.status(400).redirect('/artists/create');
     }
   }
 
