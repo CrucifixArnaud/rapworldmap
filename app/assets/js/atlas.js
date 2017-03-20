@@ -16,10 +16,6 @@ var bus = new EventEmitter();
  * Atlas
  */
 export default class Atlas extends React.Component {
-  static propTypes = {
-    bus: React.PropTypes.instanceOf(EventEmitter)
-  }
-
   constructor(props) {
     super(props);
 
