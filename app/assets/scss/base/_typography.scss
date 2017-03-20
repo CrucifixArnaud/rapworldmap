@@ -33,3 +33,9 @@ a {
     text-decoration: underline;
   }
 }
+
+// Abbr
+
+abbr[title] {
+  border-bottom: 0;
+}

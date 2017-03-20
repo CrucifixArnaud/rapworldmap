@@ -1,0 +1,16 @@
+// Navigation
+// ---------------------
+
+// Menu & Submenu
+.menu,
+.submenu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu__item__button,
+.submenu__item__button {
+  pointer-events: auto;
+  @include rem(font-size, 14px);
+  @include button-transparent(#fff);
+}

@@ -8,6 +8,7 @@ import {EventEmitter} from "events";
 import ArtistPanel from './components/artistPanel';
 import AtlasMenu from './components/atlasMenu';
 import AtlasNotifications from './components/atlasNotifications';
+import AtlasFooter from './components/atlasFooter';
 
 var bus = new EventEmitter();
 
@@ -139,7 +140,8 @@ export default class Atlas extends React.Component {
     return (
       <div>
         <AtlasNotifications bus={bus} />
-        <AtlasMenu artistsTotal={this.state.artistsTotal} centerView={this.centerView.bind(this)} bus={bus} />
+        <AtlasMenu centerView={this.centerView.bind(this)} bus={bus} />
+        <AtlasFooter artistsTotal={this.state.artistsTotal} />
         <div id='map' className='mapbox'></div>
         <ArtistPanel ref='panel' centerView={this.centerView.bind(this)} artist={this.state.artist} />
       </div>
