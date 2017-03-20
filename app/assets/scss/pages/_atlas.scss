@@ -51,18 +51,30 @@
 }
 
 .atlas-menu .menu {
+  @include breakpoint($below-md) {
+    margin: 0;
+  }
+
   @include breakpoint($md) {
     margin-left: 1em;
   }
 }
 
 .atlas-menu .menu__item__button {
-  width: 130px;
 
   &:hover .button__label,
   &:focus .button__label,
   &:active .button__label {
     text-decoration: underline;
+  }
+
+  @include breakpoint($below-md) {
+    width: 90px;
+    transform: scale(.8);
+  }
+
+  @include breakpoint($md) {
+    width: 130px;
   }
 }
 
@@ -204,35 +216,18 @@
 // Atlas Footer
 // ---------------------
 
-.atla-footer {
+.atlas-footer {
   position: absolute;
   z-index: z("footer");
   bottom: 0;
   left: 1em;
 }
 
-.about-panel {
-
-  // @include breakpoint($below-md) {
-  //   min-width: 100%;
-  //   padding: 1em;
-  // }
-
-  // @include breakpoint($md) {
-  //   overflow: auto;
-  //   width: 100%;
-  //   height: 100%;
-  //   pointer-events: auto;
-  //   left: 0;
-  //   top: 0;
-  //   right: 0;
-  //   padding: 1em 0 3em 4em;
-  //   z-index: z("panelArtist");
-  //   will-change: transform, opacity;
-  // }
+.atlas-footer .menu__item__button {
+  @include breakpoint($below-md) {
+    @include rem(font-size, 10px);
+  }
 }
-
-
 
 .about-panel__button--close {
   top: 15px;

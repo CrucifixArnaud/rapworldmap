@@ -36,7 +36,7 @@ export default class AtlasFooter extends React.Component {
 
   render() {
     return (
-      <nav className="atla-footer">
+      <nav className="atlas-footer">
         <ul className="menu">
           <li className="menu__item menu__item--about-panel">
             <ClickOutHandler ref="aboutHandler" onClickOut={() => this.clickOutsideAbout()}>
