@@ -20,15 +20,13 @@ export default class ArtistPanel extends React.Component {
   }
 
   open() {
-    var self = this;
-
-    self.setState({
+    this.setState({
       open: true
     });
 
     if (this.props.artist.youtube.clipExampleUrl) {
-      setTimeout(function() {
-        self.setState({
+      setTimeout(() => {
+        this.setState({
           youtubeClip: true
         });
       }, 750);

@@ -84,21 +84,13 @@ export default class Atlas extends React.Component {
     });
   }
 
-  // componentDidMount() {
-  //   if (typeof bus !== "undefined") {
-  //     bus.emit("results", true)
-  //   }
-  // }
-
   createAtlas() {
-    var self = this;
-
     this.map = L.mapbox.map('map', 'mapbox.dark', {
       minZoom: 3.5,
       zoomControl: false
     }).setView([40, -45], 3);
 
-    L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', function(e) {
+    L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', (e) => {
       // The clusterGroup gets each marker in the group added to it
       // once loaded, and then is added to the map
       var clusterGroup = new L.MarkerClusterGroup({
@@ -112,22 +104,22 @@ export default class Atlas extends React.Component {
           fillOpacity: 0.5
         }
       });
-      e.target.eachLayer(function(layer) {
+      e.target.eachLayer((layer) => {
         var marker = layer,
           feature = marker.feature,
           artist = feature.properties;
 
-        marker.addEventListener('click', function() {
-          self.setState({
+        marker.addEventListener('click', () => {
+          this.setState({
             artist: artist
           });
-          self.refs.panel.open();
+          this.refs.panel.open();
         });
 
         marker.setIcon(L.icon(feature.properties.icon));
         clusterGroup.addLayer(layer);
       });
-      self.map.addLayer(clusterGroup);
+      this.map.addLayer(clusterGroup);
     });
 
   }
