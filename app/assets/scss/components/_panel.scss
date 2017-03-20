@@ -37,18 +37,18 @@
 // ---------------------
 
 .artist-panel {
-  visibility: hidden;
-  position: absolute;
-  transition: visibility .2s, transform .2s ease;
-  bottom: 0;
-  right: 0;
 
   @include breakpoint($below-md) {
-    background: $blue-mirage;
-    min-width: 360px;
+    @include modal();
+    z-index: z('menu') + 500;
   }
 
   @include breakpoint($md) {
+    visibility: hidden;
+    position: absolute;
+    transition: visibility .2s, transform .2s ease;
+    bottom: 0;
+    right: 0;
     width: 620px;
     min-height: 500px;
     padding: 1em;
@@ -87,8 +87,7 @@
   position: absolute;
 
   @include breakpoint($below-md) {
-    top: 20px;
-    left: 20px;
+    top: 80px;
   }
 
   @include breakpoint($md) {
@@ -127,7 +126,7 @@
 
 .artist-panel__body {
   @include breakpoint($below-md) {
-    max-width: 75vw;
+    margin-top: 6em;
   }
 
   @include breakpoint($md) {
@@ -165,8 +164,11 @@
 }
 
 .artist-panel__bio {
-  margin: 30px 0 3em 20px;
   @include rem(font-size, 16px);
+
+  @include breakpoint($md) {
+    margin: 30px 0 3em 20px;
+  }
 }
 
 .artist-panel__bio p {
@@ -218,7 +220,7 @@
 
   @include breakpoint($below-md) {
     margin: 1em 0;
-    @include horizontal-center(absolute);
+    width: 100%;
   }
 
   @include breakpoint($md) {
@@ -242,6 +244,7 @@
   @include breakpoint($below-md) {
     background: $yellow-gold;
     padding: 1em;
+    width: 100%;
   }
 
   @include breakpoint($md) {
@@ -280,6 +283,10 @@
 
 .artist-panel__yearsactive {
   margin: 0 0 10px 20px;
+
+  @include breakpoint($below-md) {
+    @include rem(font-size, 10px);
+  }
 
   @include breakpoint($below-md) {
     display: block;
