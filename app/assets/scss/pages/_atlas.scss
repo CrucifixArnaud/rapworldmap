@@ -37,7 +37,7 @@
 
 .atlas-header .main-logo {
   @include breakpoint($below-md) {
-    width: 50%;
+    width: 80%;
   }
 }
 
@@ -51,7 +51,9 @@
 }
 
 .atlas-menu .menu {
-  margin-left: 1em;
+  @include breakpoint($md) {
+    margin-left: 1em;
+  }
 }
 
 .atlas-menu .menu__item__button {

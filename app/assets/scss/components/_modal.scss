@@ -1,7 +1,7 @@
 // Modal
 // ---------------------
 
-.modal {
+@mixin modal() {
   visibility: hidden;
   position: fixed;
   transition: visibility .2s, opacity .2s ease, transform .2s ease;
@@ -24,9 +24,14 @@
     min-width: 100%;
     padding: 1em;
   }
+
+  &.open {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
-.modal.open {
-  visibility: visible;
-  opacity: 1;
+.modal {
+  @include modal();
 }
+
