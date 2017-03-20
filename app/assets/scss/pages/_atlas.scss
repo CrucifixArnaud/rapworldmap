@@ -258,6 +258,11 @@
   max-width: 800px;
 }
 
+.about-panel__body p {
+  margin-left: .5em;
+  line-height: 1.5;
+}
+
 .about-panel .panel__title {
   @include rem(font-size, 22px);
   font-weight: bold;
