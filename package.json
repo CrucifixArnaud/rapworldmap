@@ -4,7 +4,8 @@
   "description": "Display a map of Rapper based on their childhood neighborhood",
   "main": "rapworldmap.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
+    "dev:test": "mocha -w",
     "dev:css": "nodemon -e app/assets/scss/main.scss -x \"npm run compile:css && npm run autoprefixer\"",
     "dev:js": "watchify -t [ babelify ] app/assets/js/atlas.js -o public/js/atlas.bundle.js",
     "compile:css": "node-sass --include-path scss app/assets/scss/main.scss public/css/main.css",
@@ -67,10 +68,12 @@
     "cssnano": "3.10.0",
     "eslint": "3.10.2",
     "eslint-plugin-react": "6.7.1",
+    "mocha": "^3.2.0",
     "node-sass": "4.5.0",
     "nodemon": "1.11.0",
     "postcss-cli": "3.0.0-beta",
     "react-router": "3.0.0",
+    "should": "^11.2.1",
     "uglify-js": "2.8.3"
   }
 }

@@ -8,13 +8,19 @@ const mongoose = require('mongoose'),
 
 //====== Define schema ======
 const artistSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   slug: {
     type: String,
     unique: true
   },
   location: [{
-    city: String,
+    city: {
+      type: String,
+      required: true
+    },
     coordinates: String,
     neighborhood: String,
     _id : false
