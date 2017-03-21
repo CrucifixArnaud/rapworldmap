@@ -57,7 +57,7 @@ export default class AtlasFooter extends React.Component {
                   <p>Contact us on <a href="mailto:contact@rapworldmap.com">contact@rapworldmap.com</a></p>
                   <h3 className="panel__subtitle">Licence</h3>
                   <p>Project create by <a href="http://crucifixarnaud.com" title="Visit Crucifix Arnaud portfolio">Arnaud Crucifix</a>.</p>
-                  <p>Build with <a href="https://nodejs.org/en/" title="">node.js</a>, <a href="https://facebook.github.io/react/" title="">React</a>, <a href="https://www.mapbox.com/">Mapbox</a>.</p>
+                  <p>Build with <a href="https://nodejs.org/en/" title="">node.js</a>, <a href="https://www.mongodb.com/" title="">MongoDb</a>, <a href="https://facebook.github.io/react/" title="">React</a>, <a href="https://www.mapbox.com/">Mapbox</a>.</p>
                   <p>This website use Liberation Font, created by <a href="https://en.wikipedia.org/wiki/Steve_Matteson" title="Visit Steve Matteson wikipedia page">Steve Matteson</a> and distributed by <a href="http://ascendercorp.us/" title="Visit velvetyne website">Ascender Corp.</a> type foundry. The logo and icons use Grotesk typeface, created by <a href="http://www.fadebiaye.com/" title="Visit Frank Adebiaye website">Frank Adebiaye</a> and distributed by <a href="http://www.velvetyne.fr/" title="Visit velvetyne website">Velvetyne</a> type foundry. Both two licensed under <a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=OFL"><abbr title="SIL Open Font License">SIL OFL</abbr> licence</a>.</p>
                   <p>Rapworldmap.com is licensed under the terms of the <a href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
                   <h3 className="panel__subtitle">See also</h3>
