@@ -250,6 +250,10 @@
   @include breakpoint($below-sm) {
     margin-top: 4em;
   }
+
+  @include breakpoint($md) {
+    margin-top: 5em;
+  }
 }
 
 .about-panel__body p {
