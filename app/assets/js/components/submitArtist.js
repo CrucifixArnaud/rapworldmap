@@ -53,7 +53,7 @@ export default class SubmitArtist extends React.Component {
       'type': 'submission'
     };
 
-    const artistsCreateUrl = window.location.href + 'artists/create';
+    const artistsCreateUrl = window.location.href + 'artists/submit';
 
     Request.post({url:artistsCreateUrl, form: artist}, (error, response) => {
       if (!error && response.statusCode === 200) {

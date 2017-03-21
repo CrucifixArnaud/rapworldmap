@@ -16,6 +16,7 @@ module.exports = {
   showSingle: showSingle,
   showCreate: showCreate,
   processCreate: processCreate,
+  processSubmit: processSubmit,
   showEdit: showEdit,
   processEdit: processEdit,
   deleteArtist: deleteArtist,
@@ -83,7 +84,7 @@ function showCreate(req, res) {
 /**
  * [processCreate Process artist creation]
  */
-function processCreate(req, res, next) {
+function processCreate(req, res) {
 
   // validate informations
   req.checkBody('name', 'Name is required.').notEmpty();
@@ -97,15 +98,9 @@ function processCreate(req, res, next) {
   const errors = req.validationErrors();
 
   if (errors) {
-    if(req.body.type !== undefined && req.body.type === 'submission') {
-
-      return res.status(400).json(errors);
-
-    } else {
-      console.log(errors.map(err => err.msg));
-      req.flash('errors', errors.map(err => err.msg));
-      return res.status(400).redirect('/artists/create');
-    }
+    console.log(errors.map(err => err.msg));
+    req.flash('errors', errors.map(err => err.msg));
+    return res.status(400).redirect('/artists/create');
   }
 
   var thumbnail = req.file ? req.file.filename : req.body.thumbnailUrl;
@@ -147,58 +142,87 @@ function processCreate(req, res, next) {
       return res.redirect('/artists/create');
     }
 
-    if (req.isAuthenticated() === true) {
-      // User is logged (creation from admin)
+    // User is logged (creation from admin)
+    // set a successful flash message
+    console.log('Successfuly created ' + req.body.name);
+    req.flash('success', 'Successfuly created artist!');
 
-      // set a successful flash message
-      console.log('Successfuly created ' + req.body.name);
-      req.flash('success', 'Successfuly created artist!');
+    // Redirect to the newly created artist
+    res.redirect('/artists/create');
+  });
+}
 
-      // Redirect to the newly created artist
-      res.redirect('/artists/create');
-    } else if(process.env.DEBUG !== true) {
+/**
+ * [processSubmit Process submit artist]
+ * From atlas by non authenticated user
+ */
+function processSubmit(req, res) {
 
-      var smtpConfig = {
-        host: process.env.SMTP_HOST,
-        service: process.env.SMTP_SERVICE,
-        port: process.env.SMTP_PORT,
-        secure: false,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS
-        },
-        tls: {
-          rejectUnauthorized:false
-        }
-      };
+  // validate informations
+  req.checkBody('name', 'Name is required.').notEmpty();
+  req.checkBody('city', 'City name is required').notEmpty();
 
-      var transporter = nodemailer.createTransport(smtpConfig);
+  // Check errors
+  const errors = req.validationErrors();
 
-      var mailOptions = {
-        from: process.env.MAIL_FROM,
-        to: process.env.MAIL_TO,
-        subject: 'Rap World Map - New entry submited: ' + req.body.name,
-        html: '<p>A new entry was submited.</p> <ul><li>Name: ' + req.body.name + '</li> <li>City: ' + req.body.city + '</li></ul> <a href="http://rapworldmap.com/login">Edit the entry on rapworldmap.com</a>'
-      };
+  if (errors) {
+    return res.status(400).json(errors);
+  }
 
-      transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-          console.log(error);
-          res.json({
-            yo: 'error'
-          });
-        } else {
-          console.log('Message sent: ' + info.response);
-          res.json({
-            yo: info.response
-          });
-        }
-      });
-    }else{
-      res.json({
-        yo: 'success'
-      });
+  // create a new artist
+  const artist = new Artist({
+    name: req.body.name,
+    location: [{
+      city: req.body.city
+    }],
+    youtube: [{
+      clipExampleUrl: req.body.clipExampleUrl
+    }],
+    published: false
+  });
+
+  artist.save((err) => {
+
+    if (err) {
+      return res.status(400).json(errors);
     }
+
+    var smtpConfig = {
+      host: process.env.SMTP_HOST,
+      service: process.env.SMTP_SERVICE,
+      port: process.env.SMTP_PORT,
+      secure: false,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
+      },
+      tls: {
+        rejectUnauthorized:false
+      }
+    };
+
+    var transporter = nodemailer.createTransport(smtpConfig);
+
+    var mailOptions = {
+      from: process.env.MAIL_FROM,
+      to: process.env.MAIL_TO,
+      subject: 'Rap World Map - New entry submited: ' + req.body.name,
+      html: '<p>A new entry was submited.</p> <ul><li>Name: ' + req.body.name + '</li> <li>City: ' + req.body.city + '</li></ul> <a href="http://rapworldmap.com/login">Edit the entry on rapworldmap.com</a>'
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        res.json({
+          error: error,
+          response: info.response
+        });
+      } else {
+        res.json({
+          success: true,
+          response: info.response
+        });
+      }
+    });
   });
 }
 
