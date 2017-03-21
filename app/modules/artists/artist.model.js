@@ -40,7 +40,6 @@ const artistSchema = new Schema({
     _id : false
   }],
   youtube: [{
-    pageUrl: String,
     clipExampleUrl: String,
     _id : false
   }],
