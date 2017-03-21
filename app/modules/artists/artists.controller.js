@@ -128,7 +128,6 @@ function processCreate(req, res) {
       yearsActiveEnd: req.body.yearsActiveEnd
     }],
     youtube: [{
-      pageUrl: req.body.pageUrl,
       clipExampleUrl: req.body.clipExampleUrl
     }],
     published: published
@@ -173,7 +172,21 @@ function processSubmit(req, res) {
   const artist = new Artist({
     name: req.body.name,
     location: [{
-      city: req.body.city
+      city: req.body.city,
+      coordinates: '',
+      neighborhood: ''
+    }],
+    categories: [],
+    image: {
+      thumbnailUrl: ''
+    },
+    bio: [{
+      summary: '',
+      wikipediaUrl: '',
+      birthdate: '',
+      deathdate: '',
+      yearsActiveStart: '',
+      yearsActiveEnd: ''
     }],
     youtube: [{
       clipExampleUrl: req.body.clipExampleUrl
@@ -270,6 +283,8 @@ function showEdit(req, res) {
       res.status(404);
       res.send(`Artist ${req.params.slug} cannot be found!`);
     }
+
+    console.log(artist);
 
     const locals = {
       artist: artist,

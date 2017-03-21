@@ -48,12 +48,12 @@
     <h3 class="field-group__title">Images</h3>
     <div class="field">
       <label class="field__label" for="thumbnail">Thumbnail:</label>
-      <%if (typeof artist.image !== 'undefined') { %>
+      <%if (typeof artist.image !== 'undefined' && artist.image.length > 0) { %>
         <div class="artist-panel__thumbnail--preview">
           <img class="artist-panel__thumbnail__picture" src="/uploads/medium-<%= artist.image[0].thumbnailUrl %>" alt="" />
         </div>
+        <input type="hidden" name="originalThumbnail" value="<%= typeof artist.image !== 'undefined' ? artist.image[0].thumbnailUrl : '' %>" />
       <% } %>
-      <input type="hidden" name="originalThumbnail" value="<%= typeof artist.image !== 'undefined' ? artist.image[0].thumbnailUrl : '' %>" />
       <input id="thumbnail" class="input--file" type="file" name="thumbnail" />
     </div>
   </div>

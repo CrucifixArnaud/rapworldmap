@@ -49,8 +49,7 @@ export default class SubmitArtist extends React.Component {
     var artist = {
       'name': this.state.name,
       'city': this.state.city,
-      'clipExampleUrl': this.state.clipExampleUrl,
-      'type': 'submission'
+      'clipExampleUrl': this.state.clipExampleUrl
     };
 
     const artistsCreateUrl = window.location.href + 'artists/submit';
