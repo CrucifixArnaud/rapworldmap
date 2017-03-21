@@ -75,16 +75,17 @@ export default class Atlas extends React.Component {
     artistsPromise.then((res) => {
       this.setState({
         artistsTotal: res.features.length
-      })
+      });
       this.createAtlas(res);
     });
   }
 
   createAtlas() {
     this.map = L.mapbox.map('map', 'mapbox.dark', {
-      minZoom: 3.5,
-      zoomControl: false
+      minZoom: 3.5
     }).setView([40, -45], 3);
+
+    new L.Control.Zoom({ position: 'topright' }).addTo(this.map);
 
     L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', (e) => {
       // The clusterGroup gets each marker in the group added to it
