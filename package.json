@@ -21,12 +21,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/CrucifixArnaud/rapmap.git"
+    "url": "git@github.com:CrucifixArnaud/rapworldmap.git"
   },
   "author": "Crucifix Arnaud",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/CrucifixArnaud/rapmap/issues"
+    "url": "https://github.com/CrucifixArnaud/rapworldmap/issues"
   },
   "homepage": "https://gitlab.com/CrucifixArnaud/rapmap#README",
   "dependencies": {
