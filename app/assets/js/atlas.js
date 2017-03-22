@@ -82,7 +82,8 @@ export default class Atlas extends React.Component {
 
   createAtlas() {
     this.map = L.mapbox.map('map', 'mapbox.dark', {
-      minZoom: 3.5
+      minZoom: 3.5,
+      zoomControl: false
     }).setView([40, -45], 3);
 
     new L.Control.Zoom({ position: 'topright' }).addTo(this.map);
