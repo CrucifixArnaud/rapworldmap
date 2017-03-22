@@ -42,8 +42,6 @@ export default class ArtistPanel extends React.Component {
       this.setState({
         youtubeClip: false
       });
-      // setTimeout(function() {
-      // }, 2000);
     }
   }
 
@@ -66,16 +64,16 @@ export default class ArtistPanel extends React.Component {
   }
 
   handleClickOnCity() {
-    var coordinates = JSON.parse( '[' + this.props.artist.location.coordinates + ']');
-    var lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
-    var lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
+    const coordinates = JSON.parse( '[' + this.props.artist.location.coordinates + ']');
+    const lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
+    const lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
     this.props.centerView(lat, lng, 13);
   }
 
   render() {
 
     if(this.props.artist) {
-      var tagsList = this.props.artist.categories.map(function(category, key) {
+      const tagsList = this.props.artist.categories.map(function(category, key) {
         return <li key={key} className='artist-panel__categories__item'>{category}</li>;
       });
 

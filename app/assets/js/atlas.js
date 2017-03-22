@@ -10,7 +10,7 @@ import AtlasMenu from './components/atlasMenu';
 import AtlasNotifications from './components/atlasNotifications';
 import AtlasFooter from './components/atlasFooter';
 
-var bus = new EventEmitter();
+const bus = new EventEmitter();
 
 /**
  * Atlas
@@ -61,7 +61,7 @@ export default class Atlas extends React.Component {
 
     const artistsGeojsonUrl = window.location.href + 'artists/geojson';
 
-    var artistsPromise = new Promise(function(resolve, reject) {
+    let artistsPromise = new Promise(function(resolve, reject) {
       Request(artistsGeojsonUrl, (error, response, body) => {
         if (!error && response.statusCode === 200) {
           // Success
@@ -91,7 +91,7 @@ export default class Atlas extends React.Component {
     L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', (e) => {
       // The clusterGroup gets each marker in the group added to it
       // once loaded, and then is added to the map
-      var clusterGroup = new L.MarkerClusterGroup({
+      let clusterGroup = new L.MarkerClusterGroup({
         removeOutsideVisibleBounds: true,
         maxClusterRadius: 45,
         polygonOptions: {
@@ -103,7 +103,7 @@ export default class Atlas extends React.Component {
         }
       });
       e.target.eachLayer((layer) => {
-        var marker = layer,
+        let marker = layer,
           feature = marker.feature,
           artist = feature.properties;
 

@@ -46,7 +46,7 @@ export default class SubmitArtist extends React.Component {
   }
 
   send() {
-    var artist = {
+    const artist = {
       'name': this.state.name,
       'city': this.state.city,
       'clipExampleUrl': this.state.clipExampleUrl

@@ -36,8 +36,8 @@ export default class AtlasMenu extends React.Component {
   }
 
   toggleAreaMenu() {
-    var submenu = this.refs.areaSubmenu;
-    var children = Array.from(submenu.childNodes);
+    const submenu = this.refs.areaSubmenu;
+    let children = Array.from(submenu.childNodes);
 
     if(this.state.areaOpen === false) {
       this.setState({
@@ -68,7 +68,7 @@ export default class AtlasMenu extends React.Component {
   }
 
   closeAllSubmenu() {
-    var submenus = document.getElementById('atlasMenu').getElementsByClassName('submenu open');
+    let submenus = document.getElementById('atlasMenu').getElementsByClassName('submenu open');
 
     Object.keys(submenus).forEach(key => {
       submenus[key].classList.remove('open');
