@@ -136,8 +136,8 @@ function processCreate(req, res) {
   artist.save((err) => {
 
     if (err) {
-      console.log(err.message);
-      req.flash('errors', err.message);
+      console.log(err.msg);
+      req.flash('errors', err.msg);
       return res.redirect('/artists/create');
     }
 
@@ -194,10 +194,10 @@ function processSubmit(req, res) {
     published: false
   });
 
-  artist.save((err) => {
+  artist.save((error) => {
 
-    if (err) {
-      return res.status(400).json(errors);
+    if (error) {
+      return res.status(400).json([error]);
     }
 
     var smtpConfig = {
