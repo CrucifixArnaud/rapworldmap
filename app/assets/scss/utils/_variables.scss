@@ -19,6 +19,7 @@ $green-ocean: #3eb36f;
 
 // Grey shader
 $grey-21: #333;
+$grey-15: #222;
 
 // Syntaxic color
 
@@ -59,6 +60,7 @@ $screen-md-max:             ($screen-lg-min - 1) !default;
 // ---------------------
 $z-layers: (
   "header": 2000,
+  "loader": 1750,
   "footer": 1500,
   "menu": 1250,
   "panelArtist": 1000

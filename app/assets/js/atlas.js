@@ -81,6 +81,12 @@ export default class Atlas extends React.Component {
   }
 
   createAtlas() {
+    // Prepare loader destruction
+    const loader = document.getElementById('loader');
+    loader.addEventListener('transitionend', () => {
+      loader.remove();
+    });
+
     this.map = L.mapbox.map('map', 'mapbox.dark', {
       minZoom: 3.5,
       zoomControl: false
@@ -118,6 +124,9 @@ export default class Atlas extends React.Component {
         clusterGroup.addLayer(layer);
       });
       this.map.addLayer(clusterGroup);
+
+      // Atlas is create hide loader
+      loader.classList.remove('active');
     });
 
   }
