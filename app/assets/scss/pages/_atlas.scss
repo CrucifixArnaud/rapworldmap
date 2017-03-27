@@ -181,7 +181,8 @@
 // ---------------------
 
 .marker-cluster-small,
-.marker-cluster-medium {
+.marker-cluster-medium,
+.marker-cluster-large {
   transition: background-color .3s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
@@ -201,7 +202,8 @@
 }
 
 // Medium
-.marker-cluster-medium {
+.marker-cluster-medium,
+.marker-cluster-large {
   background-color: rgba(143, 57, 154, .2);
 
   &:hover,
@@ -211,7 +213,8 @@
   }
 }
 
-.marker-cluster-medium div {
+.marker-cluster-medium div,
+.marker-cluster-large div {
   background-color: rgba(143, 57, 154, .8);
 }
 
