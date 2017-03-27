@@ -7,13 +7,18 @@ export default class SubmitArtist extends React.Component {
     bus: React.PropTypes.instanceOf(EventEmitter)
   }
 
+  defaultState = {
+    open: false,
+    errors: [],
+    name: '',
+    city: '',
+    clipExampleUrl: ''
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      open: false,
-      errors: []
-    };
+    this.state = this.defaultState;
 
     this.send = this.send.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -72,11 +77,8 @@ export default class SubmitArtist extends React.Component {
         this.refs.city.value = '';
         this.refs.clipExampleUrl.value = '';
 
-        this.setState({
-          name: '',
-          city: '',
-          clipExampleUrl: ''
-        });
+        // Clean Resets all states
+        this.setState(this.defaultState);
 
       } else {
         let errors = JSON.parse(response.body);
