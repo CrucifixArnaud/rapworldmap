@@ -74,7 +74,8 @@ export default class Atlas extends React.Component {
 
     artistsPromise.then((res) => {
       this.setState({
-        artistsTotal: res.features.length
+        artistsTotal: res.features.length,
+        geojson: res
       });
       this.createAtlas(res);
     });
@@ -94,41 +95,42 @@ export default class Atlas extends React.Component {
 
     new L.Control.Zoom({ position: 'topright' }).addTo(this.map);
 
-    L.mapbox.featureLayer().loadURL('/artists/geojson').on('ready', (e) => {
-      // The clusterGroup gets each marker in the group added to it
-      // once loaded, and then is added to the map
-      let clusterGroup = new L.MarkerClusterGroup({
-        removeOutsideVisibleBounds: true,
-        maxClusterRadius: 45,
-        polygonOptions: {
-          fillColor: 'transparent',
-          color: '#8f399a',
-          weight: 1,
-          opacity: 1,
-          fillOpacity: 0.5
-        }
-      });
-      e.target.eachLayer((layer) => {
-        let marker = layer,
-          feature = marker.feature,
-          artist = feature.properties;
+    let clusterGroup = new L.MarkerClusterGroup({
+      removeOutsideVisibleBounds: true,
+      maxClusterRadius: 45,
+      polygonOptions: {
+        fillColor: 'transparent',
+        color: '#8f399a',
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.5
+      }
+    });
 
-        marker.addEventListener('click', () => {
-          this.setState({
-            artist: artist
-          });
-          this.refs.panel.open();
+    for (let i = 0; i < this.state.geojson.features.length; i++) {
+      let a = this.state.geojson.features[i];
+      let marker = L.marker(new L.LatLng(a.geometry.coordinates[1], a.geometry.coordinates[0]));
+      let artist = a.properties;
+
+      marker.addEventListener('click', () => {
+        this.setState({
+          artist: artist
         });
-
-        marker.setIcon(L.icon(feature.properties.icon));
-        clusterGroup.addLayer(layer);
+        this.refs.panel.open();
       });
-      this.map.addLayer(clusterGroup);
 
+      marker.setIcon(L.icon(a.properties.icon));
+      clusterGroup.addLayer(marker);
+    }
+
+    this.map.addLayer(clusterGroup);
+
+    L.mapbox.tileLayer('mapbox.dark')
+    .addTo(this.map) // add your tiles to the map
+    .on('load', () => {
       // Atlas is create hide loader
       loader.classList.remove('active');
     });
-
   }
 
   centerView(lat, lng, zoom = 10) {
