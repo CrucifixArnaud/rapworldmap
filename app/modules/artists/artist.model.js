@@ -63,7 +63,7 @@ artistSchema.pre('save', function(next) {
 // in question, and the `next()` function
 artistSchema.post('save', function(error, req, next) {
   if (error.name === 'MongoError' && error.code === 11000) {
-    next(new utils.JsonError(`Artist ${req.name} allready exists`, 'name', req.name));
+    next(new utils.JsonError(`Artist ${req.name} already exists`, 'name', req.name));
   } else {
     next(error);
   }
