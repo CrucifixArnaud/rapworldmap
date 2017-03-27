@@ -195,6 +195,11 @@ textarea {
   @include rem(font-size, 16px);
 }
 
+.field__label--optional {
+  @include rem(font-size, 12px);
+  vertical-align: middle;
+}
+
 // field--inline
 
 .field--inline {

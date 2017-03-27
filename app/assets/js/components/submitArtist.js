@@ -119,7 +119,7 @@ export default class SubmitArtist extends React.Component {
               }
             </div>
             <div className="field">
-              <label htmlFor="clipExampleUrl" className="field__label">Clip Example Url:</label>
+            <label htmlFor="clipExampleUrl" className="field__label">Clip Example Url <span className="field__label--optional">(optional)</span>:</label>
               <input ref="clipExampleUrl" id="clipExampleUrl" type="text" name="clipExampleUrl" onChange={this.handleClipChange} />
             </div>
           </div>
