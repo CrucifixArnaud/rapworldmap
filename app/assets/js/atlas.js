@@ -88,10 +88,18 @@ export default class Atlas extends React.Component {
       loader.remove();
     });
 
+    let initialLatLng = [];
+
+    if(window.innerWidth < 768) {
+      initialLatLng = [40, -75];
+    }else{
+      initialLatLng = [40, -45];
+    }
+
     this.map = L.mapbox.map('map', 'mapbox.dark', {
       minZoom: 3.5,
       zoomControl: false
-    }).setView([40, -45], 3);
+    }).setView(initialLatLng, 3.5);
 
     new L.Control.Zoom({ position: 'topright' }).addTo(this.map);
 
