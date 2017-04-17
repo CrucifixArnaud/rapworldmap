@@ -10,6 +10,8 @@ import AtlasMenu from './components/atlasMenu';
 import AtlasNotifications from './components/atlasNotifications';
 import AtlasFooter from './components/atlasFooter';
 
+import { getClosest } from './utils/utils';
+
 const bus = new EventEmitter();
 
 /**
@@ -117,8 +119,10 @@ export default class Atlas extends React.Component {
 
     for (let i = 0; i < this.state.geojson.features.length; i++) {
       let a = this.state.geojson.features[i];
-      let marker = L.marker(new L.LatLng(a.geometry.coordinates[1], a.geometry.coordinates[0]));
       let artist = a.properties;
+      let marker = L.marker(new L.LatLng(a.geometry.coordinates[1], a.geometry.coordinates[0]), {
+        alt: artist.name
+      });
 
       marker.addEventListener('click', () => {
         this.setState({
@@ -127,7 +131,26 @@ export default class Atlas extends React.Component {
         this.refs.panel.open();
       });
 
-      marker.setIcon(L.icon(a.properties.icon));
+      marker.addEventListener('mouseover', (e) => {
+        let target = e.originalEvent.target;
+        let parentWrapper = getClosest(target, '.leaflet-interactive');
+        parentWrapper.classList.add('mouse-over');
+      });
+
+      marker.addEventListener('mouseout', (e) => {
+        let target = e.originalEvent.target;
+        let parentWrapper = getClosest(target, '.leaflet-interactive');
+        parentWrapper.classList.remove('mouse-over');
+      });
+
+      // marker.setIcon(L.icon(a.properties.icon));
+      marker.setIcon(L.divIcon({
+        className: 'marker__icon',
+        html: `<div class='${artist.icon.className}' style='width:${artist.icon.iconSize[0]}px; height:${artist.icon.iconSize[1]}px; margin-left:-${artist.icon.iconAnchor[0]}px; margin-top:-${artist.icon.iconAnchor[1]}px;'>
+                <img class='marker__icon' src='${artist.icon.iconUrl}' />
+                <span class='marker__title'>${artist.name}</span>
+              </div>`
+      }));
       clusterGroup.addLayer(marker);
     }
 

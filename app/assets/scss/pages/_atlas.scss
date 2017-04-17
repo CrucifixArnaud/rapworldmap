@@ -159,18 +159,69 @@
 }
 
 .marker {
-    display: block;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    background-size: cover;
-    outline: none;
-    transition: box-shadow .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  white-space: nowrap;
 }
 
-.marker:hover,
-.marker:focus {
-    box-shadow: 0 0 0 2px $yellow-gold;
+.leaflet-interactive.mouse-over {
+  z-index: z(markerIcon) + 250 !important;
+}
+
+.marker__icon {
+  display: block;
+  // position: relative;
+  border: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  cursor: pointer;
+  background-size: cover;
+  outline: none;
+  transition: box-shadow .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  z-index: z(markerIcon);
+}
+
+.marker:hover .marker__icon,
+.marker:focus .marker__icon {
+  box-shadow: 0 0 0 2px $yellow-gold;
+}
+
+.marker__title {
+  @include vertical-center(absolute);
+  display: block;
+  left: 75%;
+  transform: translate(-25px, -50%);
+  z-index: -1;
+  padding-left: 25px;
+  margin-top: -8px;
+  font-weight: bold;
+  color: $yellow-gold;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility .3s, opacity .3s cubic-bezier(0.39, 0.575, 0.565, 1), transform .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  background: rgba(0,0,0, .5);
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    height: 2px;
+    background-color: $yellow-gold;
+    transition: width .2s cubic-bezier(0.39, 0.575, 0.565, 1) .2s;
+  }
+}
+
+.marker:hover .marker__title,
+.marker:focus .marker__title {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(0, -50%);
+
+  &:after {
+    width: 100%;
+  }
 }
 
 .leaflet-container {
