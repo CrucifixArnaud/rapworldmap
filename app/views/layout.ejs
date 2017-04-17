@@ -6,6 +6,12 @@
   <title>Rap World Map <%= typeof locals.title!='undefined' ? '- ' + locals.title : '' %></title>
   <meta name="description" content="<%= locals.description %>" />
 
+  <!-- Open Graph -->
+  <meta property="og:title" content="Rap World Map" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://rapworldmap.com" />
+  <meta property="og:image" content="http://rapworldmap.com/images/app-screenshot.png" />
+
   <!-- css -->
   <link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
   <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.css' rel='stylesheet' />
