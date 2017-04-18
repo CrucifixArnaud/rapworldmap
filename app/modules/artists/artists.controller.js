@@ -98,7 +98,7 @@ function processCreate(req, res) {
   const errors = req.validationErrors();
 
   if (errors) {
-    console.log(errors.map(err => err.msg));
+    console.log('Errors: ', errors.map(err => err.msg));
     req.flash('errors', errors.map(err => err.msg));
     return res.status(400).redirect('/artists/create');
   }
@@ -110,26 +110,26 @@ function processCreate(req, res) {
   // create a new artist
   const artist = new Artist({
     name: req.body.name,
-    location: [{
+    location: {
       city: req.body.city,
       coordinates: req.body.coordinates,
       neighborhood: req.body.neighborhoodName
-    }],
+    },
     categories: req.body.categories,
     image: {
       thumbnailUrl: thumbnail
     },
-    bio: [{
+    bio: {
       summary: req.body.summary,
       wikipediaUrl: req.body.wikipediaUrl,
       birthdate: req.body.birthdate,
       deathdate: req.body.deathdate,
       yearsActiveStart: req.body.yearsActiveStart,
       yearsActiveEnd: req.body.yearsActiveEnd
-    }],
-    youtube: [{
+    },
+    youtube: {
       clipExampleUrl: req.body.clipExampleUrl
-    }],
+    },
     published: published
   });
 
@@ -326,19 +326,19 @@ function processEdit(req, res) {
 
     // updating the current artist
     artist.name = req.body.name;
-    artist.location[0].city = req.body.city;
-    artist.location[0].coordinates = req.body.coordinates;
-    artist.location[0].neighborhood = req.body.neighborhoodName;
+    artist.location.city = req.body.city;
+    artist.location.coordinates = req.body.coordinates;
+    artist.location.neighborhood = req.body.neighborhoodName;
     artist.categories = req.body.categories;
-    artist.image[0].thumbnailUrl = tumbnail;
-    artist.bio[0].summary = req.body.summary;
-    artist.bio[0].wikipediaUrl = req.body.wikipediaUrl;
-    artist.bio[0].birthdate = req.body.birthdate;
-    artist.bio[0].deathdate = req.body.deathdate;
-    artist.bio[0].yearsActiveStart = req.body.yearsActiveStart;
-    artist.bio[0].yearsActiveEnd = req.body.yearsActiveEnd;
-    artist.youtube[0].pageUrl = req.body.youtugePageUrl;
-    artist.youtube[0].clipExampleUrl = req.body.clipExampleUrl;
+    artist.image.thumbnailUrl = tumbnail;
+    artist.bio.summary = req.body.summary;
+    artist.bio.wikipediaUrl = req.body.wikipediaUrl;
+    artist.bio.birthdate = req.body.birthdate;
+    artist.bio.deathdate = req.body.deathdate;
+    artist.bio.yearsActiveStart = req.body.yearsActiveStart;
+    artist.bio.yearsActiveEnd = req.body.yearsActiveEnd;
+    artist.youtube.pageUrl = req.body.youtugePageUrl;
+    artist.youtube.clipExampleUrl = req.body.clipExampleUrl;
     artist.published = published;
 
     artist.save( (err) => {
@@ -394,37 +394,37 @@ function getArtistsGeojson (req, res) {
         'type': 'Feature',
         'geometry': {
           'type': 'Point',
-          'coordinates': JSON.parse( '[' + artist.location[0].coordinates + ']' )
+          'coordinates': JSON.parse( '[' + artist.location.coordinates + ']' )
         },
         'properties': {
           'name': artist.name,
           'icon': {
-            'iconUrl': (artist.image[0].thumbnailUrl ? '/uploads/medium-' + artist.image[0].thumbnailUrl : '/images/placeholder-artists.svg'),
+            'iconUrl': (artist.image.thumbnailUrl ? '/uploads/medium-' + artist.image.thumbnailUrl : '/images/placeholder-artists.svg'),
             'iconSize': [50, 50],
             'iconAnchor': [25, 25],
             'popupAnchor': [0, -25],
             'className': 'marker'
           },
           'location' : {
-            'city': artist.location[0].city,
-            'neighborhood': artist.location[0].neighborhood,
-            'coordinates': artist.location[0].coordinates
+            'city': artist.location.city,
+            'neighborhood': artist.location.neighborhood,
+            'coordinates': artist.location.coordinates
           },
           image: {
-            thumbnailUrl: artist.image[0].thumbnailUrl,
+            thumbnailUrl: artist.image.thumbnailUrl,
           },
           categories: artist.categories,
           bio: {
-            summary: artist.bio[0].summary,
-            wikipediaUrl: artist.bio[0].wikipediaUrl,
-            birthdate: artist.bio[0].birthdate,
-            deathdate: artist.bio[0].deathdate,
-            yearsActiveStart: artist.bio[0].yearsActiveStart,
-            yearsActiveEnd: artist.bio[0].yearsActiveEnd
+            summary: artist.bio.summary,
+            wikipediaUrl: artist.bio.wikipediaUrl,
+            birthdate: artist.bio.birthdate,
+            deathdate: artist.bio.deathdate,
+            yearsActiveStart: artist.bio.yearsActiveStart,
+            yearsActiveEnd: artist.bio.yearsActiveEnd
           },
           youtube: {
-            pageUrl: artist.youtube[0].pageUrl,
-            clipExampleUrl: artist.youtube[0].clipExampleUrl
+            pageUrl: artist.youtube.pageUrl,
+            clipExampleUrl: artist.youtube.clipExampleUrl
           }
         }
       });

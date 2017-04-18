@@ -16,7 +16,7 @@ const artistSchema = new Schema({
     type: String,
     unique: true
   },
-  location: [{
+  location: {
     city: {
       type: String,
       required: true
@@ -24,13 +24,13 @@ const artistSchema = new Schema({
     coordinates: String,
     neighborhood: String,
     _id : false
-  }],
+  },
   categories: Array,
-  image: [{
+  image: {
     thumbnailUrl: String,
     _id : false
-  }],
-  bio: [{
+  },
+  bio: {
     summary: String,
     wikipediaUrl: String,
     birthdate: Date,
@@ -38,11 +38,11 @@ const artistSchema = new Schema({
     yearsActiveStart: Number,
     yearsActiveEnd: Number,
     _id : false
-  }],
-  youtube: [{
+  },
+  youtube: {
     clipExampleUrl: String,
     _id : false
-  }],
+  },
   createDate: {
     type: Date,
     default: Date.now
