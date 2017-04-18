@@ -33,7 +33,7 @@ export default class Atlas extends React.Component {
         'bio': [
           {
             'summary': 'Radric Delantic Davis (born February 12, 1980), known professionally as Gucci Mane, is an American rapper from Atlanta, Georgia.',
-            'wikipediaUrl': 'https://en.wikipedia.org/wiki/Gucci_Mane',
+            'url': 'https://en.wikipedia.org/wiki/Gucci_Mane',
             'birthdate': null,
             'deathdate': null
           }

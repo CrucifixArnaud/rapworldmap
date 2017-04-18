@@ -121,7 +121,7 @@ function processCreate(req, res) {
     },
     bio: {
       summary: req.body.summary,
-      wikipediaUrl: req.body.wikipediaUrl,
+      url: req.body.bioUrl,
       birthdate: req.body.birthdate,
       deathdate: req.body.deathdate,
       yearsActiveStart: req.body.yearsActiveStart,
@@ -182,7 +182,7 @@ function processSubmit(req, res) {
     },
     bio: [{
       summary: '',
-      wikipediaUrl: '',
+      url: '',
       birthdate: '',
       deathdate: '',
       yearsActiveStart: '',
@@ -332,7 +332,7 @@ function processEdit(req, res) {
     artist.categories = req.body.categories;
     artist.image.thumbnailUrl = tumbnail;
     artist.bio.summary = req.body.summary;
-    artist.bio.wikipediaUrl = req.body.wikipediaUrl;
+    artist.bio.url = req.body.bioUrl;
     artist.bio.birthdate = req.body.birthdate;
     artist.bio.deathdate = req.body.deathdate;
     artist.bio.yearsActiveStart = req.body.yearsActiveStart;
@@ -416,7 +416,7 @@ function getArtistsGeojson (req, res) {
           categories: artist.categories,
           bio: {
             summary: artist.bio.summary,
-            wikipediaUrl: artist.bio.wikipediaUrl,
+            url: artist.bio.url,
             birthdate: artist.bio.birthdate,
             deathdate: artist.bio.deathdate,
             yearsActiveStart: artist.bio.yearsActiveStart,

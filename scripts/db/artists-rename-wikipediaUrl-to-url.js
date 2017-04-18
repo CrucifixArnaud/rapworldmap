@@ -1,0 +1,1 @@
+db.artists.updateMany( {}, { $rename: { "bio.wikipediaUrl": "bio.url" } } )

@@ -65,8 +65,8 @@
       <textarea name="summary" rows="10" cols="50"><%= typeof artist.bio !== 'undefined' ? artist.bio.summary : '' %></textarea>
     </div>
     <div class="field">
-      <label for="wikipediaUrl" class="field__label">Wikipedia Url:</label>
-      <input id="wikipediaUrl" type="text" name="wikipediaUrl" value="<%= typeof artist.bio !== 'undefined' ?  artist.bio.wikipediaUrl : '' %>">
+      <label for="bioUrl" class="field__label">Bio Url:</label>
+      <input id="bioUrl" type="text" name="bioUrl" value="<%= typeof artist.bio !== 'undefined' ?  artist.bio.url : '' %>">
     </div>
     <div class="field field--inline">
       <label for="birthdate" class="field__label">Birthdate:</label>

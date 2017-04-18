@@ -84,10 +84,10 @@ export default class ArtistPanel extends React.Component {
         );
       }
 
-      let artistWikipediaUrl;
-      if (this.props.artist.bio.wikipediaUrl) {
-        artistWikipediaUrl = (
-          <a className="artist-panel__readmore" href={this.props.artist.bio.wikipediaUrl}>Read more on Wikipedia</a>
+      let artistBioUrl;
+      if (this.props.artist.bio.url) {
+        artistBioUrl = (
+          <a className="artist-panel__readmore" title="Read more on an external website" href={this.props.artist.bio.url}>Read more about {this.props.artist.name}</a>
         );
       }
 
@@ -133,7 +133,7 @@ export default class ArtistPanel extends React.Component {
               <div className="artist-panel__bio">
                 <div>
                   { artistBio }
-                  { artistWikipediaUrl }
+                  { artistBioUrl }
                 </div>
               </div>
             </div>

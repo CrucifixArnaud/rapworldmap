@@ -179,6 +179,14 @@
 
 .artist-panel__readmore {
   @include rem(font-size, 12px);
+
+  &:after {
+    content: '\21AA';
+    display: inline-block;
+    vertical-align: bottom;
+    line-height: 10px;
+    margin-left: 3px;
+  }
 }
 
 .button--close {

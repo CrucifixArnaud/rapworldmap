@@ -32,7 +32,7 @@ const artistSchema = new Schema({
   },
   bio: {
     summary: String,
-    wikipediaUrl: String,
+    url: String,
     birthdate: Date,
     deathdate: Date,
     yearsActiveStart: Number,
