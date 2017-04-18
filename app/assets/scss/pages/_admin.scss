@@ -41,6 +41,12 @@
   @include rem(font-size, 24px);
 }
 
+.admin-header .main-title {
+  @include breakpoint($below-md) {
+    display: block;
+  }
+}
+
 .main-logo {
   display: block;
 }
@@ -54,6 +60,7 @@
     text-decoration: none;
   }
 }
+
 
 .page__title,
 .admin__title {
@@ -70,6 +77,10 @@
 .admin__title {
   color: #fff;
   margin-right: .2em;
+
+  @include breakpoint($below-md) {
+    margin-left: 1em;
+  }
 }
 
 .page__title .artist-name {
@@ -79,10 +90,13 @@
 // Admin Content
 .admin-content {
   background-color: $blue-mirage;
-  margin-left: 4em;
-  margin-bottom: 4em;
   padding: 2em;
-  max-width: calc(100% - 8em);
+
+  @include breakpoint($lg) {
+    max-width: calc(100% - 8em);
+    margin-left: 4em;
+    margin-bottom: 4em;
+  }
 }
 
 .admin-content__title {
@@ -105,5 +119,38 @@
 
 .table--artist {
   margin-top: 1em;
+
+  @include breakpoint($below-lg) {
+    width: 100%;
+  }
+}
+
+.table__head__cell {
+  @include breakpoint($below-md) {
+    @include rem(font-size, 12px);
+  }
+}
+
+.table__head__cell,
+.table__cell {
+  @include breakpoint($below-lg) {
+    display: inline-block;
+    width: 25%;
+  }
+}
+
+.table__cell--action {
+  @include breakpoint($below-lg) {
+    width: 100%;
+    display: block;
+  }
+}
+
+.table__head__cell--publication-date,
+.table__cell--publication-date {
+  @include breakpoint($below-lg) {
+    display: none;
+  }
+
 }
 

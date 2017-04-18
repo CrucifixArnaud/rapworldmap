@@ -11,6 +11,7 @@
 
 $sm: (min: $screen-sm-min);
 $md: (min: $screen-md-min);
+$lg: (min: $screen-lg-min);
 
 $xs-only: (max:  $screen-xs-max);
 $sm-only: (min: map-get($sm, min), max: map-get($md, min) - 1);

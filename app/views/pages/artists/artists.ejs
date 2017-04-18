@@ -14,7 +14,7 @@
               <th class="table__head__cell">Name</th>
               <th class="table__head__cell">City</th>
               <th class="table__head__cell">Categorie(s)</th>
-              <th class="table__head__cell">Creation Date</th>
+              <th class="table__head__cell table__head__cell--publication-date">Creation Date</th>
               <th class="table__head__cell">Published</th>
               <th></th>
           </tr>
@@ -31,9 +31,9 @@
                       <span><%= categorie %></span>
                     <% } %>
                   </td>
-                  <td class="table__cell"><%= moment(artist.createDate).format('MM/DD/YYYY HH:mm') %></td>
+                  <td class="table__cell table__cell--publication-date"><%= moment(artist.createDate).format('MM/DD/YYYY HH:mm') %></td>
                   <td class="table__cell"><%= artist.published %></td>
-                  <td class="table__cell">
+                  <td class="table__cell table__cell--action">
                       <a href="/artists/<%= artist.slug %>/edit" class="button--primary">Edit</a>
                       <a href="/artists/<%= artist.slug %>/delete" class="button--danger">Delete</a>
                   </td>
