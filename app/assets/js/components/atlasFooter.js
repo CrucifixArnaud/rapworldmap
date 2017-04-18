@@ -46,7 +46,7 @@ export default class AtlasFooter extends React.Component {
               <div className={'about-panel modal ' + ((this.state.aboutOpen) ? 'open' : '')}>
                 <a onClick={() => this.handleAboutClick()} className="button--close about-panel__button--close" title="Close panel">&#10799;</a>
                 <div className="about-panel__body">
-                  <h2 className="panel__title">About Rap World Map (v.1.0.0)</h2>
+                  <h2 className="panel__title">About Rap World Map (v.1.1.0)</h2>
                   <h3 className="panel__subtitle">Data Presented ({this.props.artistsTotal} artists)</h3>
                   <p>This atlas don't aim to be exhaustive. It's impossible to give a complete panel of what exists. In consequence, we have probably missed a lot of artists, don't hesitate to suggest a new addition.</p>
                   <h3 className="panel__subtitle">Localisation precision</h3>
