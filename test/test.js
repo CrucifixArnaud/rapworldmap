@@ -12,26 +12,26 @@ describe('Artists', function(){
 
     const artist = new Artist({
       name: 'Boby',
-      location: [{
+      location: {
         city: 'BobyVille',
         coordinates: '23, 23',
         neighborhood: 'Lesquer'
-      }],
+      },
       categories: 'rapper',
       image: {
         thumbnailUrl: '/path/to/url.jpg'
       },
-      bio: [{
+      bio: {
         summary: 'Boby the king',
-        wikipediaUrl: 'http://boby.com',
+        url: 'http://boby.com',
         birthdate: '01/01/1985',
         deathdate: null,
         yearsActiveStart: 2003,
         yearsActiveEnd: null
-      }],
-      youtube: [{
+      },
+      youtube: {
         clipExampleUrl: 'http://www.youtube.com'
-      }],
+      },
       published: false
     });
 
@@ -68,9 +68,9 @@ describe('Artists', function(){
   it('cannot register an artist whitout name and city', function(done) {
     const artist = new Artist({
       name: '',
-      location: [{
+      location: {
         city: ''
-      }],
+      },
       published: false
     });
 
