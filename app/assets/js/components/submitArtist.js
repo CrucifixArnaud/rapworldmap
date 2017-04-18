@@ -12,6 +12,7 @@ export default class SubmitArtist extends React.Component {
     errors: [],
     name: '',
     city: '',
+    bioUrl: '',
     clipExampleUrl: ''
   };
 
@@ -24,6 +25,7 @@ export default class SubmitArtist extends React.Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCityChange = this.handleCityChange.bind(this);
     this.handleClipChange = this.handleClipChange.bind(this);
+    this.handleBioChange = this.handleBioChange.bind(this);
   }
 
   open() {
@@ -46,14 +48,20 @@ export default class SubmitArtist extends React.Component {
     this.setState({city: e.target.value});
   }
 
+  handleBioChange(e) {
+    this.setState({bioUrl: e.target.value});
+  }
+
   handleClipChange(e) {
     this.setState({clipExampleUrl: e.target.value});
   }
 
   send() {
+
     const artist = {
       'name': this.state.name,
       'city': this.state.city,
+      'bioUrl': this.state.bioUrl,
       'clipExampleUrl': this.state.clipExampleUrl
     };
 
@@ -75,6 +83,7 @@ export default class SubmitArtist extends React.Component {
         // Empty Fields
         this.refs.name.value = '';
         this.refs.city.value = '';
+        this.refs.bioUrl.value = '';
         this.refs.clipExampleUrl.value = '';
 
         // Clean Resets all states
@@ -121,7 +130,11 @@ export default class SubmitArtist extends React.Component {
               }
             </div>
             <div className="field">
-            <label htmlFor="clipExampleUrl" className="field__label">Clip Example Url <span className="field__label--optional">(optional)</span>:</label>
+              <label htmlFor="bioUrl" className="field__label">Biography Url <span className="field__label--optional">(optional)</span>:</label>
+              <input ref="bioUrl" id="bioUrl" type="text" name="bioUrl" onChange={this.handleBioChange} />
+            </div>
+            <div className="field">
+              <label htmlFor="clipExampleUrl" className="field__label">Clip Example Url <span className="field__label--optional">(optional)</span>:</label>
               <input ref="clipExampleUrl" id="clipExampleUrl" type="text" name="clipExampleUrl" onChange={this.handleClipChange} />
             </div>
           </div>
