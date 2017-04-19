@@ -47,8 +47,6 @@
 // ---------------------
 
 .atlas-menu {
-  position: relative;
-  z-index: z(menu);
   pointer-events: none;
 }
 
@@ -60,6 +58,11 @@
   @include breakpoint($md) {
     margin-left: 1em;
   }
+}
+
+.atlas-menu .menu__item {
+  position: relative;
+  // z-index: z(footer);
 }
 
 .atlas-menu .menu__item__button {
@@ -274,9 +277,13 @@
 
 .atlas-footer {
   position: absolute;
-  z-index: z("footer");
   bottom: 0;
   left: 1em;
+}
+
+.atlas-footer .menu__item {
+  position: relative;
+  z-index: z("footer");
 }
 
 .atlas-footer .menu__item__button {
@@ -313,21 +320,4 @@
 .about-panel__body p {
   margin-left: .5em;
   line-height: 1.5;
-}
-
-.about-panel .panel__title {
-  @include rem(font-size, 22px);
-  font-weight: bold;
-}
-
-.about-panel .panel__subtitle {
-  @include rem(font-size, 18px);
-  font-weight: bold;
-}
-
-.about-panel .link-close {
-  @include rem(font-size, 12px);
-  cursor: pointer;
-  display: block;
-  margin-top: 2em;
 }

@@ -61,6 +61,7 @@ $screen-md-max:             ($screen-lg-min - 1) !default;
 $z-layers: (
   "header": 2000,
   "loader": 1750,
+  "modal": 1600,
   "footer": 1500,
   "menu": 1250,
   "panelArtist": 1000,

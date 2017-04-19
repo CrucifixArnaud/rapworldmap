@@ -20,7 +20,7 @@
   top: 0;
   right: 0;
   padding: 1em 0 3em 4em;
-  z-index: z("panelArtist");
+  z-index: z("modal");
   will-change: transform, opacity;
 
   @include breakpoint($below-md) {
@@ -38,5 +38,22 @@
 // ---------------------
 .modal {
   @include modal();
+}
+
+.modal .panel__title {
+  @include rem(font-size, 22px);
+  font-weight: bold;
+}
+
+.modal .panel__subtitle {
+  @include rem(font-size, 18px);
+  font-weight: bold;
+}
+
+.modal .link-close {
+  @include rem(font-size, 12px);
+  cursor: pointer;
+  display: block;
+  margin-top: 2em;
 }
 

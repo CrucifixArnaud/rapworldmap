@@ -76,6 +76,7 @@ export default class Atlas extends React.Component {
 
     artistsPromise.then((res) => {
       this.setState({
+        artists: res.features,
         artistsTotal: res.features.length,
         geojson: res
       });
@@ -125,10 +126,7 @@ export default class Atlas extends React.Component {
       });
 
       marker.addEventListener('click', () => {
-        this.setState({
-          artist: artist
-        });
-        this.refs.panel.open();
+        this.refs.artistPanel.updateArtist(artist);
       });
 
       marker.addEventListener('mouseover', (e) => {
@@ -168,14 +166,32 @@ export default class Atlas extends React.Component {
     this.map.setView([lat, lng], zoom);
   }
 
+  showArtist(artist) {
+    // Retrieve and extract correct lng / lat from artist coordinates
+    const coordinates = JSON.parse( '[' + artist.coordinates + ']');
+    const lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
+    const lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
+
+    // Find the artist to show inside the current artists state using the artist.index (receive from search)
+    const newArtist = this.state.artists[artist.index].properties;
+
+    // Update artist panel
+    this.refs.artistPanel.updateArtist(newArtist);
+
+    // Only center view after 500ms (hardcoded value to "avoid" view repainting during avatar repainting for better perf)
+    setTimeout(() => {
+      this.centerView(lat, lng, 13);
+    }, 500);
+  }
+
   render() {
     return (
       <div>
-        <AtlasNotifications bus={bus} />
-        <AtlasMenu centerView={this.centerView.bind(this)} bus={bus} />
-        <AtlasFooter artistsTotal={this.state.artistsTotal} />
         <div id='map' className='mapbox'></div>
-        <ArtistPanel ref='panel' centerView={this.centerView.bind(this)} artist={this.state.artist} />
+        <AtlasNotifications bus={bus} />
+        <AtlasMenu centerView={this.centerView.bind(this)} showArtist={this.showArtist.bind(this)} bus={bus} />
+        <AtlasFooter artistsTotal={this.state.artistsTotal} />
+        <ArtistPanel ref='artistPanel' centerView={this.centerView.bind(this)} artist={this.state.artist} />
       </div>
     );
   }

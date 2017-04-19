@@ -13,6 +13,7 @@ const Artist = require('./artist.model'),
 //====== Export method ======
 module.exports = {
   showArtists: showArtists,
+  getArtistsIndex: getArtistsIndex,
   showSingle: showSingle,
   showCreate: showCreate,
   processCreate: processCreate,
@@ -438,5 +439,45 @@ function getArtistsGeojson (req, res) {
     };
 
     res.status(200).json(geojson);
+  });
+}
+
+/**
+ * [showArtistsJson Return an index of all artists in json]
+ */
+function getArtistsIndex (req, res) {
+  Artist.find({
+    'published': true
+  }, (err, artists) => {
+
+    if(err) {
+      res.status(404);
+      res.send('Artists not found!');
+    }
+
+    var result = {
+      'index': {},
+      'data': []
+    };
+
+    for (var i = artists.length - 1; i >= 0; i--) {
+      var artist = artists[i];
+
+      result.index[artist.slug] = (artists.length - 1) - i;
+
+      result.data.push({
+        'index': (artists.length - 1) - i,
+        'slug': artist.slug,
+        'name': artist.name,
+        'city': artist.location.city,
+        'neighborhood': artist.location.neighborhood,
+        'coordinates': artist.location.coordinates,
+        'categories': artist.categories,
+        'summary': artist.bio.summary,
+        'thumbnail': artist.image.thumbnailUrl
+      });
+    }
+
+    res.status(200).json(result);
   });
 }

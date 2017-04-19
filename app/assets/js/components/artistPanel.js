@@ -7,6 +7,7 @@ export default class ArtistPanel extends React.Component {
 
     // State
     this.state = {
+      artist: this.props.artist,
       open: false,
       reduce: false,
       youtubeClip: false
@@ -19,30 +20,41 @@ export default class ArtistPanel extends React.Component {
     this.handleClickOnCity = this.handleClickOnCity.bind(this);
   }
 
+  updateArtist(artist) {
+    this.setState({
+      artist: artist
+    }, () => {
+      this.open();
+    });
+
+  }
+
   open() {
     this.setState({
       open: true
+    }, () => {
+      if (this.state.artist.youtube.clipExampleUrl) {
+        setTimeout(() => {
+          this.setState({
+            youtubeClip: true
+          });
+        }, 750);
+      }
     });
 
-    if (this.props.artist.youtube.clipExampleUrl) {
-      setTimeout(() => {
-        this.setState({
-          youtubeClip: true
-        });
-      }, 750);
-    }
   }
 
   close() {
     this.setState({
       open: false
+    }, () => {
+      if (this.state.artist.youtube.clipExampleUrl) {
+        this.setState({
+          youtubeClip: false
+        });
+      }
     });
 
-    if (this.props.artist.youtube.clipExampleUrl) {
-      this.setState({
-        youtubeClip: false
-      });
-    }
   }
 
   reduce() {
@@ -64,7 +76,7 @@ export default class ArtistPanel extends React.Component {
   }
 
   handleClickOnCity() {
-    const coordinates = JSON.parse( '[' + this.props.artist.location.coordinates + ']');
+    const coordinates = JSON.parse( '[' + this.state.artist.location.coordinates + ']');
     const lng = coordinates.slice(0, coordinates.indexOf(',')).toString();
     const lat = coordinates.slice(coordinates.indexOf(','), coordinates.length).toString();
     this.props.centerView(lat, lng, 13);
@@ -72,43 +84,43 @@ export default class ArtistPanel extends React.Component {
 
   render() {
 
-    if(this.props.artist) {
-      const tagsList = this.props.artist.categories.map(function(category, key) {
+    if(this.state.artist) {
+      const tagsList = this.state.artist.categories.map(function(category, key) {
         return <li key={key} className='artist-panel__categories__item'>{category}</li>;
       });
 
       let artistBio;
-      if (this.props.artist.bio.summary) {
+      if (this.state.artist.bio.summary) {
         artistBio = (
-          <p>{this.props.artist.bio.summary}</p>
+          <p>{this.state.artist.bio.summary}</p>
         );
       }
 
       let artistBioUrl;
-      if (this.props.artist.bio.url) {
+      if (this.state.artist.bio.url) {
         artistBioUrl = (
-          <a className="artist-panel__readmore" title="Read more on an external website" href={this.props.artist.bio.url}>Read more about {this.props.artist.name}</a>
+          <a className="artist-panel__readmore" title="Read more on an external website" href={this.state.artist.bio.url}>Read more about {this.state.artist.name}</a>
         );
       }
 
       let artistLocationNeighborhood;
-      if (this.props.artist.location.neighborhood) {
+      if (this.state.artist.location.neighborhood) {
         artistLocationNeighborhood = (
-          <span className="artist-panel__location__neighborhood">{this.props.artist.location.neighborhood} - </span>
+          <span className="artist-panel__location__neighborhood">{this.state.artist.location.neighborhood} - </span>
         );
       }
 
       let artistLocationCountry;
-      if (this.props.artist.location.country) {
+      if (this.state.artist.location.country) {
         artistLocationCountry = (
-          <span className="artist-panel__location__country">({this.props.artist.location.country})</span>
+          <span className="artist-panel__location__country">({this.state.artist.location.country})</span>
         );
       }
 
       let artistYearsActive;
-      if (this.props.artist.bio.yearsActiveStart) {
+      if (this.state.artist.bio.yearsActiveStart) {
         artistYearsActive = (
-          <span className="artist-panel__yearsactive">(Years active: {this.props.artist.bio.yearsActiveStart} {(this.props.artist.bio.yearsActiveEnd) ? ' - ' + this.props.artist.bio.yearsActiveEnd : '- present'})</span>
+          <span className="artist-panel__yearsactive">(Years active: {this.state.artist.bio.yearsActiveStart} {(this.state.artist.bio.yearsActiveEnd) ? ' - ' + this.state.artist.bio.yearsActiveEnd : '- present'})</span>
         );
       }
 
@@ -117,13 +129,13 @@ export default class ArtistPanel extends React.Component {
           <div className={'artist-panel ' + ((this.state.open) ? 'open' : '') + ' ' + ((this.state.reduce) ? 'reduce' : '')}>
             <a onClick={() => this.close()} className="artist-panel__button--close button--close" title="Close panel">&#10799;</a>
             <div className="artist-panel__thumbnail">
-              <img className="artist-panel__thumbnail__picture" src={'/uploads/medium-' + this.props.artist.image.thumbnailUrl} />
+              <img className="artist-panel__thumbnail__picture" src={'/uploads/medium-' + this.state.artist.image.thumbnailUrl} />
             </div>
             <div className="artist-panel__body">
-              <h2 className="artist-panel__name">{this.props.artist.name}</h2>
+              <h2 className="artist-panel__name">{this.state.artist.name}</h2>
               <div className="artist-panel__location">
                 { artistLocationNeighborhood }
-                <a onClick={() => this.handleClickOnCity()} className="artist-panel__location__city">{this.props.artist.location.city} </a>
+                <a onClick={() => this.handleClickOnCity()} className="artist-panel__location__city">{this.state.artist.location.city} </a>
                 { artistLocationCountry }
               </div>
               { artistYearsActive }
@@ -139,7 +151,7 @@ export default class ArtistPanel extends React.Component {
             </div>
             {this.state.youtubeClip &&
               <div className={'artist-panel__youtube' + ((this.state.youtubeClip) ? ' open' : '')}>
-                <iframe className="artist-panel__youtube__embed" src={this.props.artist.youtube.clipExampleUrl} frameBorder="0" allowFullScreen="allowfullscreen"></iframe>
+                <iframe className="artist-panel__youtube__embed" src={this.state.artist.youtube.clipExampleUrl} frameBorder="0" allowFullScreen="allowfullscreen"></iframe>
                 <svg className="artist-panel__youtube__background" height="182px" width="340px">
                   <path d="M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z" style={{fill:'#ffd700'}} />
                 </svg>

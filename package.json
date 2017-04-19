@@ -41,6 +41,7 @@
     "express-ejs-layouts": "2.2.0",
     "express-validator": "2.21.0",
     "leaflet.markercluster": "1.0.0",
+    "lunr": "^2.0.2",
     "mapbox.js": "3.0.1",
     "moment": "2.15.2",
     "mongoose": "4.6.4",
