@@ -138,7 +138,7 @@ export default class SearchArtist extends React.Component {
           {this.state.searchResults.length > 0 &&
             <ul className="search-result">{artistsResult}</ul>
           }
-          <a onClick={() => this.close()} className="link-close" title="Close panel" tabIndex="0">Close this modal</a>
+          <button onClick={() => this.close()} className="link-close" title="Close panel" tabIndex="0">Close this modal</button>
         </div>
       </div>
     );

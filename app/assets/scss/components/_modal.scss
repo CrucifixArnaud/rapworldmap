@@ -51,6 +51,7 @@
 }
 
 .modal .link-close {
+  @include button-link($yellow-gold);
   @include rem(font-size, 12px);
   cursor: pointer;
   margin-top: 2em;

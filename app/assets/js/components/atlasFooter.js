@@ -62,7 +62,7 @@ export default class AtlasFooter extends React.Component {
                   <p>Rapworldmap.com is licensed under the terms of the <a href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
                   <h3 className="panel__subtitle">See also</h3>
                   <p><a href="http://rapatlas.com/">Rapatlas.com</a>, a similar project created by <a href="http://jongerlach.com/" title="Visit Jon Gerlach portfolio">Jon Gerlach</a>.</p>
-                  <a onClick={() => this.handleAboutClick()} className="link-close" title="Close panel" tabIndex="0">Close this modal</a>
+                  <button onClick={() => this.handleAboutClick()} className="link-close" title="Close panel" tabIndex="0">Close this modal</button>
                 </div>
               </div>
             </ClickOutHandler>

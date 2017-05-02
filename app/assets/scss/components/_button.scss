@@ -133,6 +133,21 @@
   }
 }
 
+// Button Link
+@mixin button-link($color) {
+  border: 0;
+  background-color: transparent;
+  color: $color;
+
+  // Hover, focus, active interactions
+  &:hover,
+  &:focus,
+  &:active {
+    outline-color: $yellow-gold;
+    text-decoration: underline;
+  }
+}
+
 // Size Variation
 %button-size-default {
   @include rem(font-size, 15px);
