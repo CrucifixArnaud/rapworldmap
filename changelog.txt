@@ -1,0 +1,18 @@
+== Changelog ==
+
+= 1.2.0 - 02 May 2017 =
+* Refactor keyboard navigation.
+* Search artists.
+* Fix responsive issue.
+
+= 1.1.0 - 18 April 2017 =
+* Show artist name on marker hover.
+* Change artist.bio.wikipediaUrl to artist.bio.url.
+* Add artist.bio.url input for artist submit.
+* Add og attribute.
+
+= 1.0.1 - 28 March 2017 =
+* Fix minor bug & typo (error handling, etc).
+
+= 1.0.0 - 27 March 2017 =
+* Initial release.
