@@ -17,6 +17,14 @@ export default class AtlasFooter extends React.Component {
       this.setState({
         aboutOpen: true
       });
+
+      // Focus on modalAbout on modalAbout visibility transition end
+      this.refs.modalAbout.addEventListener('transitionend', (event) => {
+        if(event.propertyName === 'visibility') {
+          this.refs.modalAbout.focus();
+        }
+      });
+
     } else {
       this.setState({
         aboutOpen: false
@@ -40,11 +48,11 @@ export default class AtlasFooter extends React.Component {
         <ul className="menu">
           <li className="menu__item menu__item--about-panel">
             <ClickOutHandler ref="aboutHandler" onClickOut={() => this.clickOutsideAbout()}>
-              <button className="menu__item__button" onClick={(e) => this.handleAboutClick(e)}>
+              <button className="menu__item__button" tabIndex="4" onClick={(e) => this.handleAboutClick(e)}>
                 <span className="button__label">About Rap World Map ?</span>
               </button>
-              <div className={'about-panel modal ' + ((this.state.aboutOpen) ? 'open' : '')}>
-                <a onClick={() => this.handleAboutClick()} className="button--close about-panel__button--close" title="Close panel">&#10799;</a>
+              <div tabIndex="-1" ref="modalAbout" className={'about-panel modal ' + ((this.state.aboutOpen) ? 'open' : '')}>
+                <button type="button" onClick={() => this.handleAboutClick()} className="button--close about-panel__button--close" title="Close panel">&#10799;</button>
                 <div className="about-panel__body">
                   <h2 className="panel__title">About Rap World Map (v.1.1.0)</h2>
                   <h3 className="panel__subtitle">Data Presented ({this.props.artistsTotal} artists)</h3>

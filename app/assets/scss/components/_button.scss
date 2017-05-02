@@ -124,7 +124,7 @@
   // Hover, focus, active interactions
   &:hover:not(.disable),
   &:focus:not(.disable) {
-    outline: none;
+    outline-color: $color;
     color: darken($color, 10);
   }
 

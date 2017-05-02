@@ -33,6 +33,13 @@ export default class ArtistPanel extends React.Component {
     this.setState({
       open: true
     }, () => {
+
+      this.refs.panelArtist.addEventListener('transitionend', () => {
+        if(event.propertyName === 'visibility') {
+          this.refs.panelArtist.focus();
+        }
+      });
+
       if (this.state.artist.youtube.clipExampleUrl) {
         setTimeout(() => {
           this.setState({
@@ -99,7 +106,7 @@ export default class ArtistPanel extends React.Component {
       let artistBioUrl;
       if (this.state.artist.bio.url) {
         artistBioUrl = (
-          <a className="artist-panel__readmore" title="Read more on an external website" href={this.state.artist.bio.url}>Read more about {this.state.artist.name}</a>
+          <a tabIndex="0" className="artist-panel__readmore" title="Read more on an external website" href={this.state.artist.bio.url}>Read more about {this.state.artist.name}</a>
         );
       }
 
@@ -126,8 +133,8 @@ export default class ArtistPanel extends React.Component {
 
       return (
         <ClickOutHandler ref="panelHandler" onClickOut={this.clickOutside}>
-          <div className={'artist-panel ' + ((this.state.open) ? 'open' : '') + ' ' + ((this.state.reduce) ? 'reduce' : '')}>
-            <a onClick={() => this.close()} className="artist-panel__button--close button--close" title="Close panel">&#10799;</a>
+          <div tabIndex="-1" ref="panelArtist" className={'artist-panel ' + ((this.state.open) ? 'open' : '') + ' ' + ((this.state.reduce) ? 'reduce' : '')}>
+            <button type="button" onClick={() => this.close()} className="artist-panel__button--close button--close" title="Close panel">&#10799;</button>
             <div className="artist-panel__thumbnail">
               <img className="artist-panel__thumbnail__picture" src={'/uploads/medium-' + this.state.artist.image.thumbnailUrl} />
             </div>

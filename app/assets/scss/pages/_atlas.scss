@@ -67,12 +67,6 @@
 
 .atlas-menu .menu__item__button {
 
-  &:hover .button__label,
-  &:focus .button__label,
-  &:active .button__label {
-    text-decoration: underline;
-  }
-
   @include breakpoint($below-md) {
     width: 90px;
     transform: scale(.8);

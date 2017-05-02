@@ -24,11 +24,11 @@
   transition: color .2s ease;
   @include rem(font-size, 30px);
 
-  &:hover,
-  &:focus,
-  &:active {
-    color: darken($yellow-gold, 15);
-  }
+  // &:hover,
+  // &:focus,
+  // &:active {
+  //   color: darken($yellow-gold, 15);
+  // }
 }
 
 .panel__title {
@@ -39,6 +39,10 @@
 // ---------------------
 
 .artist-panel {
+
+  &:focus {
+    outline: none;
+  }
 
   @include breakpoint($below-md) {
     @include modal();
@@ -192,14 +196,19 @@
 .button--close {
   line-height: 1;
   position: absolute;
-  transition: color .2s ease;
+  // transition: color .2s ease;
+
+  @include button-transparent($yellow-gold);
+
   @include rem(font-size, 30px);
 
-  &:hover,
-  &:focus,
-  &:active {
-    color: darken($yellow-gold, 15);
-  }
+  // &:hover,
+  // &:focus,
+  // &:active {
+  //   outline: initial;
+  //   outline-color: $yellow-gold;
+  //   // color: darken($yellow-gold, 15);
+  // }
 }
 
 .artist-panel__button--close {
@@ -316,6 +325,10 @@
 }
 
 .submit-artist-panel {
+
+  &:focus {
+    outline: none;
+  }
 
   @include breakpoint($below-md) {
     @include modal();
@@ -503,6 +516,11 @@
   @include rem(font-size, 14px);
   cursor: pointer;
   padding: 0;
+  background: transparent;
+  border: 0;
+  color: $yellow-gold;
+  appearance: none;
+  width: 100%;
 
   &:hover,
   &:focus,

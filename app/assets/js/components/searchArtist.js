@@ -53,7 +53,7 @@ export default class SearchArtist extends React.Component {
 
     // Focus on searchTermsInput on modalSearch visibility transition end
     this.refs.modalSearch.addEventListener('transitionend', (event) => {
-      if(event.propertyName == 'visibility') {
+      if(event.propertyName === 'visibility') {
         this.refs.searchTermsInput.focus();
       }
     });
@@ -114,19 +114,19 @@ export default class SearchArtist extends React.Component {
     const artistsResult = this.state.searchResults.map((artist, step) => {
       return (
         <li className="search-result__item" key={step}>
-          <a className="search-result__item__link" tabIndex="0" onClick={() => this.handleClickOnArtist(artist)}>
+          <button type="button" className="search-result__item__link" tabIndex="0" onClick={() => this.handleClickOnArtist(artist)}>
             <div className="search-result__item__thumbnail">
               <img src={'/uploads/medium-' + artist.thumbnail} alt="" />
             </div>
             <p>{artist.name} <span className="search-result__item__location">({artist.city})</span></p>
-          </a>
+          </button>
         </li>
       );
     });
 
     return (
       <div ref="modalSearch" className={'modal ' + ((this.state.open) ? 'open' : '')}>
-        <a onClick={() => this.close()} className="button--close about-panel__button--close" title="Close panel" tabIndex="0">&#10799;</a>
+        <button type="button" onClick={() => this.close()} className="button--close about-panel__button--close" title="Close panel" tabIndex="0">&#10799;</button>
         <div className="search-panel__body">
           <h2 className="panel__title">Search an artist</h2>
           <div className="field field--search">

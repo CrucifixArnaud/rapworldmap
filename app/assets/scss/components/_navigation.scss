@@ -15,4 +15,16 @@
   pointer-events: auto;
   @include rem(font-size, 14px);
   @include button-transparent(#fff);
+
+  &:hover:not(.disable),
+  &:focus:not(.disable),
+  &:active:not(.disable) {
+    outline: none;
+  }
+}
+
+.menu__item__button:hover .button__label,
+.menu__item__button:focus .button__label,
+.menu__item__button:active .button__label {
+  text-decoration: underline;
 }
