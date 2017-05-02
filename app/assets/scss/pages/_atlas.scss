@@ -161,6 +161,10 @@
      right: 0;
 }
 
+.marker-wrapper {
+  outline: none;
+}
+
 .marker {
   white-space: nowrap;
 }
@@ -183,6 +187,7 @@
   z-index: z(markerIcon);
 }
 
+.marker-wrapper:focus .marker__icon,
 .marker:hover .marker__icon,
 .marker:focus .marker__icon {
   box-shadow: 0 0 0 2px $yellow-gold;
@@ -216,6 +221,7 @@
   }
 }
 
+.marker-wrapper:focus .marker .marker__title,
 .marker:hover .marker__title,
 .marker:focus .marker__title {
   visibility: visible;
@@ -248,6 +254,7 @@
   &:focus,
   &:active {
     background-color: rgba(255, 0, 102, .5);
+    outline-color: $pink-rose;
   }
 }
 
@@ -264,6 +271,7 @@
   &:focus,
   &:active {
     background-color: rgba(143, 57, 154, .6);
+    outline-color: $purple-vivid;
   }
 }
 
