@@ -32,6 +32,7 @@ a {
   &:focus,
   &:active {
     text-decoration: underline;
+    outline-color: $yellow-gold;
   }
 }
 
