@@ -117,30 +117,30 @@ export default class SubmitArtist extends React.Component {
           <div className="field-group">
             <div className="field">
               <label htmlFor="name" className="field__label">Name:</label>
-              <input ref="name" id="name" type="text" name="name" onChange={this.handleNameChange} />
+              <input ref="name" id="name" type="text" name="name" tabIndex="2" onChange={this.handleNameChange} />
               {errorName &&
                 <label htmlFor="name" className="field-error">{errorName.msg}</label>
               }
             </div>
             <div className="field">
               <label htmlFor="city" className="field__label">City:</label>
-              <input ref="city" id="city" type="text" name="city" onChange={this.handleCityChange} />
+              <input ref="city" id="city" type="text" name="city" tabIndex="2" onChange={this.handleCityChange} />
               {errorCity &&
                 <label htmlFor="name" className="field-error">{errorCity.msg}</label>
               }
             </div>
             <div className="field">
               <label htmlFor="bioUrl" className="field__label">Biography Url <span className="field__label--optional">(optional)</span>:</label>
-              <input ref="bioUrl" id="bioUrl" type="text" name="bioUrl" onChange={this.handleBioChange} />
+              <input ref="bioUrl" id="bioUrl" type="text" name="bioUrl" tabIndex="2" onChange={this.handleBioChange} />
             </div>
             <div className="field">
               <label htmlFor="clipExampleUrl" className="field__label">Clip Example Url <span className="field__label--optional">(optional)</span>:</label>
-              <input ref="clipExampleUrl" id="clipExampleUrl" type="text" name="clipExampleUrl" onChange={this.handleClipChange} />
+              <input ref="clipExampleUrl" id="clipExampleUrl" type="text" tabIndex="2" name="clipExampleUrl" onChange={this.handleClipChange} />
             </div>
           </div>
           <div className="field-group">
             <div className="field">
-              <button onClick={() => this.send()} className="button--primary--md" type="button">Submit</button>
+              <button onClick={() => this.send()} className="button--primary--md" tabIndex="2" type="button">Submit</button>
             </div>
           </div>
         </div>

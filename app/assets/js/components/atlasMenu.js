@@ -60,6 +60,13 @@ export default class AtlasMenu extends React.Component {
     children.forEach((item, index) => {
       setTimeout(() => {
         item.classList.toggle('open');
+
+        if(this.state.areaOpen === true) {
+          item.firstChild.setAttribute('tabindex', '1');
+        } else {
+          item.firstChild.removeAttribute('tabindex');
+        }
+
       }, 50 * index);
     });
   }
@@ -110,7 +117,7 @@ export default class AtlasMenu extends React.Component {
         <ul className="menu">
           <li className="menu__item">
             <ClickOutHandler ref="areaHandler" onClickOut={this.clickOutsideArea}>
-              <button className="menu__item__button" onClick={(e) => this.toggleAreaMenu(e)}>
+              <button className="menu__item__button" tabIndex="1" onClick={(e) => this.toggleAreaMenu(e)}>
                 <img className="button__icon" src="/images/placeofinterrests/placeofinterrests.svg" width="63px" height="49px" alt="" />
                 <span className="button__label">Areas</span>
               </button>
@@ -192,7 +199,7 @@ export default class AtlasMenu extends React.Component {
           </li>
           <li className="menu__item menu__item--submit-artist">
             <ClickOutHandler ref="submitHandler" onClickOut={this.clickOutsideSubmit}>
-              <button className="menu__item__button" onClick={(e) => this.handleSubmitArtistClick(e)}>
+              <button className="menu__item__button" tabIndex="2" onClick={(e) => this.handleSubmitArtistClick(e)}>
                 <img className="button__icon" src="/images/submit-artist.svg" width="58px" height="45px" alt="" />
                 <span className="button__label">Submit an entry</span>
               </button>
@@ -201,7 +208,7 @@ export default class AtlasMenu extends React.Component {
           </li>
           <li className="menu__item menu__item--search-artist">
             <ClickOutHandler ref="searchHandler" onClickOut={this.clickOutsideSearch}>
-              <button className="menu__item__button" onClick={(e) => this.handleSearchArtistClick(e)}>
+              <button className="menu__item__button" tabIndex="3" onClick={(e) => this.handleSearchArtistClick(e)}>
                 <img className="button__icon" src="/images/search-artist.svg" width="58px" height="38px" alt="" />
                 <span className="button__label">Search an artist</span>
               </button>
