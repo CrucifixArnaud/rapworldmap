@@ -22,7 +22,8 @@
 // Table cell
 .table__cell {
   padding: .5em 1em;
-  @include rem(font-size, 15px);
+  @include rem(font-size, 13px);
+  max-width: 200px;
 }
 
 // Table head

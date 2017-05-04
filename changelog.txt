@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.2.2 - 04 May 2017 =
+* Add youtube link and bio link in admin.
+
 = 1.2.1 - 04 May 2017 =
 * Add a maintenance page.
 * Fix minor focus and hover visual issue.
