@@ -59,7 +59,7 @@ export default class Atlas extends React.Component {
   }
 
   componentWillMount() {
-    L.mapbox.accessToken = 'pk.eyJ1IjoiY3J1Y2lmaXhhcm5hdWQiLCJhIjoiY2lxejJocHB6MDA1dWkybWc1MnhyMWRoOCJ9.BcDRx2fZ0sl3q5ofSTbZ_g';
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZHJ5LW1hY2Fyb255IiwiYSI6ImNqMmFkbTI5cTAwMG0zM3FnaWt5bWlneGIifQ.Ptz6oVTtQdoFGKWgx8mDgA';
 
     const artistsGeojsonUrl = window.location.href + 'artists/geojson';
 
