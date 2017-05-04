@@ -23,12 +23,6 @@
   float: right;
   transition: color .2s ease;
   @include rem(font-size, 30px);
-
-  // &:hover,
-  // &:focus,
-  // &:active {
-  //   color: darken($yellow-gold, 15);
-  // }
 }
 
 .panel__title {
@@ -194,21 +188,11 @@
 }
 
 .button--close {
-  line-height: 1;
   position: absolute;
-  // transition: color .2s ease;
 
   @include button-transparent($yellow-gold);
 
   @include rem(font-size, 30px);
-
-  // &:hover,
-  // &:focus,
-  // &:active {
-  //   outline: initial;
-  //   outline-color: $yellow-gold;
-  //   // color: darken($yellow-gold, 15);
-  // }
 }
 
 .artist-panel__button--close {
@@ -481,16 +465,7 @@
 }
 
 .search-result {
-
-  // display: inline;
-  // position: absolute;
-  //
-  // background: rgba(27 ,43 ,52 , .8);
-  // width: 100%;
-  // max-width: 360px;
-  // padding: 1em;
   list-style-type: none;
-  // overflow: auto;
   display: flex;
   align-items: stretch;
   flex-wrap: wrap;
@@ -559,7 +534,6 @@
 .search-result__item__link:hover .search-result__item__thumbnail:after,
 .search-result__item__link:focus .search-result__item__thumbnail:after,
 .search-result__item__link:active .search-result__item__thumbnail:after {
-  // opacity: 1;
   background: rgba(255, 215, 0, .4);
 }
 

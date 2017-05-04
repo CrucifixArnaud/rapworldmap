@@ -124,8 +124,15 @@
   // Hover, focus, active interactions
   &:hover:not(.disable),
   &:focus:not(.disable) {
-    outline-color: $color;
     color: darken($color, 10);
+  }
+
+  &:hover:not(.disable) {
+    outline: none;
+  }
+
+  &:focus:not(.disable) {
+    outline-color: $color;
   }
 
   &:active:not(.disable) {
@@ -143,8 +150,15 @@
   &:hover,
   &:focus,
   &:active {
-    outline-color: $yellow-gold;
     text-decoration: underline;
+  }
+
+  &:hover {
+    outline: none;
+  }
+
+  &:focus {
+    outline-color: $yellow-gold;
   }
 }
 
