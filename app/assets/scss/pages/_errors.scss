@@ -1,0 +1,16 @@
+/*------------------------------------*\
+  > Page Errors
+  Specific style for errors page
+\*------------------------------------*/
+
+// Maintenance Page
+// ---------------------
+
+.errors-container {
+  padding: 2em;
+  @include rem(font-size, 18px);
+}
+
+.error__content {
+  padding-left: 1em;
+}

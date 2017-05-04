@@ -1,23 +1,23 @@
-// atlas.controller.js
+// errors.controller.js
 //==============================================
 
 //====== Define depencies ======
 
 //====== Export method ======
 module.exports = {
-  showAtlas: showAtlas
+  showMaintenance: showMaintenance
 };
 
 //====== Methods ======
 
 /**
- * [showAtlas Show the atlas]
+ * [showMaintenance Show the maintenance]
  */
-function showAtlas (req, res) {
+function showMaintenance (req, res) {
   const locals = {
     slug: 'page-atlas',
-    title: 'An Atlas of World Rap',
+    title: 'Under maintenance',
     description: 'Discover rap artists from all around the world.'
   };
-  res.render('pages/atlas/atlas', locals);
+  res.render('pages/errors/maintenance', locals);
 }
