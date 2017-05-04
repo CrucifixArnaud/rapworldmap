@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.2.1 - 04 May 2017 =
+* Add a maintenance page.
+* Fix minor focus and hover visual issue.
+
 = 1.2.0 - 02 May 2017 =
 * Refactor keyboard navigation.
 * Search artists.
