@@ -59,7 +59,9 @@ export default class Atlas extends React.Component {
   }
 
   componentWillMount() {
-    L.mapbox.accessToken = 'pk.eyJ1IjoiY3J1Y2lmaXhhcm5hdWQiLCJhIjoiY2lxejJocHB6MDA1dWkybWc1MnhyMWRoOCJ9.BcDRx2fZ0sl3q5ofSTbZ_g';
+    // Get mapbox api token from .env file (injected into app container)
+    const mapboxToken = document.getElementById('app').dataset.mapboxtoken;
+    L.mapbox.accessToken = mapboxToken;
 
     const artistsGeojsonUrl = window.location.href + 'artists/geojson';
 
