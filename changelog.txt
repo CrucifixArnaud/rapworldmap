@@ -1,5 +1,13 @@
 == Changelog ==
 
+= 1.2.4 - 08 May 2017 =
+* Read mapbox token api from .env
+* Fix spelling in about and readme.
+
+= 1.2.3 - 06 May 2017 =
+* Allow access to backend in maintenance.
+* Fix typo in maintenance page.
+
 = 1.2.2 - 04 May 2017 =
 * Add youtube link and bio link in admin.
 

@@ -54,12 +54,12 @@ export default class AtlasFooter extends React.Component {
               <div tabIndex="-1" ref="modalAbout" className={'about-panel modal ' + ((this.state.aboutOpen) ? 'open' : '')}>
                 <button type="button" onClick={() => this.handleAboutClick()} className="button--close about-panel__button--close" title="Close panel">&#10799;</button>
                 <div className="about-panel__body">
-                  <h2 className="panel__title">About Rap World Map (v.1.2.2)</h2>
+                  <h2 className="panel__title">About Rap World Map (v.1.2.4)</h2>
                   <h3 className="panel__subtitle">Data Presented ({this.props.artistsTotal} artists)</h3>
-                  <p>This atlas don't aim to be exhaustive. It's impossible to give a complete panel of what exists. In consequence, we have probably missed a lot of artists, don't hesitate to suggest a new addition.</p>
+                  <p>This atlas doesn't aim to be exhaustive. It's impossible to give a complete panel of what exists. In consequence, we have probably missed a lot of artists, don't hesitate to suggest a new addition.</p>
                   <h3 className="panel__subtitle">Localisation precision</h3>
-                  <p>We have decided to locate each artist where they grow up or where they spent a significant part of their life instead of their born place (which could be sometime irrelevant). It could occur in some strong, opinionated decision.</p>
-                  <p>The exact localisation of some artists is quite easy to find (we know in which house, street, they grew up, etc.), but for the other one it's not the case. We try to locate their childhood neighborhood, where they went to school, and display them there. If the only know information is the city, we choose a random set of coordinates in this area.</p>
+                  <p>We have decided to locate each artist based on where they grew up or where they spent a significant part of their life instead of their born place (which could be sometime irrelevant). It could occur in some strong, opinionated decision.</p>
+                  <p>The exact location of some artists is quite easy to find (we know in which house or street they grew up, etc.), but for the other ones it's not the case. We have tried to locate their childhood neighborhood, where they went to school, and have displayed them there. If the only known information is the city, we have chosen a random set of coordinates in this area.</p>
                   <p>If you think we have made a major mistake about an artist, don't hesitate to <a href="mailto:contact@rapworldmap.com">contact us</a> with your remarks, we will adapt the database based on your input.</p>
                   <h3 className="panel__subtitle">Suggestions, comments, remarks ?</h3>
                   <p>Contact us on <a href="mailto:contact@rapworldmap.com">contact@rapworldmap.com</a></p>
