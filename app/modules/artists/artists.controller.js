@@ -229,7 +229,15 @@ function processSubmit(req, res) {
       from: process.env.MAIL_FROM,
       to: process.env.MAIL_TO,
       subject: 'Rap World Map - New entry submited: ' + req.body.name,
-      html: '<p>A new entry was submited.</p> <ul><li>Name: ' + req.body.name + '</li> <li>City: ' + req.body.city + '</li></ul> <a href="http://rapworldmap.com/login">Edit the entry on rapworldmap.com</a>'
+      html: `
+        <p>A new entry was submited.</p>
+        <ul>
+          <li>Name: ${req.body.name}</li>
+          <li>City: ${req.body.city}</li>
+          <li>Bio Url: ${req.body.bioUrl}</li>
+          <li>Clip Url: ${req.body.clipExampleUrl}</li>
+        </ul>
+        <a href="http://rapworldmap.com/login">Edit the entry on rapworldmap.com</a>`
     };
 
     transporter.sendMail(mailOptions, function(error, info) {

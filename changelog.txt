@@ -1,6 +1,7 @@
 == Changelog ==
 
 = 1.2.4 - 08 May 2017 =
+* Adapt admin ui for simplier artists management
 * Read mapbox token api from .env
 * Fix spelling in about and readme.
 
