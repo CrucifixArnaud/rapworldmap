@@ -44,7 +44,8 @@
                     <% } %>
                   </td>
                   <td class="table__cell table__cell--publication-date"><%= moment(artist.createDate).format('MM/DD/YYYY HH:mm') %></td>
-                  <td class="table__cell"><%= artist.published %></td>
+
+                  <td class="table__cell <%= artist.published === false ? 'unpublished' : '' %>"><%= artist.published %></td>
                   <td class="table__cell table__cell--action">
                       <a href="/artists/<%= artist.slug %>/edit" class="button--primary">Edit</a>
                       <a href="/artists/<%= artist.slug %>/delete" class="button--danger">Delete</a>
