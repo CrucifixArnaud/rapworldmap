@@ -357,9 +357,10 @@ function processEdit(req, res) {
     artist.published = published;
 
     artist.save( (err) => {
-      // If error stop and display it
-      if(err)
-        throw err;
+      if (err) {
+        req.flash('errors', err.msg);
+        return res.redirect('back');
+      }
 
       // Set flash success
       // Redirect to artists
