@@ -1,5 +1,16 @@
 == Changelog ==
 
+= 1.2.5 - 16 July 2017 =
+* Update various package
+* Handle error message for too large file
+* Fix error handling for duplicate artist entry
+* Configure basic Gitlab pipeline for test
+
+= 1.2.4 - 08 May 2017 =
+* Adapt admin ui for simplier artists management
+* Read mapbox token api from .env
+* Fix spelling in about and readme.
+
 = 1.2.4 - 08 May 2017 =
 * Adapt admin ui for simplier artists management
 * Read mapbox token api from .env
@@ -16,12 +27,12 @@
 * Add a maintenance page.
 * Fix minor focus and hover visual issue.
 
-= 1.2.0 - 02 May 2017 =
+= 1.2.0 - 02 May 2017 - Grandmaster Flash Release =
 * Refactor keyboard navigation.
 * Search artists.
 * Fix responsive issue.
 
-= 1.1.0 - 18 April 2017 =
+= 1.1.0 - 18 April 2017 - Afrika Bambaataa Release =
 * Show artist name on marker hover.
 * Change artist.bio.wikipediaUrl to artist.bio.url.
 * Add artist.bio.url input for artist submit.
@@ -30,5 +41,5 @@
 = 1.0.1 - 28 March 2017 =
 * Fix minor bug & typo (error handling, etc).
 
-= 1.0.0 - 27 March 2017 =
+= 1.0.0 - 27 March 2017 - Kool Herc Release =
 * Initial release.
