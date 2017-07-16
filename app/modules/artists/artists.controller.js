@@ -8,7 +8,8 @@ const Artist = require('./artist.model'),
   multer = require('multer'),
   sharp = require('sharp'),
   nodemailer = require('nodemailer'),
-  userMiddlewares = require('../users/user.middlewares');
+  userMiddlewares = require('../users/user.middlewares'),
+  utils = require('../../utils/utils');
 
 //====== Export method ======
 module.exports = {
@@ -258,6 +259,8 @@ function processSubmit(req, res) {
  * [uploadThumbnail Upload thumbnail (using multer)]
  */
 function uploadThumbnail(req, res, next) {
+  var maxSize = 2097152; // 2mo
+
   var storage =   multer.diskStorage({
     destination: function (req, file, callback) {
       callback(null, './uploads');
@@ -266,15 +269,25 @@ function uploadThumbnail(req, res, next) {
       callback(null, Date.now() + '-' + file.originalname);
     }
   });
-  var upload = multer({ storage : storage}).single('thumbnail');
+  var upload = multer({
+    storage : storage,
+    limits: { fileSize: maxSize }
+  }).single('thumbnail');
 
-  upload(req,res,function(err) {
+  upload(req, res, function(err) {
+
     if(err) {
-      return res.end('Error uploading file: ' + req.file);
+      var errorMsg = 'An error occured during file upload';
+
+      if(err.code === 'LIMIT_FILE_SIZE')
+        errorMsg = `File size too heavy. Maximum file size is ${maxSize/1048576}mo.`;
+
+      req.flash('errors', errorMsg);
+      return res.redirect('back');
     }
 
     if(req.file) {
-      sharp(req.file.path).resize(300, 300).crop(sharp.strategy.entropy).toFile('uploads/medium-' + req.file.filename, function (err, info) {
+      sharp(req.file.path).resize(300, 300).crop(sharp.strategy.entropy).toFile('uploads/medium-' + req.file.filename, function (err) {
         if (err) {
           return next(err);
         }
