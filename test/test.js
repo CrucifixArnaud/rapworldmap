@@ -5,7 +5,9 @@ const mongoose = require('mongoose'),
   Artist = require('/Users/acr/www/rapworldmap/app/modules/artists/artist.model');
 
 // Connect to db
-mongoose.connect(process.env.DB_URI);
+mongoose.connect(process.env.DB_URI, {
+  useMongoClient: true
+});
 
 describe('Artists', function(){
   beforeEach(function(done){

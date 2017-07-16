@@ -25,7 +25,9 @@ const port = process.env.PORT || 3666;
 //====== App configuration ======
 // Connect the database
 // @TODO Verify that connection work before launch it to avoid app error on display.
-mongoose.connect(process.env.DB_URI);
+mongoose.connect(process.env.DB_URI, {
+  useMongoClient: true
+});
 
 // Load passport configuration
 require('./app/config/passport')(passport); // pass passport for configuration
