@@ -175,8 +175,6 @@ function processSubmit(req, res) {
     return res.status(400).json(errors);
   }
 
-  console.log('req.body.bioUrl: ', req.body.bioUrl);
-
   // create a new artist
   const artist = new Artist({
     name: req.body.name,
