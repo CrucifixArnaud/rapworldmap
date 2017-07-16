@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const mongoose = require('mongoose'),
   should = require('should'),
-  Artist = require('/Users/acr/www/rapworldmap/app/modules/artists/artist.model');
+  Artist = require('../app/modules/artists/artist.model');
 
 // Connect to db
 mongoose.connect(process.env.DB_URI, {
