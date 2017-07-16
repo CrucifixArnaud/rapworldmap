@@ -1,5 +1,16 @@
 == Changelog ==
 
+= 1.2.5 - 16 July 2017 =
+* Update various package
+* Handle error message for too large file
+* Fix error handling for duplicate artist entry
+* Configure basic Gitlab pipeline for test
+
+= 1.2.4 - 08 May 2017 =
+* Adapt admin ui for simplier artists management
+* Read mapbox token api from .env
+* Fix spelling in about and readme.
+
 = 1.2.4 - 08 May 2017 =
 * Adapt admin ui for simplier artists management
 * Read mapbox token api from .env
