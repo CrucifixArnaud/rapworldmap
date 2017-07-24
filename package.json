@@ -7,7 +7,7 @@
     "test": "mocha",
     "dev:test": "mocha -w",
     "dev:css": "nodemon -e app/assets/scss/main.scss -x \"npm run compile:css && npm run autoprefixer\"",
-    "dev:js": "watchify -t [ babelify ] app/assets/js/atlas.js -o public/js/atlas.bundle.js",
+    "dev:js": "watchify -t [ babelify ] app/assets/js/atlas.js -o public/js/atlas.bundle.js | watchify -t [ babelify ] app/assets/js/admin.js -o public/js/admin.bundle.js",
     "compile:css": "node-sass --include-path scss app/assets/scss/main.scss public/css/main.css",
     "autoprefixer": "postcss -um autoprefixer -r public/css/main.css",
     "minify:css": "postcss -u cssnano -r public/css/main.css",

@@ -1,0 +1,62 @@
+<div id="app" class="app-container"></div>
+
+<script src='/js/admin.bundle.js'></script>
+<!--
+<div class="admin-content">
+
+  <% if (success.length > 0) { %>
+      <div class="success">
+        <p><%= success %></p>
+      </div>
+  <% } %>
+
+  <a class="button--primary--md" href="/artists/create">Create a new artist</a>
+
+  <table class="table table--artist">
+      <thead class="table__head">
+          <tr class="table__head__row">
+              <th class="table__head__cell">Name</th>
+              <th class="table__head__cell">City</th>
+              <th class="table__head__cell">Categorie(s)</th>
+              <th class="table__head__cell">Clip</th>
+              <th class="table__head__cell table__head__cell--publication-date">Creation Date</th>
+              <th class="table__head__cell">Published</th>
+              <th></th>
+          </tr>
+      </thead>
+
+      <tbody class="table__body">
+
+          <% for (var artist of artists) { %>
+              <tr class="table__row">
+              <td class="table__cell">
+              <% if (artist.bio.url) { %>
+                <a href="<%= artist.bio.url %>" title="View details (json)"><%= artist.name %></a>
+              <% } else { %>
+                <p><%= artist.name %></p>
+              <% } %>
+              </td>
+                  <td class="table__cell"><%= artist.location.city %></td>
+                  <td class="table__cell">
+                    <% for (categorie of artist.categories) { %>
+                      <span><%= categorie %></span>
+                    <% } %>
+                  </td>
+                  <td class="table__cell">
+                    <% if (artist.youtube.clipExampleUrl) { %>
+                      <a href="<%= artist.youtube.clipExampleUrl %>">Link</a>
+                    <% } %>
+                  </td>
+                  <td class="table__cell table__cell--publication-date"><%= moment(artist.createDate).format('MM/DD/YYYY HH:mm') %></td>
+
+                  <td class="table__cell <%= artist.published === false ? 'unpublished' : '' %>"><%= artist.published %></td>
+                  <td class="table__cell table__cell--action">
+                      <a href="/artists/<%= artist.slug %>/edit" class="button--primary">Edit</a>
+                      <a href="/artists/<%= artist.slug %>/delete" class="button--danger">Delete</a>
+                  </td>
+              </tr>
+          <% } %>
+
+      </tbody>
+  </table>
+</div>-->

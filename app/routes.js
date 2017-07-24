@@ -7,7 +7,8 @@ const express = require ('express'),
   errorsController = require('./modules/errors/errors.controller'),
   usersController = require('./modules/users/users.controller'),
   userMiddlewares = require('./modules/users/user.middlewares'),
-  artistsController = require('./modules/artists/artists.controller');
+  artistsController = require('./modules/artists/artists.controller'),
+  adminController = require('./modules/admin/admin.controller');
 
 //====== Define routes ======
 module.exports = function(app, passport) {
@@ -34,7 +35,7 @@ module.exports = function(app, passport) {
   // Login
   app.get('/login', usersController.showLogin);
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/artists/',
+    successRedirect : '/admin/artists/',
     failureRedirect : '/login',
     failureFlash : true
   }));
@@ -42,6 +43,8 @@ module.exports = function(app, passport) {
   app.get('/logout', usersController.processLogout);
   // Profile
   app.get('/profile', userMiddlewares.isLoggedIn, usersController.showProfile);
+  // Admin
+  app.get('/admin/artists', userMiddlewares.isLoggedIn, adminController.showArtists);
   // Artists
   app.get('/artists/', userMiddlewares.isLoggedIn, artistsController.showArtists);
   app.get('/artists/index', artistsController.getArtistsIndex);
