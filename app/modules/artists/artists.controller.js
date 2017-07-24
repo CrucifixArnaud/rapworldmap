@@ -34,27 +34,12 @@ module.exports = {
 function showArtists (req, res) {
   Artist.find({}, (err, artists) => {
 
-    var publishedArtists = artists.filter(function(item) {
-      if(item.published === true) {
-        return item;
-      }
-    });
-
-    const locals = {
-      artists: artists,
-      moment: moment,
-      success: req.flash('success'),
-      layout: 'admin',
-      title: 'All artists (' + publishedArtists.length + ' / ' + artists.length + ')',
-      slug: 'page-admin'
-    };
-
     if(err) {
       res.status(404);
       res.send('Artists not found!');
     }
 
-    res.render('pages/artists/artists', locals);
+    res.json(artists);
   });
 }
 
