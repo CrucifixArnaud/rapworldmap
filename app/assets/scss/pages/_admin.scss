@@ -146,6 +146,14 @@
   }
 }
 
+.table__cell--action [class^='button'] {
+  margin-left: .5em;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
 .table__head__cell--publication-date,
 .table__cell--publication-date {
   @include breakpoint($below-lg) {
