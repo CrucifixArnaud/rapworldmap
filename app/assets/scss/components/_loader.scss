@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   position: absolute;
-  background: #000;
+  background: darken($blue-mirage, 3);
   opacity: .1;
   visibility: hidden;
   transition: opacity .4s ease, visibility .4s ease;
@@ -43,8 +43,19 @@
 }
 
 .loader__spin:after {
+  border: 5px solid darken($blue-mirage, 5);
+}
+
+// Atlas Loader
+.loader--atlas {
+  background: #000;
+}
+
+.loader--atlas .loader__spin:after {
   border: 5px solid #222;
 }
+
+// Keyframe
 
 @keyframes spin {
   0% {

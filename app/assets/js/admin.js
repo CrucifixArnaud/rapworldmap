@@ -30,15 +30,20 @@ export default class Admin extends React.Component {
     });
 
     artistsPromise.then((res) => {
+      // Prepare loaderCell destruction
+      const loaderCell = document.getElementById('loaderCell');
+
+      loaderCell.remove();
+
       this.setState({
         artists: res,
         artistsTotal: res.length,
       });
+
     });
   }
 
   render() {
-
 
     // Artists row
     const artistsResult = this.state.artists.map((artist, step) => {
@@ -105,11 +110,19 @@ export default class Admin extends React.Component {
                 </tr>
             </thead>
 
-            {this.state.artists.length > 0 &&
-              <tbody className='table__body'>
-                {artistsResult}
-              </tbody>
-            }
+            <tbody className='table__body'>
+              <tr id="loaderCell" className="table__row">
+                <td colSpan="7" className="table__cell--loader">
+                  <div id="loader" className="loader active">
+                    <div className="loader__spin"></div>
+                  </div>
+                </td>
+              </tr>
+
+              {this.state.artists.length > 0 &&
+                artistsResult
+              }
+            </tbody>
         </table>
       </div>
     );

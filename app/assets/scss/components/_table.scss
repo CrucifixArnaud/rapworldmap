@@ -2,6 +2,10 @@
   > Table
 \*------------------------------------*/
 
+.table {
+  width: 75%;
+}
+
 // Table row
 .table__row {
   background: darken($blue-mirage, 3);
@@ -24,6 +28,14 @@
   padding: .5em 1em;
   @include rem(font-size, 13px);
   max-width: 200px;
+}
+
+// Table cell loader
+.table__cell--loader {
+  height: 25vh;
+  text-align: center;
+  position: relative;
+  width: 100%;
 }
 
 // Table head

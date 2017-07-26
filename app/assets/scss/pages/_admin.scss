@@ -119,6 +119,7 @@
 
 .table--artist {
   margin-top: 1em;
+  position: relative;
 
   @include breakpoint($below-lg) {
     width: 100%;
