@@ -111,6 +111,24 @@
   max-width: 500px;
 }
 
+// Filter Box
+// ---------------------
+
+.filters-box {
+  display: inline-block;
+  margin-left: 2rem;
+}
+
+.filters-box__title {
+  display: inline-block;
+  @include rem(font-size, 16px);
+  margin-right: 1em;
+}
+
+.filters-box .field-group {
+  display: inline-block;
+}
+
 // Artists List
 // ---------------------
 .artist-total {
@@ -166,4 +184,3 @@
 .table__cell.unpublished {
   color: $color-error;
 }
-
