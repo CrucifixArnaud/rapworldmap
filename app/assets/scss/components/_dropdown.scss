@@ -1,0 +1,95 @@
+/*------------------------------------*\
+  > Dropdown
+\*------------------------------------*/
+
+// Dropdown Button
+.dropdown__button {
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  padding-right: 2rem;
+  transition: color .2s ease;
+  @include rem(font-size, 14px);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color-primary;
+    text-decoration: none;
+
+    &:after {
+      border-top-color: $color-primary;
+    }
+  }
+
+  &:after {
+    transition: color .2s ease, transform .3s cubic-bezier(1, 0, 0, 1), margin .3s cubic-bezier(1, 0, 0, 1);
+    @include triangle(.4rem, #fff, down);
+    @include vertical-center(absolute);
+    right: 0;
+    // Magic number (to have a "visually better" vertical middle allignement add a 1px margin-top)
+    margin-top: 1px;
+  }
+}
+
+.dropdown__button.open {
+  &:after {
+    transform-origin: 50%;
+    transform: translateY(-50%) rotate(-180deg);
+    margin-top: -2px;
+  }
+}
+
+// Dropdown content
+.dropdown__content {
+  min-width: 20rem;
+  position: absolute;
+  margin-top: .5rem;
+  margin-left: -1rem;
+  padding: 1rem;
+  @include rem(font-size, 14px);
+  background: darken($blue-mirage, 3);
+  border: 1px solid #000;
+  z-index: z('header');
+}
+
+// Dropdown list
+.dropdown__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown__item__item {
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown__item__link {
+  color: #fff;
+  display: block;
+  width: 100%;
+  padding: .6rem;
+  position: relative;
+  cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: darken($blue-mirage, 5);
+    text-decoration: none;
+  }
+}
+
+.dropdown__item__link.active {
+  color: $color-primary;
+
+  &:after {
+    display: block;
+    position: absolute;
+    content: "\2713";
+    @include vertical-center(absolute);
+    right: .5em;
+  }
+}
+

@@ -113,6 +113,34 @@ $below-lg: (max:  $screen-lg-min - 1);
     transform: translate(-50%, -50%);
 }
 
+
+/**
+ * [triangle]
+ * Display a triangle (use for carret)
+ * @param  {width (+ unit)} $size [Size of the triangle]
+ * @param  {string} $color [Color of the triangle]
+ * @param  {string} $direction [Direction of the triangle, top, right, down, left]
+ */
+@mixin triangle($size, $color, $direction) {
+  content: '';
+  width: 0;
+  height: 0;
+  border: $size solid transparent;
+  @if $direction == 'up' {
+    border-bottom: $size solid $color;
+  }
+  @if $direction == 'right' {
+    border-left: $size solid $color;
+  }
+  @if $direction == 'down' {
+    border-top: $size solid $color;
+  }
+  @if $direction == 'left' {
+    border-right: $size solid $color;
+  }
+}
+
+
 /**
  * [debug-map Output content of a sass map for debug purpose]
  * @param  {map} $map [The map to debug]

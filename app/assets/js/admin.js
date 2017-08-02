@@ -3,6 +3,8 @@ import React from 'react';
 import Request from 'request';
 import moment from 'moment';
 
+import Dropdown from './components/shared/dropdown';
+
 /**
  * Admin
  */
@@ -14,13 +16,12 @@ export default class Admin extends React.Component {
       artists: [],
       allArtist: [],
       filters: {
-        isPublished: true,
-        isNotPublished: true
+        published: 'all'
       }
     };
 
     this.filterArtists = this.filterArtists.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
   componentWillMount() {
@@ -54,25 +55,33 @@ export default class Admin extends React.Component {
 
   filterArtists() {
 
-    let filteredArtist = [];
+    let filteredArtists  = [];
+    let publishedArtistFilter;
 
-    if (this.state.filters.isPublished === true) {
-      const publishedArtist = this.state.allArtist.filter( function (artist) {
-        return artist.published === true;
-      });
-
-      filteredArtist.push(publishedArtist);
+    switch(this.state.filters.published) {
+      case 'published': {
+        publishedArtistFilter = this.state.allArtist.filter( function (artist) {
+          return artist.published === true;
+        });
+        break;
+      }
+      case 'not-published': {
+        publishedArtistFilter = this.state.allArtist.filter( function (artist) {
+          return artist.published === false;
+        });
+        break;
+      }
+      default: {
+        publishedArtistFilter = this.state.allArtist.filter( function (artist) {
+          return artist.published === false || artist.published === true;
+        });
+        break;
+      }
     }
 
-    if (this.state.filters.isNotPublished === true) {
-      const notPublishedArtist = this.state.allArtist.filter( function (artist) {
-        return artist.published === false;
-      });
+    filteredArtists.push(publishedArtistFilter);
 
-      filteredArtist.push(notPublishedArtist);
-    }
-
-    const mergedFilteredArtist = [].concat.apply([], filteredArtist);
+    const mergedFilteredArtist = [].concat.apply([], filteredArtists);
 
     this.setState({
       artists: mergedFilteredArtist
@@ -80,29 +89,44 @@ export default class Admin extends React.Component {
 
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    const dataFilter = target.dataset.filter;
+  handleFilterChange(filter, value) {
 
-    const filters = Object.assign(this.state.filters, {
-      [dataFilter]: value
-    });
-
-    this.setState({
-      [name]: value,
-      filters: filters
-    }, () => {
-      this.filterArtists();
-    });
+    if (value !== this.state.filters[filter]) {
+      this.setState({
+        filters: {
+          [filter]: value
+        }
+      }, () => {
+        this.filterArtists();
+      });
+    }
 
   }
+
+  // handleInputChange(event) {
+
+  //   const target = event.target;
+  //   const value = target.type === 'checkbox' ? target.checked : target.value;
+  //   const name = target.name;
+  //   const dataFilter = target.dataset.filter;
+
+  //   const filters = Object.assign(this.state.filters, {
+  //     [dataFilter]: value
+  //   });
+
+  //   this.setState({
+  //     [name]: value,
+  //     filters: filters
+  //   }, () => {
+  //     this.filterArtists();
+  //   });
+
+  // }
 
   render() {
 
     // Artists row
-    const artistsResult = this.state.artists.map((artist) => {
+    const artistsResult = this.state.artists.map((artist, step) => {
       // Artist Bio Url
       let artistBioUrl;
       if (artist.bio.url) {
@@ -116,12 +140,14 @@ export default class Admin extends React.Component {
       }
 
       // Artist Categories
-      const artistCategories = artist.categories.map((category, step) =>
-        <span key={artist._id+step}>{category}&nbsp;</span>
+      const artistCategories = artist.categories.map((category) =>
+        <span key={artist._id + category}>{category}&nbsp;</span>
       );
 
+
+
       return (
-        <tr className='table__row' key={artist._id}>
+        <tr className='table__row' key={artist._id + step}>
           <td className='table__cell'>
             { artistBioUrl }
           </td>
@@ -158,26 +184,23 @@ export default class Admin extends React.Component {
           <h3 className="filters-box__title">Filters:</h3>
           <div className="field-group">
             <div className="field--inline">
-              <input
-                id="filterIsPublished"
-                type="checkbox"
-                name="filterIsPublished"
-                value={this.state.filters.isPublished}
-                defaultChecked={this.state.filters.isPublished}
-                data-filter="isPublished"
-                onChange={this.handleInputChange} />
-                <label className="field__label" htmlFor="filterIsPublished">Published</label>
+              <Dropdown label={'Published ' + '(' + this.state.filters.published + ')'}>
+                <ul className="dropdown__list">
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.published === 'all' ? 'active' : '')} onClick={() => this.handleFilterChange('published', 'all')}>All</a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.published === 'published' ? 'active' : '')} onClick={() => this.handleFilterChange('published', 'published')}>Published</a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.published === 'not-published' ? 'active' : '')} onClick={() => this.handleFilterChange('published', 'not-published')}>Not Published</a>
+                  </li>
+                </ul>
+              </Dropdown>
             </div>
             <div className="field--inline">
-              <input
-                id="filterIsNotPublished"
-                type="checkbox"
-                name="filterIsNotPublished"
-                value={this.state.filters.isNotPublished}
-                defaultChecked={this.state.filters.isNotPublished}
-                data-filter="isNotPublished"
-                onChange={this.handleInputChange} />
-                <label className="field__label" htmlFor="filterIsNotPublished">Not Published</label>
+            </div>
+            <div className="field--inline">
             </div>
           </div>
         </div>
