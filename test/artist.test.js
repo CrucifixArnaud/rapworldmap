@@ -55,6 +55,53 @@ describe('Artists', function(){
     });
   });
 
+  // Can be save
+  it('can be save', function(done) {
+    const artist = new Artist({
+      name: 'Bondy',
+      location: {
+        city: 'Bondy city'
+      }
+    });
+
+    artist.save(() => {
+      done();
+    });
+  });
+
+  // Cannot be save whitout name and city
+  it('cannot be save whitout name and city', function(done) {
+    const artist = new Artist({
+      name: '',
+      location: {
+        city: ''
+      },
+      published: false
+    });
+
+    artist.save((err) => {
+      should.exist(err);
+      done();
+    });
+  });
+
+  // Cannot be save with an allready existing name
+  it('cannot be save with an allready existing name', function(done) {
+    const artist = new Artist({
+      name: 'Boby',
+      location: {
+        city: 'Bob town'
+      },
+      published: false
+    });
+
+    artist.save((err) => {
+      should.exist(err);
+      done();
+    });
+  });
+
+  // Retrieves by slug
   it('retrieves by slug', function(done) {
     Artist.findOne({ slug: 'boby' }, (err, artist) => {
       if(err) {
@@ -67,17 +114,28 @@ describe('Artists', function(){
 
   });
 
-  it('cannot register an artist whitout name and city', function(done) {
+  // Submited artist must not be published
+  it('submited artist must not be published', function(done) {
     const artist = new Artist({
-      name: '',
+      name: 'Bondy',
       location: {
-        city: ''
-      },
-      published: false
+        city: 'Bondy city'
+      }
     });
 
-    artist.save((err) => {
-      should.exist(err);
+    artist.save(() => {
+      artist.published.should.equal(false);
+      done();
+    });
+  });
+
+  // Can be deleted
+  it('can be deleted', function(done) {
+    Artist.remove({ slug: 'boby' }, (err) => {
+      if(err) {
+        console.log(err);
+      }
+
       done();
     });
   });
