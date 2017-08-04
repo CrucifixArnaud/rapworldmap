@@ -17,7 +17,8 @@ export default class Admin extends React.Component {
       allArtist: [],
       filters: {
         published: 'all',
-        clip: 'all'
+        clip: 'all',
+        category: 'all'
       }
     };
 
@@ -106,8 +107,36 @@ export default class Admin extends React.Component {
       }
     }
 
+    // Category Filter
+    let categoryArtistFilter;
+
+    switch(this.state.filters.category) {
+      case 'rapper': {
+        categoryArtistFilter = clipArtistFilter.filter( function (artist) {
+          return artist.categories.indexOf('rapper') > -1;
+        });
+        break;
+      }
+      case 'singer': {
+        categoryArtistFilter = clipArtistFilter.filter( function (artist) {
+          return artist.categories.indexOf('singer') > -1;
+        });
+        break;
+      }
+      case 'dj-producer': {
+        categoryArtistFilter = clipArtistFilter.filter( function (artist) {
+          return artist.categories.indexOf('dj / producer') > -1;
+        });
+        break;
+      }
+      default: {
+        categoryArtistFilter = clipArtistFilter;
+        break;
+      }
+    }
+
     // Apply filters
-    filteredArtists = clipArtistFilter;
+    filteredArtists = categoryArtistFilter;
 
     const mergedFilteredArtist = [].concat.apply([], filteredArtists);
 
@@ -235,6 +264,30 @@ export default class Admin extends React.Component {
               </Dropdown>
             </div>
             <div className="field--inline">
+              <Dropdown label={'Category ' + '(' + this.state.filters.category + ')'}>
+                <ul className="dropdown__list">
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.category === 'all' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('category', 'all')}>All
+                    </a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.category === 'rapper' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('category', 'rapper')}>Rapper
+                    </a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.category === 'singer' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('category', 'singer')}>Singer
+                    </a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.category === 'dj-producer' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('category', 'dj-producer')}>Dj / Producder
+                    </a>
+                  </li>
+                </ul>
+              </Dropdown>
             </div>
           </div>
         </div>
