@@ -129,6 +129,14 @@
   display: inline-block;
 }
 
+.filters-box .field--inline {
+  margin-left: 1em;
+
+  &:last-child {
+    margin-left: 0;
+  }
+}
+
 // Artists List
 // ---------------------
 .artist-total {

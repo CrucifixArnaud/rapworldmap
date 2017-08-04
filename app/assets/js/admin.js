@@ -16,7 +16,8 @@ export default class Admin extends React.Component {
       artists: [],
       allArtist: [],
       filters: {
-        published: 'all'
+        published: 'all',
+        clip: 'all'
       }
     };
 
@@ -56,6 +57,8 @@ export default class Admin extends React.Component {
   filterArtists() {
 
     let filteredArtists  = [];
+
+    // Published Filter
     let publishedArtistFilter;
 
     switch(this.state.filters.published) {
@@ -79,7 +82,32 @@ export default class Admin extends React.Component {
       }
     }
 
-    filteredArtists.push(publishedArtistFilter);
+    // Clip Filter
+    let clipArtistFilter;
+
+    switch(this.state.filters.clip) {
+      case 'with-clip': {
+        clipArtistFilter = publishedArtistFilter.filter( function (artist) {
+          return artist.youtube.clipExampleUrl.length > 0;
+        });
+        break;
+      }
+      case 'without-clip': {
+        clipArtistFilter = publishedArtistFilter.filter( function (artist) {
+          return artist.youtube.clipExampleUrl.length === 0;
+        });
+        break;
+      }
+      default: {
+        clipArtistFilter = publishedArtistFilter.filter( function (artist) {
+          return artist.youtube.clipExampleUrl.length > 0 || artist.youtube.clipExampleUrl.length === 0;
+        });
+        break;
+      }
+    }
+
+    // Apply filters
+    filteredArtists = clipArtistFilter;
 
     const mergedFilteredArtist = [].concat.apply([], filteredArtists);
 
@@ -90,38 +118,19 @@ export default class Admin extends React.Component {
   }
 
   handleFilterChange(filter, value) {
-
     if (value !== this.state.filters[filter]) {
+
+      const filters = Object.assign(this.state.filters, {
+        [filter]: value
+      });
+
       this.setState({
-        filters: {
-          [filter]: value
-        }
+        filters: filters
       }, () => {
         this.filterArtists();
       });
     }
-
   }
-
-  // handleInputChange(event) {
-
-  //   const target = event.target;
-  //   const value = target.type === 'checkbox' ? target.checked : target.value;
-  //   const name = target.name;
-  //   const dataFilter = target.dataset.filter;
-
-  //   const filters = Object.assign(this.state.filters, {
-  //     [dataFilter]: value
-  //   });
-
-  //   this.setState({
-  //     [name]: value,
-  //     filters: filters
-  //   }, () => {
-  //     this.filterArtists();
-  //   });
-
-  // }
 
   render() {
 
@@ -187,18 +196,43 @@ export default class Admin extends React.Component {
               <Dropdown label={'Published ' + '(' + this.state.filters.published + ')'}>
                 <ul className="dropdown__list">
                   <li className="dropdown__list__item">
-                    <a className={'dropdown__item__link ' + (this.state.filters.published === 'all' ? 'active' : '')} onClick={() => this.handleFilterChange('published', 'all')}>All</a>
+                    <a className={'dropdown__item__link ' + (this.state.filters.published === 'all' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('published', 'all')}>All
+                    </a>
                   </li>
                   <li className="dropdown__list__item">
-                    <a className={'dropdown__item__link ' + (this.state.filters.published === 'published' ? 'active' : '')} onClick={() => this.handleFilterChange('published', 'published')}>Published</a>
+                    <a className={'dropdown__item__link ' + (this.state.filters.published === 'published' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('published', 'published')}>Published
+                    </a>
                   </li>
                   <li className="dropdown__list__item">
-                    <a className={'dropdown__item__link ' + (this.state.filters.published === 'not-published' ? 'active' : '')} onClick={() => this.handleFilterChange('published', 'not-published')}>Not Published</a>
+                    <a className={'dropdown__item__link ' + (this.state.filters.published === 'not-published' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('published', 'not-published')}>Not Published
+                    </a>
                   </li>
                 </ul>
               </Dropdown>
             </div>
             <div className="field--inline">
+              <Dropdown label={'Clip ' + '(' + this.state.filters.clip + ')'}>
+                <ul className="dropdown__list">
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.clip === 'all' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('clip', 'all')}>All
+                    </a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.clip === 'with-clip' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('clip', 'with-clip')}>With clip
+                    </a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.clip === 'without-clip' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('clip', 'without-clip')}>Without clip
+                    </a>
+                  </li>
+                </ul>
+              </Dropdown>
             </div>
             <div className="field--inline">
             </div>
