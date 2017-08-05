@@ -9,24 +9,31 @@ import Dropdown from './components/shared/dropdown';
  * Admin
  */
 export default class Admin extends React.Component {
+
+  defaultState = {
+    artists: [],
+    allArtist: [],
+    filters: {
+      published: 'all',
+      clip: 'all',
+      category: 'all'
+    }
+  };
+
   constructor(props) {
     super(props);
 
-    this.state = {
-      artists: [],
-      allArtist: [],
-      filters: {
-        published: 'all',
-        clip: 'all',
-        category: 'all'
-      }
-    };
+    this.state = this.defaultState;
 
     this.filterArtists = this.filterArtists.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
   componentWillMount() {
+    this.getArtist();
+  }
+
+  getArtist() {
     const artistsUrl = window.location.origin + '/artists';
 
     let artistsPromise = new Promise(function(resolve) {
@@ -146,6 +153,10 @@ export default class Admin extends React.Component {
 
   }
 
+  resetFilter() {
+    this.setState(this.defaultState);
+  }
+
   handleFilterChange(filter, value) {
     if (value !== this.state.filters[filter]) {
 
@@ -157,6 +168,22 @@ export default class Admin extends React.Component {
         filters: filters
       }, () => {
         this.filterArtists();
+      });
+    }
+  }
+
+  handleDeleteClick(slug) {
+    const confirmation = confirm(`Are you sure you want to delete: ${slug}?`);
+
+    if (confirmation === true) {
+      const artistsDeleteUrl = window.location.origin + '/artists/' + slug + '/delete';
+
+      Request(artistsDeleteUrl, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+          window.location.reload(false);
+        } else {
+          console.error(error);
+        }
       });
     }
   }
@@ -182,8 +209,6 @@ export default class Admin extends React.Component {
         <span key={artist._id + category}>{category}&nbsp;</span>
       );
 
-
-
       return (
         <tr className='table__row' key={artist._id + step}>
           <td className='table__cell'>
@@ -208,7 +233,7 @@ export default class Admin extends React.Component {
           </td>
           <td className="table__cell table__cell--action">
             <a href={'/artists/' + artist.slug + '/edit'} className="button--primary">Edit</a>
-            <a href={'/artists/' + artist.slug + '/delete'} className="button--danger">Delete</a>
+            <a className="button--danger" onClick={() => this.handleDeleteClick(artist.slug)}>Delete</a>
           </td>
         </tr>
       );
