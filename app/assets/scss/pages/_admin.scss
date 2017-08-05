@@ -115,8 +115,13 @@
 // ---------------------
 
 .filters-box {
-  display: inline-block;
   margin-left: 2rem;
+  margin-bottom: 1em;
+
+  @include breakpoint($sm) {
+    display: inline-block;
+    margin-bottom: 0;
+  }
 }
 
 .filters-box__title {
@@ -126,14 +131,25 @@
 }
 
 .filters-box .field-group {
-  display: inline-block;
+
+  @include breakpoint($sm) {
+    display: inline-block;
+  }
 }
 
 .filters-box .field--inline {
-  margin-left: 1em;
 
-  &:last-child {
-    margin-left: 0;
+  @include breakpoint($below-sm) {
+    display: block;
+    margin-bottom: 1em;
+  }
+
+  @include breakpoint($md) {
+    margin-left: 1em;
+
+    &:last-child {
+      margin-left: 0;
+    }
   }
 }
 
