@@ -510,13 +510,19 @@ function getArtistsDownload (req, res) {
     const fileLocation = 'extracts';
     const fileName = 'rapworldmap-artists';
     const fileExtension = 'json';
+    const file = `${fileLocation}/${fileName}.${fileExtension}`;
 
-    fs.writeFile(`${fileLocation}/${fileName}.${fileExtension}`, JSON.stringify(artists), function(err) {
+    fs.writeFile(file, JSON.stringify(artists), function(err) {
         if(err) {
           console.log(err);
         } else {
-          console.log('Extract: ', `${fileLocation}/${fileName}.${fileExtension}`);
-          res.download(`${fileLocation}/${fileName}.${fileExtension}`);
+          res.download(file, (err) => {
+               if (err) throw err;
+            fs.unlink(file, (err) => {
+               if (err) throw err;
+               console.log(`Successfully deleted ${file}`);
+            });
+          });
         }
       });
   });
