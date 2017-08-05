@@ -46,7 +46,14 @@ describe('Artists', function(){
   });
 
   afterEach(function(done) {
-    Artist.remove({ slug: 'boby' }, (err) => {
+    Artist.remove({
+      slug:  {
+        $in: [
+          'boby',
+          'bondy'
+        ]
+      }
+    }, (err) => {
       if(err) {
         console.log(err);
       }
