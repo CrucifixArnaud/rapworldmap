@@ -9,7 +9,8 @@ const Artist = require('./artist.model'),
   sharp = require('sharp'),
   nodemailer = require('nodemailer'),
   userMiddlewares = require('../users/user.middlewares'),
-  utils = require('../../utils/utils');
+  utils = require('../../utils/utils'),
+  fs = require('fs');
 
 //====== Export method ======
 module.exports = {
@@ -23,7 +24,8 @@ module.exports = {
   processEdit: processEdit,
   deleteArtist: deleteArtist,
   getArtistsGeojson: getArtistsGeojson,
-  uploadThumbnail: uploadThumbnail
+  uploadThumbnail: uploadThumbnail,
+  getArtistsDownload: getArtistsDownload
 };
 
 //====== Methods ======
@@ -490,5 +492,32 @@ function getArtistsIndex (req, res) {
     }
 
     res.status(200).json(result);
+  });
+}
+
+
+/**
+ * [getArtistsDownload Download and extract of artists database as zip format]
+ */
+function getArtistsDownload (req, res) {
+  Artist.find({}, (err, artists) => {
+
+    if(err) {
+      res.status(404);
+      res.send('Artists not found!');
+    }
+
+    const fileLocation = 'extracts';
+    const fileName = 'rapworldmap-artists';
+    const fileExtension = 'json';
+
+    fs.writeFile(`${fileLocation}/${fileName}.${fileExtension}`, JSON.stringify(artists), function(err) {
+        if(err) {
+          console.log(err);
+        } else {
+          console.log('Extract: ', `${fileLocation}/${fileName}.${fileExtension}`);
+          res.download(`${fileLocation}/${fileName}.${fileExtension}`);
+        }
+      });
   });
 }

@@ -59,6 +59,8 @@ app.use(flash());
 app.use(express.static(__dirname + '/public'));
 // Define upload folder path
 app.use('/uploads', express.static(__dirname + '/uploads'));
+// Define extracts folder path
+app.use('/extracts', express.static(__dirname + '/extracts'));
 
 // Set ejs as our templating engine
 app.set('view engine', 'ejs');
