@@ -204,6 +204,10 @@ export default class Admin extends React.Component {
             <p>{artist.name}</p>
           );
         }
+      } else {
+        artistBioUrl = (
+          <p>{artist.name}</p>
+        );
       }
 
       // Artist Categories
