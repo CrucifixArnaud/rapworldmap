@@ -10,6 +10,8 @@ http://rapworldmap.com
 
 This atlas doesn't aim to be exhaustive. It's impossible to give a complete panel of what exists. In consequence, we have probably missed a lot of artists, don't hesitate to suggest a new addition.
 
+The artists database (json) is available for download at this url: http://rapworldmap.com/artists/download, feel free to use it in any of your projects.
+
 ### Localisation precision
 
 We have decided to locate each artist based on where they grew up or where they spent a significant part of their life instead of their born place (which could be sometime irrelevant). It could occur in some strong, opinionated decision.

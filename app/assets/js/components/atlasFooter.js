@@ -57,6 +57,7 @@ export default class AtlasFooter extends React.Component {
                   <h2 className="panel__title">About Rap World Map (v.1.2.4)</h2>
                   <h3 className="panel__subtitle">Data Presented ({this.props.artistsTotal} artists)</h3>
                   <p>This atlas doesn't aim to be exhaustive. It's impossible to give a complete panel of what exists. In consequence, we have probably missed a lot of artists, don't hesitate to suggest a new addition.</p>
+                  <p>The artists database (json) is available for <a href="/artists/download">download</a>, feel free to use it in any of your projects.</p>
                   <h3 className="panel__subtitle">Localisation precision</h3>
                   <p>We have decided to locate each artist based on where they grew up or where they spent a significant part of their life instead of their born place (which could be sometime irrelevant). It could occur in some strong, opinionated decision.</p>
                   <p>The exact location of some artists is quite easy to find (we know in which house or street they grew up, etc.), but for the other ones it's not the case. We have tried to locate their childhood neighborhood, where they went to school, and have displayed them there. If the only known information is the city, we have chosen a random set of coordinates in this area.</p>

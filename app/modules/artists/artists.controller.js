@@ -500,11 +500,40 @@ function getArtistsIndex (req, res) {
  * [getArtistsDownload Download and extract of artists database as zip format]
  */
 function getArtistsDownload (req, res) {
-  Artist.find({}, (err, artists) => {
+
+  Artist.find({
+    'published': true
+  }, (err, artists) => {
 
     if(err) {
       res.status(404);
       res.send('Artists not found!');
+    }
+
+    var extractedArtists = [];
+    for (var i = artists.length - 1; i >= 0; i--) {
+      var artist = artists[i];
+
+      extractedArtists.push({
+        'name': artist.name,
+        'location' : {
+          'city': artist.location.city,
+          'neighborhood': artist.location.neighborhood,
+          'coordinates': artist.location.coordinates
+        },
+        categories: artist.categories,
+        bio: {
+          summary: artist.bio.summary,
+          url: artist.bio.url,
+          birthdate: artist.bio.birthdate,
+          deathdate: artist.bio.deathdate,
+          yearsActiveStart: artist.bio.yearsActiveStart,
+          yearsActiveEnd: artist.bio.yearsActiveEnd
+        },
+        youtube: {
+          clipExampleUrl: artist.youtube.clipExampleUrl
+        }
+      });
     }
 
     const fileLocation = 'extracts';
@@ -512,18 +541,19 @@ function getArtistsDownload (req, res) {
     const fileExtension = 'json';
     const file = `${fileLocation}/${fileName}.${fileExtension}`;
 
-    fs.writeFile(file, JSON.stringify(artists), function(err) {
-        if(err) {
-          console.log(err);
-        } else {
-          res.download(file, (err) => {
-               if (err) throw err;
-            fs.unlink(file, (err) => {
-               if (err) throw err;
-               console.log(`Successfully deleted ${file}`);
-            });
+    fs.writeFile(file, JSON.stringify(extractedArtists), function(err) {
+      if(err) {
+        console.log(err);
+      } else {
+        res.status(200).download(file, (err) => {
+          if (err) throw err;
+
+          fs.unlink(file, (err) => {
+            if (err) throw err;
+            console.log(`Successfully deleted ${file}`);
           });
-        }
-      });
+        });
+      }
+    });
   });
 }
