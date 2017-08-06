@@ -365,7 +365,7 @@ function processEdit(req, res) {
       // Set flash success
       // Redirect to artists
       req.flash('success', `Successfuly update ${artist.name}!`);
-      res.redirect('/artists');
+      res.redirect('/admin/artists');
     });
 
   });

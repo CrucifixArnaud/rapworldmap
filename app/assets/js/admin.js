@@ -194,14 +194,16 @@ export default class Admin extends React.Component {
     const artistsResult = this.state.artists.map((artist, step) => {
       // Artist Bio Url
       let artistBioUrl;
-      if (artist.bio.url) {
-        artistBioUrl = (
-          <a href={artist.bio.url} title="View details (json)">{artist.name}</a>
-        );
-      } else {
-        artistBioUrl = (
-          <p>{artist.name}</p>
-        );
+      if(artist.bio !== undefined) {
+        if (artist.bio.url) {
+          artistBioUrl = (
+            <a href={artist.bio.url} title="View details (json)">{artist.name}</a>
+          );
+        } else {
+          artistBioUrl = (
+            <p>{artist.name}</p>
+          );
+        }
       }
 
       // Artist Categories
