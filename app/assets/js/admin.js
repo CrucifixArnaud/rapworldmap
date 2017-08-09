@@ -136,6 +136,12 @@ export default class Admin extends React.Component {
         });
         break;
       }
+      case 'group': {
+        categoryArtistFilter = clipArtistFilter.filter( function (artist) {
+          return artist.categories.indexOf('group') > -1;
+        });
+        break;
+      }
       default: {
         categoryArtistFilter = clipArtistFilter;
         break;
@@ -315,6 +321,11 @@ export default class Admin extends React.Component {
                   <li className="dropdown__list__item">
                     <a className={'dropdown__item__link ' + (this.state.filters.category === 'dj-producer' ? 'active' : '')}
                       onClick={() => this.handleFilterChange('category', 'dj-producer')}>Dj / Producder
+                    </a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.category === 'group' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('category', 'group')}>Group
                     </a>
                   </li>
                 </ul>
