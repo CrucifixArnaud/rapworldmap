@@ -54,7 +54,7 @@ export default class AtlasFooter extends React.Component {
               <div tabIndex="-1" ref="modalAbout" className={'about-panel modal ' + ((this.state.aboutOpen) ? 'open' : '')}>
                 <button type="button" onClick={() => this.handleAboutClick()} className="button--close about-panel__button--close" title="Close panel">&#10799;</button>
                 <div className="about-panel__body">
-                  <h2 className="panel__title">About Rap World Map (v.1.2.4)</h2>
+                  <h2 className="panel__title">About Rap World Map</h2>
                   <h3 className="panel__subtitle">Data Presented ({this.props.artistsTotal} artists)</h3>
                   <p>This atlas doesn't aim to be exhaustive. It's impossible to give a complete panel of what exists. In consequence, we have probably missed a lot of artists, don't hesitate to suggest a new addition.</p>
                   <p>The artists database (json) is available for <a href="/artists/download">download</a>, feel free to use it in any of your projects.</p>

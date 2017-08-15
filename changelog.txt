@@ -1,5 +1,11 @@
 == Changelog ==
 
+= 1.2.6 - 15 Aug 2017 =
+* Rewrite artists list in admin in React.
+* Add filters in admin.
+* User can download an extract of the database in JSON.
+* Add various tests.
+
 = 1.2.5 - 16 July 2017 =
 * Update various package
 * Handle error message for too large file
