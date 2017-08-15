@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import Request from 'request';
 import moment from 'moment';
+import Cookies from 'universal-cookie';
 
 import Dropdown from './components/shared/dropdown';
 
@@ -22,8 +23,20 @@ export default class Admin extends React.Component {
 
   constructor(props) {
     super(props);
+    const cookies = new Cookies();
 
-    this.state = this.defaultState;
+    const savedFilters = cookies.get('filters');
+    const filters = (savedFilters) ? savedFilters : {
+      published: 'all',
+      clip: 'all',
+      category: 'all'
+    };
+
+    this.state = {
+      artists: [],
+      allArtist: [],
+      filters: filters
+    }
 
     this.filterArtists = this.filterArtists.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -54,9 +67,10 @@ export default class Admin extends React.Component {
       loaderCell.remove();
 
       this.setState({
-        artists: res,
         allArtist: res,
         artistsTotal: res.length,
+      }, () => {
+        this.filterArtists();
       });
 
     });
@@ -173,6 +187,9 @@ export default class Admin extends React.Component {
       this.setState({
         filters: filters
       }, () => {
+        const cookies = new Cookies();
+
+        cookies.set('filters', filters, { path: '/' });
         this.filterArtists();
       });
     }
