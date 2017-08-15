@@ -217,8 +217,8 @@ export default class Admin extends React.Component {
       }
 
       // Artist Categories
-      const artistCategories = artist.categories.map((category) =>
-        <span key={artist._id + category}>{category}&nbsp;</span>
+      const artistCategories = artist.categories.map((category, index) =>
+        <span key={artist._id + category}>{(index > 0 ? ', ' : null)}{category}</span>
       );
 
       return (
