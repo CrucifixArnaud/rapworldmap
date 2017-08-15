@@ -11,16 +11,6 @@ import Dropdown from './components/shared/dropdown';
  */
 export default class Admin extends React.Component {
 
-  defaultState = {
-    artists: [],
-    allArtist: [],
-    filters: {
-      published: 'all',
-      clip: 'all',
-      category: 'all'
-    }
-  };
-
   constructor(props) {
     super(props);
     const cookies = new Cookies();
@@ -33,10 +23,11 @@ export default class Admin extends React.Component {
     };
 
     this.state = {
+      artistsLoaded: false,
       artists: [],
       allArtist: [],
       filters: filters
-    }
+    };
 
     this.filterArtists = this.filterArtists.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -67,6 +58,7 @@ export default class Admin extends React.Component {
       loaderCell.remove();
 
       this.setState({
+        artistsLoaded: true,
         allArtist: res,
         artistsTotal: res.length,
       }, () => {
@@ -173,10 +165,6 @@ export default class Admin extends React.Component {
 
   }
 
-  resetFilter() {
-    this.setState(this.defaultState);
-  }
-
   handleFilterChange(filter, value) {
     if (value !== this.state.filters[filter]) {
 
@@ -201,7 +189,7 @@ export default class Admin extends React.Component {
     if (confirmation === true) {
       const artistsDeleteUrl = window.location.origin + '/artists/' + slug + '/delete';
 
-      Request(artistsDeleteUrl, (error, response, body) => {
+      Request(artistsDeleteUrl, (error, response) => {
         if (!error && response.statusCode === 200) {
           window.location.reload(false);
         } else {
@@ -365,6 +353,7 @@ export default class Admin extends React.Component {
             </thead>
 
             <tbody className='table__body'>
+
               <tr id="loaderCell" className="table__row">
                 <td colSpan="7" className="table__cell--loader">
                   <div id="loader" className="loader active">
@@ -373,9 +362,18 @@ export default class Admin extends React.Component {
                 </td>
               </tr>
 
-              {this.state.artists.length > 0 &&
+              {this.state.artistsLoaded === true && this.state.artists.length > 0 &&
                 artistsResult
               }
+
+              {this.state.artistsLoaded === true && this.state.artists.length === 0 &&
+                <tr className='table__row' >
+                  <td className='table__cell' colSpan='7'>
+                    <p>Selected filter doesn't return any result.</p>
+                  </td>
+                </tr>
+              }
+
             </tbody>
         </table>
       </div>
