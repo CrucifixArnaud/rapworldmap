@@ -48,7 +48,7 @@ export default class AtlasFooter extends React.Component {
         <ul className="menu">
           <li className="menu__item menu__item--about-panel">
             <ClickOutHandler ref="aboutHandler" onClickOut={() => this.clickOutsideAbout()}>
-              <button className="menu__item__button" tabIndex="4" onClick={(e) => this.handleAboutClick(e)}>
+              <button className="menu__item__button" onClick={(e) => this.handleAboutClick(e)}>
                 <span className="button__label">About Rap World Map ?</span>
               </button>
               <div tabIndex="-1" ref="modalAbout" className={'about-panel modal ' + ((this.state.aboutOpen) ? 'open' : '')}>
