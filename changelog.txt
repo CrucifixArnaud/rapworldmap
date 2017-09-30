@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.2.7 - 30 Sept 2017 =
+* Add No JS error message
+* Fix some accessibility issues
+* Split main.css into atlas/admin
+
 = 1.2.6 - 15 Aug 2017 =
 * Rewrite artists list in admin in React.
 * Add filters in admin.
