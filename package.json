@@ -12,7 +12,7 @@
     "compile:css": "node-sass app/assets/scss/ -o public/css/",
     "autoprefixer": "postcss -um autoprefixer -r public/css/*.css",
     "minify:css": "postcss -u cssnano -r public/css/*.css -m { inline:false }",
-    "browserify": "NODE_ENV=production browserify app/assets/js/atlas.js -t [ babelify --presets [ es2015 react ] --plugins [ transform-class-properties transform-object-rest-spread ] ] -o public/js/atlas.bundle.js | NODE_ENV=production browserify app/assets/js/admin.js -t [ babelify --presets [ es2015 react ] --plugins [ transform-class-properties transform-object-rest-spread ] ] -o public/js/admin.bundle.js",
+    "browserify": "NODE_ENV=production browserify app/assets/js/atlas.js -t babelify -o public/js/atlas.bundle.js | NODE_ENV=production browserify app/assets/js/admin.js -t babelify -o public/js/admin.bundle.js",
     "uglify:js": "NODE_ENV=production uglifyjs public/js/atlas.bundle.js -mc -o public/js/atlas.bundle.js | NODE_ENV=production uglifyjs public/js/admin.bundle.js -mc -o public/js/admin.bundle.js",
     "build:css": "npm run compile:css && npm run autoprefixer && npm run minify:css",
     "build:js": "npm run browserify && npm run uglify:js",
