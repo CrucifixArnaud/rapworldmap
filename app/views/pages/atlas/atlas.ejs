@@ -1,5 +1,26 @@
 <% include ../../shared/atlas-header.ejs %>
 
+<noscript>
+  <div class="errors-container">
+    <h2 class="error__title">Javascript is disabled.</h2>
+    <div class="error__content">
+      <p>We are sorry for the disagreement, but Javascript is mandatory to be able to browse rapworldmap.com.</p>
+      <p>Here are some <a href="https://www.enable-javascript.com/">
+ instructions how to enable JavaScript in your web browser</a>.</p>
+    </div>
+
+    <br />
+
+    <h2 class="error__title">About rapworldmap.com</h2>
+    <div class="error__content">
+      <p>An Atlas of World Rap created by <a href="http://crucifixarnaud.com">Arnaud Crucifix.</a></p>
+      <p>The artists database (json) is available for <a href="/artists/download">download</a>, feel free to use it in any of your projects.</p>
+      <br />
+      <p>Contact us on <a href="mailto:contact@rapworldmap.com">contact@rapworldmap.com</a></p>
+    </div>
+  </div>
+</noscript>
+
 <div id="app" class="app-container" data-mapboxtoken="<%= mapboxToken %>"></div>
 
 <div id="loader" class="loader loader--atlas active">

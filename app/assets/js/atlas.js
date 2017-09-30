@@ -59,6 +59,7 @@ export default class Atlas extends React.Component {
   }
 
   componentWillMount() {
+
     // Get mapbox api token from .env file (injected into app container)
     const mapboxToken = document.getElementById('app').dataset.mapboxtoken;
     L.mapbox.accessToken = mapboxToken;

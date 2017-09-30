@@ -2,6 +2,10 @@
   > Loader
 \*------------------------------------*/
 
+.no-js .loader {
+  display: none;
+}
+
 .loader {
   z-index: z("loader");
   width: 100%;
