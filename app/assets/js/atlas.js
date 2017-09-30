@@ -148,7 +148,7 @@ export default class Atlas extends React.Component {
       marker.setIcon(L.divIcon({
         className: 'marker-wrapper',
         html: `<div class='${artist.icon.className}' style='width:${artist.icon.iconSize[0]}px; height:${artist.icon.iconSize[1]}px; margin-left:-${artist.icon.iconAnchor[0]}px; margin-top:-${artist.icon.iconAnchor[1]}px;'>
-                <img class='marker__icon' src='${artist.icon.iconUrl}' />
+                <img class='marker__icon' src='${artist.icon.iconUrl}' alt="" />
                 <span class='marker__title'>${artist.name}</span>
               </div>`
       }));
