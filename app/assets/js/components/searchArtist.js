@@ -115,7 +115,7 @@ export default class SearchArtist extends React.Component {
       return (
         <li className="search-result__item" key={step}>
           <button type="button" className="search-result__item__link" tabIndex="0" onClick={() => this.handleClickOnArtist(artist)}>
-            <div className="search-result__item__thumbnail">
+            <div className="thumbnail--small search-result__item__thumbnail">
               <img src={'/uploads/medium-' + artist.thumbnail} alt="" />
             </div>
             <p>{artist.name} <span className="search-result__item__location">({artist.city})</span></p>

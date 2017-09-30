@@ -49,8 +49,8 @@
     <div class="field">
       <label class="field__label" for="thumbnail">Thumbnail:</label>
       <%if (typeof artist.image !== 'undefined') { %>
-        <div class="artist-panel__thumbnail--preview">
-          <img class="artist-panel__thumbnail__picture" src="/uploads/medium-<%= artist.image.thumbnailUrl %>" alt="" />
+        <div class="thumbnail field__thumbnail">
+          <img class="thumbnail__picture" src="/uploads/medium-<%= artist.image.thumbnailUrl %>" alt="" />
         </div>
         <input type="hidden" name="originalThumbnail" value="<%= typeof artist.image !== 'undefined' ? artist.image.thumbnailUrl : '' %>" />
       <% } %>

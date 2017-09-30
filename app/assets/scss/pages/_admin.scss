@@ -21,7 +21,6 @@
   }
 }
 
-
 // admin-header
 // ---------------------
 .admin-header {
@@ -102,6 +101,14 @@
 .admin-content__title {
   margin: 0;
   @include rem(font-size, 24px);
+}
+
+// Thumbnail
+// ---------------------
+
+.field__thumbnail {
+  margin-right: 1em;
+  margin-bottom: 1em;
 }
 
 // Form
