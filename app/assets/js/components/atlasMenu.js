@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ClickOutHandler from 'react-onclickout';
 import SubmitArtist from './submitArtist.js';
 import SearchArtist from './searchArtist.js';
@@ -6,7 +7,7 @@ import {EventEmitter} from 'events';
 
 export default class AtlasMenu extends React.Component {
   static propTypes = {
-    bus: React.PropTypes.instanceOf(EventEmitter)
+    bus: PropTypes.instanceOf(EventEmitter)
   }
 
   constructor(props) {

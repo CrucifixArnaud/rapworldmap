@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Request from 'request';
 import {EventEmitter} from 'events';
 
 export default class SubmitArtist extends React.Component {
   static propTypes = {
-    bus: React.PropTypes.instanceOf(EventEmitter)
+    bus: PropTypes.instanceOf(EventEmitter)
   }
 
   defaultState = {
