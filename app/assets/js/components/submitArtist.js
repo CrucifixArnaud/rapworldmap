@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Request from 'request';
 import {EventEmitter} from 'events';
 
 export default class SubmitArtist extends React.Component {
@@ -67,23 +66,37 @@ export default class SubmitArtist extends React.Component {
   }
 
   send() {
-
-    const artist = {
-      'name': this.state.name,
-      'city': this.state.city,
+    const artist = JSON.stringify({
+      name: this.state.name,
+      city: this.state.city,
       'bioUrl': this.state.bioUrl,
       'clipExampleUrl': this.state.clipExampleUrl
-    };
+    });
 
     const artistsCreateUrl = window.location.href + 'artists/submit';
 
-    Request.post({url:artistsCreateUrl, form: artist}, (error, response) => {
-      if (!error && response.statusCode === 200) {
+    const artistsPromise = new Promise((resolve, reject) => {
+      fetch(artistsCreateUrl, {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: artist
+      }).then((response) => {
+        resolve(response.json());
+      }).catch((error) => {
+        console.log(error);
+      });
+    });
+
+    artistsPromise.then((response) => {
+      if (response.success === true) {
         // Success
         if (typeof this.props.bus !== 'undefined') {
           this.props.bus.emit('add', {
             type: 'success',
-            text: `${artist.name} has been successfully submited`
+            text: `${this.state.name} has been successfully submited`
           });
         }
 
@@ -100,7 +113,7 @@ export default class SubmitArtist extends React.Component {
         this.setState(this.defaultState);
 
       } else {
-        let errors = JSON.parse(response.body);
+        let errors = response;
         let newErrors = [];
 
         errors.map((error) => {

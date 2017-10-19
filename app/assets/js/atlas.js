@@ -1,6 +1,16 @@
-import ReactDOM from 'react-dom';
+import 'whatwg-fetch';
+import "babel-polyfill";
+import 'core-js/es6/map';
+import 'core-js/es6/set';
+import Promise from 'promise-polyfill';
+
+if (!window.Promise) {
+  console.log("Promise polyfill");
+  window.Promise = Promise;
+}
+
 import React from 'react';
-import Request from 'request';
+import ReactDOM from 'react-dom';
 import L from 'mapbox.js';
 import LeafletMarkercluster from 'leaflet.markercluster';
 import {EventEmitter} from "events";
@@ -61,19 +71,16 @@ export default class Atlas extends React.Component {
   componentWillMount() {
 
     // Get mapbox api token from .env file (injected into app container)
-    const mapboxToken = document.getElementById('app').dataset.mapboxtoken;
+    const mapboxToken = document.getElementById('app').getAttribute('data-mapboxtoken');
     L.mapbox.accessToken = mapboxToken;
 
     const artistsGeojsonUrl = window.location.href + 'artists/geojson';
 
-    let artistsPromise = new Promise(function(resolve, reject) {
-      Request(artistsGeojsonUrl, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
-          // Success
-          resolve(JSON.parse(body));
-        } else {
-          console.error(error);
-        }
+    let artistsPromise = new Promise((resolve, reject) => {
+      fetch(artistsGeojsonUrl).then((response) => {
+        resolve(response.json());
+      }).catch((error) => {
+        console.log(error);
       });
     });
 

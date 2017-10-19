@@ -1,6 +1,7 @@
-import ReactDOM from 'react-dom';
+import 'whatwg-fetch'
+
 import React from 'react';
-import Request from 'request';
+import ReactDOM from 'react-dom';
 import moment from 'moment';
 import Cookies from 'universal-cookie';
 
@@ -40,14 +41,11 @@ export default class Admin extends React.Component {
   getArtist() {
     const artistsUrl = window.location.origin + '/artists';
 
-    let artistsPromise = new Promise(function(resolve) {
-      Request(artistsUrl, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
-          // Success
-          resolve(JSON.parse(body));
-        } else {
-          console.error(error);
-        }
+    const artistsPromise = new Promise(function(resolve) {
+      fetch(artistsUrl).then( (response) => {
+        resolve(response.json());
+      }).catch( (error) => {
+        console.log(error);
       });
     });
 

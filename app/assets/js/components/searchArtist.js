@@ -1,5 +1,4 @@
 import React from 'react';
-import Request from 'request';
 import lunr from 'lunr';
 
 export default class SearchArtist extends React.Component {
@@ -18,12 +17,19 @@ export default class SearchArtist extends React.Component {
     this.handleClickOnArtist = this.handleClickOnArtist.bind(this);
 
     const artistsJsonUrl = window.location.href + 'artists/index';
-    Request.get({url:artistsJsonUrl}, (error, response) => {
-      if (!error && response.statusCode === 200) {
 
-        const artists = JSON.parse(response.body);
+    const artistsPromise = new Promise((resolve, reject) => {
+      fetch(artistsJsonUrl).then((response) => {
+        resolve(response.json());
+      }).catch((error) => {
+        console.log(error);
+      });
+    });
 
-        const artistsIndex = lunr(function () {
+    artistsPromise.then((response) => {
+      const artists = response;
+
+      const artistsIndex = lunr(function () {
           this.ref('slug');
           this.field('name');
           this.field('city');
@@ -39,10 +45,6 @@ export default class SearchArtist extends React.Component {
           artists: artists,
           artistsIndex: artistsIndex
         });
-
-      } else {
-        console.error(error);
-      }
     });
   }
 

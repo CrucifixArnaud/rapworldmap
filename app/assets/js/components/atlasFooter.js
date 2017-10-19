@@ -1,6 +1,5 @@
 import React from 'react';
 import ClickOutHandler from 'react-onclickout';
-import Request from 'request';
 
 export default class AtlasFooter extends React.Component {
   constructor(props) {
