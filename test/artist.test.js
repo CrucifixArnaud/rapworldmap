@@ -4,12 +4,23 @@ const mongoose = require('mongoose'),
   should = require('should'),
   Artist = require('../app/modules/artists/artist.model');
 
-// Connect to db
-mongoose.connect(process.env.DB_URI, {
-  useMongoClient: true
-});
+// Replace default mongoose promise by native es6 promise
+mongoose.Promise = global.Promise;
 
 describe('Artists', function(){
+  before(function(done) {
+    // Connect to db
+    mongoose.connect(process.env.DB_URI, {
+      useMongoClient: true
+    }, function(error) {
+        if (error) {
+          console.error('Error while connecting:\n%\n', error);
+        }
+
+        done(error);
+    });
+  });
+
   beforeEach(function(done){
 
     const artist = new Artist({
@@ -61,6 +72,10 @@ describe('Artists', function(){
       done();
     });
   });
+
+  after(function(){
+    mongoose.connection.close()
+  })
 
   // Can be save
   it('can be save', function(done) {
@@ -118,7 +133,6 @@ describe('Artists', function(){
       artist.slug.should.equal('boby');
       done();
     });
-
   });
 
   // Submited artist must not be published
