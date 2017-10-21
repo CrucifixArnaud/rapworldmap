@@ -145,6 +145,8 @@
   border: 0;
   background-color: transparent;
   color: $color;
+  border-radius: 0;
+  padding: 0;
 
   // Hover, focus, active interactions
   &:hover,
@@ -207,5 +209,11 @@
 
 .button--danger {
   @extend %button-size-default;
+}
+
+// Button link
+
+.button--link {
+  @include button-link($yellow-gold);
 }
 

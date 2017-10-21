@@ -122,9 +122,17 @@ export default class SubmitArtist extends React.Component {
 
         this.setState({
           errors: newErrors
+        }, () => {
+          const firstError = document.getElementById('submit-error-' + newErrors[0].param);
+          firstError.focus();
         });
       }
     });
+  }
+
+  handleKeyDown(e) {
+    if (e.keyCode === 27)
+      this.close();
   }
 
   render() {
@@ -133,8 +141,8 @@ export default class SubmitArtist extends React.Component {
     const errorCity = this.state.errors.find(x => x.param === 'city');
 
     return (
-      <form tabIndex="-1" ref="submitPanel" className={'submit-artist-panel ' + ((this.state.open) ? 'open' : '')}>
-        <button type="button" tabIndex="0" onClick={() => this.close()} className="submit-artist-panel__button--close button--close" title="Close panel">&#10799;</button>
+      <form onKeyDown={(e) => this.handleKeyDown(e)} tabIndex="-1" ref="submitPanel" className={'submit-artist-panel ' + ((this.state.open) ? 'open' : '')}>
+        <button type="button" tabIndex="0" onClick={() => this.close()} className="submit-artist-panel__button--close button--close" aria-label="Close panel" title="Close panel">&#10799;</button>
         <div className="submit-artist-panel__content">
           <h2 className="panel__title">Submit a new entry</h2>
           <div className="field-group">
@@ -142,14 +150,14 @@ export default class SubmitArtist extends React.Component {
               <label htmlFor="name" className="field__label">Name:</label>
               <input ref="name" id="name" type="text" name="name" tabIndex="0" onChange={this.handleNameChange} />
               {errorName &&
-                <label htmlFor="name" className="field-error">{errorName.msg}</label>
+                <label id="submit-error-name" htmlFor="name" className="field-error">{errorName.msg}</label>
               }
             </div>
             <div className="field">
               <label htmlFor="city" className="field__label">City:</label>
               <input ref="city" id="city" type="text" name="city" tabIndex="0" onChange={this.handleCityChange} />
               {errorCity &&
-                <label htmlFor="name" className="field-error">{errorCity.msg}</label>
+                <label id="submit-error-city" htmlFor="city" className="field-error">{errorCity.msg}</label>
               }
             </div>
             <div className="field">

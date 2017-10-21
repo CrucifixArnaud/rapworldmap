@@ -41,6 +41,11 @@ export default class AtlasFooter extends React.Component {
     }
   }
 
+  handleKeyDown(e) {
+    if (e.keyCode === 27)
+      this.toggleAbout();
+  }
+
   render() {
     return (
       <nav className="atlas-footer">
@@ -50,8 +55,8 @@ export default class AtlasFooter extends React.Component {
               <button className="menu__item__button" onClick={(e) => this.handleAboutClick(e)}>
                 <span className="button__label">About Rap World Map ?</span>
               </button>
-              <div tabIndex="-1" ref="modalAbout" className={'about-panel modal ' + ((this.state.aboutOpen) ? 'open' : '')}>
-                <button type="button" onClick={() => this.handleAboutClick()} className="button--close about-panel__button--close" title="Close panel">&#10799;</button>
+              <div onKeyDown={(e) => this.handleKeyDown(e)} tabIndex="-1" ref="modalAbout" className={'about-panel modal ' + ((this.state.aboutOpen) ? 'open' : '')}>
+                <button type="button" onClick={() => this.handleAboutClick()} className="button--close about-panel__button--close" aria-label="Close panel" title="Close panel (esc)">&#10799;</button>
                 <div className="about-panel__body">
                   <h2 className="panel__title">About Rap World Map</h2>
                   <h3 className="panel__subtitle">Data Presented ({this.props.artistsTotal} artists)</h3>

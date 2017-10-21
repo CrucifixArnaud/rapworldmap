@@ -125,6 +125,24 @@ export default class Atlas extends React.Component {
         weight: 1,
         opacity: 1,
         fillOpacity: 0.5
+      },
+      iconCreateFunction: function(cluster) {
+        var childCount = cluster.getChildCount();
+
+        var c = ' marker-cluster-';
+        if (childCount < 10) {
+          c += 'small';
+        } else if (childCount < 100) {
+          c += 'medium';
+        } else {
+          c += 'large';
+        }
+
+        return new L.DivIcon({
+          html: `<div aria-label="Artist Group (contain ${childCount} artists)"><span>${childCount}</span></div>`,
+          className: 'marker-cluster' + c,
+          iconSize: new L.Point(40, 40)
+        });
       }
     });
 
@@ -154,8 +172,8 @@ export default class Atlas extends React.Component {
       // marker.setIcon(L.icon(a.properties.icon));
       marker.setIcon(L.divIcon({
         className: 'marker-wrapper',
-        html: `<div class='${artist.icon.className}' style='width:${artist.icon.iconSize[0]}px; height:${artist.icon.iconSize[1]}px; margin-left:-${artist.icon.iconAnchor[0]}px; margin-top:-${artist.icon.iconAnchor[1]}px;'>
-                <img class='marker__icon' src='${artist.icon.iconUrl}' alt="" />
+        html: `<div aria-label='${artist.name}, clik to open the artist description' class='${artist.icon.className}' style='width:${artist.icon.iconSize[0]}px; height:${artist.icon.iconSize[1]}px; margin-left:-${artist.icon.iconAnchor[0]}px; margin-top:-${artist.icon.iconAnchor[1]}px;'>
+                <img class='marker__icon' src='${artist.icon.iconUrl}' role='presentation' alt='' />
                 <span class='marker__title'>${artist.name}</span>
               </div>`
       }));

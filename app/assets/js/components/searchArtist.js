@@ -110,13 +110,18 @@ export default class SearchArtist extends React.Component {
     });
   }
 
+  handleKeyDown(e) {
+    if (e.keyCode === 27)
+      this.close();
+  }
+
   render() {
 
     // Artists list
     const artistsResult = this.state.searchResults.map((artist, step) => {
       return (
         <li className="search-result__item" key={step}>
-          <button type="button" className="search-result__item__link" tabIndex="0" onClick={() => this.handleClickOnArtist(artist)}>
+          <button aria-label={artist.name +', click to view ' + artist.name + ' detail.' }  type="button" className="search-result__item__link" tabIndex="0" onClick={() => this.handleClickOnArtist(artist)}>
             <div className="thumbnail--small search-result__item__thumbnail">
               <img src={'/uploads/medium-' + artist.thumbnail} alt="" />
             </div>
@@ -127,8 +132,8 @@ export default class SearchArtist extends React.Component {
     });
 
     return (
-      <div ref="modalSearch" className={'modal ' + ((this.state.open) ? 'open' : '')}>
-        <button type="button" onClick={() => this.close()} className="button--close about-panel__button--close" title="Close panel" tabIndex="0">&#10799;</button>
+      <div onKeyDown={(e) => this.handleKeyDown(e)} ref="modalSearch" className={'modal ' + ((this.state.open) ? 'open' : '')}>
+        <button type="button" onClick={() => this.close()} className="button--close about-panel__button--close" aria-label="Close panel" title="Close panel" tabIndex="0">&#10799;</button>
         <div className="search-panel__body">
           <h2 className="panel__title">Search an artist</h2>
           <div className="field field--search">
@@ -140,7 +145,7 @@ export default class SearchArtist extends React.Component {
           {this.state.searchResults.length > 0 &&
             <ul className="search-result">{artistsResult}</ul>
           }
-          <button onClick={() => this.close()} className="link-close" title="Close panel" tabIndex="0">Close this modal</button>
+          <button onClick={() => this.close()} className="link-close" aria-label="Close panel" title="Close panel" tabIndex="0">Close this modal</button>
         </div>
       </div>
     );

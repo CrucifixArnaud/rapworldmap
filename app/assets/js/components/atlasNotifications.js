@@ -38,6 +38,8 @@ export default class AtlasNotifications extends React.Component {
 
     this.setState({
       notifications: [newItem].concat(this.state.notifications)
+    }, () => {
+      // this.refs.notification.focus();
     });
   }
 
@@ -87,7 +89,7 @@ export default class AtlasNotifications extends React.Component {
   render() {
     const {notifications, value, selected} = this.state;
     return (
-      <div className="notifications">
+      <div ref="notification" role="status" className="notifications">
         <TransitionMotion
           defaultStyles={this.getDefaultStyles()}
           styles={this.getStyles()}

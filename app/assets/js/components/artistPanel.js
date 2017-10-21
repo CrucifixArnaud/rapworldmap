@@ -89,6 +89,11 @@ export default class ArtistPanel extends React.Component {
     this.props.centerView(lat, lng, 13);
   }
 
+  handleKeyDown(e) {
+    if (e.keyCode === 27)
+      this.close();
+  }
+
   render() {
 
     if(this.state.artist) {
@@ -133,16 +138,15 @@ export default class ArtistPanel extends React.Component {
 
       return (
         <ClickOutHandler ref="panelHandler" onClickOut={this.clickOutside}>
-          <div tabIndex="-1" ref="panelArtist" className={'artist-panel ' + ((this.state.open) ? 'open' : '') + ' ' + ((this.state.reduce) ? 'reduce' : '')}>
-            <button type="button" onClick={() => this.close()} className="artist-panel__button--close button--close" title="Close panel">&#10799;</button>
+          <div onKeyDown={(e) => this.handleKeyDown(e)} tabIndex="-1" ref="panelArtist" className={'artist-panel ' + ((this.state.open) ? 'open' : '') + ' ' + ((this.state.reduce) ? 'reduce' : '')}>
             <div className="thumbnail artist-panel__thumbnail">
-              <img className="thumbnail__picture" src={'/uploads/medium-' + this.state.artist.image.thumbnailUrl} />
+              <img className="thumbnail__picture" src={'/uploads/medium-' + this.state.artist.image.thumbnailUrl} alt="" role="presentation"/>
             </div>
             <div className="artist-panel__body">
               <h2 className="artist-panel__name">{this.state.artist.name}</h2>
               <div className="artist-panel__location">
                 { artistLocationNeighborhood }
-                <a onClick={() => this.handleClickOnCity()} className="artist-panel__location__city">{this.state.artist.location.city} </a>
+                <button href="" onClick={() => this.handleClickOnCity()} className="artist-panel__location__city button--link" aria-label={this.state.artist.location.city + ', click to center view on this area' }>{this.state.artist.location.city}</button>
                 { artistLocationCountry }
               </div>
               { artistYearsActive }
@@ -158,12 +162,13 @@ export default class ArtistPanel extends React.Component {
             </div>
             {this.state.youtubeClip &&
               <div className={'artist-panel__youtube' + ((this.state.youtubeClip) ? ' open' : '')}>
-                <iframe className="artist-panel__youtube__embed" src={this.state.artist.youtube.clipExampleUrl} frameBorder="0" allowFullScreen="allowfullscreen"></iframe>
+                <iframe aria-label={'A video clip example of ' + this.state.artist.name} className="artist-panel__youtube__embed" src={this.state.artist.youtube.clipExampleUrl} frameBorder="0" allowFullScreen="allowfullscreen"></iframe>
                 <svg className="artist-panel__youtube__background" height="182px" width="340px">
                   <path d="M-0.000,4.000 L9.000,182.000 L330.000,172.000 L340.000,0.000 L-0.000,4.000 Z" style={{fill:'#ffd700'}} />
                 </svg>
               </div>
             }
+            <button type="button" onClick={() => this.close()} className="artist-panel__button--close button--close" aria-label="Close panel" title="Close panel">&#10799;</button>
           </div>
         </ClickOutHandler>
       );
