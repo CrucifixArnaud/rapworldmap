@@ -11,7 +11,7 @@ if (!window.Promise) {
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import L from 'mapbox.js';
+// import L from 'mapbox.js';
 import LeafletMarkercluster from 'leaflet.markercluster';
 import {EventEmitter} from "events";
 
