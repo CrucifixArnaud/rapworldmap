@@ -35,8 +35,7 @@ function show404 (req, res) {
     description: "Discover rap artists from all around the world."
   };
 
-  res.status(404);
-  res.render('pages/errors/404', locals);
+  res.status(404).render('pages/errors/404', locals);
 }
 
 function show500 (err, req, res) {
@@ -49,6 +48,4 @@ function show500 (err, req, res) {
 
   console.error(err.stack)
   res.status(500).render('pages/errors/500', locals);
-
-  // res.status(500).send('Something broke!')
 }

@@ -59,11 +59,15 @@ module.exports = function(app, passport) {
   app.get('/artists/:slug/delete', userMiddlewares.isLoggedIn, artistsController.deleteArtist);
 
   //====== Configure the errors pages (404/500) ======
+  // Create route for the 500 (even if no error occurs, should stay above the error handling)
+  app.get('/500', errorsController.show500);
+
   // 404
   app.use(function(req, res, next) {
     errorsController.show404(req, res);
   });
-  // 505
+
+  // 500
   app.use(function (err, req, res, next) {
     errorsController.show500(err, req, res);
   })
