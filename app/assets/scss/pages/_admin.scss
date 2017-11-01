@@ -5,7 +5,6 @@
 
 .page-admin {
   background-color: darken($blue-mirage, 2);
-  color: #fff;
 }
 
 .link--back-to {
@@ -36,7 +35,6 @@
 }
 
 .main-title {
-  margin: 0;
   @include rem(font-size, 24px);
 }
 

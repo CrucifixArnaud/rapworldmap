@@ -15,6 +15,7 @@ module.exports = {
  */
 function showAtlas (req, res) {
   const locals = {
+    layout: 'atlas',
     slug: 'page-atlas',
     title: 'An Atlas of World Rap',
     description: 'Discover rap artists from all around the world.',

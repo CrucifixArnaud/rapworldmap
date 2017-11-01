@@ -19,6 +19,7 @@ const express = require('express'),
   flash = require('connect-flash'),
   expressValidator = require('express-validator');
 
+
 // Define config variables/const
 const port = process.env.PORT || 3666;
 

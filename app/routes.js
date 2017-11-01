@@ -57,4 +57,10 @@ module.exports = function(app, passport) {
   app.get('/artists/:slug/edit', userMiddlewares.isLoggedIn, artistsController.showEdit);
   app.post('/artists/:slug', userMiddlewares.isLoggedIn, artistsController.uploadThumbnail, artistsController.processEdit);
   app.get('/artists/:slug/delete', userMiddlewares.isLoggedIn, artistsController.deleteArtist);
+
+  //====== Configure the errors pages (404/500) ======
+  // 404
+  app.use(function(req, res, next) {
+    errorsController.show404(req, res);
+  });
 };
