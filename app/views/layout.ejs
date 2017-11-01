@@ -6,11 +6,7 @@
   <title>Rap World Map <%= typeof locals.title!='undefined' ? '- ' + locals.title : '' %></title>
   <meta name="description" content="<%= locals.description %>" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Rap World Map <%= typeof locals.title!='undefined' ? '- ' + locals.title : '' %>" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://rapworldmap.com" />
-  <meta property="og:image" content="http://rapworldmap.com/images/app-screenshot.png" />
+  <%- include shared/social-metas.ejs %>
 
   <!-- css -->
   <link rel="stylesheet" href="/css/admin.css">
