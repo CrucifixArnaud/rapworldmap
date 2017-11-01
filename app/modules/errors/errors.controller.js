@@ -6,7 +6,8 @@
 //====== Export method ======
 module.exports = {
   showMaintenance: showMaintenance,
-  show404: show404
+  show404: show404,
+  show500: show500
 };
 
 //====== Methods ======
@@ -36,4 +37,18 @@ function show404 (req, res) {
 
   res.status(404);
   res.render('pages/errors/404', locals);
+}
+
+function show500 (err, req, res) {
+  const locals = {
+    slug: 'page-errors',
+    title: '500 - Ann error occured',
+    url: req.url,
+    description: "Discover rap artists from all around the world."
+  };
+
+  console.error(err.stack)
+  res.status(500).render('pages/errors/500', locals);
+
+  // res.status(500).send('Something broke!')
 }

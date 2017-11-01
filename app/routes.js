@@ -63,4 +63,8 @@ module.exports = function(app, passport) {
   app.use(function(req, res, next) {
     errorsController.show404(req, res);
   });
+  // 505
+  app.use(function (err, req, res, next) {
+    errorsController.show500(err, req, res);
+  })
 };
