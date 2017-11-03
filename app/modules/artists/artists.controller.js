@@ -32,31 +32,54 @@ module.exports = {
 
 /**
  * [showArtists Show a list of all artists]
+ *
+ * @api {get} /artists/
+ *
+ * @apiReturn {array of object} artists [Artists list]
+ *
  */
 function showArtists (req, res) {
   Artist.find({}, (err, artists) => {
 
     if(err) {
-      res.status(404);
-      res.send('Artists not found!');
+      res.send(err);
     }
 
-    res.json(artists);
+    res.status(200).json(artists);
   });
 }
 
 /**
  * [showSingle Show a single artist]
+ *
+ * @api {get} /artists/:slug
+ *
+ * @apiParam {string} slug [Artist unique slug]
+ *
+ * @apiReturn {object} artist [Artist data]
  */
 function showSingle (req, res) {
   // get a single artist
   Artist.findOne({ slug: req.params.slug }, (err, artist) => {
-    if(err) {
-      res.status(404);
-      res.send(`Artist ${req.params.slug} cannot be found!`);
+
+    if (err) {
+      res.send(err);
     }
 
-    res.json(artist);
+    if (artist === null) {
+      res.status(404).json({
+        error: {
+          status: '404',
+          title: 'Artist not found',
+          detail: `Artist ${req.params.slug} cannot be found in database`,
+          meta: {
+            artist: req.params.slug
+          }
+        }
+      });
+    } else {
+      res.status(200).json(artist);
+    }
   });
 }
 
