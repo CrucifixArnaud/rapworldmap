@@ -1,7 +1,8 @@
 // config/passport.js
 //==============================================
 
-var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy,
+  BasicStrategy = require('passport-http').BasicStrategy;
 
 //  up the user model
 var User = require('../modules/users/user.model');
@@ -98,6 +99,23 @@ var passportStrategy = (passport) => {
 
   }));
 
+  //====== Basic Auth ======
+  passport.use('basic', new BasicStrategy(function(email, password, done) {
+    User.findOne({ email: email }, function (err, user) {
+      if (err)
+        return done(err);
+
+      // if no user is found, return the message
+      if (!user)
+        return done(null, false);
+
+      // if the user is found but password invalid
+      if (!user.validPassword(password))
+        return done(null, false);
+
+      return done(null, user);
+    });
+  }));
 };
 
 //====== Export the configuration ======

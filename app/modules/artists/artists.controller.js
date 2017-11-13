@@ -85,6 +85,8 @@ function showSingle (req, res) {
 
 /**
  * [showCreate Show artist creation page]
+ *
+ * @app {get} /artists/create
  */
 function showCreate(req, res) {
   const locals = {
@@ -101,6 +103,8 @@ function showCreate(req, res) {
 
 /**
  * [processCreate Process artist creation]
+ *
+ * @api {post} /artists/create
  */
 function processCreate(req, res) {
 
@@ -116,9 +120,14 @@ function processCreate(req, res) {
   const errors = req.validationErrors();
 
   if (errors) {
-    console.log('Errors: ', errors.map(err => err.msg));
-    req.flash('errors', errors.map(err => err.msg));
-    return res.status(400).redirect('/artists/create');
+    return res.status(400).json({
+      error: {
+        status: res.status,
+        title: 'One or more required field is missing',
+        detail: errors.map(err => err.msg),
+        meta: req.body
+      }
+    });
   }
 
   var thumbnail = req.file ? req.file.filename : req.body.thumbnailUrl;
@@ -152,20 +161,25 @@ function processCreate(req, res) {
   });
 
   artist.save((err) => {
-
     if (err) {
-      console.log(err.msg);
-      req.flash('errors', err.msg);
-      return res.redirect('/artists/create');
+      return res.status(400).json({
+        error: {
+          status: res.status,
+          title: err.name,
+          detail: err.msg,
+          meta: req.body
+        }
+      });
+    } else {
+      return res.status(200).json({
+        success: {
+          status: res.status,
+          title: `Artist ${req.body.name} successfuly created`,
+          meta: req.body,
+          artist: artist
+        }
+      });
     }
-
-    // User is logged (creation from admin)
-    // set a successful flash message
-    console.log('Successfuly created ' + req.body.name);
-    req.flash('success', 'Successfuly created artist!');
-
-    // Redirect to the newly created artist
-    res.redirect('/artists/create');
   });
 }
 

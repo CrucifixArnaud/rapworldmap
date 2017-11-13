@@ -51,6 +51,8 @@ const artistSchema = new Schema({
     type: Boolean,
     default: false
   }
+}, {
+    minimize: false
 });
 
 //====== Middleware ======

@@ -51,14 +51,16 @@ module.exports = function(app, passport) {
   app.get('/artists/download', artistsController.getArtistsDownload);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
   app.get('/artists/create', userMiddlewares.isLoggedIn, artistsController.showCreate);
-  app.post('/artists/create', userMiddlewares.isLoggedIn, artistsController.uploadThumbnail, artistsController.processCreate);
+  app.post('/artists/create', passport.authenticate('basic', {
+    session : false
+  }), artistsController.uploadThumbnail, artistsController.processCreate);
   app.post('/artists/submit', artistsController.processSubmit);
   app.get('/artists/:slug', artistsController.showSingle);
   app.get('/artists/:slug/edit', userMiddlewares.isLoggedIn, artistsController.showEdit);
   app.post('/artists/:slug', userMiddlewares.isLoggedIn, artistsController.uploadThumbnail, artistsController.processEdit);
   app.get('/artists/:slug/delete', userMiddlewares.isLoggedIn, artistsController.deleteArtist);
 
-  //====== Configure the errors pages (404/500) ======
+  //====== Errors pages (404/500) ======
   // Create route for the 500 (even if no error occurs, should stay above the error handling)
   app.get('/500', errorsController.show500);
 
