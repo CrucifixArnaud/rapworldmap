@@ -5,7 +5,6 @@ import 'core-js/es6/set';
 import Promise from 'promise-polyfill';
 
 if (!window.Promise) {
-  console.log("Promise polyfill");
   window.Promise = Promise;
 }
 

@@ -39,6 +39,8 @@
 .atlas-header .main-logo {
   @include breakpoint($below-md) {
     width: 80%;
+    max-width: 350px;
+    max-height: 66px;
   }
 }
 
