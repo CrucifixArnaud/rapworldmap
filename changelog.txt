@@ -1,6 +1,10 @@
 == Changelog ==
 
-= 1.3.0 - 21 Nov 2017 =
+= 1.3.2 - 03 Jan 2018 =
+* Remove unsuported target-densitydpi meta
+* Only show /artist/create for authenticated user
+
+= 1.3.1 - 21 Nov 2017 =
 * Fix atlas main-logo position issue on small screen (below-md)
 * Update packages
 * Add basic twitter card metas
