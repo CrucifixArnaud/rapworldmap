@@ -50,7 +50,7 @@ module.exports = function(app, passport) {
   app.get('/artists/index', artistsController.getArtistsIndex);
   app.get('/artists/download', artistsController.getArtistsDownload);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
-  app.get('/artists/create', artistsController.showCreate);
+  app.get('/artists/create', userMiddlewares.isLoggedIn, artistsController.showCreate);
   app.post('/artists/create', userMiddlewares.isLoggedIn, artistsController.uploadThumbnail, artistsController.processCreate);
   app.post('/artists/submit', artistsController.processSubmit);
   app.get('/artists/:slug', artistsController.showSingle);
