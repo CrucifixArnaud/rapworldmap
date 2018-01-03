@@ -75,3 +75,6 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);
 });
+
+// Export app for testing purpose
+module.exports = app;

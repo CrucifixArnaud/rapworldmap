@@ -1,25 +1,22 @@
+// artists.test.js
+//==============================================
+
+//====== Define dependencies ======
 require('dotenv').config();
 
-const mongoose = require('mongoose'),
-  should = require('should'),
+const chai = require('chai'),
+  chaiHttp = require('chai-http'),
+  should = chai.should(),
+  expect = chai.expect(),
+  server = require('../rapworldmap'),
+  helper = require('./helper.js'),
   Artist = require('../app/modules/artists/artist.model');
 
-// Replace default mongoose promise by native es6 promise
-mongoose.Promise = global.Promise;
+//====== Specific configuration  ======
+chai.use(chaiHttp);
 
-describe('Artists', function(){
-  before(function(done) {
-    // Connect to db
-    mongoose.connect(process.env.DB_URI, {
-      useMongoClient: true
-    }, function(error) {
-        if (error) {
-          console.error('Error while connecting:\n%\n', error);
-        }
-
-        done(error);
-    });
-  });
+//====== Tests for Artist model ======
+describe('Artists Model', function(){
 
   beforeEach(function(done){
 
@@ -56,27 +53,6 @@ describe('Artists', function(){
     });
   });
 
-  afterEach(function(done) {
-    Artist.remove({
-      slug:  {
-        $in: [
-          'boby',
-          'bondy'
-        ]
-      }
-    }, (err) => {
-      if(err) {
-        console.log(err);
-      }
-
-      done();
-    });
-  });
-
-  after(function(){
-    mongoose.connection.close()
-  })
-
   // Can be save
   it('can be save', function(done) {
     const artist = new Artist({
@@ -102,7 +78,7 @@ describe('Artists', function(){
     });
 
     artist.save((err) => {
-      should.exist(err);
+      err.should.exist;
       done();
     });
   });
@@ -118,34 +94,19 @@ describe('Artists', function(){
     });
 
     artist.save((err) => {
-      should.exist(err);
+      err.should.exist;
       done();
     });
   });
 
-  // Retrieves by slug
-  it('retrieves by slug', function(done) {
+  // Can be retrieves by slug
+  it('can be retrieves by slug', function(done) {
     Artist.findOne({ slug: 'boby' }, (err, artist) => {
       if(err) {
         console.log(err);
       }
 
       artist.slug.should.equal('boby');
-      done();
-    });
-  });
-
-  // Submited artist must not be published
-  it('submited artist must not be published', function(done) {
-    const artist = new Artist({
-      name: 'Bondy',
-      location: {
-        city: 'Bondy city'
-      }
-    });
-
-    artist.save(() => {
-      artist.published.should.equal(false);
       done();
     });
   });
@@ -159,5 +120,40 @@ describe('Artists', function(){
 
       done();
     });
+  });
+
+  // Submited artist should not be published
+  it('submited artist should not be published', function(done) {
+    const artist = new Artist({
+      name: 'Bondy',
+      location: {
+        city: 'Bondy city'
+      }
+    });
+
+    artist.save(() => {
+      artist.published.should.equal(false);
+      done();
+    });
+  });
+});
+
+//====== Tests for Artist Api ======
+describe('Artists Api', function(){
+
+  const artistsCreateUrl = '/artists/create';
+
+  // Can be save
+  it(`can be save (${artistsCreateUrl}, POST)`, function(done) {
+
+    chai.request(server)
+      .post(artistsCreateUrl)
+      .auth(process.env.TEST_USER_EMAIL, process.env.TEST_USER_PWD)
+      .field('name', 'Boby')
+      .field('city', 'Bobby Ville')
+      .end((err, res) => {
+        res.should.have.status(200);
+        done();
+      });
   });
 });

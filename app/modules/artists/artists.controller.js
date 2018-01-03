@@ -110,13 +110,13 @@ function processCreate(req, res) {
 
   // validate informations
   req.checkBody('name', 'Name is required.').notEmpty();
-  req.checkBody('city', 'City name is required').notEmpty();
+  req.checkBody('city', 'City is required').notEmpty();
 
   if(req.body.coordinates) {
     req.checkBody('coordinates', 'Coordinate must be formated <lng, lat>').matches(/(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)\w+/);
   }
 
-  // if there are errors, redirect and save errors to flash
+  // Errors handling
   const errors = req.validationErrors();
 
   if (errors) {
