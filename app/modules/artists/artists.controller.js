@@ -582,6 +582,7 @@ function getArtistsDownload (req, res) {
       if(err) {
         console.log(err);
       } else {
+
         res.status(200).download(file, (err) => {
           if (err) throw err;
 
