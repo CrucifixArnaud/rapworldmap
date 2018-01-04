@@ -58,8 +58,12 @@ module.exports = function(app, passport) {
   }), artistsController.uploadThumbnail, artistsController.processCreate);
   app.post('/artists/submit', artistsController.processSubmit);
   app.get('/artists/:slug', artistsController.showSingle);
-  app.get('/artists/:slug/edit', userMiddlewares.isLoggedIn, artistsController.showEdit);
-  app.post('/artists/:slug', userMiddlewares.isLoggedIn, artistsController.uploadThumbnail, artistsController.processEdit);
+  app.get('/artists/:slug/edit', passport.authenticate('basic', {
+    session : false
+  }), artistsController.uploadThumbnail, artistsController.showEdit);
+  app.post('/artists/:slug', passport.authenticate('basic', {
+    session : false
+  }), artistsController.uploadThumbnail, artistsController.processEdit);
   app.get('/artists/:slug/delete', userMiddlewares.isLoggedIn, artistsController.deleteArtist);
 
   //====== Errors pages (404/500) ======

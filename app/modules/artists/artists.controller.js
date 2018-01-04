@@ -336,8 +336,6 @@ function showEdit(req, res) {
       res.send(`Artist ${req.params.slug} cannot be found!`);
     }
 
-    console.log(artist);
-
     const locals = {
       artist: artist,
       moment: moment,
@@ -362,11 +360,11 @@ function processEdit(req, res) {
   req.checkBody('name', 'Name is required.').notEmpty();
   req.checkBody('city', 'City name is required').notEmpty();
 
-  // if there are errors, redirect to form and save errors to flash
+  // Check errors
   const errors = req.validationErrors();
+
   if (errors) {
-    req.flash('errors', errors.map(err => err.msg));
-    return res.redirect(`/artists/${req.params.slug}/edit`);
+    return res.status(400).json(errors);
   }
 
   // Find current artist
@@ -393,16 +391,26 @@ function processEdit(req, res) {
     artist.youtube.clipExampleUrl = req.body.clipExampleUrl;
     artist.published = published;
 
-    artist.save( (err) => {
+    artist.save((err) => {
       if (err) {
-        req.flash('errors', err.msg);
-        return res.redirect('back');
+        return res.status(400).json({
+          error: {
+            status: res.status,
+            title: err.name,
+            detail: err.msg,
+            meta: req.body
+          }
+        });
+      } else {
+        return res.status(200).json({
+          success: {
+            status: res.status,
+            title: `Artist ${req.body.name} successfuly created`,
+            meta: req.body,
+            artist: artist
+          }
+        });
       }
-
-      // Set flash success
-      // Redirect to artists
-      req.flash('success', `Successfuly update ${artist.name}!`);
-      res.redirect('/admin/artists');
     });
 
   });

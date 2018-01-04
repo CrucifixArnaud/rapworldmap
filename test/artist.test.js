@@ -317,7 +317,9 @@ describe('Artists Api', () => {
       chai.request(server)
         .post('/artists/gucci-mane')
         .auth(process.env.TEST_USER_EMAIL, process.env.TEST_USER_PWD)
-        .field('neighborhoodName', 'East Atlanta')
+        .field('name', 'Gucci-mane')
+        .field('city', 'Atlanta')
+        .field('neighborhoodName', 'Atlanta East')
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
