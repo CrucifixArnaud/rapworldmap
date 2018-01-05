@@ -64,7 +64,9 @@ module.exports = function(app, passport) {
   app.post('/artists/:slug', passport.authenticate('basic', {
     session : false
   }), artistsController.uploadThumbnail, artistsController.processEdit);
-  app.get('/artists/:slug/delete', userMiddlewares.isLoggedIn, artistsController.deleteArtist);
+  app.get('/artists/:slug/delete', passport.authenticate('basic', {
+    session : false
+  }), artistsController.deleteArtist);
 
   //====== Errors pages (404/500) ======
   // Create route for the 500 (even if no error occurs, should stay above the error handling)
