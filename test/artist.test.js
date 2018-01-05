@@ -9,7 +9,7 @@ const chai = require('chai'),
   should = chai.should(),
   expect = chai.expect,
   server = require('../rapworldmap'),
-  helper = require('./helper.js'),
+  helper = require('./helper'),
   Artist = require('../app/modules/artists/artist.model');
 
 //====== Specific configuration  ======
@@ -201,22 +201,13 @@ describe('Artists Api', () => {
 
   describe('/artists/create GET', () => {
 
+
     it('user should GET authenticate to access the artist page creation', (done) => {
       chai.request(server)
         .get('/artists/create')
         .end((err,res) => {
-          expect(res).to.have.status(401);
-          done();
-        });
-    });
-
-    it('it should GET the artist page creation', (done) => {
-      chai.request(server)
-        .get('/artists/create')
-        .auth(process.env.TEST_USER_EMAIL, process.env.TEST_USER_PWD)
-        .end((err,res) => {
-          expect(res).to.have.status(200);
-          expect(res).to.be.html;
+          expect(res).to.redirect;
+          expect(res).to.redirectTo(`${res.request.protocol}//${res.request.host}/`);
           done();
         });
     });
