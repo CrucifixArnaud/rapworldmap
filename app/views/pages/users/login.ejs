@@ -1,9 +1,16 @@
 <div class="admin-content">
+
   <% if (errors.length > 0) { %>
     <div class="errors">
       <% for (error of errors) { %>
         <p class="error"><%= error %></p>
       <% } %>
+    </div>
+  <% } %>
+
+  <% if (message.length > 0) { %>
+    <div class="errors">
+      <p class="error"><%= message %></p>
     </div>
   <% } %>
 

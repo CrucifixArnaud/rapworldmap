@@ -88,11 +88,11 @@ var passportStrategy = (passport) => {
 
       // if no user is found, return the message
       if (!user)
-        return done(null, false, req.flash('loginMessage', 'Invalid email or password.'));
+        return done(null, false, { message: 'No user with this email.' });
 
       // if the user is found but password invalid
       if (!user.validPassword(password))
-        return done(null, false, req.flash('loginMessage', 'Invalid email or password.'));
+        return done(null, false, { message: 'Invalid email or password.' });
 
       return done(null, user);
     });

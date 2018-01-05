@@ -57,7 +57,8 @@ function showLogin (req, res) {
     layout: 'admin',
     title: 'Login',
     slug: 'page-admin',
-    errors: req.flash('loginMessage')
+    errors: req.flash('error'),
+    message: req.flash('message')
   };
 
   res.render('pages/users/login', locals);
