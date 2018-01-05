@@ -100,13 +100,15 @@ export default class Admin extends React.Component {
     switch(this.state.filters.clip) {
       case 'with-clip': {
         clipArtistFilter = publishedArtistFilter.filter( function (artist) {
-          return artist.youtube.clipExampleUrl !== null && artist.youtube.clipExampleUrl.length > 0;
+          if(artist.youtube.clipExampleUrl !== undefined) {
+            return artist.youtube.clipExampleUrl !== null && artist.youtube.clipExampleUrl.length > 0;
+          }
         });
         break;
       }
       case 'without-clip': {
         clipArtistFilter = publishedArtistFilter.filter( function (artist) {
-          return artist.youtube.clipExampleUrl === null || artist.youtube.clipExampleUrl.length === 0;
+          return artist.youtube.clipExampleUrl === undefined && artist.youtube.clipExampleUrl === null || artist.youtube.clipExampleUrl.length === 0;
         });
         break;
       }
@@ -236,7 +238,7 @@ export default class Admin extends React.Component {
               {artistCategories}
           </td>
           <td className="table__cell">
-            {artist.youtube.clipExampleUrl !== null && artist.youtube.clipExampleUrl.length > 0 &&
+            {artist.youtube.clipExampleUrl !== undefined && artist.youtube.clipExampleUrl !== null && artist.youtube.clipExampleUrl.length > 0 &&
               <a href={artist.youtube.clipExampleUrl}>Link</a>
             }
           </td>
