@@ -596,7 +596,7 @@ function getArtistsDownload (req, res) {
 
           fs.unlink(file, (err) => {
             if (err) throw err;
-            console.log(`Successfully deleted ${file}`);
+            // console.log(`Successfully deleted ${file}`);
           });
         });
       }
