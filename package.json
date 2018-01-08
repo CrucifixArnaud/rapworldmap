@@ -17,7 +17,7 @@
     "build:css": "npm run compile:css && npm run autoprefixer && npm run minify:css",
     "build:js": "npm run browserify && npm run uglify:js",
     "build": "NODE_ENV=production npm run build:js && npm run build:css",
-    "dev": "nodemon rapworldmap.js",
+    "dev": "NODE_ENV=development nodemon rapworldmap.js",
     "start": "NODE_ENV=production node rapworldmap.js"
   },
   "repository": {

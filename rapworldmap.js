@@ -34,7 +34,9 @@ mongoose.connect(process.env.DB_URI, {
 require('./app/config/passport')(passport); // pass passport for configuration
 
 // Use morgan for log
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // Set sessions and cookie parser
 app.use(cookieParser());
