@@ -377,4 +377,30 @@ describe('Artists Api', () => {
         });
     });
   });
+
+  describe('/artists/submit POST', () => {
+
+    it('it should submit an artist', (done) => {
+      chai.request(server)
+        .post('/artists/submit')
+        .field('name', 'Bondy')
+        .field('city', 'Bondy city')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.json;
+          done();
+        });
+    });
+
+    it(`it should not be submited whitout name and city`, function(done) {
+      chai.request(server)
+        .post('/artists/submit')
+        .end((err, res) => {
+          expect(err).to.not.be.empty;
+          expect(res).to.have.property('error');
+          expect(res).to.have.status(400);
+          done();
+        });
+    });
+  });
 });
