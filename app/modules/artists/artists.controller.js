@@ -203,7 +203,7 @@ function processSubmit(req, res) {
       error: {
         status: res.status,
         title: 'One or more required field is missing',
-        detail: errors.map(err => err.msg),
+        detail: errors.map(err => err),
         meta: req.body
       }
     });
@@ -301,13 +301,13 @@ function processSubmit(req, res) {
       });
     } else {
       return res.status(200).json({
-            success: {
-              status: res.status,
-              title: `Artist ${req.body.name} successfuly submited`,
-              meta: req.body,
-              artist: artist
-            }
-          });
+        success: {
+          status: res.status,
+          title: `Artist ${req.body.name} successfuly submited`,
+          meta: req.body,
+          artist: artist
+        }
+      });
     }
   });
 }

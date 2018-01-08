@@ -91,7 +91,7 @@ export default class SubmitArtist extends React.Component {
     });
 
     artistsPromise.then((response) => {
-      if (response.success === true) {
+      if (response.success !== undefined) {
         // Success
         if (typeof this.props.bus !== 'undefined') {
           this.props.bus.emit('add', {
@@ -113,7 +113,8 @@ export default class SubmitArtist extends React.Component {
         this.setState(this.defaultState);
 
       } else {
-        let errors = response;
+
+        let errors = response.error.detail;
         let newErrors = [];
 
         errors.map((error) => {
