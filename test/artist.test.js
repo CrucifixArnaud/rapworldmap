@@ -247,9 +247,8 @@ describe('Artists Api', () => {
         .field('name', 'Boby')
         .field('city', 'Bobby Ville')
         .end((err, res) => {
-          expect(err).to.be.null;
-          expect(res).to.be.json;
           expect(res).to.have.status(200);
+          expect(res).to.be.json;
           done();
         });
     });
@@ -380,11 +379,12 @@ describe('Artists Api', () => {
 
   describe('/artists/submit POST', () => {
 
-    it('it should submit an artist', (done) => {
+    it(`it should submit a new artist`, (done) => {
       chai.request(server)
         .post('/artists/submit')
-        .field('name', 'Bondy')
-        .field('city', 'Bondy city')
+        .type('form')
+        .send({name: 'Boby'})
+        .send({city: 'Bobby Ville'})
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
@@ -392,7 +392,7 @@ describe('Artists Api', () => {
         });
     });
 
-    it(`it should not be submited whitout name and city`, function(done) {
+    it(`it should not submit whitout name and city`, (done) => {
       chai.request(server)
         .post('/artists/submit')
         .end((err, res) => {

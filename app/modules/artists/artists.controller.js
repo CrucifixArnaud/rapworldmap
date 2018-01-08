@@ -186,6 +186,8 @@ function processCreate(req, res) {
 /**
  * [processSubmit Process submit artist]
  * From atlas by non authenticated user
+ *
+ * @api {post} /artists/submit
  */
 function processSubmit(req, res) {
 
@@ -193,11 +195,18 @@ function processSubmit(req, res) {
   req.checkBody('name', 'Name is required.').notEmpty();
   req.checkBody('city', 'City name is required').notEmpty();
 
-  // Check errors
+  // Errors handling
   const errors = req.validationErrors();
 
   if (errors) {
-    return res.status(400).json(errors);
+    return res.status(400).json({
+      error: {
+        status: res.status,
+        title: 'One or more required field is missing',
+        detail: errors.map(err => err.msg),
+        meta: req.body
+      }
+    });
   }
 
   // create a new artist
@@ -226,56 +235,80 @@ function processSubmit(req, res) {
     published: false
   });
 
-  artist.save((error) => {
+  artist.save((err) => {
 
-    if (error) {
-      return res.status(400).json([error]);
+    if (err) {
+      return res.status(400).json({
+        error: {
+          status: res.status,
+          title: err.name,
+          detail: err.msg,
+          meta: req.body
+        }
+      });
+    } else if(process.env.NODE_ENV !== 'test') {
+      var smtpConfig = {
+        host: process.env.SMTP_HOST,
+        service: process.env.SMTP_SERVICE,
+        port: process.env.SMTP_PORT,
+        secure: false,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS
+        },
+        tls: {
+          rejectUnauthorized:false
+        }
+      };
+
+      var transporter = nodemailer.createTransport(smtpConfig);
+
+      var mailOptions = {
+        from: process.env.MAIL_FROM,
+        to: process.env.MAIL_TO,
+        subject: 'Rap World Map - New entry submited: ' + req.body.name,
+        html: `
+          <p>A new entry was submited.</p>
+          <ul>
+            <li>Name: ${req.body.name}</li>
+            <li>City: ${req.body.city}</li>
+            <li>Bio Url: ${req.body.bioUrl}</li>
+            <li>Clip Url: ${req.body.clipExampleUrl}</li>
+          </ul>
+          <a href="http://rapworldmap.com/login">Edit the entry on rapworldmap.com</a>`
+      };
+
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          return res.status(400).json({
+            error: {
+              status: res.status,
+              title: error.name,
+              detail: error.msg,
+              meta: req.body
+            }
+          });
+        } else {
+          return res.status(200).json({
+            success: {
+              status: res.status,
+              title: `Artist ${req.body.name} successfuly submited`,
+              meta: req.body,
+              artist: artist
+            }
+          });
+        }
+      });
+    } else {
+      return res.status(200).json({
+            success: {
+              status: res.status,
+              title: `Artist ${req.body.name} successfuly submited`,
+              meta: req.body,
+              artist: artist
+            }
+          });
     }
-
-    var smtpConfig = {
-      host: process.env.SMTP_HOST,
-      service: process.env.SMTP_SERVICE,
-      port: process.env.SMTP_PORT,
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      },
-      tls: {
-        rejectUnauthorized:false
-      }
-    };
-
-    var transporter = nodemailer.createTransport(smtpConfig);
-
-    var mailOptions = {
-      from: process.env.MAIL_FROM,
-      to: process.env.MAIL_TO,
-      subject: 'Rap World Map - New entry submited: ' + req.body.name,
-      html: `
-        <p>A new entry was submited.</p>
-        <ul>
-          <li>Name: ${req.body.name}</li>
-          <li>City: ${req.body.city}</li>
-          <li>Bio Url: ${req.body.bioUrl}</li>
-          <li>Clip Url: ${req.body.clipExampleUrl}</li>
-        </ul>
-        <a href="http://rapworldmap.com/login">Edit the entry on rapworldmap.com</a>`
-    };
-
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) {
-        res.json({
-          error: error,
-          response: info.response
-        });
-      } else {
-        res.json({
-          success: true,
-          response: info.response
-        });
-      }
-    });
   });
 }
 
