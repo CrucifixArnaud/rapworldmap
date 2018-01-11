@@ -4,6 +4,7 @@
 //====== Define depencies ======
 const User = require('./user.model');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 //====== Export method ======
 module.exports = {
@@ -11,8 +12,9 @@ module.exports = {
   showProfile: showProfile,
   showSignup: showSignup,
   showLogin: showLogin,
+  processLogin: processLogin,
   processLogout: processLogout,
-  processEdit: processEdit,
+  processEdit: processEdit
 };
 
 //====== Methods ======
@@ -65,6 +67,18 @@ function showLogin (req, res) {
 }
 
 /**
+ * [processLogin After the user login, generate a JWT token and save inside a cookie]
+ */
+function processLogin (req, res) {
+  // user has authenticated correctly thus we create a JWT token
+  const token = jwt.sign({ email: req.user.email }, process.env.SECRET);
+  // Save it inside a cookie
+  res.cookie('jwt', token);
+  // Redirect
+  res.redirect('/admin/artists/');
+}
+
+/**
  * [processEdit Process the edit profile form]
  */
 function processEdit (req, res) {
@@ -86,6 +100,9 @@ function processEdit (req, res) {
  * [processLogout Logout user]
  */
 function processLogout (req, res) {
+  // Clear the JWT cookie on logout
+  res.clearCookie('jwt');
+
   req.logout();
   res.redirect('/');
 }

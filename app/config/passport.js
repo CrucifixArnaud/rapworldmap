@@ -2,7 +2,9 @@
 //==============================================
 
 var LocalStrategy = require('passport-local').Strategy,
-  BasicStrategy = require('passport-http').BasicStrategy;
+  BasicStrategy = require('passport-http').BasicStrategy,
+  JwtStrategy = require('passport-jwt').Strategy,
+  ExtractJwt = require('passport-jwt').ExtractJwt;
 
 //  up the user model
 var User = require('../modules/users/user.model');
@@ -114,6 +116,24 @@ var passportStrategy = (passport) => {
         return done(null, false);
 
       return done(null, user);
+    });
+  }));
+
+  //====== JWT Auth ======
+  const opts = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.SECRET
+  }
+  passport.use('jwt', new JwtStrategy(opts, function(jwt_payload, done) {
+    User.findOne( { id: jwt_payload.sub }, function(err, user) {
+      if (err)
+        return done(err, false);
+
+      if (!user) {
+        return done(null, false);
+      } else {
+        return done(null, user);
+      }
     });
   }));
 };

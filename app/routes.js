@@ -35,10 +35,10 @@ module.exports = function(app, passport) {
   // Login
   app.get('/login', usersController.showLogin);
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/admin/artists/',
+    // successRedirect : '/admin/artists/',
     failureRedirect : '/login',
     failureFlash : true
-  }));
+  }), usersController.processLogin);
   // Logout
   app.get('/logout', usersController.processLogout);
   // Profile
@@ -51,18 +51,18 @@ module.exports = function(app, passport) {
   app.get('/artists/download', artistsController.getArtistsDownload);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
   app.get('/artists/create', userMiddlewares.isLoggedIn, artistsController.showCreate);
-  app.post('/artists/create', passport.authenticate('basic', {
+  app.post('/artists/create', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.uploadThumbnail, artistsController.processCreate);
   app.post('/artists/submit', artistsController.processSubmit);
   app.get('/artists/:slug', artistsController.showSingle);
-  app.get('/artists/:slug/edit', passport.authenticate('basic', {
+  app.get('/artists/:slug/edit', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.uploadThumbnail, artistsController.showEdit);
-  app.post('/artists/:slug', passport.authenticate('basic', {
+  app.post('/artists/:slug', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.uploadThumbnail, artistsController.processEdit);
-  app.get('/artists/:slug/delete', passport.authenticate('basic', {
+  app.get('/artists/:slug/delete', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.deleteArtist);
 
