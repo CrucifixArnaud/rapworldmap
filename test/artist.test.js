@@ -358,7 +358,7 @@ describe('Artists Api', () => {
 
     it('user should GET authenticate to delete an artist', (done) => {
       chai.request(server)
-        .get('/artists/gucci-mane/delete')
+        .post('/artists/gucci-mane/delete')
         .end((err,res) => {
           expect(res).to.have.status(401);
           done();
@@ -367,7 +367,7 @@ describe('Artists Api', () => {
 
     it('it should delete the artist', (done) => {
       chai.request(server)
-        .get('/artists/bobby-la-pointe/delete')
+        .post('/artists/bobby-la-pointe/delete')
         .auth(process.env.TEST_USER_EMAIL, process.env.TEST_USER_PWD)
         .end((err,res) => {
           expect(res).to.have.status(200);

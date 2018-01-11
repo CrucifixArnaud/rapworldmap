@@ -27,7 +27,8 @@ export default class Admin extends React.Component {
       artistsLoaded: false,
       artists: [],
       allArtist: [],
-      filters: filters
+      filters: filters,
+      jwt: cookies.get('jwt')
     };
 
     this.filterArtists = this.filterArtists.bind(this);
@@ -189,12 +190,31 @@ export default class Admin extends React.Component {
     if (confirmation === true) {
       const artistsDeleteUrl = window.location.origin + '/artists/' + slug + '/delete';
 
-      Request(artistsDeleteUrl, (error, response) => {
-        if (!error && response.statusCode === 200) {
-          window.location.reload(false);
-        } else {
-          console.error(error);
-        }
+      // const artistsUrl = window.location.origin + '/artists';
+
+      const artistsDeletePromise = new Promise( (resolve) => {
+        fetch(artistsDeleteUrl, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer '+ this.state.jwt
+          }
+        }).then( (response) => {
+          resolve(response.json());
+        }).catch( (error) => {
+          console.log(error);
+        });
+      });
+
+      artistsDeletePromise.then((res) => {
+
+        this.setState({
+          artistsLoaded: true,
+          allArtist: res,
+          artistsTotal: res.length,
+        }, () => {
+          this.filterArtists();
+        });
+
       });
     }
   }

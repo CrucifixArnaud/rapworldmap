@@ -62,7 +62,7 @@ module.exports = function(app, passport) {
   app.post('/artists/:slug', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.uploadThumbnail, artistsController.processEdit);
-  app.get('/artists/:slug/delete', passport.authenticate(['basic', 'jwt'], {
+  app.post('/artists/:slug/delete', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.deleteArtist);
 
