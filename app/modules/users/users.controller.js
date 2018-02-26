@@ -75,7 +75,7 @@ function processLogin (req, res) {
   // Save it inside a cookie
   res.cookie('jwt', token);
   // Redirect
-  res.redirect('/admin/artists/');
+  res.redirect('/admin/artists');
 }
 
 /**

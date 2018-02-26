@@ -7,15 +7,15 @@ const Artist = require('../artists/artist.model'),
 
 //====== Export method ======
 module.exports = {
-  showArtists: showArtists
+  showAdmin: showAdmin
 };
 
 //====== Methods ======
 
 /**
- * [showArtists Show a list of all artists]
+ * [showAdmin Show a list of all artists]
  */
-function showArtists (req, res) {
+function showAdmin (req, res) {
   Artist.find({}, (err, artists) => {
 
     var publishedArtists = artists.filter(function(item) {

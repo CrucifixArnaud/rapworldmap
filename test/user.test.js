@@ -30,7 +30,7 @@ describe('Users Api', () => {
           expect(res).to.have.cookie('session');
           expect(res).to.have.status(200);
           expect(res).to.redirect;
-          expect(res).to.redirectTo(`${res.request.protocol}//${res.request.host}/admin/artists/`);
+          expect(res).to.redirectTo(`${res.request.protocol}//${res.request.host}/admin/artists`);
 
           done();
         });

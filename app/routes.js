@@ -44,21 +44,19 @@ module.exports = function(app, passport) {
   // Profile
   app.get('/profile', userMiddlewares.isLoggedIn, usersController.showProfile);
   // Admin
-  app.get('/admin/artists', userMiddlewares.isLoggedIn, adminController.showArtists);
+  app.get('/admin/artists', userMiddlewares.isLoggedIn, adminController.showAdmin);
+  app.get('/admin/artists/create', userMiddlewares.isLoggedIn, adminController.showAdmin);
+  app.get('/admin/artists/:slug/edit', userMiddlewares.isLoggedIn, artistsController.showEdit);
   // Artists
   app.get('/artists/', artistsController.showArtists);
   app.get('/artists/index', artistsController.getArtistsIndex);
   app.get('/artists/download', artistsController.getArtistsDownload);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
-  app.get('/artists/create', userMiddlewares.isLoggedIn, artistsController.showCreate);
   app.post('/artists/create', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.uploadThumbnail, artistsController.processCreate);
   app.post('/artists/submit', artistsController.processSubmit);
   app.get('/artists/:slug', artistsController.showSingle);
-  app.get('/artists/:slug/edit', passport.authenticate(['basic', 'jwt'], {
-    session : false
-  }), artistsController.uploadThumbnail, artistsController.showEdit);
   app.post('/artists/:slug', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.uploadThumbnail, artistsController.processEdit);

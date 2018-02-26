@@ -18,7 +18,7 @@ chai.use(chaiHttp);
 //====== Tests for Artist model ======
 describe('Artists Model', () => {
 
-  beforeEach(function(done){
+  beforeEach(function(done) {
 
     const artist = new Artist({
       name: 'Boby',
@@ -199,12 +199,11 @@ describe('Artists Api', () => {
     });
   });
 
-  describe('/artists/create GET', () => {
-
+  describe('/admin/artists/create GET', () => {
 
     it('user should GET authenticate to access the artist page creation', (done) => {
       chai.request(server)
-        .get('/artists/create')
+        .get('/admin/artists/create')
         .end((err,res) => {
           expect(res).to.redirect;
           expect(res).to.redirectTo(`${res.request.protocol}//${res.request.host}/`);
@@ -271,16 +270,17 @@ describe('Artists Api', () => {
 
     it('user should GET authenticate to access the edit artist page', (done) => {
       chai.request(server)
-        .get('/artists/gucci-mane/edit')
+        .get('/admin/artists/gucci-mane/edit')
         .end((err,res) => {
-          expect(res).to.have.status(401);
+          expect(res).to.redirect;
+          expect(res).to.redirectTo(`${res.request.protocol}//${res.request.host}/`);
           done();
         });
     });
 
     it('it should GET the edit artist page', (done) => {
       chai.request(server)
-        .get('/artists/gucci-mane/edit')
+        .get('/admin/artists/gucci-mane/edit')
         .auth(process.env.TEST_USER_EMAIL, process.env.TEST_USER_PWD)
         .end((err,res) => {
           expect(res).to.have.status(200);
