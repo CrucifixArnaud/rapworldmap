@@ -46,7 +46,7 @@ module.exports = function(app, passport) {
   // Admin
   app.get('/admin/artists', userMiddlewares.isLoggedIn, adminController.showAdmin);
   app.get('/admin/artists/create', userMiddlewares.isLoggedIn, adminController.showAdmin);
-  app.get('/admin/artists/:slug/edit', userMiddlewares.isLoggedIn, artistsController.showEdit);
+  app.get('/admin/artists/:slug/edit', userMiddlewares.isLoggedIn, adminController.showAdmin);
   // Artists
   app.get('/artists/', artistsController.showArtists);
   app.get('/artists/index', artistsController.getArtistsIndex);

@@ -79,7 +79,7 @@
     <div>
       <div class="field field--inline">
         <label for="yearsActiveStart" class="field__label">Years Active Start:</label>
-        <input id="yearsActiveStart" type="number" min="1950" step="1" name="yearsActiveStart" value="<%= typeof artist.bio !== 'undefined' ? (artist.bio.yearsActiveStart !== null ? artist.bio.yearsActiveStart : '') : ''%>">
+        <input id="yearsActiveStart" type="number" min="1950" step="1" name="yearsActiveStart" value="(<%= typeof artist.bio !== 'undefined' ? (artist.bio.yearsActiveStart !== null ? artist.bio.yearsActiveStart : '') : '') %>">
       </div>
       <div class="field field--inline">
         <label for="yearsActiveEnd" class="field__label">Years Active End:</label>

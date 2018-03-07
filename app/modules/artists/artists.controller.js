@@ -403,7 +403,7 @@ function processEdit(req, res) {
   // Find current artist
   Artist.findOne({ slug: req.params.slug }, (err, artist) => {
 
-    var tumbnail = req.file ? req.file.filename : req.body.originalThumbnail;
+    var tumbnail = req.file ? req.file.filename : artist.image.thumbnailUrl;
 
     var published = (userMiddlewares.isLoggedIn ? req.body.published : false);
 

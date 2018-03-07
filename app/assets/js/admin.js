@@ -14,6 +14,7 @@ const Admin = () => (
     <div>
       <Route exact path="/admin/artists" component={ArtistsList} />
       <Route exact path="/admin/artists/create" component={ArtistsForm} />
+      <Route path="/admin/artists/:slug/edit" component={ArtistsForm} />
     </div>
   </Router>
 )
