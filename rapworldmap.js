@@ -19,7 +19,6 @@ const express = require('express'),
   flash = require('connect-flash'),
   expressValidator = require('express-validator');
 
-
 // Define config variables/const
 const port = process.env.PORT || 3666;
 
@@ -48,8 +47,11 @@ app.use(expressValidator());
 app.use(session({
   cookieName: 'session',
   secret: process.env.SECRET,
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
+  duration: 43200000, // 12h
+  cookie: {
+    maxAge: 0,
+    ephemeral: true
+  }
 }));
 
 app.use(passport.initialize());
