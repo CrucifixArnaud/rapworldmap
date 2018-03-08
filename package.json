@@ -1,6 +1,6 @@
 {
   "name": "rapworldmap",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Display a map of Rapper based on their childhood neighborhood",
   "main": "rapworldmap.js",
   "scripts": {
