@@ -80,10 +80,8 @@ export default class ArtistsForm extends React.Component {
         if (res.error) {
 
           this.setState({
-            error: res.error
+            artistNotFound: res.error
           });
-
-          window.scrollTo(0, 0);
 
         } else {
           this.setState({
@@ -294,136 +292,152 @@ export default class ArtistsForm extends React.Component {
     return (
       <div className="admin-content">
 
-        {this.state.error &&
+        {this.state.artistNotFound ? (
 
-          <div className="errors">
-            <p>{this.state.error.title} </p>
-            <ul>
-              {errors}
-            </ul>
-          </div>
-        }
-
-        <a href="/admin/artists" className="link--back-to">&larr; Back to artist list</a>
-
-        <form ref="artistForm" className="form" onSubmit={this.handleSubmit} encType="multipart/form-data" method="POST">
-
-          <div className="field-group">
-            <h3 className="field-group__title">About</h3>
-            <div className="field">
-              <label htmlFor="name" className="field__label">Name:</label>
-              <input id="name" type="text" name="name" value={this.state.artist.name || ''} onChange={this.handleArtistNameChange} />
+          <div className="errors-container">
+            <h2 className="error__title">{this.state.artistNotFound.title}</h2>
+            <div className="error__content">
+              {this.state.artistNotFound.detail}
+              <p>Go back to the <a href="/admin/artists">artists list</a>.</p>
             </div>
           </div>
 
-          <div className="field-group">
-            <h3 className="field-group__title">Location</h3>
-            <div className="field">
-              <label htmlFor="city" className="field__label">City:</label>
-              <input id="city" type="text" name="city" value={this.state.artist.location.city || ''} onChange={this.handleArtistCityChange} />
-            </div>
-            <div className="field">
-              <label htmlFor="neighborhoodName" className="field__label">Neighborhood Name:</label>
-              <input id="neighborhoodName" type="text" name="neighborhoodName" value={this.state.artist.location.neighborhood || ''} onChange={this.handleArtistNeighborhoodChange} />
-            </div>
-            <div className="field">
-              <label htmlFor="coordinates" className="field__label">Coordinates:</label>
-              <input id="coordinates" type="text" name="coordinates" value={this.state.artist.location.coordinates || ''} onChange={this.handleArtistCoordinatesChange} />
-            </div>
-          </div>
+        ) : (
 
-          <div className="field-group">
-            <h3 className="field-group__title">Categories:</h3>
-            <div className="field--inline">
-              <input type="checkbox" id="producer" name="categories" value="producer / dj" checked={this.state.artist.categories.includes('producer / dj')} onChange={this.handleArtistCategoriesChange} />
-              <label className="field__label" htmlFor="producer">Producer / DJ</label>
-            </div>
-            <div className="field--inline">
-              <input type="checkbox" id="rapper" name="categories" value="rapper" checked={this.state.artist.categories.includes('rapper')} onChange={this.handleArtistCategoriesChange} />
-              <label className="field__label" htmlFor="rapper">Rapper</label>
-            </div>
-            <div className="field--inline">
-              <input type="checkbox" id="singer" name="categories" value="singer" checked={this.state.artist.categories.includes('singer')} onChange={this.handleArtistCategoriesChange} />
-              <label className="field__label" htmlFor="singer">Singer</label>
-            </div>
-            <div className="field--inline">
-              <input type="checkbox" id="group" name="categories" value="group" checked={this.state.artist.categories.includes('group')} onChange={this.handleArtistCategoriesChange}/>
-              <label className="field__label" htmlFor="group">Group</label>
-            </div>
-          </div>
+          <div>
+            {this.state.error &&
 
-          <div className="field-group">
-            <h3 className="field-group__title">Images</h3>
-            <div className="field">
-              <label className="field__label" htmlFor="thumbnail">Thumbnail:</label>
+              <div className="errors">
+                <p>{this.state.error.title} </p>
+                <ul>
+                  {errors}
+                </ul>
+              </div>
+            }
 
-              {this.state.artist.image.thumbnailUrl &&
+            <a href="/admin/artists" className="link--back-to">&larr; Back to artist list</a>
+
+            <form ref="artistForm" className="form" onSubmit={this.handleSubmit} encType="multipart/form-data" method="POST">
+
+              <div className="field-group">
+                <h3 className="field-group__title">About</h3>
+                <div className="field">
+                  <label htmlFor="name" className="field__label">Name:</label>
+                  <input id="name" type="text" name="name" value={this.state.artist.name || ''} onChange={this.handleArtistNameChange} />
+                </div>
+              </div>
+
+              <div className="field-group">
+                <h3 className="field-group__title">Location</h3>
+                <div className="field">
+                  <label htmlFor="city" className="field__label">City:</label>
+                  <input id="city" type="text" name="city" value={this.state.artist.location.city || ''} onChange={this.handleArtistCityChange} />
+                </div>
+                <div className="field">
+                  <label htmlFor="neighborhoodName" className="field__label">Neighborhood Name:</label>
+                  <input id="neighborhoodName" type="text" name="neighborhoodName" value={this.state.artist.location.neighborhood || ''} onChange={this.handleArtistNeighborhoodChange} />
+                </div>
+                <div className="field">
+                  <label htmlFor="coordinates" className="field__label">Coordinates:</label>
+                  <input id="coordinates" type="text" name="coordinates" value={this.state.artist.location.coordinates || ''} onChange={this.handleArtistCoordinatesChange} />
+                </div>
+              </div>
+
+              <div className="field-group">
+                <h3 className="field-group__title">Categories:</h3>
+                <div className="field--inline">
+                  <input type="checkbox" id="producer" name="categories" value="producer / dj" checked={this.state.artist.categories.includes('producer / dj')} onChange={this.handleArtistCategoriesChange} />
+                  <label className="field__label" htmlFor="producer">Producer / DJ</label>
+                </div>
+                <div className="field--inline">
+                  <input type="checkbox" id="rapper" name="categories" value="rapper" checked={this.state.artist.categories.includes('rapper')} onChange={this.handleArtistCategoriesChange} />
+                  <label className="field__label" htmlFor="rapper">Rapper</label>
+                </div>
+                <div className="field--inline">
+                  <input type="checkbox" id="singer" name="categories" value="singer" checked={this.state.artist.categories.includes('singer')} onChange={this.handleArtistCategoriesChange} />
+                  <label className="field__label" htmlFor="singer">Singer</label>
+                </div>
+                <div className="field--inline">
+                  <input type="checkbox" id="group" name="categories" value="group" checked={this.state.artist.categories.includes('group')} onChange={this.handleArtistCategoriesChange}/>
+                  <label className="field__label" htmlFor="group">Group</label>
+                </div>
+              </div>
+
+              <div className="field-group">
+                <h3 className="field-group__title">Images</h3>
+                <div className="field">
+                  <label className="field__label" htmlFor="thumbnail">Thumbnail:</label>
+
+                  {this.state.artist.image.thumbnailUrl &&
+                    <div>
+                      <div className="thumbnail field__thumbnail">
+                        <img className="thumbnail__picture" src={'/uploads/medium-' + this.state.artist.image.thumbnailUrl} alt="" />
+                      </div>
+                    </div>
+                  }
+
+                  <input id="thumbnail" className="input--file" type="file" name="thumbnail" />
+                </div>
+              </div>
+
+              <div className="field-group">
+                <h3 className="field-group__title">Bio</h3>
+                <div className="field">
+                  <label htmlFor="summary" className="field__label">Summary:</label>
+                  <textarea name="summary" rows="10" cols="50" value={this.state.artist.bio.summary || ''} onChange={this.handleArtistSummaryChange} />
+                </div>
+                <div className="field">
+                  <label htmlFor="bioUrl" className="field__label">Bio Url:</label>
+                  <input id="bioUrl" type="text" name="bioUrl" value={this.state.artist.bio.url || ''} onChange={this.handleArtistBioUrlChange} />
+                </div>
+                <div className="field field--inline">
+                  <label htmlFor="birthdate" className="field__label">Birthdate:</label>
+                  <input id="birthdate" type="date" name="birthdate" value={(this.state.artist.bio.birthdate ? moment(this.state.artist.bio.birthdate).format('YYYY-MM-DD') : '') || ''} onChange={this.handleArtistBirthdateChange} />
+                </div>
+                <div className="field field--inline">
+                  <label htmlFor="deathdate" className="field__label">Deathdate:</label>
+                  <input id="deathdate" type="date" name="deathdate" value={(this.state.artist.bio.deathdate ? moment(this.state.artist.bio.deathdate).format('YYYY-MM-DD') : '') || ''} onChange={this.handleArtistDeathdateChange} />
+                </div>
                 <div>
-                  <div className="thumbnail field__thumbnail">
-                    <img className="thumbnail__picture" src={'/uploads/medium-' + this.state.artist.image.thumbnailUrl} alt="" />
+                  <div className="field field--inline">
+                    <label htmlFor="yearsActiveStart" className="field__label">Years Active Start:</label>
+                    <input id="yearsActiveStart" type="number" min="1950" step="1" name="yearsActiveStart" value={this.state.artist.bio.yearsActiveStart || ''} onChange={this.handleArtistYearsActiveStartChange} />
+                  </div>
+                  <div className="field field--inline">
+                    <label htmlFor="yearsActiveEnd" className="field__label">Years Active End:</label>
+                    <input id="yearsActiveEnd" type="number" min="1950" step="1" name="yearsActiveEnd" value={this.state.artist.bio.yearsActiveEnd || ''} onChange={this.handleArtistYearsActiveEndChange} />
                   </div>
                 </div>
-              }
-
-              <input id="thumbnail" className="input--file" type="file" name="thumbnail" />
-            </div>
-          </div>
-
-          <div className="field-group">
-            <h3 className="field-group__title">Bio</h3>
-            <div className="field">
-              <label htmlFor="summary" className="field__label">Summary:</label>
-              <textarea name="summary" rows="10" cols="50" value={this.state.artist.bio.summary || ''} onChange={this.handleArtistSummaryChange} />
-            </div>
-            <div className="field">
-              <label htmlFor="bioUrl" className="field__label">Bio Url:</label>
-              <input id="bioUrl" type="text" name="bioUrl" value={this.state.artist.bio.url || ''} onChange={this.handleArtistBioUrlChange} />
-            </div>
-            <div className="field field--inline">
-              <label htmlFor="birthdate" className="field__label">Birthdate:</label>
-              <input id="birthdate" type="date" name="birthdate" value={(this.state.artist.bio.birthdate ? moment(this.state.artist.bio.birthdate).format('YYYY-MM-DD') : '') || ''} onChange={this.handleArtistBirthdateChange} />
-            </div>
-            <div className="field field--inline">
-              <label htmlFor="deathdate" className="field__label">Deathdate:</label>
-              <input id="deathdate" type="date" name="deathdate" value={(this.state.artist.bio.deathdate ? moment(this.state.artist.bio.deathdate).format('YYYY-MM-DD') : '') || ''} onChange={this.handleArtistDeathdateChange} />
-            </div>
-            <div>
-              <div className="field field--inline">
-                <label htmlFor="yearsActiveStart" className="field__label">Years Active Start:</label>
-                <input id="yearsActiveStart" type="number" min="1950" step="1" name="yearsActiveStart" value={this.state.artist.bio.yearsActiveStart || ''} onChange={this.handleArtistYearsActiveStartChange} />
               </div>
-              <div className="field field--inline">
-                <label htmlFor="yearsActiveEnd" className="field__label">Years Active End:</label>
-                <input id="yearsActiveEnd" type="number" min="1950" step="1" name="yearsActiveEnd" value={this.state.artist.bio.yearsActiveEnd || ''} onChange={this.handleArtistYearsActiveEndChange} />
+
+              <div className="field-group">
+                <h3 className="field-group__title">Youtube</h3>
+                <div className="field--inline">
+                  <label htmlFor="clipExampleUrl" className="field__label">Clip Example Url:</label>
+                  <input id="clipExampleUrl" type="text" name="clipExampleUrl" value={this.state.artist.youtube.clipExampleUrl || ''} onChange={this.handleArtistClipExampleUrlChange} />
+                </div>
               </div>
-            </div>
+
+              <div className="field-groud">
+                <h3 className="field-group__title">Published</h3>
+                <div className="field--inline">
+                  <input type="radio" id="publishedYes" name="published" value="true" checked={this.state.artist.published} onChange={this.handleArtistPublishedChange} />
+                  <label className="field__label" htmlFor="publishedYes">Yes</label>
+                </div>
+                <div className="field--inline">
+                  <input type="radio" id="publishedNo" name="published" value="false" checked={!this.state.artist.published} onChange={this.handleArtistPublishedChange} />
+                  <label className="field__label" htmlFor="publishedNo">No</label>
+                </div>
+              </div>
+
+              <div className="field">
+                <button className="button--primary--md" type="submit">{this.state.submitLabel}</button>
+              </div>
+
+            </form>
           </div>
 
-          <div className="field-group">
-            <h3 className="field-group__title">Youtube</h3>
-            <div className="field--inline">
-              <label htmlFor="clipExampleUrl" className="field__label">Clip Example Url:</label>
-              <input id="clipExampleUrl" type="text" name="clipExampleUrl" value={this.state.artist.youtube.clipExampleUrl || ''} onChange={this.handleArtistClipExampleUrlChange} />
-            </div>
-          </div>
-
-          <div className="field-groud">
-            <h3 className="field-group__title">Published</h3>
-            <div className="field--inline">
-              <input type="radio" id="publishedYes" name="published" value="true" checked={this.state.artist.published} onChange={this.handleArtistPublishedChange} />
-              <label className="field__label" htmlFor="publishedYes">Yes</label>
-            </div>
-            <div className="field--inline">
-              <input type="radio" id="publishedNo" name="published" value="false" checked={!this.state.artist.published} onChange={this.handleArtistPublishedChange} />
-              <label className="field__label" htmlFor="publishedNo">No</label>
-            </div>
-          </div>
-
-          <div className="field">
-            <button className="button--primary--md" type="submit">{this.state.submitLabel}</button>
-          </div>
-
-        </form>
+        )}
 
       </div>
     );
