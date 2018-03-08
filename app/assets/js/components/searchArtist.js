@@ -1,5 +1,4 @@
 import React from 'react';
-import lunr from 'lunr';
 
 export default class SearchArtist extends React.Component {
   constructor(props) {
@@ -29,22 +28,9 @@ export default class SearchArtist extends React.Component {
     artistsPromise.then((response) => {
       const artists = response;
 
-      const artistsIndex = lunr(function () {
-          this.ref('slug');
-          this.field('name');
-          this.field('city');
-          this.field('neighborhood');
-          this.field('thumbnail');
-
-          artists.data.forEach(function (doc) {
-            this.add(doc);
-          }, this);
-        });
-
-        this.setState({
-          artists: artists,
-          artistsIndex: artistsIndex
-        });
+      this.setState({
+        artists: artists
+      });
     });
   }
 
@@ -80,7 +66,7 @@ export default class SearchArtist extends React.Component {
   handleSearchChange(e) {
     const searchText = e.target.value;
     this.setState({search: e.target.value}, function() {
-      if(searchText.length > 3) {
+      if(searchText.length >= 3) {
         this.search();
       }
     });
@@ -89,25 +75,32 @@ export default class SearchArtist extends React.Component {
 
   search() {
     const textToSearch = this.state.search;
-    // Use lunr search to search into the artist index load on component init
-    const searchRef = this.state.artistsIndex.search(textToSearch);
 
     // Define the search result array
     let searchResults = [];
 
-    // For each search reference found
-    searchRef.map((object, step) => {
-      // Return the associated key using the artist.slug
-      const artistKey = this.state.artists.index[object.ref];
-      // Use the artist key to return the correct related artist
-      const artist = this.state.artists.data[artistKey];
-      // Push it to the search result array
-      searchResults.push(artist);
-    });
+      const prop = (typeof prop === 'undefined') ? 'name' : prop;
+
+      const artists = this.state.artists.data;
+
+      for (var i=0; i < artists.length; i++) {
+        if (artists[i]['name'].indexOf(textToSearch) !== -1 ) {
+          searchResults.push(artists[i]);
+        }
+
+        if (artists[i]['city'].indexOf(textToSearch) !== -1 ) {
+          searchResults.push(artists[i]);
+        }
+
+        if (artists[i]['neighborhood'].indexOf(textToSearch) !== -1 ) {
+          searchResults.push(artists[i]);
+        }
+      }
 
     this.setState({
       searchResults: searchResults
     });
+
   }
 
   handleKeyDown(e) {
