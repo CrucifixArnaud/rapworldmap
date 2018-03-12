@@ -74,7 +74,7 @@ export default class SearchArtist extends React.Component {
   }
 
   search() {
-    const textToSearch = this.state.search;
+    const textToSearch = this.state.search.toLowerCase();
 
     // Define the search result array
     let searchResults = [];
@@ -84,15 +84,15 @@ export default class SearchArtist extends React.Component {
       const artists = this.state.artists.data;
 
       for (var i=0; i < artists.length; i++) {
-        if (artists[i]['name'].indexOf(textToSearch) !== -1 ) {
+        if (artists[i]['name'].toLowerCase().indexOf(textToSearch) !== -1 ) {
           searchResults.push(artists[i]);
         }
 
-        if (artists[i]['city'].indexOf(textToSearch) !== -1 ) {
+        if (artists[i]['city'].toLowerCase().indexOf(textToSearch) !== -1 ) {
           searchResults.push(artists[i]);
         }
 
-        if (artists[i]['neighborhood'].indexOf(textToSearch) !== -1 ) {
+        if (artists[i]['neighborhood'].toLowerCase().indexOf(textToSearch) !== -1 ) {
           searchResults.push(artists[i]);
         }
       }
