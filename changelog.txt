@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.4.1 - 12 Mar 2018 =
+* Make new search case insensitive
+* Fix issue with markercluster (downgrade version to 1.0.0 instead of 1.2.0)
+
 = 1.4.0 - 08 Mar 2018 =
 * Refactor search (drop lunr and for custom JS)
 * Refactor Artist API
