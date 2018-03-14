@@ -15,6 +15,7 @@ export default class ArtistsForm extends React.Component {
 
     this.state = {
       jwt: cookies.get('jwt'),
+      errors: [],
       artist: {
         'name': '',
         'youtube': {
@@ -261,12 +262,22 @@ export default class ArtistsForm extends React.Component {
     artistsSubmitPromise.then((res) => {
 
       if (res.error) {
+        let errors = res.error.detail;
+        let newErrors = [];
 
-        this.setState({
-          error: res.error
+        errors.map((error) => {
+          newErrors.push(error);
         });
 
-        window.scrollTo(0, 0);
+        this.setState({
+          errors: newErrors
+        }, () => {
+          window.scrollTo(0, 0);
+          const firstError = document.getElementById(newErrors[0].param);
+          console.log(firstError);
+          firstError.focus();
+        });
+
 
       } else {
         window.location = '/admin/artists';
@@ -277,17 +288,20 @@ export default class ArtistsForm extends React.Component {
   render() {
 
     // Artists row
-    let errors;
+    // let errors;
 
-    if (this.state.error) {
-      errors = this.state.error.detail.map((error, key) => {
-        return (
-          <li className="error" key={key}>
-            <p>{error}</p>
-          </li>
-        );
-      });
-    }
+    // if (this.state.error) {
+    //   errors = this.state.error.map((error, key) => {
+    //     return (
+    //       <li className="error" key={key}>
+    //         <p>{error.detail}</p>
+    //       </li>
+    //     );
+    //   });
+    // }
+
+    const errorName = this.state.errors.find(x => x.param === 'name');
+    const errorCity = this.state.errors.find(x => x.param === 'city');
 
     return (
       <div className="admin-content">
@@ -324,6 +338,9 @@ export default class ArtistsForm extends React.Component {
                 <div className="field">
                   <label htmlFor="name" className="field__label">Name:</label>
                   <input id="name" type="text" name="name" value={this.state.artist.name || ''} onChange={this.handleArtistNameChange} />
+                  {errorName &&
+                    <label id="submit-error-name" htmlFor="name" className="field-error">{errorName.msg}</label>
+                  }
                 </div>
               </div>
 
@@ -332,6 +349,9 @@ export default class ArtistsForm extends React.Component {
                 <div className="field">
                   <label htmlFor="city" className="field__label">City:</label>
                   <input id="city" type="text" name="city" value={this.state.artist.location.city || ''} onChange={this.handleArtistCityChange} />
+                  {errorCity &&
+                    <label id="submit-error-city" htmlFor="city" className="field-error">{errorCity.msg}</label>
+                  }
                 </div>
                 <div className="field">
                   <label htmlFor="neighborhoodName" className="field__label">Neighborhood Name:</label>

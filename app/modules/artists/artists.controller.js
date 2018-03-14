@@ -124,7 +124,7 @@ function processCreate(req, res) {
       error: {
         status: res.status,
         title: 'One or more required field is missing',
-        detail: errors.map(err => err.msg),
+        detail: errors.map(err => err),
         meta: req.body
       }
     });
@@ -166,7 +166,12 @@ function processCreate(req, res) {
         error: {
           status: res.status,
           title: err.name,
-          detail: err.msg,
+          detail: [{
+              msg: err.msg,
+              param: err.param,
+              vaue: err.value
+            }
+          ],
           meta: req.body
         }
       });
@@ -289,7 +294,12 @@ function processSubmit(req, res) {
             error: {
               status: res.status,
               title: error.name,
-              detail: error.msg,
+              detail: [{
+                  msg: err.msg,
+                  param: err.param,
+                  vaue: err.value
+                }
+              ],
               meta: req.body
             }
           });
@@ -435,7 +445,12 @@ function processEdit(req, res) {
           error: {
             status: res.status,
             title: err.name,
-            detail: err.msg,
+            detail: [{
+                msg: err.msg,
+                param: err.param,
+                vaue: err.value
+              }
+            ],
             meta: req.body
           }
         });
