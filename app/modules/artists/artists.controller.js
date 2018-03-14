@@ -408,11 +408,18 @@ function processEdit(req, res) {
   req.checkBody('name', 'Name is required.').notEmpty();
   req.checkBody('city', 'City name is required').notEmpty();
 
-  // Check errors
+  // Errors handling
   const errors = req.validationErrors();
 
   if (errors) {
-    return res.status(400).json(errors);
+    return res.status(400).json({
+      error: {
+        status: res.status,
+        title: 'One or more required field is missing',
+        detail: errors.map(err => err),
+        meta: req.body
+      }
+    });
   }
 
   // Find current artist
