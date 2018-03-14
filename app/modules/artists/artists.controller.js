@@ -242,7 +242,12 @@ function processSubmit(req, res) {
         error: {
           status: res.status,
           title: err.name,
-          detail: err.msg,
+          detail: [{
+              msg: err.msg,
+              param: err.param,
+              vaue: err.value
+            }
+          ],
           meta: req.body
         }
       });
