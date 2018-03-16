@@ -274,7 +274,6 @@ export default class ArtistsForm extends React.Component {
         }, () => {
           window.scrollTo(0, 0);
           const firstError = document.getElementById(newErrors[0].param);
-          console.log(firstError);
           firstError.focus();
         });
 
@@ -287,21 +286,9 @@ export default class ArtistsForm extends React.Component {
 
   render() {
 
-    // Artists row
-    // let errors;
-
-    // if (this.state.error) {
-    //   errors = this.state.error.map((error, key) => {
-    //     return (
-    //       <li className="error" key={key}>
-    //         <p>{error.detail}</p>
-    //       </li>
-    //     );
-    //   });
-    // }
-
     const errorName = this.state.errors.find(x => x.param === 'name');
     const errorCity = this.state.errors.find(x => x.param === 'city');
+    const errorThumbnail = this.state.errors.find(x => x.param === 'thumbnail');
 
     return (
       <div className="admin-content">
@@ -397,6 +384,10 @@ export default class ArtistsForm extends React.Component {
                   }
 
                   <input id="thumbnail" className="input--file" type="file" name="thumbnail" />
+
+                  {errorThumbnail &&
+                    <label id="submit-error-thumbnail" htmlFor="thumbnail" className="field-error">{errorThumbnail.msg}</label>
+                  }
                 </div>
               </div>
 

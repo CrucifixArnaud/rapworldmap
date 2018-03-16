@@ -169,7 +169,7 @@ function processCreate(req, res) {
           detail: [{
               msg: err.msg,
               param: err.param,
-              vaue: err.value
+              value: err.value
             }
           ],
           meta: req.body
@@ -250,7 +250,7 @@ function processSubmit(req, res) {
           detail: [{
               msg: err.msg,
               param: err.param,
-              vaue: err.value
+              value: err.value
             }
           ],
           meta: req.body
@@ -349,13 +349,24 @@ function uploadThumbnail(req, res, next) {
   upload(req, res, function(err) {
 
     if(err) {
-      var errorMsg = 'An error occured during file upload';
+
+      var errorMsg = err.code;
 
       if(err.code === 'LIMIT_FILE_SIZE')
-        errorMsg = `File size too heavy. Maximum file size is ${maxSize/1048576}mo.`;
+        var errorMsg = `File size too heavy. Maximum file size is ${maxSize/1048576}mo.`;
 
-      req.flash('errors', errorMsg);
-      return res.redirect('back');
+      return res.status(400).json({
+        error: {
+          status: res.status,
+          title: 'An error occured during file upload',
+          detail: [{
+              msg: errorMsg,
+              param: err.field
+            }
+          ],
+          meta: req.body
+        }
+      });
     }
 
     if(req.file) {
@@ -363,7 +374,6 @@ function uploadThumbnail(req, res, next) {
         if (err) {
           return next(err);
         }
-
       });
     }
 
@@ -455,7 +465,7 @@ function processEdit(req, res) {
             detail: [{
                 msg: err.msg,
                 param: err.param,
-                vaue: err.value
+                value: err.value
               }
             ],
             meta: req.body
