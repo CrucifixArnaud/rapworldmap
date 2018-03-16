@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.4.2 - 16 Mar 2018 =
+* Fix error handling for artist creation and edition
+* Fix error handling for artist submission
+
 = 1.4.1 - 12 Mar 2018 =
 * Make new search case insensitive
 * Fix issue with markercluster (downgrade version to 1.0.0 instead of 1.2.0)
