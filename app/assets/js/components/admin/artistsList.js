@@ -19,7 +19,6 @@ export default class ArtistsList extends React.Component {
     const filters = (savedFilters) ? savedFilters : {
       published: 'all',
       clip: 'all',
-      category: 'all'
     };
 
     this.state = {
@@ -108,7 +107,7 @@ export default class ArtistsList extends React.Component {
       }
       case 'without-clip': {
         clipArtistFilter = publishedArtistFilter.filter( function (artist) {
-          return artist.youtube.clipExampleUrl === undefined && artist.youtube.clipExampleUrl === null || artist.youtube.clipExampleUrl.length === 0;
+          return artist.youtube.clipExampleUrl === undefined && artist.youtube.clipExampleUrl === null || artist.youtube.clipExampleUrl !== undefined && artist.youtube.clipExampleUrl.length === 0;
         });
         break;
       }
@@ -253,12 +252,20 @@ export default class ArtistsList extends React.Component {
           <td className="table__cell">
             {artist.location.city}
           </td>
-          <td className="table__cell">
+          {/*<td className="table__cell">
             {artistCategories}
-          </td>
+          </td>*/}
           <td className="table__cell">
             {artist.youtube.clipExampleUrl !== undefined && artist.youtube.clipExampleUrl !== null && artist.youtube.clipExampleUrl.length > 0 &&
               <a href={artist.youtube.clipExampleUrl}>Link</a>
+            }
+          </td>
+          <td className="table__cell">
+            {artist.bio.yearsActiveStart !== undefined && artist.bio.yearsActiveStart !== null &&
+              artist.bio.yearsActiveStart
+            }
+            {artist.bio.yearsActiveStart !== undefined && artist.bio.yearsActiveEnd !== null &&
+              ' - ' + artist.bio.yearsActiveEnd
             }
           </td>
           <td className="table__cell table__cell--publication-date">
@@ -324,7 +331,7 @@ export default class ArtistsList extends React.Component {
                 </ul>
               </Dropdown>
             </div>
-            <div className="field--inline">
+            {/*<div className="field--inline">
               <Dropdown label={'Category ' + '(' + this.state.filters.category + ')'}>
                 <ul className="dropdown__list">
                   <li className="dropdown__list__item">
@@ -354,7 +361,7 @@ export default class ArtistsList extends React.Component {
                   </li>
                 </ul>
               </Dropdown>
-            </div>
+            </div>*/}
           </div>
         </div>
 
@@ -363,8 +370,9 @@ export default class ArtistsList extends React.Component {
             <tr className='table__head__row'>
               <th className='table__head__cell'>Name</th>
               <th className='table__head__cell'>City</th>
-              <th className='table__head__cell'>Categorie(s)</th>
+              {/*<th className='table__head__cell'>Categorie(s)</th>*/}
               <th className='table__head__cell'>Clip</th>
+              <th className='table__head__cell'>Active Years</th>
               <th className='table__head__cell table__head__cell--publication-date'>Creation Date</th>
               <th className='table__head__cell'>Published</th>
               <th></th>
