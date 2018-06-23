@@ -1,4 +1,4 @@
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
@@ -254,7 +254,7 @@ export default class ArtistsList extends React.Component {
             {artist.location.city}
           </td>
           <td className="table__cell">
-              {artistCategories}
+            {artistCategories}
           </td>
           <td className="table__cell">
             {artist.youtube.clipExampleUrl !== undefined && artist.youtube.clipExampleUrl !== null && artist.youtube.clipExampleUrl.length > 0 &&
@@ -359,41 +359,41 @@ export default class ArtistsList extends React.Component {
         </div>
 
         <table className='table table--artist'>
-            <thead className='table__head'>
-                <tr className='table__head__row'>
-                    <th className='table__head__cell'>Name</th>
-                    <th className='table__head__cell'>City</th>
-                    <th className='table__head__cell'>Categorie(s)</th>
-                    <th className='table__head__cell'>Clip</th>
-                    <th className='table__head__cell table__head__cell--publication-date'>Creation Date</th>
-                    <th className='table__head__cell'>Published</th>
-                    <th></th>
-                </tr>
-            </thead>
+          <thead className='table__head'>
+            <tr className='table__head__row'>
+              <th className='table__head__cell'>Name</th>
+              <th className='table__head__cell'>City</th>
+              <th className='table__head__cell'>Categorie(s)</th>
+              <th className='table__head__cell'>Clip</th>
+              <th className='table__head__cell table__head__cell--publication-date'>Creation Date</th>
+              <th className='table__head__cell'>Published</th>
+              <th></th>
+            </tr>
+          </thead>
 
-            <tbody className='table__body'>
+          <tbody className='table__body'>
 
-              <tr id="loaderCell" className="table__row">
-                <td colSpan="7" className="table__cell--loader">
-                  <div id="loader" className="loader active">
-                    <div className="loader__spin"></div>
-                  </div>
+            <tr id="loaderCell" className="table__row">
+              <td colSpan="7" className="table__cell--loader">
+                <div id="loader" className="loader active">
+                  <div className="loader__spin"></div>
+                </div>
+              </td>
+            </tr>
+
+            {this.state.artistsLoaded === true && this.state.artists.length > 0 &&
+              artistsResult
+            }
+
+            {this.state.artistsLoaded === true && this.state.artists.length === 0 &&
+              <tr className='table__row' >
+                <td className='table__cell' colSpan='7'>
+                  <p>Selected filter doesn't return any result.</p>
                 </td>
               </tr>
+            }
 
-              {this.state.artistsLoaded === true && this.state.artists.length > 0 &&
-                artistsResult
-              }
-
-              {this.state.artistsLoaded === true && this.state.artists.length === 0 &&
-                <tr className='table__row' >
-                  <td className='table__cell' colSpan='7'>
-                    <p>Selected filter doesn't return any result.</p>
-                  </td>
-                </tr>
-              }
-
-            </tbody>
+          </tbody>
         </table>
       </div>
     );

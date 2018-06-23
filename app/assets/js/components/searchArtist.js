@@ -65,7 +65,7 @@ export default class SearchArtist extends React.Component {
 
   handleSearchChange(e) {
     const searchText = e.target.value;
-    this.setState({search: e.target.value}, function() {
+    this.setState({search: e.target.value}, function(){
       if(searchText.length >= 3) {
         this.search();
       }
@@ -79,23 +79,23 @@ export default class SearchArtist extends React.Component {
     // Define the search result array
     let searchResults = [];
 
-      const prop = (typeof prop === 'undefined') ? 'name' : prop;
+    const prop = (typeof prop === 'undefined') ? 'name' : prop;
 
-      const artists = this.state.artists.data;
+    const artists = this.state.artists.data;
 
-      for (var i=0; i < artists.length; i++) {
-        if (artists[i]['name'].toLowerCase().indexOf(textToSearch) !== -1 ) {
-          searchResults.push(artists[i]);
-        }
-
-        if (artists[i]['city'].toLowerCase().indexOf(textToSearch) !== -1 ) {
-          searchResults.push(artists[i]);
-        }
-
-        if (artists[i]['neighborhood'].toLowerCase().indexOf(textToSearch) !== -1 ) {
-          searchResults.push(artists[i]);
-        }
+    for (var i=0; i < artists.length; i++) {
+      if (artists[i]['name'].toLowerCase().indexOf(textToSearch) !== -1 ) {
+        searchResults.push(artists[i]);
       }
+
+      if (artists[i]['city'].toLowerCase().indexOf(textToSearch) !== -1 ) {
+        searchResults.push(artists[i]);
+      }
+
+      if (artists[i]['neighborhood'].toLowerCase().indexOf(textToSearch) !== -1 ) {
+        searchResults.push(artists[i]);
+      }
+    }
 
     this.setState({
       searchResults: searchResults

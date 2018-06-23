@@ -18,7 +18,8 @@
     "build:js": "npm run browserify && npm run uglify:js",
     "build": "NODE_ENV=production npm run build:js && npm run build:css",
     "dev": "NODE_ENV=development nodemon rapworldmap.js",
-    "start": "NODE_ENV=production node rapworldmap.js"
+    "start": "NODE_ENV=production node rapworldmap.js",
+    "lint": "eslint app/assets/js"
   },
   "repository": {
     "type": "git",
@@ -70,6 +71,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",

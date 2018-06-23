@@ -1,4 +1,4 @@
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
@@ -306,13 +306,9 @@ export default class ArtistsForm extends React.Component {
         ) : (
 
           <div>
-            {this.state.error &&
-
+            {this.state.errors.length > 0 &&
               <div className="errors">
-                <p>{this.state.error.title} </p>
-                <ul>
-                  {errors}
-                </ul>
+                <p className="error">There were some errors</p>
               </div>
             }
 

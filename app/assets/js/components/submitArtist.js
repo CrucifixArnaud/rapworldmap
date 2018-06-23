@@ -77,7 +77,7 @@ export default class SubmitArtist extends React.Component {
 
     const artistsPromise = new Promise((resolve, reject) => {
       fetch(artistsCreateUrl, {
-        method: "POST",
+        method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

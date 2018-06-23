@@ -17,7 +17,7 @@ const Admin = () => (
       <Route path="/admin/artists/:slug/edit" component={ArtistsForm} />
     </div>
   </Router>
-)
+);
 export default Admin;
 
 ReactDOM.render(<Admin />,

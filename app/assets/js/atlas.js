@@ -1,5 +1,7 @@
+/* global L */
+
 import 'whatwg-fetch';
-import "babel-polyfill";
+import 'babel-polyfill';
 import 'core-js/es6/map';
 import 'core-js/es6/set';
 import Promise from 'promise-polyfill';
@@ -12,7 +14,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import L from 'mapbox.js';
 import LeafletMarkercluster from 'leaflet.markercluster';
-import {EventEmitter} from "events";
+import {EventEmitter} from 'events';
 
 import ArtistPanel from './components/artistPanel';
 import AtlasMenu from './components/atlasMenu';
@@ -182,11 +184,11 @@ export default class Atlas extends React.Component {
     this.map.addLayer(clusterGroup);
 
     L.mapbox.tileLayer('mapbox.dark')
-    .addTo(this.map) // add your tiles to the map
-    .on('load', () => {
+      .addTo(this.map) // add your tiles to the map
+      .on('load', () => {
       // Atlas is create hide loader
-      loader.classList.remove('active');
-    });
+        loader.classList.remove('active');
+      });
   }
 
   centerView(lat, lng, zoom = 10) {

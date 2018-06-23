@@ -19,10 +19,10 @@ export default class AtlasNotifications extends React.Component {
   }
 
   componentWillMount() {
-    if (typeof this.props.bus !== "undefined") {
-      this.props.bus.on("add", (notification) => {
+    if (typeof this.props.bus !== 'undefined') {
+      this.props.bus.on('add', (notification) => {
         this.handleAdd(notification);
-      })
+      });
     }
   }
 
@@ -34,7 +34,7 @@ export default class AtlasNotifications extends React.Component {
 
     setTimeout(() => {
       this.handleRemove(newItem.key);
-    }, 5000)
+    }, 5000);
 
     this.setState({
       notifications: [newItem].concat(this.state.notifications)
@@ -103,7 +103,7 @@ export default class AtlasNotifications extends React.Component {
                     <li key={key} style={style} className={'notification' + (type ? ' notification--' + type : '')} onClick={() => this.handleRemove(key)}>
                       <span className="notification__content">{text}</span>
                     </li>
-                  )
+                  );
                 })
               }
             </ul>

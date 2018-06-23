@@ -6,7 +6,7 @@ module.exports = {
         "mocha": true
     },
     "extends": "eslint:recommended",
-    "installedESLint": true,
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -18,9 +18,13 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "strict": 0,
         "indent": [
             "error",
-            2
+            2,
+            {
+                "SwitchCase": 1
+            }
         ],
         "linebreak-style": [
             "error",
@@ -34,6 +38,7 @@ module.exports = {
             "error",
             "always"
         ],
-        "no-console":0
+        "no-console":0,
+        "no-unused-vars": 0
     }
 };
