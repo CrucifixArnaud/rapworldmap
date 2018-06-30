@@ -43,6 +43,7 @@
 .modal .panel__title {
   @include rem(font-size, 22px);
   font-weight: bold;
+  outline-color: $yellow-gold;
 }
 
 .modal .panel__subtitle {
