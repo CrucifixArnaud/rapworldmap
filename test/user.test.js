@@ -18,21 +18,21 @@ chai.use(chaiHttp);
 describe('Users Api', () => {
   it('should login a user an access artist admin/artists', (done) => {
 
-      var agent = chai.request.agent(server)
-      agent
-        .post('/login')
-        .type('form')
-        .send({
-          'email': process.env.TEST_USER_EMAIL,
-          'password': process.env.TEST_USER_PWD
-        })
-        .end(function (err, res) {
-          expect(res).to.have.cookie('session');
-          expect(res).to.have.status(200);
-          expect(res).to.redirect;
-          expect(res).to.redirectTo(`${res.request.protocol}//${res.request.host}/admin/artists`);
+    var agent = chai.request.agent(server);
+    agent
+      .post('/login')
+      .type('form')
+      .send({
+        'email': process.env.TEST_USER_EMAIL,
+        'password': process.env.TEST_USER_PWD
+      })
+      .end(function (err, res) {
+        expect(res).to.have.cookie('session');
+        expect(res).to.have.status(200);
+        expect(res).to.redirect;
+        expect(res).to.redirectTo(`${res.request.protocol}//${res.request.host}/admin/artists`);
 
-          done();
-        });
-    });
+        done();
+      });
+  });
 });

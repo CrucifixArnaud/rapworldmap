@@ -228,7 +228,7 @@ describe('Artists Api', () => {
 
   describe('/artists/create POST', () => {
 
-    it(`user should GET authenticate to post a new artist`, function(done) {
+    it('user should GET authenticate to post a new artist', function(done) {
       chai.request(server)
         .post('/artists/create')
         .field('name', 'Boby')
@@ -239,7 +239,7 @@ describe('Artists Api', () => {
         });
     });
 
-    it(`it should save a new artist`, function(done) {
+    it('it should save a new artist', function(done) {
       chai.request(server)
         .post('/artists/create')
         .auth(process.env.TEST_USER_EMAIL, process.env.TEST_USER_PWD)
@@ -252,7 +252,7 @@ describe('Artists Api', () => {
         });
     });
 
-    it(`it should not be save whitout name and city`, function(done) {
+    it('it should not be save whitout name and city', function(done) {
       chai.request(server)
         .post('/artists/create')
         .auth(process.env.TEST_USER_EMAIL, process.env.TEST_USER_PWD)
@@ -292,7 +292,7 @@ describe('Artists Api', () => {
 
   describe('/artists/:slug POST', () => {
 
-    it(`user should GET authenticate to edit an artist`, function(done) {
+    it('user should GET authenticate to edit an artist', function(done) {
       chai.request(server)
         .post('/artists/gucci-mane')
         .field('name', 'Boby')
@@ -303,7 +303,7 @@ describe('Artists Api', () => {
         });
     });
 
-    it(`it should edit the existing artist (eg. gucci-mane)`, function(done) {
+    it('it should edit the existing artist (eg. gucci-mane)', function(done) {
       chai.request(server)
         .post('/artists/gucci-mane')
         .auth(process.env.TEST_USER_EMAIL, process.env.TEST_USER_PWD)
@@ -379,7 +379,7 @@ describe('Artists Api', () => {
 
   describe('/artists/submit POST', () => {
 
-    it(`it should submit a new artist`, (done) => {
+    it('it should submit a new artist', (done) => {
       chai.request(server)
         .post('/artists/submit')
         .type('form')
@@ -392,7 +392,7 @@ describe('Artists Api', () => {
         });
     });
 
-    it(`it should not submit whitout name and city`, (done) => {
+    it('it should not submit whitout name and city', (done) => {
       chai.request(server)
         .post('/artists/submit')
         .end((err, res) => {

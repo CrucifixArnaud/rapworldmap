@@ -4,7 +4,7 @@
   "description": "Display a map of Rapper based on their childhood neighborhood",
   "main": "rapworldmap.js",
   "scripts": {
-    "test": "mocha --require test/init.js --exit",
+    "test": "nyc mocha --require test/init.js --exit",
     "dev:test": "nodemon -x \"npm run test\"",
     "dev:css": "nodemon -e scss -x \"npm run compile:css && npm run autoprefixer\"",
     "dev:css:minify": "nodemon -e scss -x \"npm run build:css\"",
@@ -87,6 +87,7 @@
     "mocha": "^4.1.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.7",
+    "nyc": "^12.0.2",
     "postcss-cli": "^4.1.1",
     "react-router": "^4.2.0",
     "should": "^13.2.0",

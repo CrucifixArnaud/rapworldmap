@@ -16,3 +16,6 @@ doc/about-prod.md
 
 # Uploads
 uploads
+
+# Test Coverage
+.nyc_output
