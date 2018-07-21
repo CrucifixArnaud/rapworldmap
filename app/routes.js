@@ -76,5 +76,5 @@ module.exports = function(app, passport) {
   // 500
   app.use(function (err, req, res, next) {
     errorsController.show500(err, req, res);
-  })
+  });
 };
