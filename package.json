@@ -93,5 +93,23 @@
     "should": "^13.2.0",
     "uglify-js": "^3.3.4",
     "uglifyify": "^4.0.5"
+  },
+  "nyc": {
+    "include": [
+      "app/**/*.js"
+    ],
+    "exclude": [
+      "test/**/*.js"
+    ],
+    "reporter": [
+      "html",
+      "text"
+    ],
+    "extension": [
+      ".jsx"
+    ],
+    "cache": true,
+    "all": true,
+    "report-dir": "test/coverage"
   }
 }
