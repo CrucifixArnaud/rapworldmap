@@ -40,21 +40,50 @@
   @include modal();
 }
 
-.modal .panel__title {
+.modal__title {
   @include rem(font-size, 22px);
   font-weight: bold;
   outline-color: $yellow-gold;
 }
 
-.modal .panel__subtitle {
+.modal__subtitle {
   @include rem(font-size, 18px);
   font-weight: bold;
 }
 
-.modal .link-close {
+.modal__link-close {
   @include button-link($yellow-gold);
   @include rem(font-size, 12px);
   cursor: pointer;
   margin-top: 2em;
 }
 
+.modal__button-close {
+  top: 15px;
+
+  @include breakpoint($below-md) {
+    right: 15px;
+  }
+
+  @include breakpoint($md) {
+    right: 35px;
+  }
+}
+
+.modal__body {
+  @include rem(font-size, 16px);
+  max-width: 800px;
+
+  @include breakpoint($below-sm) {
+    margin-top: 4em;
+  }
+
+  @include breakpoint($md) {
+    margin-top: 5em;
+  }
+}
+
+.modal__body p {
+  margin-left: .5em;
+  line-height: 1.5;
+}

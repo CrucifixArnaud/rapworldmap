@@ -59,10 +59,10 @@ export default class Modal extends React.Component {
         <div onKeyDown={(e) => this.handleKeyDown(e)} role="dialog" aria-labelledby={this.props.ariaLabelledby} aria-describedby={this.props.ariaLabelledby} className={'modal ' + (this.props.className) + ((this.state.open) ? ' open' : '')}>
           {this.state.open === true &&
             <div className="modal__body" onClick={this.handleChildClick.bind(this)}>
-              <div className="modal__body__content about-panel__body">
+              <div className="modal__body__content">
                 {this.props.children}
               </div>
-              <button type="button" onClick={() => this.toggleModal()} className="button--close about-panel__button--close" aria-label="Close panel" title="Close panel (esc)">&#10799;</button>
+              <button type="button" onClick={() => this.toggleModal()} className="button--close modal__button-close" aria-label="Close modal" title="Close modal (esc)">&#10799;</button>
             </div>
           }
         </div>

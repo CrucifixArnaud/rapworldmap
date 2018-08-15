@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Modal from './shared/modal.js';
+
 export default class SearchArtist extends React.Component {
   constructor(props) {
     super(props);
@@ -39,12 +41,15 @@ export default class SearchArtist extends React.Component {
       open: true
     });
 
-    // Focus on searchTermsInput on modalSearch visibility transition end
-    this.refs.modalSearch.addEventListener('transitionend', (event) => {
-      if(event.propertyName === 'visibility') {
-        this.refs.searchTermsInput.focus();
-      }
-    });
+    this.refs.modalSearch.toggleModal();
+
+
+    // // Focus on searchTermsInput on modalSearch visibility transition end
+    // this.refs.modalSearch.addEventListener('transitionend', (event) => {
+    //   if(event.propertyName === 'visibility') {
+    //     this.refs.searchTermsInput.focus();
+    //   }
+    // });
   }
 
   close() {
@@ -56,11 +61,13 @@ export default class SearchArtist extends React.Component {
 
     // Clean Resets input value
     this.refs.searchTermsInput.value = '';
+
+    this.refs.modalSearch.closeModal();
   }
 
   handleClickOnArtist(artist) {
     this.props.showArtist(artist);
-    this.close();
+    this.refs.modalSearch.toggleModal();
   }
 
   handleSearchChange(e) {
@@ -105,7 +112,7 @@ export default class SearchArtist extends React.Component {
 
   handleKeyDown(e) {
     if (e.keyCode === 27)
-      this.close();
+      this.refs.modalSearch.toggleModal();
   }
 
   render() {
@@ -125,10 +132,10 @@ export default class SearchArtist extends React.Component {
     });
 
     return (
-      <div onKeyDown={(e) => this.handleKeyDown(e)} ref="modalSearch" className={'modal ' + ((this.state.open) ? 'open' : '')}>
+      <Modal ref="modalSearch" ariaLabelledby="searchModalTitle">
         <button type="button" onClick={() => this.close()} className="button--close about-panel__button--close" aria-label="Close panel" title="Close panel" tabIndex="0">&#10799;</button>
         <div className="search-panel__body">
-          <h2 className="panel__title">Search an artist</h2>
+          <h2 id="searchModalTitle" className="panel__title">Search an artist</h2>
           <div className="field field--search">
             <label htmlFor="searchTermsInput" className="field__label">Enter your search <span className="field__label--optional">(Name, City, Neighborhood)</span>:</label>
             <input ref="searchTermsInput" id="searchTermsInput" type="text" name="searchTermsInput" className="field--search__input" onChange={this.handleSearchChange} />
@@ -140,7 +147,7 @@ export default class SearchArtist extends React.Component {
           }
           <button onClick={() => this.close()} className="link-close" aria-label="Close panel" title="Close panel" tabIndex="0">Close this modal</button>
         </div>
-      </div>
+      </Modal>
     );
   }
 }

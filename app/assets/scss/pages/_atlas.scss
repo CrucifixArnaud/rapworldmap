@@ -297,33 +297,3 @@
     @include rem(font-size, 10px);
   }
 }
-
-.about-panel__button--close {
-  top: 15px;
-
-  @include breakpoint($below-md) {
-    right: 15px;
-  }
-
-  @include breakpoint($md) {
-    right: 35px;
-  }
-}
-
-.about-panel__body {
-  @include rem(font-size, 16px);
-  max-width: 800px;
-
-  @include breakpoint($below-sm) {
-    margin-top: 4em;
-  }
-
-  @include breakpoint($md) {
-    margin-top: 5em;
-  }
-}
-
-.about-panel__body p {
-  margin-left: .5em;
-  line-height: 1.5;
-}
