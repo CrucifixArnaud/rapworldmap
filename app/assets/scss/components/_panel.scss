@@ -339,6 +339,10 @@
 // Search Artist Panel
 // ---------------------
 
+.modal--search .modal__body {
+  max-width: none;
+}
+
 .menu__item--search-artist {
   position: relative;
 

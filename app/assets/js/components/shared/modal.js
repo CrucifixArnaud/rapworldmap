@@ -37,6 +37,10 @@ export default class Modal extends React.Component {
     });
     // Set focus back on the element that trigger the modal opening
     this.state.modalOpener.focus();
+
+    if(this.props.onCloseModal) {
+      this.props.onCloseModal();
+    }
   }
 
   // This function will be called for the 'click' event in any

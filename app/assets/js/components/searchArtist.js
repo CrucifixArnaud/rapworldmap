@@ -61,8 +61,6 @@ export default class SearchArtist extends React.Component {
 
     // Clean Resets input value
     this.refs.searchTermsInput.value = '';
-
-    this.refs.modalSearch.closeModal();
   }
 
   handleClickOnArtist(artist) {
@@ -132,20 +130,19 @@ export default class SearchArtist extends React.Component {
     });
 
     return (
-      <Modal ref="modalSearch" ariaLabelledby="searchModalTitle">
-        <button type="button" onClick={() => this.close()} className="button--close about-panel__button--close" aria-label="Close panel" title="Close panel" tabIndex="0">&#10799;</button>
+      <Modal ref="modalSearch" ariaLabelledby="searchModalTitle" onCloseModal={this.close.bind(this)} className="modal--search">
         <div className="search-panel__body">
           <h2 id="searchModalTitle" className="panel__title">Search an artist</h2>
           <div className="field field--search">
             <label htmlFor="searchTermsInput" className="field__label">Enter your search <span className="field__label--optional">(Name, City, Neighborhood)</span>:</label>
             <input ref="searchTermsInput" id="searchTermsInput" type="text" name="searchTermsInput" className="field--search__input" onChange={this.handleSearchChange} />
-            <button onClick={() => this.search()} className="button--primary field--search__button" type="button" tabIndex="-1">Search</button>
+            {/*<button onClick={() => this.search()} className="button--primary field--search__button" type="button" tabIndex="-1">Search</button>*/}
           </div>
 
           {this.state.searchResults.length > 0 &&
             <ul className="search-result">{artistsResult}</ul>
           }
-          <button onClick={() => this.close()} className="link-close" aria-label="Close panel" title="Close panel" tabIndex="0">Close this modal</button>
+          <button onClick={() => this.refs.modalSearch.closeModal()} className="modal__link-close" aria-label="Close modal" title="Close modal" tabIndex="0">Close this modal</button>
         </div>
       </Modal>
     );
