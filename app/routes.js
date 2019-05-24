@@ -49,9 +49,11 @@ module.exports = function(app, passport) {
   app.get('/admin/artists/:slug/edit', userMiddlewares.isLoggedIn, adminController.showAdmin);
   // Artists
   app.get('/artists/', artistsController.showArtists);
+  app.get('/artists/yearsActiveStart/:yearsActiveStart', artistsController.showArtists);
   app.get('/artists/index', artistsController.getArtistsIndex);
   app.get('/artists/download', artistsController.getArtistsDownload);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
+  app.get('/artists/geojson/yearsActiveStart/:yearsActiveStart', artistsController.getArtistsGeojson);
   app.post('/artists/create', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.uploadThumbnail, artistsController.processCreate);

@@ -39,7 +39,22 @@ module.exports = {
  *
  */
 function showArtists (req, res) {
-  Artist.find({}, (err, artists) => {
+
+  var yearsActiveStart = req.params.yearsActiveStart;
+  var query = {};
+
+  if(req.params.hasOwnProperty('yearsActiveStart')) {
+    query = {
+      'bio.yearsActiveStart': {
+        $lte: yearsActiveStart
+      },
+      'bio.yearsActiveEnd': {
+        $gte: yearsActiveStart
+      }
+    }
+  }
+
+  Artist.find(query, (err, artists) => {
 
     if(err) {
       res.send(err);
@@ -505,12 +520,26 @@ function deleteArtist(req, res) {
  */
 function getArtistsGeojson (req, res) {
 
-  Artist.find({
+  var yearsActiveStart = req.params.yearsActiveStart;
+  var query = {
     'location.coordinates': {
       $gt: []
     },
-    'published': true
-  }, (err, artists) => {
+    'published': true,
+  };
+
+  if(req.params.hasOwnProperty('yearsActiveStart')) {
+    Object.assign(query, {
+      'bio.yearsActiveStart': {
+        $lte: yearsActiveStart
+      },
+      'bio.yearsActiveEnd': {
+        $gte: yearsActiveStart
+      }
+    });
+  }
+
+  Artist.find(query, (err, artists) => {
 
     if(err) {
       res.status(404);
@@ -571,7 +600,7 @@ function getArtistsGeojson (req, res) {
 }
 
 /**
- * [showArtistsJson Return an index of all artists in json]
+ * [getArtistsIndex Return an index of all artists in json]
  */
 function getArtistsIndex (req, res) {
   Artist.find({
