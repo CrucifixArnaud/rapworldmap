@@ -521,6 +521,8 @@ function deleteArtist(req, res) {
 function getArtistsGeojson (req, res) {
 
   var yearsActiveStart = req.params.yearsActiveStart;
+  var filters = req.body.filters;
+
   var query = {
     'location.coordinates': {
       $gt: []
@@ -528,19 +530,30 @@ function getArtistsGeojson (req, res) {
     'published': true,
   };
 
-  if(req.params.hasOwnProperty('yearsActiveStart')) {
-    Object.assign(query, {
-      'bio.yearsActiveStart': {
-        $lte: yearsActiveStart
-      },
-      'bio.yearsActiveEnd': {
-        $gte: yearsActiveStart
+  if(req.body.hasOwnProperty('filters')) {
+
+    Object.keys(filters).map(function(key, index) {
+      var value = filters[key];
+
+      if(key === 'categories') {
+        value = {
+          $all: filters[key]
+        }
       }
+
+      if(key === 'bio.yearsActiveStart') {
+        value = {
+          $gte: filters[key]
+        }
+      }
+
+      Object.assign(query, {
+        [key]: value
+      });
     });
   }
 
   Artist.find(query, (err, artists) => {
-
     if(err) {
       res.status(404);
       res.send('Artists not found!');

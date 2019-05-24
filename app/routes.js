@@ -53,7 +53,7 @@ module.exports = function(app, passport) {
   app.get('/artists/index', artistsController.getArtistsIndex);
   app.get('/artists/download', artistsController.getArtistsDownload);
   app.get('/artists/geojson', artistsController.getArtistsGeojson);
-  app.get('/artists/geojson/yearsActiveStart/:yearsActiveStart', artistsController.getArtistsGeojson);
+  app.post('/artists/geojson', artistsController.getArtistsGeojson);
   app.post('/artists/create', passport.authenticate(['basic', 'jwt'], {
     session : false
   }), artistsController.uploadThumbnail, artistsController.processCreate);
