@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ClickOutHandler from 'react-onclickout';
 import SubmitArtist from './submitArtist.js';
 import SearchArtist from './searchArtist.js';
+import FilterArtists from './filterArtists.js';
 import { EventEmitter } from 'events';
 
 export default class AtlasMenu extends React.Component {
@@ -21,10 +22,12 @@ export default class AtlasMenu extends React.Component {
     this.handleAreaClick = this.handleAreaClick.bind(this);
     this.handleSubmitArtistClick = this.handleSubmitArtistClick.bind(this);
     this.handleSearchArtistClick = this.handleSearchArtistClick.bind(this);
+    this.handleFilterArtistsClick = this.handleFilterArtistsClick.bind(this);
     this.toggleAreaMenu = this.toggleAreaMenu.bind(this);
     this.clickOutsideArea = this.clickOutsideArea.bind(this);
     this.clickOutsideSubmit = this.clickOutsideSubmit.bind(this);
     this.clickOutsideSearch = this.clickOutsideSearch.bind(this);
+    this.clickOutsideFilter = this.clickOutsideFilter.bind(this);
     this.closeAllSubmenu = this.closeAllSubmenu.bind(this);
   }
 
@@ -39,6 +42,10 @@ export default class AtlasMenu extends React.Component {
 
   handleSearchArtistClick() {
     this.toggleSearchArtist();
+  }
+
+  handleFilterArtistsClick() {
+    this.toggleFilterArtist();
   }
 
   toggleAreaMenu() {
@@ -92,6 +99,14 @@ export default class AtlasMenu extends React.Component {
     }
   }
 
+  toggleFilterArtist() {
+    if(this.refs.filterArtists.state.open === false) {
+      this.refs.filterArtists.open();
+    }else{
+      this.refs.filterArtists.close();
+    }
+  }
+
   closeAllSubmenu() {
     let submenus = document.getElementById('atlasMenu').getElementsByClassName('submenu open');
 
@@ -113,6 +128,12 @@ export default class AtlasMenu extends React.Component {
   clickOutsideSearch() {
     if(this.refs.searchArtist.state.open === true) {
       this.refs.searchArtist.close();
+    }
+  }
+
+  clickOutsideFilter() {
+    if(this.refs.filterArtists.state.open === true) {
+      this.refs.filterArtists.close();
     }
   }
 
@@ -223,6 +244,15 @@ export default class AtlasMenu extends React.Component {
                 <span className="button__label">Search an artist</span>
               </button>
               <SearchArtist ref="searchArtist" showArtist={this.props.showArtist} centerView={this.props.centerView} />
+            </ClickOutHandler>
+          </li>
+          <li role="menuitem" className="menu__item menu__item--filter-artist">
+            <ClickOutHandler ref="filterHandler" onClickOut={this.clickOutsideFilter}>
+              <button className="menu__item__button" onClick={(e) => this.handleFilterArtistsClick(e)}>
+                <img className="button__icon" src="/images/filter-artist.svg" width="54px" height="39px" alt="" />
+                <span className="button__label">Filter artists</span>
+              </button>
+              <FilterArtists bus={this.props.bus} ref="filterArtists" showArtist={this.props.showArtist} centerView={this.props.centerView} />
             </ClickOutHandler>
           </li>
         </ul>

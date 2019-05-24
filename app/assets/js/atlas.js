@@ -71,6 +71,16 @@ export default class Atlas extends React.Component {
 
   componentWillMount() {
 
+    if (typeof bus !== 'undefined') {
+      bus.on('updateArtists', (filters) => {
+
+        this.setState({
+          filters: filters
+        });
+
+      });
+    }
+
     // Get mapbox api token from .env file (injected into app container)
     const mapboxToken = document.getElementById('app').getAttribute('data-mapboxtoken');
     L.mapbox.accessToken = mapboxToken;
