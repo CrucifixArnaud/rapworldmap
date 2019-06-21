@@ -102,8 +102,9 @@ export default class Atlas extends React.Component {
         artists: res.features,
         artistsTotal: res.features.length,
         geojson: res
+      }, () => {
+        this.createAtlas(res);
       });
-      this.createAtlas(res);
     });
   }
 
@@ -132,10 +133,11 @@ export default class Atlas extends React.Component {
         artists: res.features,
         artistsTotal: res.features.length,
         geojson: res
+      }, () => {
+        this.refreshAtlasData();
       });
     });
 
-    this.refreshAtlasData();
   }
 
   refreshAtlasData() {
