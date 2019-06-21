@@ -73,7 +73,7 @@ export default class SubmitArtist extends React.Component {
 
   apply() {
     if (typeof this.props.bus !== 'undefined') {
-      this.props.bus.emit('updateArtists', this.filters);
+      this.props.bus.emit('updateArtists', this.state.filters);
     }
   }
 

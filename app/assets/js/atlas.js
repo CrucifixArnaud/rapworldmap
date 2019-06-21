@@ -66,6 +66,7 @@ export default class Atlas extends React.Component {
       artistsTotal: 0
     };
 
+    this.markerLayer = null;
     this.map = '';
   }
 
@@ -76,8 +77,9 @@ export default class Atlas extends React.Component {
 
         this.setState({
           filters: filters
+        }, () => {
+          this.updateArtists();
         });
-
       });
     }
 
@@ -105,28 +107,38 @@ export default class Atlas extends React.Component {
     });
   }
 
-  createAtlas() {
-    // Prepare loader destruction
-    const loader = document.getElementById('loader');
-    loader.addEventListener('transitionend', () => {
-      loader.remove();
+  updateArtists() {
+    const artistsGeojsonUrl = window.location.href + 'artists/geojson';
+
+    let artistsPromise = new Promise((resolve, reject) => {
+      fetch(artistsGeojsonUrl, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          filters: this.state.filters
+        })
+      }).then((response) => {
+        resolve(response.json());
+      }).catch((error) => {
+        console.log(error);
+      });
     });
 
-    let initialLatLng = [];
+    artistsPromise.then((res) => {
+      this.setState({
+        artists: res.features,
+        artistsTotal: res.features.length,
+        geojson: res
+      });
+    });
 
-    if(window.innerWidth < 768) {
-      initialLatLng = [40, -75];
-    }else{
-      initialLatLng = [40, -45];
-    }
+    this.refreshAtlasData();
+  }
 
-    this.map = L.mapbox.map('map', 'mapbox.dark', {
-      minZoom: 3.5,
-      zoomControl: false
-    }).setView(initialLatLng, 3.5);
-
-    new L.Control.Zoom({ position: 'topright' }).addTo(this.map);
-
+  refreshAtlasData() {
     let clusterGroup = new L.MarkerClusterGroup({
       removeOutsideVisibleBounds: true,
       maxClusterRadius: 45,
@@ -191,7 +203,41 @@ export default class Atlas extends React.Component {
       clusterGroup.addLayer(marker);
     }
 
+    // Check if the map has a previous markerLayer if so remove it
+    if(this.map.hasLayer(this.markerLayer)) {
+      this.map.removeLayer(this.markerLayer);
+    }
+
+    // Save new clusterGroup has markerLayer (use to remove old marker on update)
+    this.markerLayer = clusterGroup;
+
+    // Add the new layer on map
     this.map.addLayer(clusterGroup);
+  }
+
+  createAtlas() {
+    // Prepare loader destruction
+    const loader = document.getElementById('loader');
+    loader.addEventListener('transitionend', () => {
+      loader.remove();
+    });
+
+    let initialLatLng = [];
+
+    if(window.innerWidth < 768) {
+      initialLatLng = [40, -75];
+    }else{
+      initialLatLng = [40, -45];
+    }
+
+    this.map = L.mapbox.map('map', 'mapbox.dark', {
+      minZoom: 3.5,
+      zoomControl: false
+    }).setView(initialLatLng, 3.5);
+
+    new L.Control.Zoom({ position: 'topright' }).addTo(this.map);
+
+    this.refreshAtlasData();
 
     L.mapbox.tileLayer('mapbox.dark')
       .addTo(this.map) // add your tiles to the map

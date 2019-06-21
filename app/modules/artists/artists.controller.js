@@ -537,7 +537,7 @@ function getArtistsGeojson (req, res) {
 
       if(key === 'categories') {
         value = {
-          $all: filters[key]
+          $in: filters[key]
         }
       }
 
