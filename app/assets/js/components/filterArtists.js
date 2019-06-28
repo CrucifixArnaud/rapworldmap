@@ -218,11 +218,11 @@ export default class SubmitArtist extends React.Component {
             <h3 className="field-group__title">Years actives:</h3>
             <div className="field--inline">
               <label className="field__label" htmlFor="yearActiveStart">From: {this.state.yearsActiveStart}</label>
-              <input id="yearActiveStart"  name="yearActiveStart" type="range" min={this.minYearActiveStart} max={ this.currentYear } onChange={this.handleFilterYearActiveStartChange} />
+              <input className="input--range" id="yearActiveStart"  name="yearActiveStart" type="range" min={this.minYearActiveStart} max={ this.currentYear } onChange={this.handleFilterYearActiveStartChange} />
             </div>
             <div className="field--inline">
               <label className="field__label" htmlFor="yearActiveEnd">To: {this.state.yearsActiveEnd}</label>
-              <input id="yearActiveEnd"  name="yearActiveEnd" type="range" min={this.minYearActiveStart} max={this.currentYear} value={this.state.yearsActiveEnd} onChange={this.handleFilterYearActiveEndChange} />
+              <input className="input--range" id="yearActiveEnd"  name="yearActiveEnd" type="range" min={this.minYearActiveStart} max={this.currentYear} value={this.state.yearsActiveEnd} onChange={this.handleFilterYearActiveEndChange} />
             </div>
           </div>
           <div className="field-group">

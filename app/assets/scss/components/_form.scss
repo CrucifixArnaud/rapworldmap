@@ -182,6 +182,127 @@ textarea {
   @include rem(font-size, 16px);
 }
 
+// Input Range
+// ---------------------
+
+@mixin inputRangeThumb() {
+  width: 1.5em;
+  height: 1.5em;
+  margin-top: 0;
+  background-color: $color-primary;
+  border-radius: 1em;
+  border: 1px solid $color-primary;
+  cursor: pointer;
+  transition: all .1s ease-in-out;
+}
+
+@mixin inputRangeTrack() {
+  width: 100%;
+  cursor: pointer;
+  height: 1em;
+  border-bottom: 4px solid darken($blue-mirage, 6);
+  background-color: transparent;
+}
+
+.input--range {
+  box-sizing: border-box;
+  line-height: 1;
+  // height: 2em;
+  background-color: transparent;
+  cursor: pointer;
+
+  // RESET
+
+  -webkit-appearance: none;
+  width: 100%;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+
+  &::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  // Thumb
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    @include inputRangeThumb();
+  }
+
+  &::-moz-range-thumb {
+    @include inputRangeThumb();
+  }
+
+  &::-ms-thumb {
+    @include inputRangeThumb();
+  }
+
+  &:focus,
+  &:hover{
+    &::-webkit-slider-thumb {
+      background-color: lighten($color-primary, 20);
+      border-color: lighten($color-primary, 20);
+    }
+
+    &::-moz-range-thumb {
+      background-color: lighten($color-primary, 20);
+      border-color: lighten($color-primary, 20);
+    }
+
+    &::-ms-thumb {
+      background-color: lighten($color-primary, 20);
+      border-color: lighten($color-primary, 20);
+    }
+  }
+
+  //&:focus,
+  &:active{
+    &::-webkit-slider-thumb {
+      background-color: lighten($blue-mirage, 10);
+      border-color: lighten($blue-mirage, 10);
+    }
+
+    &::-moz-range-thumb {
+      background-color: lighten($blue-mirage, 10);
+      border-color: lighten($blue-mirage, 10);
+    }
+
+    &::-ms-thumb {
+      background-color: lighten($blue-mirage, 10);
+      border-color: lighten($blue-mirage, 10);
+    }
+  }
+
+  // Track
+  &::-webkit-slider-runnable-track {
+    @include inputRangeTrack();
+  }
+
+  &:focus::-webkit-slider-runnable-track {
+
+  }
+
+  &::-moz-range-track {
+    @include inputRangeTrack();
+  }
+
+  &::-ms-track {
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+}
+
 // Field
 // ---------------------
 
