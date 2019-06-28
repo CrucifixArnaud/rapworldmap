@@ -518,7 +518,7 @@ function deleteArtist(req, res) {
 /**
  * [getArtistsGeojson Return a list of all rappers formated into geojson for mapbox]
  */
-function getArtistsGeojson (req, res) {
+function getArtistsGeojson (req, res, next) {
 
   var yearsActiveStart = req.params.yearsActiveStart;
   var filters = req.body.filters;
@@ -532,31 +532,71 @@ function getArtistsGeojson (req, res) {
 
   if(req.body.hasOwnProperty('filters')) {
 
+    const currentYear = new Date().getFullYear();
+    var startYear = 1970;
+    var endYear = 2019;
+
     Object.keys(filters).map(function(key, index) {
       var value = filters[key];
 
       if(key === 'categories') {
-        value = {
-          $in: filters[key]
-        }
-      }
+        Object.assign(query, {
+          [key]: {
+            $in: value
+          }
+        });
+      } else if(key === 'bio.yearsActiveStart' || key === 'bio.yearsActiveEnd') {
 
-      if(key === 'bio.yearsActiveStart') {
-        value = {
-          $gte: filters[key]
+        if (key === 'bio.yearsActiveStart') {
+          startYear = value;
         }
-      }
 
-      Object.assign(query, {
-        [key]: value
-      });
+        if (key === 'bio.yearsActiveEnd') {
+          endYear = value;
+        }
+
+        Object.assign(query, {
+          $and: [
+            {
+              $or: [
+                {
+                  "bio.yearsActiveEnd": {
+                    $gte: startYear
+                  }
+                },
+                {
+                  "bio.yearsActiveEnd": null
+                }
+              ]
+            },
+            {
+              $or: [
+                {
+                  "bio.yearsActiveStart": {
+                    $lte: endYear
+                  }
+                },
+                {
+                  "bio.yearsActiveStart": null
+                }
+              ]
+            }
+          ]
+        });
+      } else {
+        Object.assign(query, {
+          [key]: value
+        });
+      }
     });
   }
 
   Artist.find(query, (err, artists) => {
+
     if(err) {
-      res.status(404);
-      res.send('Artists not found!');
+      res.status(500);
+      res.send("An error occured");
+      return;
     }
 
     var features = [];

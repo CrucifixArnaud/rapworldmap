@@ -7,6 +7,9 @@ export default class SubmitArtist extends React.Component {
     bus: PropTypes.instanceOf(EventEmitter)
   }
 
+  currentYear = new Date().getFullYear();
+  minYearActiveStart = 1970;
+
   defaultState = {
     open: false,
     errors: [],
@@ -14,8 +17,12 @@ export default class SubmitArtist extends React.Component {
     city: '',
     bioUrl: '',
     clipExampleUrl: '',
+    yearsActiveStart: this.minYearActiveStart,
+    yearsActiveEnd: this.currentYear,
     filters: {
-      'categories': ['producer / dj', 'rapper', 'singer', 'group']
+      'categories': ['producer / dj', 'rapper', 'singer', 'group'],
+      'bio.yearsActiveStart' : this.minYearActiveStart,
+      'bio.yearsActiveEnd' : this.currentYear,
     }
   };
 
@@ -25,6 +32,8 @@ export default class SubmitArtist extends React.Component {
     this.state = this.defaultState;
 
     this.handleFilterCategoriesChange = this.handleFilterCategoriesChange.bind(this);
+    this.handleFilterYearActiveStartChange = this.handleFilterYearActiveStartChange.bind(this);
+    this.handleFilterYearActiveEndChange = this.handleFilterYearActiveEndChange.bind(this);
   }
 
   open() {
@@ -61,6 +70,34 @@ export default class SubmitArtist extends React.Component {
 
     this.setState({
       'filters': filters
+    });
+
+    this.apply();
+  }
+
+  handleFilterYearActiveStartChange(e) {
+    const value = Number(e.target.value);
+    const filters = this.state.filters;
+
+    filters['bio.yearsActiveStart'] = value;
+
+    this.setState({
+      'filters': filters,
+      'yearsActiveStart': value
+    });
+
+    this.apply();
+  }
+
+  handleFilterYearActiveEndChange(e) {
+    const value = Number(e.target.value);
+    const filters = this.state.filters;
+
+    filters['bio.yearsActiveEnd'] = value;
+
+    this.setState({
+      'filters': filters,
+      'yearsActiveEnd': value
     });
 
     this.apply();
@@ -175,6 +212,17 @@ export default class SubmitArtist extends React.Component {
             <div className="field--inline">
               <input type="checkbox" id="group" name="categories" value="group" checked={this.state.filters.categories.includes('group')} onChange={this.handleFilterCategoriesChange}/>
               <label className="field__label" htmlFor="group">Group</label>
+            </div>
+          </div>
+          <div className="field-group">
+            <h3 className="field-group__title">Years actives:</h3>
+            <div className="field--inline">
+              <label className="field__label" htmlFor="yearActiveStart">From: {this.state.yearsActiveStart}</label>
+              <input id="yearActiveStart"  name="yearActiveStart" type="range" min={this.minYearActiveStart} max={ this.currentYear } onChange={this.handleFilterYearActiveStartChange} />
+            </div>
+            <div className="field--inline">
+              <label className="field__label" htmlFor="yearActiveEnd">To: {this.state.yearsActiveEnd}</label>
+              <input id="yearActiveEnd"  name="yearActiveEnd" type="range" min={this.minYearActiveStart} max={this.currentYear} value={this.state.yearsActiveEnd} onChange={this.handleFilterYearActiveEndChange} />
             </div>
           </div>
           <div className="field-group">
