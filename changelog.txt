@@ -1,4 +1,8 @@
 == Changelog ==
+= 1.5.0 - 05 Jul 2019 =
+* Add filters on the atlas
+* Add some filters in admin artists list
+* Refactor modal component
 
 = 1.4.2 - 16 Mar 2018 =
 * Fix error handling for artist creation and edition
