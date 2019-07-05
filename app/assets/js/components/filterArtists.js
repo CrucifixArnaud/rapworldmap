@@ -71,8 +71,6 @@ export default class SubmitArtist extends React.Component {
     this.setState({
       'filters': filters
     });
-
-    this.apply();
   }
 
   handleFilterYearActiveStartChange(e) {
@@ -85,8 +83,6 @@ export default class SubmitArtist extends React.Component {
       'filters': filters,
       'yearsActiveStart': value
     });
-
-    this.apply();
   }
 
   handleFilterYearActiveEndChange(e) {
@@ -99,8 +95,6 @@ export default class SubmitArtist extends React.Component {
       'filters': filters,
       'yearsActiveEnd': value
     });
-
-    this.apply();
   }
 
   handleApplyClick(e) {
