@@ -208,6 +208,12 @@ export default class AtlasMenu extends React.Component {
                   </button>
                 </li>
                 <li className="submenu__item">
+                  <button tabIndex="-1" className="submenu__item__button" onClick={() => this.handleAreaClick(42.387930, -83.111910, 12)}>
+                    <img className="button__icon" src="/images/placeofinterrests/motown.svg" width="169px" height="46px" alt="" title="Detroit" />
+                    <span className="button__label">Detroit</span>
+                  </button>
+                </li>
+                <li className="submenu__item">
                   <button tabIndex="-1" className="submenu__item__button" onClick={() => this.handleAreaClick(29.984120, -90.065548, 11)}>
                     <img className="button__icon" src="/images/placeofinterrests/nola.svg" width="95px" height="50px" alt="" title="New Orleans" />
                     <span className="button__label">New Orleans</span>
