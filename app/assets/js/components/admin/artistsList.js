@@ -19,6 +19,8 @@ export default class ArtistsList extends React.Component {
     const filters = (savedFilters) ? savedFilters : {
       published: 'all',
       clip: 'all',
+      category: 'all',
+      startdate: 'all'
     };
 
     this.state = {
@@ -153,8 +155,36 @@ export default class ArtistsList extends React.Component {
       }
     }
 
+    // Start date Filter
+    let startdateArtistFilter;
+
+    switch(this.state.filters.startdate) {
+      case 'with-startdate': {
+        startdateArtistFilter = categoryArtistFilter.filter( function (artist) {
+          if(artist.bio.yearsActiveStart !== undefined) {
+            console.log(artist.bio.yearsActiveStart);
+            return artist.bio.yearsActiveStart !== null;
+          }
+        });
+        break;
+      }
+      case 'without-startdate': {
+        startdateArtistFilter = categoryArtistFilter.filter( function (artist) {
+          return artist.bio.yearsActiveStart === undefined || artist.bio.yearsActiveStart === null || artist.bio.yearsActiveStart !== undefined && artist.bio.yearsActiveStart.length === 0;
+        });
+        break;
+      }
+      default: {
+        startdateArtistFilter = categoryArtistFilter.filter( function (artist) {
+          return artist;
+        });
+        break;
+      }
+    }
+
+
     // Apply filters
-    filteredArtists = categoryArtistFilter;
+    filteredArtists = startdateArtistFilter;
 
     const mergedFilteredArtist = [].concat.apply([], filteredArtists);
 
@@ -252,9 +282,9 @@ export default class ArtistsList extends React.Component {
           <td className="table__cell">
             {artist.location.city}
           </td>
-          {/*<td className="table__cell">
+          <td className="table__cell">
             {artistCategories}
-          </td>*/}
+          </td>
           <td className="table__cell">
             {artist.youtube.clipExampleUrl !== undefined && artist.youtube.clipExampleUrl !== null && artist.youtube.clipExampleUrl.length > 0 &&
               <a href={artist.youtube.clipExampleUrl}>Link</a>
@@ -268,9 +298,9 @@ export default class ArtistsList extends React.Component {
               ' - ' + artist.bio.yearsActiveEnd
             }
           </td>
-          <td className="table__cell table__cell--publication-date">
+          {/*<td className="table__cell table__cell--publication-date">
             {moment(artist.createDate).format('MM/DD/YYYY HH:mm')}
-          </td>
+          </td>*/}
           <td className={artist.published !== true ? 'table__cell unpublished' : 'table__cell'}>
             {String(artist.published)}
           </td>
@@ -331,7 +361,7 @@ export default class ArtistsList extends React.Component {
                 </ul>
               </Dropdown>
             </div>
-            {/*<div className="field--inline">
+            <div className="field--inline">
               <Dropdown label={'Category ' + '(' + this.state.filters.category + ')'}>
                 <ul className="dropdown__list">
                   <li className="dropdown__list__item">
@@ -361,7 +391,28 @@ export default class ArtistsList extends React.Component {
                   </li>
                 </ul>
               </Dropdown>
-            </div>*/}
+            </div>
+            <div className="field--inline">
+              <Dropdown label={'Start date ' + '(' + this.state.filters.startdate + ')'}>
+                <ul className="dropdown__list">
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.startdate === 'all' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('startdate', 'all')}>All
+                    </a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.startdate === 'with-startdate' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('startdate', 'with-startdate')}>With start date
+                    </a>
+                  </li>
+                  <li className="dropdown__list__item">
+                    <a className={'dropdown__item__link ' + (this.state.filters.startdate === 'without-startdate' ? 'active' : '')}
+                      onClick={() => this.handleFilterChange('startdate', 'without-startdate')}>Without start date
+                    </a>
+                  </li>
+                </ul>
+              </Dropdown>
+            </div>
           </div>
         </div>
 
@@ -370,10 +421,10 @@ export default class ArtistsList extends React.Component {
             <tr className='table__head__row'>
               <th className='table__head__cell'>Name</th>
               <th className='table__head__cell'>City</th>
-              {/*<th className='table__head__cell'>Categorie(s)</th>*/}
+              <th className='table__head__cell'>Categorie(s)</th>
               <th className='table__head__cell'>Clip</th>
               <th className='table__head__cell'>Active Years</th>
-              <th className='table__head__cell table__head__cell--publication-date'>Creation Date</th>
+              {/*<th className='table__head__cell table__head__cell--publication-date'>Creation Date</th>*/}
               <th className='table__head__cell'>Published</th>
               <th></th>
             </tr>
