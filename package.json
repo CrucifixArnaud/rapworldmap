@@ -47,7 +47,7 @@
     "focus-trap-react": "^3.1.2",
     "jsonwebtoken": "^8.1.0",
     "leaflet.markercluster": "1.0.0",
-    "mapbox.js": "^3.1.1",
+    "mapbox.js": "^3.3.0",
     "moment": "^2.20.1",
     "mongoose": "^4.13.8",
     "morgan": "^1.9.0",

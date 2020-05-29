@@ -232,7 +232,7 @@ export default class Atlas extends React.Component {
       initialLatLng = [40, -45];
     }
 
-    this.map = L.mapbox.map('map', 'mapbox.dark', {
+    this.map = L.mapbox.map('map', 'https://api.mapbox.com/styles/v1/crucifixarnaud/ck9l25bzk25eg1irzkvhm12sl?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A#3.21/18.46/-0.5', {
       minZoom: 3.5,
       zoomControl: false
     }).setView(initialLatLng, 3.5);
@@ -241,7 +241,7 @@ export default class Atlas extends React.Component {
 
     this.refreshAtlasData();
 
-    L.mapbox.tileLayer('mapbox.dark')
+    L.mapbox.tileLayer('https://api.mapbox.com/styles/v1/crucifixarnaud/ck9l25bzk25eg1irzkvhm12sl?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A#3.21/18.46/-0.5')
       .addTo(this.map) // add your tiles to the map
       .on('load', () => {
       // Atlas is create hide loader
