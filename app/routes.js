@@ -5,6 +5,7 @@
 const express = require ('express'),
   atlasController = require('./modules/atlas/atlas.controller'),
   errorsController = require('./modules/errors/errors.controller'),
+  announcementController = require('./modules/announcement/announcement.controller'),
   usersController = require('./modules/users/users.controller'),
   userMiddlewares = require('./modules/users/user.middlewares'),
   artistsController = require('./modules/artists/artists.controller'),
@@ -16,7 +17,10 @@ module.exports = function(app, passport) {
 
   if(process.env.MAINTENANCE === 'true') {
     // Maintenance
-    app.get('/', errorsController.showMaintenance);
+    app.get('/', errorsController.show);
+  } else if(process.env.blacklivesmatter === 'true') {
+    // Maintenance
+    app.get('/', announcementController.showBlackLivesMatter);
   } else {
     // Atlas
     app.get('/', atlasController.showAtlas);
