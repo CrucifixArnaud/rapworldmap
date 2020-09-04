@@ -49,6 +49,11 @@ export default class AtlasFooter extends React.Component {
 
             <Modal ref="modalAbout" ariaLabelledby="aboutModalTitle" className="about-panel">
               <h2 id="aboutModalTitle" className="modal__title" tabIndex="0">About Rap World Map</h2>
+              <h3 className="modal__subtitle">Black Lives Matter</h3>
+              <p>Rapworldmap is a non-profit project celebrating Hip hop and Rap music from all around the world. A musical movement that has its roots into the black culture of the United States.</p>
+              <p>We support protests and organisations fighting for black people rights and against police brutality in the United States or anywhere else in the world.</p>
+              <p><a href="https://blacklivesmatter.com/">Black Lives Matter</a></p>
+              <p><a href="https://twitter.com/laveritepradama">La Vérité pour Adama</a></p>
               <h3 className="modal__subtitle">Data Presented ({this.props.artistsTotal} artists)</h3>
               <p>This atlas doesn't aim to be exhaustive. It's impossible to give a complete panel of what exists. In consequence, we have probably missed a lot of artists, don't hesitate to suggest a new addition.</p>
               <p>The artists database (json) is available for <a href="/artists/download">download</a>, feel free to use it in any of your projects.</p>
