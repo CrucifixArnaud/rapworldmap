@@ -213,7 +213,11 @@ function processSubmit(req, res) {
 
   // validate informations
   req.checkBody('name', 'Name is required.').notEmpty();
-  req.checkBody('city', 'City name is required').notEmpty();
+  req.checkBody('location.city', 'City name is required').notEmpty();
+
+  if(req.body.coordinates) {
+    req.checkBody('location.coordinates', 'Coordinate must be formated <lng, lat>').matches(/(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)\w+/);
+  }
 
   // Errors handling
   const errors = req.validationErrors();
@@ -230,30 +234,7 @@ function processSubmit(req, res) {
   }
 
   // create a new artist
-  const artist = new Artist({
-    name: req.body.name,
-    location: {
-      city: req.body.city,
-      coordinates: '',
-      neighborhood: ''
-    },
-    categories: [],
-    image: {
-      thumbnailUrl: ''
-    },
-    bio: {
-      summary: '',
-      url: req.body.bioUrl,
-      birthdate: '',
-      deathdate: '',
-      yearsActiveStart: '',
-      yearsActiveEnd: ''
-    },
-    youtube: {
-      clipExampleUrl: req.body.clipExampleUrl
-    },
-    published: false
-  });
+  const artist = new Artist(req.body);
 
   artist.save((err) => {
 
@@ -296,9 +277,20 @@ function processSubmit(req, res) {
           <p>A new entry was submited.</p>
           <ul>
             <li>Name: ${req.body.name}</li>
-            <li>City: ${req.body.city}</li>
-            <li>Bio Url: ${req.body.bioUrl}</li>
-            <li>Clip Url: ${req.body.clipExampleUrl}</li>
+            <li>City: ${req.body.location.city}</li>
+            <li>Bio Url: ${req.body.bio.url}</li>
+            <li>Clip Url: ${req.body.youtube.clipExampleUrl}</li>
+          </ul>
+          <hr />
+          <ul>
+            <li>neighborhood: ${req.body.location.neighborhood}</li>
+            <li>coordinates: ${req.body.location.coordinates}</li>
+            <li>categories: ${req.body.categories}</li>
+            <li>Summary: ${req.body.bio.summary}</li>
+            <li>Birthdate: ${req.body.bio.birthdate}</li>
+            <li>Deathdate: ${req.body.bio.deathdate}</li>
+            <li>Years Active Start: ${req.body.bio.yearsActiveStart}</li>
+            <li>Years Active End: ${req.body.bio.yearsActiveEnd}</li>
           </ul>
           <a href="http://rapworldmap.com/login">Edit the entry on rapworldmap.com</a>`
       };
