@@ -65,7 +65,7 @@
     "react-motion": "^0.5.2",
     "react-onclickout": "^2.0.8",
     "react-router-dom": "^4.2.2",
-    "sharp": "^0.18.4",
+    "sharp": "^0.28.3",
     "underscore": "^1.8.3",
     "universal-cookie": "^2.1.2",
     "whatwg-fetch": "^2.0.3"
@@ -78,7 +78,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babelify": "^7.3.0",
-    "browserify": "^14.5.0",
+    "browserify": "^17.0.0",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "cssnano": "^3.10.0",
@@ -86,14 +86,16 @@
     "eslint-plugin-react": "^7.5.1",
     "isomorphic-fetch": "^2.2.1",
     "mocha": "^4.1.0",
-    "node-sass": "^4.7.2",
+    "node-sass": "^6.0.0",
     "nodemon": "^1.14.7",
     "nyc": "^12.0.2",
-    "postcss-cli": "^4.1.1",
+    "postcss": "^8.3.3",
+    "postcss-cli": "^8.3.1",
     "react-router": "^4.2.0",
     "should": "^13.2.0",
     "uglify-js": "^3.3.4",
-    "uglifyify": "^4.0.5"
+    "uglifyify": "^4.0.5",
+    "watchify": "^4.0.0"
   },
   "nyc": {
     "include": [
