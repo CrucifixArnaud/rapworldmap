@@ -32,6 +32,8 @@
   },
   "homepage": "https://gitlab.com/CrucifixArnaud/rapmap#README",
   "dependencies": {
+    "@sentry/react": "^6.17.4",
+    "@sentry/tracing": "^6.17.4",
     "babel-polyfill": "^6.26.0",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.18.2",
