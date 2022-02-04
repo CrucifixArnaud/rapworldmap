@@ -384,7 +384,15 @@ describe('Artists Api', () => {
         .post('/artists/submit')
         .type('form')
         .send({name: 'Boby'})
-        .send({city: 'Bobby Ville'})
+        .send({bio: {
+          url: ''
+        }})
+        .send({youtube: {
+          clipExampleUrl: ''
+        }})
+        .send({location: {
+            city: 'Bobby Ville'
+        }})
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
