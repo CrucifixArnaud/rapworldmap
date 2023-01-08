@@ -377,7 +377,7 @@ function uploadThumbnail(req, res, next) {
     }
 
     if(req.file) {
-      sharp(req.file.path).resize(300, 300).toFile('uploads/medium-' + req.file.filename, function (err) {
+      sharp(req.file.path).resize(300, 300).crop(sharp.strategy.entropy).toFile('uploads/medium-' + req.file.filename, function (err) {
         if (err) {
           return next(err);
         }
