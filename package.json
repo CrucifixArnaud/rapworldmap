@@ -83,7 +83,7 @@
     "browserify": "^17.0.0",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
-    "cssnano": "^3.10.0",
+    "cssnano": "^5.1.14",
     "eslint": "^4.14.0",
     "eslint-plugin-react": "^7.5.1",
     "isomorphic-fetch": "^2.2.1",
