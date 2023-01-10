@@ -289,11 +289,11 @@ export default class Atlas extends React.Component {
 Sentry.init({
   dsn: "https://bcaa3d8a19ff4cf99fa94d86f58419cf@o1129260.ingest.sentry.io/6184394",
   integrations: [new BrowserTracing()],
-
+  release: "rapworldmap@" + process.env.npm_package_version,
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
-  tracesSampleRate: 0,
+  tracesSampleRate: 0.2,
 });
 
 ReactDOM.render(<Atlas />,
