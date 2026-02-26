@@ -220,7 +220,11 @@ export default class Atlas extends React.Component {
   }
 
   createAtlas() {
-    // Prepare loader destruction
+  	// Get mapbox api token from .env file (injected into app container)
+    const mapboxToken = document.getElementById('app').getAttribute('data-mapboxtoken');
+    L.mapbox.accessToken = mapboxToken;
+
+	// Prepare loader destruction
     const loader = document.getElementById('loader');
     loader.addEventListener('transitionend', () => {
       loader.remove();
@@ -234,7 +238,7 @@ export default class Atlas extends React.Component {
       initialLatLng = [40, -45];
     }
 
-    this.map = L.mapbox.map('map', 'https://api.mapbox.com/styles/v1/crucifixarnaud/ck9l25bzk25eg1irzkvhm12sl?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A#3.21/18.46/-0.5', {
+    this.map = L.mapbox.map('map', `https://api.mapbox.com/styles/v1/crucifixarnaud/ck9l25bzk25eg1irzkvhm12sl?access_token=${mapboxToken}`, {
       minZoom: 3.5,
       zoomControl: false
     }).setView(initialLatLng, 3.5);
@@ -243,7 +247,7 @@ export default class Atlas extends React.Component {
 
     this.refreshAtlasData();
 
-    L.mapbox.tileLayer('https://api.mapbox.com/styles/v1/crucifixarnaud/ck9l25bzk25eg1irzkvhm12sl?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A#3.21/18.46/-0.5')
+    L.mapbox.tileLayer(`https://api.mapbox.com/styles/v1/crucifixarnaud/ck9l25bzk25eg1irzkvhm12sl?access_token=${mapboxToken}`)
       .addTo(this.map) // add your tiles to the map
       .on('load', () => {
       // Atlas is create hide loader
