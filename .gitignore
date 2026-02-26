@@ -1,6 +1,7 @@
-# Sublime related file
+# Editor related file
 *.sublime-workspace
 *.sublime-project
+*.idea
 
 # Node related file
 node_modules
@@ -11,8 +12,10 @@ node_modules
 # Doc
 doc/about-prod.md
 
-# CSS
+# Build related file
 *.css.map
+public/css/
+public/js/
 
 # Uploads
 uploads
