@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: rapworldmap-app
+    restart: unless-stopped
+    ports:
+      - "3666:3666"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      # If you don't have DB_URI in .env, this provides a default pointing at the mongo service
+      - DB_URI=${DB_URI:-mongodb://mongo:27017/rapmap}
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.4
+    container_name: rapworldmap-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

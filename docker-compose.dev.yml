@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: rapworldmap-app-dev
+    restart: unless-stopped
+    ports:
+      - "3666:3666"
+    command: npm run dev
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+      - DB_URI=${DB_URI:-mongodb://mongo:27017/rapmap}
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+
+  assets:
+    build: .
+    container_name: rapworldmap-assets-dev
+    restart: unless-stopped
+    command: sh -c "npm run dev:css & npm run dev:js"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.4
+    container_name: rapworldmap-mongo-dev
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo_data:
+
