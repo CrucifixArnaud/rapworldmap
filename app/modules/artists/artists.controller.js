@@ -6,11 +6,33 @@ const Artist = require('./artist.model'),
   moment = require('moment'),
   underscore = require('underscore'),
   multer = require('multer'),
-  sharp = require('sharp'),
   nodemailer = require('nodemailer'),
   userMiddlewares = require('../users/user.middlewares'),
   utils = require('../../utils/utils'),
-  fs = require('fs');
+  fs = require('fs'),
+  path = require('path'),
+  childProcess = require('child_process');
+
+function resizeToMediumThumbnail(inputPath, outputPath, cb) {
+  const args = [
+    inputPath,
+    '-auto-orient',
+    '-resize', '300x300^',
+    '-gravity', 'center',
+    '-extent', '300x300',
+    outputPath
+  ];
+
+  const proc = childProcess.spawn('convert', args, { stdio: ['ignore', 'ignore', 'pipe'] });
+
+  let stderr = '';
+  proc.stderr.on('data', (d) => { stderr += d.toString(); });
+  proc.on('error', cb);
+  proc.on('close', (code) => {
+    if (code === 0) return cb(null);
+    cb(new Error(`ImageMagick convert exited with code ${code}${stderr ? `: ${stderr}` : ''}`));
+  });
+}
 
 //====== Export method ======
 module.exports = {
@@ -377,14 +399,12 @@ function uploadThumbnail(req, res, next) {
     }
 
     if(req.file) {
-      sharp(req.file.path).resize(300, 300).toFile('uploads/medium-' + req.file.filename, function (err) {
-        if (err) {
-          return next(err);
-        }
-      });
+      const inputPath = req.file.path;
+      const outputPath = path.join('uploads', `medium-${req.file.filename}`);
+      return resizeToMediumThumbnail(inputPath, outputPath, next);
     }
 
-    next();
+    return next();
 
   });
 }

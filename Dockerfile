@@ -1,5 +1,5 @@
 # ---------- Build stage ----------
-FROM node:14.17.3 AS builder
+FROM node:14-bullseye AS builder
 
 WORKDIR /usr/src/app
 
@@ -18,9 +18,14 @@ RUN npm run build
 
 
 # ---------- Production stage ----------
-FROM node:14.17.3-slim
+FROM node:14-bullseye-slim
 
 WORKDIR /usr/src/app
+
+# Image resizing dependency (replacement for sharp)
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends imagemagick \
+  && rm -rf /var/lib/apt/lists/*
 
 # Copy built files (and node_modules) from builder stage
 COPY --from=builder /usr/src/app ./
