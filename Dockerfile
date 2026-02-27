@@ -1,5 +1,5 @@
 # ---------- Build stage ----------
-FROM node:14-bullseye AS builder
+FROM node:16-bullseye AS builder
 
 WORKDIR /usr/src/app
 
@@ -18,7 +18,7 @@ RUN npm run build
 
 
 # ---------- Production stage ----------
-FROM node:14-bullseye-slim
+FROM node:16-bullseye-slim
 
 WORKDIR /usr/src/app
 
