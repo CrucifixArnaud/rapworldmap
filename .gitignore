@@ -22,3 +22,4 @@ uploads
 
 # Test Coverage
 .nyc_output
+test/coverage/
