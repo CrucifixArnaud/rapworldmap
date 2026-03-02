@@ -1,6 +1,6 @@
 DOCKER_COMPOSE ?= docker compose
 
-.PHONY: dev prod down-dev down-prod logs-dev logs-prod
+.PHONY: dev prod down-dev down-prod logs-dev logs-prod bash-dev bash-prod
 
 dev:
 	$(DOCKER_COMPOSE) -f docker-compose.dev.yml up --build
@@ -19,4 +19,10 @@ logs-dev:
 
 logs-prod:
 	$(DOCKER_COMPOSE) -f docker-compose.yml logs -f
+
+bash-dev:
+	$(DOCKER_COMPOSE) -f docker-compose.dev.yml exec app bash
+
+bash-prod:
+	$(DOCKER_COMPOSE) -f docker-compose.yml exec app bash
 
