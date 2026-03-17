@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# LOAD ENV VARIABLES
+if [ -f .env ]; then
+  echo "📦 Loading environment variables from .env..."
+  set -a
+  source .env
+  set +a
+fi
+
+: "${DOCKER_MONGO:=rapworldmap-mongo}"
+
+BACKUP="$1"
+
+echo "📥 Restore db from dump '$BACKUP'"
+
+docker exec -i "$DOCKER_MONGO" \
+  mongorestore --db=rapmap --drop --archive --gzip < "$BACKUP"
+
+echo "✅ Export complete!"
