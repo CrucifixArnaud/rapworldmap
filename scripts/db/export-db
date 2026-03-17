@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# LOAD ENV VARIABLES
+if [ -f .env ]; then
+  echo "📦 Loading environment variables from .env..."
+  set -a
+  source .env
+  set +a
+fi
+
+: "${EXPORT_DB_BASE_DIR:=/home/user/backup/rapworldmap/rapworldmap.db}"
+: "${DOCKER_MONGO:=rapworldmap-mongo}"
+
+DAY_DIR="$(date +%d)"
+DEST="${EXPORT_DB_BASE_DIR}/${DAY_DIR}"
+
+mkdir -p "$DEST"
+
+# Run mongodump inside the Docker Mongo container and stream a single gzipped archive to the host.
+echo "📥 Dump db to '$DEST'"
+docker exec "$DOCKER_MONGO" \
+  mongodump --db=rapmap --archive --gzip \
+  > "${DEST}/rapmap.${DAY_DIR}.gz"
+
+echo "✅ Backup complete!"
