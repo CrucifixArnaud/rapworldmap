@@ -1,0 +1,84 @@
+name: Build & Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Build Docker image
+        run: docker build -t rapworldmap:latest .
+
+      - name: Save Docker image
+        run: docker save rapworldmap:latest -o rapworldmap.tar
+
+      - name: Copy Docker image to server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
+
+          scp rapworldmap.tar $DEPLOY_USER@$DEPLOY_HOST:/home/$DEPLOY_USER/www/rapworldmap.tar
+
+      - name: Deploy Docker image on server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
+      
+          ssh $DEPLOY_USER@$DEPLOY_HOST "
+            set -e
+      
+            echo 'Loading Docker image...'
+            docker load -i /home/$DEPLOY_USER/www/rapworldmap.tar
+      
+            echo 'Backing up uploads...'
+            BACKUP_DIR=/home/$DEPLOY_USER/backup/rapworldmap
+            WWW_DIR=/home/$DEPLOY_USER/www/rapworldmap
+            mkdir -p \$BACKUP_DIR
+            cp -r \$WWW_DIR/uploads \$BACKUP_DIR/uploads || true
+      
+            cd \$WWW_DIR
+      
+            # Check if Mongo container exists
+            MONGO_EXISTS=\$(docker ps -a --filter name=rapworldmap-mongo -q || true)
+      
+            if [ -z \"\$MONGO_EXISTS\" ]; then
+              echo 'Mongo container not found → full deploy (all services)'
+              docker compose up -d --build
+            else
+              echo 'Mongo container exists → normal deploy (only app)'
+              docker compose up -d --no-deps --build app
+            fi
+      
+            echo 'Cleaning up tarball...'
+            rm /home/$DEPLOY_USER/www/rapworldmap.tar
+      
+            echo 'Deployment completed!'
+          "

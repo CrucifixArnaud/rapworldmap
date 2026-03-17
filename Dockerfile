@@ -1,34 +1,21 @@
-# ---------- Build stage ----------
-FROM node:16-bullseye AS builder
-
-WORKDIR /usr/src/app
-
-# Install deps (including dev deps for build)
-COPY package*.json ./
-RUN npm ci
-
-# Copy source
-COPY . .
-
-# Build assets (React, TS, etc.)
-RUN npm run build
-
-# Strip devDependencies so only production deps remain
-RUN npm prune --production
-
-
-# ---------- Production stage ----------
 FROM node:16-bullseye-slim
 
 WORKDIR /usr/src/app
 
-# Image resizing dependency (replacement for sharp)
+# Install runtime dependency
 RUN apt-get update \
   && apt-get install -y --no-install-recommends imagemagick \
   && rm -rf /var/lib/apt/lists/*
 
-# Copy built app (code + assets + production node_modules) from builder stage
-COPY --from=builder /usr/src/app ./
+# Install only production dependencies
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+# Copy backend code (everything except ignored files)
+COPY . .
+
+# Ensure Browserify-built assets are included
+COPY public ./public
 
 ENV NODE_ENV=production
 
