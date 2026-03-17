@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# LOAD ENV VARIABLES
+if [ -f .env ]; then
+  echo "📦 Loading environment variables from .env..."
+  set -a
+  source .env
+  set +a
+fi
+
+: "${EXPORT_UPLOADS_BASE_DIR:=/home/user/backup/rapworldmap/rapworldmap.uploads}"
+: "${DOCKER_MONGO:=rapworldmap-mongo}"
+
+TODAY="$(date +%d)"
+FILE="rapworldmap.uploads.$(date +%m%d%y).tar.gz"
+SRC="uploads"
+
+rm -rf "$EXPORT_UPLOADS_BASE_DIR/$TODAY"
+mkdir -p "$EXPORT_UPLOADS_BASE_DIR/$TODAY"
+
+echo "📥 Backup uploads to '$EXPORT_UPLOADS_BASE_DIR'"
+# Create archive with "uploads" as the top-level directory (no full absolute path)
+cd "$(dirname "$SRC")" || exit 1
+tar czf "$EXPORT_UPLOADS_BASE_DIR/$TODAY/$FILE" "$(basename "$SRC")"
+echo "✅ Backup complete!"
