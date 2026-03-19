@@ -24,7 +24,7 @@ export default defineConfig({
         chunkFileNames: 'js/[name].[hash].js',
         assetFileNames: (assetInfo) => {
           if (assetInfo.name && assetInfo.name.endsWith('.css')) {
-            return `css/${assetInfo.name.replace('_css.css','.css')}`
+            return `css/${assetInfo.name.replace('_css.css', '.css')}`
           }
           return 'assets/[name].[hash][extname]'
         },
@@ -33,5 +33,10 @@ export default defineConfig({
   },
   define: {
     'import.meta.env.VITE_APP_VERSION': JSON.stringify(pkg.version)
+  },
+  resolve: {
+    alias: {
+      events: 'events'
+    }
   }
 });
