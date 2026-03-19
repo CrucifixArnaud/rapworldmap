@@ -14,8 +14,7 @@ doc/about-prod.md
 
 # Build related file
 *.css.map
-public/css/
-public/js/
+/public
 
 # Uploads
 /uploads

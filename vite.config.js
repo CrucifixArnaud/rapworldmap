@@ -5,8 +5,9 @@ import pkg from './package.json';
 
 export default defineConfig({
   plugins: [react()],
+  publicDir: path.resolve(__dirname, 'app/assets/public'),
   build: {
-    outDir: 'public',
+    outDir: path.resolve(__dirname, 'public'),
     emptyOutDir: false,
     rollupOptions: {
       input: {
