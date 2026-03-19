@@ -1,10 +1,10 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import pkg from './package.json';
 
 export default defineConfig({
   plugins: [react()],
-
   build: {
     outDir: 'public',
     emptyOutDir: false,
@@ -20,4 +20,7 @@ export default defineConfig({
       },
     },
   },
+  define: {
+    'import.meta.env.VITE_APP_VERSION': JSON.stringify(pkg.version)
+  }
 });
