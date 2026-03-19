@@ -33,7 +33,6 @@
   "dependencies": {
     "@sentry/react": "^6.19.7",
     "@sentry/tracing": "^6.19.7",
-    "babel-polyfill": "^6.26.0",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.20.4",
     "client-sessions": "^0.8.0",
@@ -72,13 +71,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.0.1",
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.6",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babelify": "^7.3.0",
     "chai": "^4.5.0",
     "chai-http": "^3.0.0",
     "cssnano": "^5.1.15",

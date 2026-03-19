@@ -1,7 +1,6 @@
 /* global L */
 
 import 'whatwg-fetch';
-import 'babel-polyfill';
 import 'core-js/es6/map';
 import 'core-js/es6/set';
 import Promise from 'promise-polyfill';
