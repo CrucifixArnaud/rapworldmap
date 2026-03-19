@@ -7,7 +7,7 @@ import moment from 'moment';
 export default class AdvanceSubmitArtist extends React.Component {
   static propTypes = {
     bus: PropTypes.instanceOf(EventEmitter)
-  }
+  };
 
   defaultState = {
     open: false,
@@ -255,7 +255,7 @@ export default class AdvanceSubmitArtist extends React.Component {
 
         // Close submit modal
         this.close();
-        this.refs.modalSubmit.closeModal()
+        this.refs.modalSubmit.closeModal();
       } else {
 
         let errors = response.error.detail;

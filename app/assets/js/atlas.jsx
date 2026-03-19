@@ -11,8 +11,8 @@ if (!window.Promise) {
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
+import * as Sentry from '@sentry/react';
+import { BrowserTracing } from '@sentry/tracing';
 // import L from 'mapbox.jsx';
 import * as LeafletMarkercluster from 'leaflet.markercluster';
 import {EventEmitter} from 'events';
@@ -219,11 +219,11 @@ export default class Atlas extends React.Component {
   }
 
   createAtlas() {
-  	// Get mapbox api token from .env file (injected into app container)
+    // Get mapbox api token from .env file (injected into app container)
     const mapboxToken = document.getElementById('app').getAttribute('data-mapboxtoken');
     L.mapbox.accessToken = mapboxToken;
 
-	// Prepare loader destruction
+    // Prepare loader destruction
     const loader = document.getElementById('loader');
     loader.addEventListener('transitionend', () => {
       loader.remove();
@@ -290,9 +290,9 @@ export default class Atlas extends React.Component {
 }
 
 Sentry.init({
-  dsn: "https://bcaa3d8a19ff4cf99fa94d86f58419cf@o1129260.ingest.sentry.io/6184394",
+  dsn: 'https://bcaa3d8a19ff4cf99fa94d86f58419cf@o1129260.ingest.sentry.io/6184394',
   integrations: [new BrowserTracing()],
-  release: "rapworldmap@" + import.meta.env.VITE_APP_VERSION,
+  release: 'rapworldmap@' + import.meta.env.VITE_APP_VERSION,
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production

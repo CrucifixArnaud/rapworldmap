@@ -6,7 +6,7 @@ import AdvanceSubmitArtist from './advancedSubmitArtist.jsx';
 export default class SubmitArtist extends React.Component {
   static propTypes = {
     bus: PropTypes.instanceOf(EventEmitter)
-  }
+  };
 
   defaultState = {
     open: false,

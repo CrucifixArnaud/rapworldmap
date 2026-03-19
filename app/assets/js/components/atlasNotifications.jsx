@@ -6,7 +6,7 @@ import {TransitionMotion, spring, presets} from 'react-motion';
 export default class AtlasNotifications extends React.Component {
   static propTypes = {
     bus: PropTypes.instanceOf(EventEmitter)
-  }
+  };
 
   constructor(props) {
     super(props);

@@ -34,8 +34,8 @@ export default class ArtistPanel extends React.Component {
       open: true
     }, () => {
 
-      this.refs.panelArtist.addEventListener('transitionend', () => {
-        if(event.propertyName === 'visibility') {
+      this.refs.panelArtist.addEventListener('transitionend', (event) => {
+        if (event.propertyName === 'visibility') {
           this.refs.panelArtist.focus();
         }
       });

@@ -9,7 +9,7 @@ import { EventEmitter } from 'events';
 export default class AtlasMenu extends React.Component {
   static propTypes = {
     bus: PropTypes.instanceOf(EventEmitter)
-  }
+  };
 
   constructor(props) {
     super(props);

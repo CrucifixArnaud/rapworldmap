@@ -10,7 +10,8 @@
     "build": "NODE_ENV=production vite build",
     "dev": "NODE_ENV=development nodemon rapworldmap.js",
     "start": "NODE_ENV=production node rapworldmap.js",
-    "lint": "eslint app/assets/js"
+    "lint": "eslint app/assets/js",
+    "lint:fix": "eslint app/assets/js --fix"
   },
   "repository": {
     "type": "git",
@@ -66,7 +67,9 @@
     "@vitejs/plugin-react": "^6.0.1",
     "chai": "^4.5.0",
     "chai-http": "^3.0.0",
-    "eslint": "^4.19.1",
+    "eslint": "^9.14.0",
+    "@eslint/js": "^9.14.0",
+    "@stylistic/eslint-plugin": "^2.11.0",
     "eslint-plugin-react": "^7.37.5",
     "isomorphic-fetch": "^2.2.1",
     "mocha": "^4.1.0",

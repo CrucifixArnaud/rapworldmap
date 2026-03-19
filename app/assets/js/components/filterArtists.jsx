@@ -5,7 +5,7 @@ import {EventEmitter} from 'events';
 export default class SubmitArtist extends React.Component {
   static propTypes = {
     bus: PropTypes.instanceOf(EventEmitter)
-  }
+  };
 
   currentYear = new Date().getFullYear();
   minYearActiveStart = 1970;
