@@ -2,6 +2,7 @@
   > Modal
 \*------------------------------------*/
 
+@use 'sass:color';
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 @use '../utils/functions' as *;
@@ -16,7 +17,7 @@
   transition: visibility .2s, opacity .2s ease, transform .2s ease;
   opacity: 0;
   right: 0;
-  background:  fade-out($blue-mirage, .1);
+  background: color.adjust($blue-mirage, $alpha: -0.1);
 
   overflow: auto;
   width: 100%;

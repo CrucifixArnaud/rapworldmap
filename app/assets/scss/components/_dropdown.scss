@@ -2,6 +2,7 @@
   > Dropdown
 \*------------------------------------*/
 
+@use 'sass:color';
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 @use '../utils/functions' as *;
@@ -52,7 +53,7 @@
   margin-left: -1rem;
   padding: 1rem;
   @include rem(font-size, 14px);
-  background: darken($blue-mirage, 3);
+  background: color.adjust($blue-mirage, $lightness: -3%);
   border: 1px solid #000;
   z-index: z('header');
 }
@@ -80,7 +81,7 @@
   &:hover,
   &:focus,
   &:active {
-    background: darken($blue-mirage, 5);
+    background: color.adjust($blue-mirage, $lightness: -5%);
     text-decoration: none;
   }
 }

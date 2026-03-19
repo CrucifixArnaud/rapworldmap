@@ -2,6 +2,7 @@
   > Form
 \*------------------------------------*/
 
+@use 'sass:color';
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 @use '../utils/functions' as *;
@@ -19,7 +20,7 @@
   width: 100%;
   @include rem(font-size, 14px);
   // outline-color: $color-primary;
-  background: darken($blue-mirage, 6);
+  background: color.adjust($blue-mirage, $lightness: -6%);
 
   &:focus {
     outline: none;
@@ -75,7 +76,7 @@ textarea {
   content: "";
   display: inline-block;
   vertical-align: middle;
-  background: darken($blue-mirage, 6);
+  background: color.adjust($blue-mirage, $lightness: -6%);
   width: 20px;
   height: 20px;
   margin-right: 10px;
@@ -113,7 +114,7 @@ textarea {
 [type="radio"]:focus:not(:checked) + label:after {
   opacity: 1;
   transform: scale(1);
-  background: lighten($blue-mirage, 10);
+  background: color.adjust($blue-mirage, $lightness: 10%);
 }
 
 // Checked
@@ -129,12 +130,12 @@ textarea {
 [type="checkbox"]:disabled:checked + label:before,
 [type="radio"]:disabled:not(:checked) + label:before,
 [type="radio"]:disabled:checked + label:before {
-  background-color: darken($blue-mirage, 3);
+  background-color: color.adjust($blue-mirage, $lightness: -3%);
 }
 
 [type="checkbox"]:disabled + label,
 [type="radio"]:disabled + label {
-  color: darken(#fff, 50);
+  color: color.adjust(#fff, $lightness: -50%);
 }
 
 [type="checkbox"]:disabled + label,
@@ -204,7 +205,7 @@ textarea {
   width: 100%;
   cursor: pointer;
   height: 1em;
-  border-bottom: 4px solid darken($blue-mirage, 6);
+  border-bottom: 4px solid color.adjust($blue-mirage, $lightness: -6%);
   background-color: transparent;
 }
 
@@ -254,36 +255,36 @@ textarea {
   &:focus,
   &:hover{
     &::-webkit-slider-thumb {
-      background-color: lighten($color-primary, 20);
-      border-color: lighten($color-primary, 20);
+      background-color: color.adjust($color-primary, $lightness: 20%);
+      border-color: color.adjust($color-primary, $lightness: 20%);
     }
 
     &::-moz-range-thumb {
-      background-color: lighten($color-primary, 20);
-      border-color: lighten($color-primary, 20);
+      background-color: color.adjust($color-primary, $lightness: 20%);
+      border-color: color.adjust($color-primary, $lightness: 20%);
     }
 
     &::-ms-thumb {
-      background-color: lighten($color-primary, 20);
-      border-color: lighten($color-primary, 20);
+      background-color: color.adjust($color-primary, $lightness: 20%);
+      border-color: color.adjust($color-primary, $lightness: 20%);
     }
   }
 
   //&:focus,
   &:active{
     &::-webkit-slider-thumb {
-      background-color: lighten($blue-mirage, 10);
-      border-color: lighten($blue-mirage, 10);
+      background-color: color.adjust($blue-mirage, $lightness: 10%);
+      border-color: color.adjust($blue-mirage, $lightness: 10%);
     }
 
     &::-moz-range-thumb {
-      background-color: lighten($blue-mirage, 10);
-      border-color: lighten($blue-mirage, 10);
+      background-color: color.adjust($blue-mirage, $lightness: 10%);
+      border-color: color.adjust($blue-mirage, $lightness: 10%);
     }
 
     &::-ms-thumb {
-      background-color: lighten($blue-mirage, 10);
-      border-color: lighten($blue-mirage, 10);
+      background-color: color.adjust($blue-mirage, $lightness: 10%);
+      border-color: color.adjust($blue-mirage, $lightness: 10%);
     }
   }
 

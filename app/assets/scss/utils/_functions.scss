@@ -3,6 +3,9 @@
   Usefull functions use every where in the applications
 \*------------------------------------*/
 
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:math';
 @use 'variables' as *;
 
 /**
@@ -11,7 +14,7 @@
  * @return {int}    [The related integer of the given ($n) number]
  */
 @function parseInt($n) {
-  @return $n / ($n * 0 + 1);
+  @return math.div($n, ($n * 0 + 1));
 }
 
 /**
@@ -38,7 +41,21 @@
 
 @function apply-color-diff($color, $diff) {
   @each $key, $value in $diff {
-    $color: call($key, $color, $value);
+    @if $key == 'adjust-hue' {
+      $color: color.adjust($color, $hue: $value);
+    } @else if $key == 'saturate' {
+      $color: color.adjust($color, $saturation: $value);
+    } @else if $key == 'desaturate' {
+      $color: color.adjust($color, $saturation: -$value);
+    } @else if $key == 'lighten' {
+      $color: color.adjust($color, $lightness: $value);
+    } @else if $key == 'darken' {
+      $color: color.adjust($color, $lightness: -$value);
+    } @else {
+      // Fallback for any other function-like keys
+      $fn: get-function($key);
+      $color: call($fn, $color, $value);
+    }
   }
   @return $color;
 }
@@ -49,9 +66,9 @@
  * @return {int} [Z-index value]
  */
 @function z($layer) {
-  @if not map-has-key($z-layers, $layer) {
+  @if not map.has-key($z-layers, $layer) {
     @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
   }
 
-  @return map-get($z-layers, $layer);
+  @return map.get($z-layers, $layer);
 }

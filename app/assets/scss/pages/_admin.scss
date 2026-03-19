@@ -3,12 +3,13 @@
   Specific style for page admin
 \*------------------------------------*/
 
+@use 'sass:color';
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 @use '../utils/functions' as *;
 
 .page-admin {
-  background-color: darken($blue-mirage, 2);
+  background-color: color.adjust($blue-mirage, $lightness: -2%);
 }
 
 .link--back-to {
@@ -27,7 +28,7 @@
 // admin-header
 // ---------------------
 .admin-header {
-  background-color: darken($blue-mirage, 2);
+  background-color: color.adjust($blue-mirage, $lightness: -2%);
   // padding: 1em 4em;
 }
 

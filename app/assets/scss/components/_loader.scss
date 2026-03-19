@@ -2,6 +2,7 @@
   > Loader
 \*------------------------------------*/
 
+@use 'sass:color';
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 @use '../utils/functions' as *;
@@ -17,7 +18,7 @@
   top: 0;
   left: 0;
   position: absolute;
-  background: darken($blue-mirage, 3);
+  background: color.adjust($blue-mirage, $lightness: -3%);
   opacity: .1;
   visibility: hidden;
   transition: opacity .4s ease, visibility .4s ease;
@@ -51,7 +52,7 @@
 }
 
 .loader__spin:after {
-  border: 5px solid darken($blue-mirage, 5);
+  border: 5px solid color.adjust($blue-mirage, $lightness: -5%);
 }
 
 // Atlas Loader

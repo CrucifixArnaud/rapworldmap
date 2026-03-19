@@ -3,6 +3,10 @@
   Generic and common mixins
 \*------------------------------------*/
 
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:math';
 @use 'variables' as *;
 @use 'functions' as *;
 
@@ -17,7 +21,7 @@ $md: (min: $screen-md-min);
 $lg: (min: $screen-lg-min);
 
 $xs-only: (max:  $screen-xs-max);
-$sm-only: (min: map-get($sm, min), max: map-get($md, min) - 1);
+$sm-only: (min: map.get($sm, min), max: map.get($md, min) - 1);
 
 $below-sm: (max:  $screen-sm-min - 1);
 $below-md: (max:  $screen-md-min - 1);
@@ -25,18 +29,18 @@ $below-lg: (max:  $screen-lg-min - 1);
 
 @mixin breakpoint($map) {
   $query: '';
-  @if map-has-key($map, min) {
-      $query: append($query, '(min-width: #{map-get($map, min)})');
+  @if map.has-key($map, min) {
+      $query: list.append($query, '(min-width: #{map.get($map, min)})');
   }
-  @if map-has-key($map, min) and map-has-key($map, max) {
-      $query: append($query, 'and');
+  @if map.has-key($map, min) and map.has-key($map, max) {
+      $query: list.append($query, 'and');
   }
-  @if map-has-key($map, min) and map-has-key($map, orientation){
-      $query: append($query, 'and');
-      $query: append($query, '(orientation: #{map-get($map, orientation)})');
+  @if map.has-key($map, min) and map.has-key($map, orientation){
+      $query: list.append($query, 'and');
+      $query: list.append($query, '(orientation: #{map.get($map, orientation)})');
   }
-  @if map-has-key($map, max) {
-      $query: append($query, '(max-width: #{map-get($map, max)})');
+  @if map.has-key($map, max) {
+      $query: list.append($query, '(max-width: #{map.get($map, max)})');
   }
 
   @media screen and #{$query} {
@@ -56,22 +60,22 @@ $below-lg: (max:  $screen-lg-min - 1);
   @each $value in $values {
 
     @if $value == 0 or $value == auto {
-      $px : append($px , $value);
-      $rem: append($rem, $value);
+      $px : list.append($px , $value);
+      $rem: list.append($rem, $value);
     }
 
     @else {
-      $unit: unit($value);
+      $unit: math.unit($value);
       $val: parseInt($value);
 
       @if $unit == "px" {
-        $px : append($px,  $value);
-        $rem: append($rem, ($val / 10 + rem));
+        $px : list.append($px,  $value);
+        $rem: list.append($rem, (math.div($val, 10) + rem));
       }
 
       @if $unit == "rem" {
-        $px : append($px,  ($val * 10 + px));
-        $rem: append($rem, $value);
+        $px : list.append($px,  ($val * 10 + px));
+        $rem: list.append($rem, $value);
       }
     }
   }
@@ -151,13 +155,13 @@ $below-lg: (max:  $screen-lg-min - 1);
 @mixin debug-map($map) {
   @at-root {
     @debug-map {
-      __toString__: inspect($map);
-      __length__: length($map);
+      __toString__: meta.inspect($map);
+      __length__: list.length($map);
       __depth__: depth($map);
-      __keys__: map-keys($map);
+      __keys__: map.keys($map);
       __properties__ {
         @each $key, $value in $map {
-          #{'(' + type-of($value) + ') ' + $key}: inspect($value);
+          #{'(' + meta.type-of($value) + ') ' + $key}: meta.inspect($value);
         }
       }
     }

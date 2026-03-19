@@ -2,6 +2,7 @@
   > Table
 \*------------------------------------*/
 
+@use 'sass:color';
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 @use '../utils/functions' as *;
@@ -13,17 +14,17 @@
 
 // Table row
 .table__row {
-  background: darken($blue-mirage, 3);
+  background: color.adjust($blue-mirage, $lightness: -3%);
 
   &:nth-child(odd) {
-    background: darken($blue-mirage, 5);
+    background: color.adjust($blue-mirage, $lightness: -5%);
   }
 
   &:hover,
   &:focus,
   &:nth-child(odd):hover ,
   &:nth-child(odd):focus {
-    background: lighten($blue-mirage, 3);
+    background: color.adjust($blue-mirage, $lightness: 3%);
   }
 }
 
@@ -45,7 +46,7 @@
 
 // Table head
 .table__head__row {
-  background: darken($blue-mirage, 1);
+  background: color.adjust($blue-mirage, $lightness: -1%);
 }
 
 .table__head__cell {
