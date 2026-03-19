@@ -4,22 +4,22 @@
 
 @font-face {
     font-family: 'liberation';
-    src: url('../fonts/LiberationSans/LiberationSans-Regular-webfont.eot');
-    src: url('../fonts/LiberationSans/LiberationSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/LiberationSans/LiberationSans-Regular-webfont.woff') format('woff'),
-         url('../fonts/LiberationSans/LiberationSans-Regular-webfont.ttf') format('truetype'),
-         url('../fonts/LiberationSans/LiberationSans-Regular-webfont.svg#liberation_sansregular') format('svg');
+    src: url('/fonts/LiberationSans/LiberationSans-Regular-webfont.eot');
+    src: url('/fonts/LiberationSans/LiberationSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/LiberationSans/LiberationSans-Regular-webfont.woff') format('woff'),
+         url('/fonts/LiberationSans/LiberationSans-Regular-webfont.ttf') format('truetype'),
+         url('/fonts/LiberationSans/LiberationSans-Regular-webfont.svg#liberation_sansregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'liberation';
-    src: url('../fonts/LiberationSans/LiberationSans-Bold-webfont.eot');
-    src: url('../fonts/LiberationSans/LiberationSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/LiberationSans/LiberationSans-Bold-webfont.woff') format('woff'),
-         url('../fonts/LiberationSans/LiberationSans-Bold-webfont.ttf') format('truetype'),
-         url('../fonts/LiberationSans/LiberationSans-Bold-webfont.svg#liberation_sansregular') format('svg');
+    src: url('/fonts/LiberationSans/LiberationSans-Bold-webfont.eot');
+    src: url('/fonts/LiberationSans/LiberationSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/LiberationSans/LiberationSans-Bold-webfont.woff') format('woff'),
+         url('/fonts/LiberationSans/LiberationSans-Bold-webfont.ttf') format('truetype'),
+         url('/fonts/LiberationSans/LiberationSans-Bold-webfont.svg#liberation_sansregular') format('svg');
     font-weight: bold;
     font-style: normal;
 }

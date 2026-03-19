@@ -108,7 +108,7 @@
   @include breakpoint($md) {
     max-width: 604px;
     min-height: 300px;
-    background: url('../images/artist-panel-background.svg') no-repeat;
+    background: url('/images/artist-panel-background.svg') no-repeat;
     background-size: cover;
     background-position: 0 0;
     padding: 1em;
@@ -309,7 +309,7 @@
     right: 0;
     transform: translateX(-120%);
     will-change: transform,opacity;
-    background: url('../images/submit-artist-panel-background.svg') no-repeat;
+    background: url('/images/submit-artist-panel-background.svg') no-repeat;
     background-size: cover;
   }
 }
@@ -378,7 +378,7 @@
     right: 0;
     transform: translateX(-120%);
     will-change: transform,opacity;
-    background: url('../images/search-artist-panel-background.svg') no-repeat;
+    background: url('/images/search-artist-panel-background.svg') no-repeat;
     background-size: cover;
   }
 }
