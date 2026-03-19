@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Modal from './shared/modal.js';
+import Modal from './shared/modal.jsx';
 
 export default class SearchArtist extends React.Component {
   constructor(props) {

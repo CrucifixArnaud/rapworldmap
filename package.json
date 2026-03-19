@@ -8,14 +8,14 @@
     "dev:test": "nodemon -x \"npm run test\"",
     "dev:css": "nodemon -e scss -x \"npm run compile:css && npm run autoprefixer\"",
     "dev:css:minify": "nodemon -e scss -x \"npm run build:css\"",
-    "dev:js": "watchify -t [ babelify ] app/assets/js/atlas.js -o public/js/atlas.bundle.js | watchify -t [ babelify ] app/assets/js/admin.js -o public/js/admin.bundle.js",
+    "dev:js": "vite",
     "compile:css": "node-sass app/assets/scss/ -o public/css/",
     "autoprefixer": "postcss -um autoprefixer -r public/css/*.css",
     "minify:css": "postcss -u cssnano -r public/css/*.css -m { inline:false }",
-    "browserify": "NODE_ENV=production browserify app/assets/js/atlas.js -t [ babelify ] -o public/js/atlas.bundle.js | NODE_ENV=production browserify app/assets/js/admin.js -t [ babelify ] -o public/js/admin.bundle.js",
+    "browserify": "NODE_ENV=production browserify app/assets/js/atlas.jsx -t [ babelify ] -o public/js/atlas.bundle.js | NODE_ENV=production browserify app/assets/js/admin.jsx -t [ babelify ] -o public/js/admin.bundle.js",
     "uglify:js": "NODE_ENV=production uglifyjs public/js/atlas.bundle.js -mc -o public/js/atlas.bundle.js | NODE_ENV=production uglifyjs public/js/admin.bundle.js -mc -o public/js/admin.bundle.js",
     "build:css": "npm run compile:css && npm run autoprefixer && npm run minify:css",
-    "build:js": "npm run browserify && npm run uglify:js",
+    "build:js": "vite build",
     "build": "NODE_ENV=production npm run build:js && npm run build:css",
     "dev": "NODE_ENV=development nodemon rapworldmap.js",
     "start": "NODE_ENV=production node rapworldmap.js",
@@ -72,6 +72,7 @@
     "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -96,6 +97,7 @@
     "should": "^13.2.3",
     "uglify-js": "^3.19.3",
     "uglifyify": "^4.0.5",
+    "vite": "^8.0.1",
     "watchify": "^4.0.0"
   },
   "nyc": {

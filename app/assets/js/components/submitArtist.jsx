@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {EventEmitter} from 'events';
-import AdvanceSubmitArtist from './advancedSubmitArtist.js';
+import AdvanceSubmitArtist from './advancedSubmitArtist.jsx';
 
 export default class SubmitArtist extends React.Component {
   static propTypes = {

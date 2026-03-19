@@ -14,8 +14,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
-// import L from 'mapbox.js';
-import LeafletMarkercluster from 'leaflet.markercluster';
+// import L from 'mapbox.jsx';
+import * as LeafletMarkercluster from 'leaflet.markercluster';
 import {EventEmitter} from 'events';
 
 import ArtistPanel from './components/artistPanel';

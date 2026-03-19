@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClickOutHandler from 'react-onclickout';
-import SubmitArtist from './submitArtist.js';
-import SearchArtist from './searchArtist.js';
-import FilterArtists from './filterArtists.js';
+import SubmitArtist from './submitArtist.jsx';
+import SearchArtist from './searchArtist.jsx';
+import FilterArtists from './filterArtists.jsx';
 import { EventEmitter } from 'events';
 
 export default class AtlasMenu extends React.Component {

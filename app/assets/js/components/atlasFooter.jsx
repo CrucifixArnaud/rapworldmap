@@ -1,7 +1,7 @@
 import React from 'react';
 import ClickOutHandler from 'react-onclickout';
 
-import Modal from './shared/modal.js';
+import Modal from './shared/modal.jsx';
 
 export default class AtlasFooter extends React.Component {
   constructor(props) {

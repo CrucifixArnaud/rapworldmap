@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {EventEmitter} from 'events';
-import Modal from './shared/modal.js';
+import Modal from './shared/modal.jsx';
 import moment from 'moment';
 
 export default class AdvanceSubmitArtist extends React.Component {
