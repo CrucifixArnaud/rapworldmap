@@ -4,29 +4,29 @@
 \*------------------------------------*/
 
 // Vendors
-@import 'vendors/normalize';
+@use 'vendors/normalize';
 
 // Utils
-@import 'utils/functions';
-@import 'utils/variables';
-@import 'utils/mixins';
+@use 'utils/functions';
+@use 'utils/variables';
+@use 'utils/mixins';
 
 // Base
-@import 'base/fonts';
-@import 'base/typography';
+@use 'base/fonts';
+@use 'base/typography';
 
 // Layout
-@import 'layout/layout';
+@use 'layout/layout';
 
 // Components
-@import 'components/button';
-@import 'components/navigation';
-@import 'components/form';
-@import 'components/table';
-@import 'components/thumbnails';
-@import 'components/loader';
-@import 'components/dropdown';
+@use 'components/button';
+@use 'components/navigation';
+@use 'components/form';
+@use 'components/table';
+@use 'components/thumbnails';
+@use 'components/loader';
+@use 'components/dropdown';
 
 // Pages
-@import 'pages/admin';
-@import 'pages/errors';
+@use 'pages/admin';
+@use 'pages/errors';
