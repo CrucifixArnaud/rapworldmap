@@ -24,8 +24,8 @@
   $lightness: lightness($color-a) - lightness($color-b);
 
   $function-hue: 'adjust-hue';
-  $function-saturation: if($saturation > 0, 'desaturate', 'saturate');
-  $function-lightness: if($lightness > 0, 'darken', 'lighten');
+  $function-saturation: if(sass($saturation > 0): 'desaturate'; else: 'saturate');
+  $function-lightness: if(sass($lightness > 0): 'darken'; else: 'lighten');
 
   @return (
     #{$function-hue}: -($hue),
