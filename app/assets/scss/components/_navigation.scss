@@ -3,6 +3,11 @@
   Resuable navigation components
 \*------------------------------------*/
 
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+@use '../components/button' as *;
+
 // Menu & Submenu
 .menu,
 .submenu {

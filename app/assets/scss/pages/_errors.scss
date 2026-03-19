@@ -3,6 +3,10 @@
   Specific style for errors page
 \*------------------------------------*/
 
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+
 // Maintenance Page
 // ---------------------
 

@@ -3,6 +3,8 @@
   Usefull functions use every where in the applications
 \*------------------------------------*/
 
+@use 'variables' as *;
+
 /**
  * [parseInt Return an integer from a value with a unit]
  * @param  {number} $n [A number]

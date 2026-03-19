@@ -3,6 +3,9 @@
   Generic and common mixins
 \*------------------------------------*/
 
+@use 'variables' as *;
+@use 'functions' as *;
+
 // Breakpoints mixin
 // ---------------------
 // https://gist.github.com/timknight/b8adb5df5600c37fd567#file-breakpoint-v2-scss

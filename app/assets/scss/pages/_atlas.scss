@@ -3,6 +3,10 @@
   Specific style for atlas page
 \*------------------------------------*/
 
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+
 .page-atlas {
   padding: 0;
   overflow: hidden;

@@ -3,6 +3,8 @@
   Define all typography global rules heres
   (fontface are handle in fonts.scss file)
 \*------------------------------------*/
+
+@use '../utils/variables' as *;
 html {
   font-size: 62.5%;
 }

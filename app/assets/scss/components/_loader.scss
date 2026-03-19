@@ -2,6 +2,10 @@
   > Loader
 \*------------------------------------*/
 
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+
 .no-js .loader {
   display: none;
 }

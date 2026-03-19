@@ -2,6 +2,10 @@
   > Table
 \*------------------------------------*/
 
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+
 .table {
   max-width: 1200px;
   width: 100%;

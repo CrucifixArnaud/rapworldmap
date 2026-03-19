@@ -2,6 +2,12 @@
   > Modal
 \*------------------------------------*/
 
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+@use '../components/button' as *;
+
+
 // Modal mixin
 // ---------------------
 @mixin modal() {

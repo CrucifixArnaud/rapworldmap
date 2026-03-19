@@ -2,6 +2,10 @@
   > Dropdown
 \*------------------------------------*/
 
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+
 // Dropdown Button
 .dropdown__button {
   color: #fff;

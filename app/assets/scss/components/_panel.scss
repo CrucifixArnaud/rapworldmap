@@ -3,6 +3,12 @@
   All style for panel (submit, artist, etc)
 \*------------------------------------*/
 
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+@use '../components/modal' as *;
+@use '../components/button' as *;
+
 .panel {
   position: fixed;
   height: 100%;

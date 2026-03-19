@@ -3,6 +3,10 @@
   All style & mixins for generic buttons
 \*------------------------------------*/
 
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+
 .button,
 [class*="button--"] {
   display: inline-block;
